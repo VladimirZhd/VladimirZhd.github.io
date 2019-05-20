@@ -1,0 +1,13 @@
+header, nav {
+background: dodgerblue;
+}
+
+.name {
+    font-size: 2em;
+    font-style: italic;
+    float: right;
+}
+
+.logo {
+    border-radius: 25%;
+}
