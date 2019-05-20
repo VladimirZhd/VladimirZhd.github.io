@@ -5,7 +5,9 @@ background: dodgerblue;
 .name {
     font-size: 2em;
     font-style: italic;
-    float: right;
+    float: right; 
+    marging-left: 
+    padding-inline: 10%
 }
 
 .logo {
