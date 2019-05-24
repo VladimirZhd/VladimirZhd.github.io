@@ -5,37 +5,38 @@
   <title id="title">Franklin, ID | Weather Site</title>
   <meta name="description" content="Weather for Franklin, ID">
   <meta name="viewport" content="width=device-width, initial-scale = 1.0">
-  <link href="https://fonts.googleapis.com/css?family=Sansita&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="CSS/screen.css">
  </head>
  <body>
     <header id="page-header">
         <img id="logo-image" src="images/weather-site-images/logo.jpeg" alt="logo image">
-        <h1 id="name-paragraph">The Weather Site</h1>
+        <p id="name">The Weather Site</p>
     </header>
     <main id="main-section">
         <section id="name-section">
-            <h2>Franklin, ID</h2>
-            <p><strong>Zip:</strong> 83237 | <strong>Elevation:</strong> 1514.246 m. |
+            <h1>Franklin, ID</h1>
+            <p id="location"><strong>Zip:</strong> 83237 | <strong>Elevation:</strong> 1514.246 m. |
                 <strong>Location:</strong> 111.79&deg;, 42.07&deg;</p>
         </section>
-        <section id="temp-section">
-            <h2 class="centerText">Temperature</h2>
+        <div id="background">
+        <section class="sections" id="temp-section">
+            <h2>Temperature</h2>
             <p class="centerText temper">40&deg;F</p>
             <p class="centerText hotest">64&deg;F<span class="centerText coldest">   41&deg;F</span></p>
-            <p class="centerText">Feels Like 25&deg;F</p>
+            <p>Feels Like 25&deg;F</p>
         </section>
-        <section id="wind-section">
-            <h2 class="centerText">Wind</h2>
+        <section class="sections" id="wind-section">
+            <h2>Wind</h2>
             <img src="images/weather-site-images/wind-pointer.png" alt="wind pointer image" id="wind-picture">
-            <p class="centerText"><strong>Wind:</strong> 5 mph</p>
-            <p class="centerText"><strong>Direction:</strong> SW</p>
-            <p class="centerText"><strong>Gusts:</strong> 10-12mph</p>
+            <p id="wind-speed">5 mph</p>
+            <p><strong>Direction:</strong> SW</p>
+            <p><strong>Gusts:</strong> 10-12mph</p>
         </section>
-        <section id="curent-picture-section">
-            <h2 class="centerText">Rain</h2>
+        <section class="sections" id="curent-picture-section">
+            <h2>Rain</h2>
             <img id="rain-img" src="images/weather-site-images/rain.jpg" alt="picture of clear weather" class="responsive">
         </section>
+        </div>
         <section id="hourly-section">
             <h2 class="centerText">Hourly Forecast</h2>
             <p class="scrollBar">10am: 41&deg;F | 11am: 41&deg;F | 12pm: 41&deg;F | 1pm: 41&deg;F |
@@ -44,7 +45,7 @@
         </section>
     </main>
     <footer id="page-footer">
-        &copy;2019, The Weather Site
+        <p id="copy">&copy;2019, The Weather Site</p>
     </footer>
     <nav id="nav-section">
         <ul id="horizontal-list">

@@ -1,13 +1,30 @@
-/*
-1. Imports 
-2. General rules
-3. Mobile rules
-4. Large Screen Rules
-*/
+/***********************
+* 1. Imports 
+* 2. General rules
+* 3. Mobile rules
+* 4. Large Screen Rules
+***********************/
+/* 1. Imports */
+
+@import url('https://fonts.googleapis.com/css?family=Sansita&display=swap');
 
 
-header, nav {
-background: dodgerblue;
+
+
+
+/* 2. General */
+body {
+    font-family: helvetica, sans-serif;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Sansita', sans-serif;
+}
+header, nav, footer {
+    background: dodgerblue;
+}
+#page-header {
+    position: relative;
+    font: bold;
 }
 
 h1 {
@@ -19,91 +36,99 @@ h2 {
 }
 
 p {
-    font-size: 3vw;
+    font-size: 3.5vw;
 }
-
 a:hover {
-    text-decoration: none;
+    color: black;
 }
-
-#name-paragraph {
-    font-style: italic;
+a:visited {
+    color: lightgrey;
 }
-
+.sections {
+    text-align: center;
+    background: transparent;
+}
 #logo-image {
     width: 7%;
     height: auto;
     float: left;
     border-radius: 25%;
 }
-
-#page-header {
-    font-family: 'Sansita', sans-serif;
+#name {
+    font-size: 6vw;
+    width: 100%;
+    height: auto;
+    font-style: italic;
+    margin: 0 0 0 0;
 }
-
-#temp-section {
-    background-color: rgba(200,200,200,.6);
+#name-section { 
+    margin-top: -1em;
+    background: white;
+}
+#location {
+    margin-top: -1em;
+    margin-bottom: .2em;
+    font-size: 3vw;
+}
+#wind-speed {
+    position: relative;
+    top: -110px;
+}
+.sections {
+    background: transparent;
     margin: .2em auto;
     border: 1px solid;
     border-radius: 15px;
 }
-
+#background {
+    background-image: url(../images/weather-site-images/rain.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .centerText {
     text-align: center;
 }
+#nav-section {
+    margin-top: -0.8em;
+    margin-bottom: -2em;
+}
+#copy {
+    margin-top: -2px;
+}
 
+
+
+/* 3. Mobil rules */
 .temper {
     font-size: 4em;
     margin: 0 auto;
 }
-
 .hotest {
     color: red;
 }
-
 .coldest {
     color: blue;
 }
-
-
 .responsive{
     width: 100%;
     height: auto;
 }
-
-#wind-section {
-    background-color: rgba(200,200,200,.6);
-    margin: .2em auto;
-    border: 1px solid;
-    border-radius: 15px;
-}
-
 #wind-picture {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-
-#curent-picture-section {
-    background-color: rgba(200,200,200,.6);
-    margin: .2em auto;
-    border: 1px solid;
-    border-radius: 15px;
-}
-
 #hourly-section {
+    background-image: none;
     background-color: rgba(200,200,200,.6);
     margin: .2em auto;
     border: 1px solid;
     border-radius: 15px;
 }
-
 .scrollBar {
   overflow: auto;
   white-space: nowrap;
 }
-
-
 #horizontal-list a {
     display: block;
     display: inline-block;
@@ -112,14 +137,17 @@ a:hover {
     float: none;
     text-align: center;
     color: white;
-    padding: 14px 16px;
-    font-size: 2vw;
+    font-size: 3.5vw;
+    margin-left: 9%;
+    margin-top: 3%;
 }
-
 ul#horizontal-list li {
     display: inline;
 }
+#rain-img {
+    width: 80%;
+    margin: 5% 10%;
+}
 
 
-
-
+/* 4. Large screen rules */
