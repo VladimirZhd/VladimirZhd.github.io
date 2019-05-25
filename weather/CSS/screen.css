@@ -7,8 +7,7 @@
 /* 1. Imports */
 
 @import url('https://fonts.googleapis.com/css?family=Sansita&display=swap');
-
-
+@import url('normalize.css');
 
 
 
@@ -36,6 +35,11 @@ h2 {
 }
 
 p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
     font-size: 3.5vw;
 }
 a:hover {
@@ -70,18 +74,18 @@ a:visited {
     margin-bottom: .2em;
     font-size: 3vw;
 }
-#wind-speed {
-    position: relative;
-    top: -110px;
-}
 .sections {
     background: transparent;
+    background-color: rgba(200,200,200,.6);
+    background-position: center;
+    
     margin: .2em auto;
     border: 1px solid;
     border-radius: 15px;
 }
 #background {
     background-image: url(../images/weather-site-images/rain.jpg);
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -129,24 +133,35 @@ a:visited {
   overflow: auto;
   white-space: nowrap;
 }
+#horizontal-list {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+}
 #horizontal-list a {
     display: block;
     display: inline-block;
-    width: 30px;
-    height: 30px;
     float: none;
     text-align: center;
     color: white;
     font-size: 3.5vw;
-    margin-left: 9%;
-    margin-top: 3%;
+
 }
 ul#horizontal-list li {
     display: inline;
+
 }
 #rain-img {
-    width: 80%;
+    width: 60%;
     margin: 5% 10%;
+}
+#wind-speed {
+    z-index: 1;
+    /* position: relative; */
+    margin-top: -100px;
+    margin-bottom: 100px;
 }
 
 
