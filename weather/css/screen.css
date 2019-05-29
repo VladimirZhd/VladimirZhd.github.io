@@ -1,0 +1,163 @@
+/***********************
+* 1. Imports 
+* 2. General rules
+* 3. Mobile rules
+* 4. Large Screen Rules
+***********************/
+/* 1. Imports */
+
+@import url('https://fonts.googleapis.com/css?family=Sansita&display=swap');
+@import url('normalize.css');
+
+
+
+/* 2. General */
+body {
+    font-family: helvetica, sans-serif;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Sansita', sans-serif;
+}
+header, nav, footer {
+    background: dodgerblue;
+}
+#page-header {
+    position: relative;
+    font: bold;
+}
+
+h1 {
+    font-size: 5.5vw;
+}
+
+h2 {
+    font-size: 4.5vw;
+}
+
+p {
+    font-size: 3.5vw;
+}
+a:hover {
+    color: black;
+}
+a:visited {
+    color: lightgrey;
+}
+.sections {
+    text-align: center;
+    background: transparent;
+}
+#logo-image {
+    width: 7%;
+    height: auto;
+    float: left;
+    border-radius: 25%;
+}
+#name {
+    font-size: 6vw;
+    width: 100%;
+    height: auto;
+    font-style: italic;
+    margin: 0 0 0 0;
+}
+#name-section { 
+    margin-top: -1em;
+    background: white;
+}
+#location {
+    margin-top: -1em;
+    margin-bottom: .2em;
+    font-size: 3vw;
+}
+.sections {
+    background: transparent;
+    background-color: rgba(200,200,200,.6);
+    background-position: center;
+    
+    margin: .2em auto;
+    border: 1px solid;
+    border-radius: 15px;
+}
+#background {
+    background-image: url(../images/weather-site-images/rain.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.centerText {
+    text-align: center;
+}
+#nav-section {
+    margin-top: -0.8em;
+    margin-bottom: -2em;
+}
+#copy {
+    margin-top: -2px;
+}
+
+
+
+/* 3. Mobil rules */
+.temper {
+    font-size: 4em;
+    margin: 0 auto;
+}
+.hotest {
+    color: red;
+}
+.coldest {
+    color: blue;
+}
+.responsive{
+    width: 100%;
+    height: auto;
+}
+#wind-picture {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#hourly-section {
+    background-image: none;
+    background-color: rgba(200,200,200,.6);
+    margin: .2em auto;
+    border: 1px solid;
+    border-radius: 15px;
+}
+.scrollBar {
+  overflow: auto;
+  white-space: nowrap;
+}
+#horizontal-list {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+}
+#horizontal-list a {
+    display: block;
+    display: inline-block;
+    float: none;
+    text-align: center;
+    color: white;
+    font-size: 3.5vw;
+
+}
+ul#horizontal-list li {
+    display: inline;
+
+}
+#rain-img {
+    width: 60%;
+    margin: 5% 10%;
+}
+#wind-speed {
+    z-index: 1;
+    /* position: relative; */
+    margin-top: -100px;
+    margin-bottom: 100px;
+}
+
+
+/* 4. Large screen rules */
