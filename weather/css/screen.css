@@ -226,7 +226,7 @@ ul#horizontal-list li {
         background-color: rgba(200,200,200,.6);
         background-position: center;
         margin: 2em .1em;
-        border: 2px solid;
+        border: 1.5px solid;
         border-radius: 25px;
     }
     #wind-speed {
