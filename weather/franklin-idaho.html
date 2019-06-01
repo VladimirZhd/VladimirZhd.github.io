@@ -22,32 +22,37 @@
    </nav>   
     <main id="main-section">
         <section id="name-section">
-            <h1>Franklin, ID</h1>
-            <p id="location"><strong>Zip:</strong> 83237 | <strong>Elevation:</strong> 1514.246 m. |
-                <strong>Location:</strong> 111.79&deg;, 42.07&deg;</p>
+            <h1 id="fran">Franklin, ID</h1>
+            <dl>
+                <dt>Zip: </dt><dd>83237 </dd>
+                <dt>Elevation: </dt><dd>1514.246 m. </dd>
+                <dt>Location: </dt><dd>111.79&deg;, 42.07&deg;</dd>
+            </dl>
+            <!-- <p id="location"><strong>Zip:</strong> 83237 | <strong>Elevation:</strong> 1514.246 m. |
+                <strong>Location:</strong> 111.79&deg;, 42.07&deg;</p> -->
         </section>
         <div id="background">
         <section class="sections" id="temp-section">
-            <h2>Temperature</h2>
+            <h2 class="section-name">Temperature</h2>
             <p class="centerText temper">40&deg;F</p>
             <p class="centerText hotest">64&deg;F<span class="centerText coldest">   41&deg;F</span></p>
-            <p>Feels Like 25&deg;F</p>
+            <p id="feelslike">Feels Like 25&deg;F</p>
         </section>
         <section class="sections" id="wind-section">
-            <h2>Wind</h2>
+            <h2 class="section-name">Wind</h2>
             <img src="images/weather-site-images/wind-pointer.png" alt="wind pointer image" id="wind-picture">
             <p id="wind-speed">5 mph</p>
-            <p><strong>Direction:</strong> SW</p>
-            <p><strong>Gusts:</strong> 10-12mph</p>
+            <p id="direction"><strong>Direction:</strong> SW</p>
+            <p id="gusts"><strong>Gusts:</strong> 10-12mph</p>
         </section>
         <section class="sections" id="curent-picture-section">
-            <h2>Rain</h2>
+            <h2 class="section-name">Rain</h2>
             <img id="rain-img" src="images/weather-site-images/rain.jpg" alt="picture of clear weather" class="responsive">
         </section>
         </div>
         <section id="hourly-section">
-            <h2 class="centerText">Hourly Forecast</h2>
-            <ul id="scrollBar">
+            <h2 id="hour" class="centerText">Hourly Forecast</h2>
+            <ul id="scroll-bar">
                 <li>10am: </li>
                 <li>41&deg;F |</li>
                 <li> 11am: </li>
