@@ -12,6 +12,8 @@
 
 
 /* 2. General */
+
+/* general rules for elements */
 body {
     font-family: helvetica, sans-serif;
     position: relative;
@@ -26,20 +28,17 @@ header, nav, footer {
     position: relative;
     font: bold;
 }
-
 h1 {
     font-size: 5.5vw;
 }
-
 h2 {
     font-size: 4.5vw;
 }
-
 p {
     font-size: 3.5vw;
 }
-li {
-    font-size: 3vw;
+a {
+    text-decoration: none;
 }
 dl {
     margin-top: -15px;
@@ -52,21 +51,19 @@ dt, dd {
     display: inline;
     padding: 0;
     margin: 0;
-    font-size: 3vw;
-
+    font-size: 2.5vw;
 }
 dt::before{
     content: "| ";
 }
-dt:first-child::before, #wind dd::after {
+dt:first-child::before {
     content: "";
   }
-.sections {
-    text-align: center;
-    background: transparent;
-    width: 100%;
-    height: auto;
+#scroll-bar dt {
+    font-weight: inherit;
 }
+
+/* logo and name */
 #logo-image {
     width: 7%;
     height: auto;
@@ -80,14 +77,13 @@ dt:first-child::before, #wind dd::after {
     font-style: italic;
     margin: 0 0 0 0;
 }
-#name-section { 
-    margin-top: -1em;
-    background: white;
-}
-#location {
-    margin-top: -1em;
-    margin-bottom: .2em;
-    font-size: 3vw;
+
+/* section class reles */
+.sections {
+    text-align: center;
+    background: transparent;
+    width: 100%;
+    height: auto;
 }
 .sections {
     background: transparent;
@@ -96,6 +92,18 @@ dt:first-child::before, #wind dd::after {
     margin: .2em auto;
     border: 1px solid;
     border-radius: 15px;
+}
+#name-section { 
+    margin-top: -1em;
+    background: white;
+}
+#fran {
+    display: flex;
+}
+#location {
+    margin-top: -1em;
+    margin-bottom: .2em;
+    font-size: 3vw;
 }
 #background {
     display: flex;
@@ -107,13 +115,6 @@ dt:first-child::before, #wind dd::after {
 }
 .centerText {
     text-align: center;
-}
-#nav-section {
-    margin-top: 0px;
-    margin-bottom: -1.5em;
-}
-#copy {
-    margin-top: -2px;
 }
 .temper {
     font-size: 4em;
@@ -133,6 +134,7 @@ dt:first-child::before, #wind dd::after {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    transform: rotate(225deg);
 }
 #hourly-section {
     background-image: none;
@@ -178,6 +180,13 @@ ul#horizontal-list li {
     /* position: relative; */
     margin-top: -100px;
     margin-bottom: 100px;
+}
+#nav-section {
+    margin-top: 0px;
+    margin-bottom: -1.5em;
+}
+#copy {
+    margin-top: -2px;
 }
 
 
@@ -264,9 +273,21 @@ ul#horizontal-list li {
     }
     #horizontal-list li a {
         font-size: 30px;
+        padding: 1em;
     }
     #fran {
         font-size: 70px;
         margin: 0.3em auto;
+    }
+    #scroll-bar dt {
+        font-weight: inherit;
+        font-size: 30px;
+    }
+    #scroll-bar dd {
+        font-weight: inherit;
+        font-size: 30px;
+    }
+    #scroll-bar {
+        margin: 0;
     }
 }
