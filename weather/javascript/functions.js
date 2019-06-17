@@ -88,20 +88,21 @@ function buildWC(speed, temp) {
         return "rain";
      }
      else if (conditionW.includes('cloudy') ||
-              conditionW.includes('overcast'))
+              conditionW.includes('overcast') || 
+              conditionW.includes('clouds'))
      {
-         return "clouds";
+         return "cloud";
      }
      else if (conditionW.includes('clear') ||
               conditionW.includes('sunny'))
      {
          return "clear";
      }
-     else if (conditionW.includes('foggy'))
+     else if (conditionW.includes('fog') || conditionW.includes('foggy'))
      {
          return "fog";
      }
-     else (conditionW.includes('snowy') || conditionW.includes("blizzard"))
+     if (conditionW.includes('snowy') || conditionW.includes("blizzard"))
      {
          return "snow";
      }
@@ -156,7 +157,7 @@ function converMeters(meters)
  const temp = 31;
  const speed = 5;
  const direction = 'W';
- let condition = "Blizzard";
+ let condition = "overcast";
 
  //getting elements from HTML
  let weather = getCondition(condition);
