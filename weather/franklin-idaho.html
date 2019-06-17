@@ -25,29 +25,30 @@
             <h1 id="fran">Franklin, ID</h1>
             <dl>
                 <dt>Zip: </dt><dd>83237 </dd>
-                <dt>Elevation: </dt><dd>1514.246 m. </dd>
+                <dt>Elevation: </dt><dd id="elev">1514.246</dd>
                 <dt>Location: </dt><dd>111.79&deg;, 42.07&deg;</dd>
             </dl>
             <!-- <p id="location"><strong>Zip:</strong> 83237 | <strong>Elevation:</strong> 1514.246 m. |
                 <strong>Location:</strong> 111.79&deg;, 42.07&deg;</p> -->
         </section>
-        <div id="background">
+        <div id="background" class="bg-rain">
         <section class="sections" id="temp-section">
             <h2 class="section-name">Temperature</h2>
             <p class="centerText temper">40&deg;F</p>
             <p class="centerText hotest">64&deg;F<span class="centerText coldest">   41&deg;F</span></p>
-            <p id="feelslike">Feels Like 25&deg;F</p>
+            <p id="feelslike">Feels Like <span id="feelTemp">25</span>&deg;F</p>
         </section>
         <section class="sections" id="wind-section">
             <h2 class="section-name">Wind</h2>
-            <img src="images/weather-site-images/wind-pointer.png" alt="wind pointer image" id="wind-picture">
+            <img src="images/weather-site-images/wind-pointer.png" alt="wind pointer image" id="wind-picture" class="sw">
             <p id="wind-speed">5 mph</p>
-            <p id="direction"><strong>Direction:</strong> SW</p>
+            <p id="direction"><strong>Direction:</strong><span id="dir"> SW</span></p>
             <p id="gusts"><strong>Gusts:</strong> 10-12mph</p>
         </section>
         <section class="sections" id="curent-picture-section">
-            <h2 class="section-name">Rain</h2>
-            <img id="rain-img" src="images/weather-site-images/rain.jpg" alt="picture of clear weather" class="responsive">
+            <h2 id="cond" class="section-name">Rain</h2>
+            <div id="summary" class="rain"></div>
+            <!-- <img id="rain-img" src="images/weather-site-images/rain.jpg" alt="picture of clear weather" class="responsive"> -->
         </section>
         </div>
         <section id="hourly-section">
@@ -85,5 +86,6 @@
     <footer id="page-footer">
         <p id="copy"><small>&copy;2019, The Weather Site</small></p>
     </footer>
+    <script src="./javascript/functions.js"></script>
  </body>
 </html>

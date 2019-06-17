@@ -108,10 +108,24 @@ dt:first-child::before {
 #background {
     display: flex;
     flex-direction: column;
-    background-image: url(../images/weather-site-images/rain.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.bg-rain {
+    background-image: url(../images/weather-site-images/weather-images-large/rain-1280.jpg);
+}
+.bg-snow {
+    background-image: url(../images/weather-site-images/weather-images-large/snow-1280.jpg);
+}
+.bg-fog {
+    background-image: url(../images/weather-site-images/weather-images-large/fog-1280.jpg);
+}
+.bg-cloud {
+    background-image: url(../images/weather-site-images/weather-images-large/clouds-1280.jpg);
+}
+.bg-clear {
+    background-image: url(../images/weather-site-images/weather-images-large/clear-1280.jpg);
 }
 .centerText {
     text-align: center;
@@ -134,7 +148,7 @@ dt:first-child::before {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    transform: rotate(225deg);
+    /* transform: rotate(225deg); */
 }
 #hourly-section {
     background-image: none;
@@ -188,6 +202,38 @@ ul#horizontal-list li {
 #copy {
     margin-top: -2px;
 }
+.n {
+    transform: rotate(360deg);
+}
+.ne {
+    transform: rotate(45deg);
+}
+.e {
+    transform: rotate(90deg);
+}
+.se {
+    transform: rotate(135deg);
+}
+.s {
+    transform: rotate(180deg);
+}
+.sw {
+    transform: rotate(225deg);
+}
+.w {
+    transform: rotate(270deg);
+}
+.nw {
+    transform: rotate(315deg);
+}
+#current-picture-section {
+    width: 400px;
+    height: 500px;
+}
+#background {
+    padding: 1%;
+}
+
 
 
 
@@ -199,6 +245,46 @@ ul#horizontal-list li {
         position: absolute;
         bottom: 0;
         width: 100%;
+    }
+    .rain {
+        width: 90%;
+        height: 80vw;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/rain-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
+    }
+    .snow {
+        width: 90%;
+        height: 80vw;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/snow-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
+    }
+    .cloud {
+        width: 90%;
+        height: 80vw;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/cloud-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
+    }
+    .fog {
+        width: 90%;
+        height: 80vw;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/fog-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
+    }
+    .clear {
+        width: 90%;
+        height: 80vw;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/clear-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
     }
 }
 
@@ -289,5 +375,45 @@ ul#horizontal-list li {
     }
     #scroll-bar {
         margin: 0;
+    }
+    .rain {
+        width: 90%;
+        height: 75%;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/rain-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
+    }
+    .snow {
+        width: 90%;
+        height: 75%;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/snow-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
+    }
+    .cloud {
+        width: 90%;
+        height: 75%;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/cloud-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
+    }
+    .fog {
+        width: 90%;
+        height: 75%;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/fog-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
+    }
+    .clear {
+        width: 90%;
+        height: 75%;
+        background-image: url(/VladimirZhd.github.io/weather/images/weather-site-images/weather-images-small/clear-400.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px auto; 
     }
 }
