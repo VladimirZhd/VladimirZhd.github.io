@@ -11,13 +11,10 @@ function buildWC(speed, temp) {
     // Compute the windchill
     let wc = 35.74 + 0.6215 * temp - 35.75 * Math.pow(speed, 0.16) + 0.4275 * temp * Math.pow(speed, 0.16);
     console.log(wc);
-   
     // Round the answer down to integer
     wc = Math.floor(wc);
-   
     // If chill is greater than temp, return the temp
     wc = (wc > temp)?temp:wc;
-   
     // Display the windchill
     console.log(wc);
     // wc = 'Feels like '+wc+'°F';
@@ -83,7 +80,8 @@ function buildWC(speed, temp) {
  {
      //check the condition and return appropriate condition
      if (conditionW.includes('wet') ||
-         conditionW.includes('rainy'))
+         conditionW.includes('rainy') || 
+         conditionW.includes('thunderstorm'))
      {
         return "rain";
      }
@@ -98,11 +96,13 @@ function buildWC(speed, temp) {
      {
          return "clear";
      }
-     else if (conditionW.includes('fog') || conditionW.includes('foggy'))
+     else if (conditionW.includes('fog') || 
+              conditionW.includes('foggy'))
      {
          return "fog";
      }
-     if (conditionW.includes('snowy') || conditionW.includes("blizzard"))
+     if (conditionW.includes('snowy') || 
+         conditionW.includes("blizzard"))
      {
          return "snow";
      }
@@ -156,8 +156,8 @@ function converMeters(meters)
  //Variables for function use
  const temp = 31;
  const speed = 5;
- const direction = 'W';
- let condition = "overcast";
+ const direction = 'S';
+ const condition = "mostly clear";
 
  //getting elements from HTML
  let weather = getCondition(condition);
