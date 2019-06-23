@@ -2,7 +2,8 @@
 * 1. Imports 
 * 2. General rules
 * 3. Mobile rules
-* 4. Large Screen Rules
+* 4. Medium screen rules
+* 5. Large Screen Rules
 ***********************/
 /* 1. Imports */
 
@@ -23,6 +24,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 header, nav, footer {
     background: dodgerblue;
+}
+.hide{
+    display:none;
 }
 #page-header {
     position: relative;
@@ -97,7 +101,7 @@ dt:first-child::before {
     margin-top: -1em;
     background: white;
 }
-#fran {
+#content-heading {
     display: flex;
 }
 #location {
@@ -111,6 +115,9 @@ dt:first-child::before {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+#background {
+    max-width: 1440px;
 }
 .bg-rain {
     background-image: url(../images/weather-site-images/weather-images-large/rain-1280.jpg);
@@ -191,7 +198,6 @@ ul#horizontal-list li {
 }
 #wind-speed {
     z-index: 1;
-    /* position: relative; */
     margin-top: -100px;
     margin-bottom: 100px;
 }
@@ -289,9 +295,10 @@ ul#horizontal-list li {
 }
 
 
+
 /* 4. Large screen rules */
 
-@media only screen and (min-width: 769px){
+@media only screen and (min-width: 798px){
     #background {
         display: flex;
         flex-direction: row;

@@ -2,7 +2,7 @@
 <html lang="en-us">
  <head>
   <meta charset="UTF-8">
-  <title id="title">Greenville, SC | Weather Site</title>
+  <title id="title"> | Weather Site</title>
   <meta name="description" content="Weather for Franklin, ID">
   <meta name="viewport" content="width=device-width, initial-scale = 1.0">
   <link rel="stylesheet" type="text/css" href="css/screen.css">
@@ -16,17 +16,18 @@
         <ul id="horizontal-list">
             <li><a href="#" title="Go to the Weather Site home page">Current</a></li>
             <li><a href="#" title="Search for weather in different location">Search</a></li>
-            <li><a href="./franklin-idaho.html" title="Visit the Franklin Idaho weather website">Franklin</a></li>
-            <li><a href="./greenville-sc.html" title="Visir the Greenville Idaho weather website">Greenville</a></li>
+            <li><a href="./franklin-idaho.html" title="Visit the Franklin, ID weather website">Franklin</a></li>
+            <li><a href="./greenville-sc.html" title="Visit the Greenville, SC weather website">Greenville</a></li>
        </ul>
-   </nav>   
-    <main id="main-section">
+   </nav> 
+   <section id="status">Please be patient while I get your weather information.</section>  
+    <main id="main-section" class="hide">
         <section id="name-section">
-            <h1 id="fran">Greenville, SC</h1>
+            <h1 id="content-heading">Greenville, SC</h1>
             <dl>
-                <dt>Zip: </dt><dd>29601 </dd>
+                <dt>Zip: </dt><dd id="zip">29601 </dd>
                 <dt>Elevation: </dt><dd id="elev">294.437</dd>
-                <dt>Location: </dt><dd>-82.4&deg;, 34.85&deg;</dd>
+                <dt>Location: </dt><dd><span id="long">-82.4</span>&deg;, <span id="lat">34.85</span>&deg;</dd>
             </dl>
             <!-- <p id="location"><strong>Zip:</strong> 83237 | <strong>Elevation:</strong> 1514.246 m. |
                 <strong>Location:</strong> 111.79&deg;, 42.07&deg;</p> -->
@@ -34,60 +35,33 @@
         <div id="background" class="bg-rain">
         <section class="sections" id="temp-section">
             <h2 class="section-name">Temperature</h2>
-            <p class="centerText temper">55&deg;F</p>
-            <p class="centerText hotest">72&deg;F<span class="centerText coldest">   51&deg;F</span></p>
+            <p class="centerText temper"><span id="temperature">55</span>&deg;F</p>
+            <p class="centerText hotest"> <span id="high">72</span><span id="low" class="centerText coldest">51</span></p>
             <p id="feelslike">Feels Like <span id="feelTemp">25</span>&deg;F</p>
         </section>
         <section class="sections" id="wind-section">
             <h2 class="section-name">Wind</h2>
             <img src="images/weather-site-images/wind-pointer.png" alt="wind pointer image" id="wind-picture" class="sw">
-            <p id="wind-speed">8 mph</p>
+            <p id="wind-speed"> <span id="windS">8</span> mph</p>
             <p id="direction"><strong>Direction:</strong><span id="dir"> SW</span></p>
-            <p id="gusts"><strong>Gusts:</strong> 15-17mph</p>
+            <p id="gusts"><strong>Gusts: </strong><span id="gustsV">15-17</span>mph</p>
         </section>
         <section class="sections" id="curent-picture-section">
-            <h2 id="cond" class="section-name">Thunderstorm</h2>
+            <h2 id="cond" class="section-name">Thunderstorms</h2>
             <div id="summary" class="rain"></div>
             <!-- <img id="rain-img" src="images/weather-site-images/rain.jpg" alt="picture of clear weather" class="responsive"> -->
         </section>
         </div>
         <section id="hourly-section">
             <h2 id="hour" class="centerText">Hourly Forecast</h2>
-            <dl id="scroll-bar">
-                <dt>10am: </dt>
-                <dd>55&deg;F </dd>
-                <dt> 11am: </dt>
-                <dd>55&deg;F </dd>
-                <dt> 12pm: </dt>
-                <dd>56&deg;F </dd>
-                <dt> 1pm: </dt>
-                <dd>57&deg;F </dd>
-                <dt> 2pm: </dt>
-                <dd>57&deg;F </dd>
-                <dt> 3pm: </dt>
-                <dd>57&deg;F </dd>
-                <dt> 4pm: </dt>
-                <dd>59&deg;F </dd>
-                <dt> 5pm: </dt>
-                <dd>59&deg;F </dd>
-                <dt> 6pm: </dt>
-                <dd>59&deg;F </dd>
-                <dt> 7pm: </dt>
-                <dd>59&deg;F </dd>
-                <dt> 8pm: </dt>
-                <dd>60&deg;F </dd>
-                <dt> 9pm: </dt>
-                <dd>61&deg;F </dd>
-                <dt> 10pm: </dt>
-                <dd>63&deg;F</dd>
-                <dt> 11pm: </dt>
-                <dd>64&deg;F</dd>
-            </dl>
+            <ul id="scroll-bar">
+            </ul>
         </section>
     </main>
     <footer id="page-footer">
         <p id="copy"><small>&copy;2019, The Weather Site</small></p>
     </footer>
     <script src="./javascript/functions.js"></script>
+    <script src="./javascript/localdata.js"></script>
  </body>
 </html>
