@@ -148,7 +148,7 @@ function converMeters(meters)
 {
     let feet = meters*3.2808;
     console.log(feet);
-    feet = Math.floor(feet);
+    feet = Math.round(feet);
     console.log(feet);
     return feet;
 }

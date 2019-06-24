@@ -83,7 +83,7 @@ function fetchData(weatherURL){
 
     // Set the temperature information
     document.getElementById('temperature').innerHTML = curTemp;
-    document.getElementById('high').innerHTML = hightTemp + "&deg;F ";
+    document.getElementById('high').innerHTML = hightTemp + "&deg;F &nbsp;";
     document.getElementById('low').innerHTML = " " + lowTemp + "&deg;F";
     buildWC(getWind, curTemp);
  
