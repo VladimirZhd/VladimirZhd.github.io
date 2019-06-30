@@ -439,8 +439,8 @@ function buildPage() {
     document.getElementById('cond').innerHTML = locSummary; 
 
     // set visability
-    contentContainer.setAttribute('class', ''); // removes the hide class
-    statusContainer.setAttribute('class', 'hide'); // hides the status container
+    // contentContainer.setAttribute('class', ''); // removes the hide class
+    // statusContainer.setAttribute('class', 'hide'); // hides the status container
 
 }
 // This function converts degrees to a letter 
@@ -483,7 +483,7 @@ function getWindDerectionLetter(degree) {
 
 // This function converts celsius to fahrenheits
 function convertToFahrenheit(celsius) {
-    let fahr = Math.round((celsius * 9/5) + 32);
+    let fahr = Math.round((celsius * (9/5)) + 32);
     return fahr;
 }
 

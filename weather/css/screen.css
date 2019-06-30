@@ -25,9 +25,9 @@ h1,h2,h3,h4,h5,h6 {
 header, nav, footer {
     background: dodgerblue;
 }
-.hide{
+/* .hide{
     display:none;
-}
+} */
 #page-header {
     position: relative;
     font: bold;
@@ -117,7 +117,7 @@ dt:first-child::before {
     background-size: cover;
 }
 #background {
-    max-width: 1440px;
+    max-width: 1485px;
 }
 .bg-rain {
     background-image: url(../images/weather-site-images/weather-images-large/rain-1280.jpg);
@@ -320,6 +320,7 @@ ul#horizontal-list li {
     #background {
         display: flex;
         flex-direction: row;
+        width: 100%;
     }
     #background section{
         width: 33.33%;
