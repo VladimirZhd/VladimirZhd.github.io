@@ -25,9 +25,9 @@ h1,h2,h3,h4,h5,h6 {
 header, nav, footer {
     background: dodgerblue;
 }
-/* .hide{
+.hide{
     display:none;
-} */
+}
 #page-header {
     position: relative;
     font: bold;
