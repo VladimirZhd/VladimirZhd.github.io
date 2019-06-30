@@ -95,7 +95,9 @@ function fetchData(weatherURL){
 
     // Set the current conditions information
     document.getElementById('cond').innerHTML = currentCond;
-    changeSummaryPicture(currentCond);
+    let lowCond = currentCond.toLowerCase();
+    let curCond = getCondition(lowCond);
+    changeSummaryPicture(curCond);
     
 
     // Set the hourly temperature information
