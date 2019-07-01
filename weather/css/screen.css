@@ -17,7 +17,8 @@
 /* general rules for elements */
 body {
     font-family: helvetica, sans-serif;
-    position: relative;
+    /* position: relative; */
+    flex-direction: row;
 }
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Sansita', sans-serif;
