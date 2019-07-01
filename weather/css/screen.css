@@ -252,8 +252,10 @@ ul#horizontal-list li {
         position: fixed;
         bottom: 0;
         width: 100%;
-        height: 8%;
+        height: 6%;
         z-index: 1;
+        padding: 0 auto;
+        
     }
     .rain {
         width: 90%;
