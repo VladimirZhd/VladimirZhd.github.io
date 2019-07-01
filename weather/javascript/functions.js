@@ -421,8 +421,8 @@ function buildPage() {
     
     // set location information 
     document.getElementById('elev').innerHTML = feet + ' ft.'; 
-    document.getElementById('long').innerHTML = locLong; 
-    document.getElementById('lat').innerHTML = locLat;
+    document.getElementById('long').innerHTML = locLong + '&deg;'; 
+    document.getElementById('lat').innerHTML = locLat + '&deg;';
 
     // set temperature on the page
     document.getElementById('temperature').innerHTML = tempFahr;
