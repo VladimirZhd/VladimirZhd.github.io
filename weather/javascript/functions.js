@@ -120,27 +120,22 @@ function changeSummaryPicture(weather) {
         case 'rain':
             back.setAttribute('class', 'rain');
             bigBack.setAttribute('class', 'bg-rain');
-            // name.innerHTML = "Rain";
             break;
         case 'snow':
             back.setAttribute('class', 'snow');
             bigBack.setAttribute('class', 'bg-snow');
-            // name.innerHTML = "Snow";
             break;
         case 'fog':
             back.setAttribute('class', 'fog');
             bigBack.setAttribute('class', 'bg-fog');
-            // name.innerHTML = "Fog";
             break;
         case 'cloud':
             back.setAttribute('class', 'cloud');
             bigBack.setAttribute('class', 'bg-cloud');
-            // name.innerHTML = "Cloudy";
             break;
         case 'clear':
             back.setAttribute('class', 'clear');
             bigBack.setAttribute('class', 'bg-clear');
-            // name.innerHTML = "Clear";
             break;
     }
 }

@@ -29,6 +29,7 @@ header, nav, footer {
     display:none;
 }
 #page-header {
+    display: flex;
     position: relative;
     font: bold;
 }
@@ -45,7 +46,7 @@ a {
     text-decoration: none;
 }
 dl {
-    margin-top: -15px;
+    margin-top: 10px;
     margin-bottom: 0.3em;
 }
 dt {
@@ -103,6 +104,8 @@ dt:first-child::before {
 }
 #content-heading {
     display: flex;
+    margin-top: 20px;
+    margin-bottom: -5px;
 }
 #location {
     margin-top: -1em;
@@ -170,6 +173,9 @@ dt:first-child::before {
 }
 #scroll-bar li {
     display: inline;
+}
+#hour {
+    margin-bottom: 30px;
 }
 #horizontal-list {
     display: flex; 
@@ -387,9 +393,6 @@ ul#horizontal-list li {
     .section {
         width: 100%;
     }
-    #scroll-bar li {
-        font-size: 30px;
-    }
     #copy {
         font-size: 30px;
     }
@@ -408,9 +411,6 @@ ul#horizontal-list li {
     #scroll-bar dd {
         font-weight: inherit;
         font-size: 30px;
-    }
-    #scroll-bar {
-        margin: 0;
     }
     .rain {
         width: 90%;
