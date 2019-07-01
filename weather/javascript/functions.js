@@ -454,7 +454,7 @@ function getWindDerectionLetter(degree) {
         return 'NE';
     }else if (degree <= 67 && degree > 45) {
         return 'ENE';
-    }else if (degree == 90) {
+    }else if (degree <= 90 && degree > 67) {
         return 'E';
     }else if (degree <= 112 && degree > 90) {
         return 'ESE';
@@ -462,7 +462,7 @@ function getWindDerectionLetter(degree) {
         return 'SE';
     }else if (degree <= 157 && degree > 135) {
         return 'SSE';
-    }else if (degree == 180) {
+    }else if (degree <= 180 && degree > 157) {
         return 'S';
     }else if (degree <= 202 && degree > 180) {
         return 'SSW';
@@ -470,7 +470,7 @@ function getWindDerectionLetter(degree) {
         return 'SW';
     }else if (degree <= 247 && degree > 225) {
         return 'WSW';
-    }else if (degree == 270) {
+    }else if (degree <= 270 && degree > 247) {
         return 'W';
     }else if (degree <= 292 && degree > 270) {
         return 'WNW';
