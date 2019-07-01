@@ -283,8 +283,7 @@ function getStationId(stationsURL) {
 // Gets current weather information for a specific weather station from the NWS API
 function getWeather(stationId) { 
     // This is the URL for current observation data 
-    // const URL = 'https://api.weather.gov/stations/' + stationId + '/observations/latest';
-    const URL = 'https://api.weather.gov/gridpoints/PIH/125,87/forecast/hourly';
+    const URL = 'https://api.weather.gov/stations/' + stationId + '/observations/latest';
     // NWS User-Agent header (built above) will be the second parameter 
     fetch(URL, idHeader) 
     .then(function(response){
@@ -322,7 +321,8 @@ function getWeather(stationId) {
 function getHourly(nextHour) {
     let hourlyLink = storage.getItem('hourlyLink');
     // This is URl for hourly forcast
-    const URL = 'https://api.weather.gov/gridpoints/' + hourlyLink + '/forecast/hourly';
+    // const URL = 'https://api.weather.gov/gridpoints/' + hourlyLink + '/forecast/hourly';
+    const URL = 'https://api.weather.gov/gridpoints/PIH/125,87/forecast/hourly';
     fetch(URL, idHeader)
     .then(function(response){
         if(response.ok){ 

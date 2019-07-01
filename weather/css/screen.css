@@ -29,7 +29,7 @@ header, nav, footer {
     display:none;
 }
 #page-header {
-    display: flex;
+    /* display: flex; */
     position: relative;
     font: bold;
 }
@@ -72,6 +72,7 @@ dt:first-child::before {
 #logo-image {
     width: 7%;
     height: auto;
+    float: left;
     border-radius: 25%;
 }
 #name {
