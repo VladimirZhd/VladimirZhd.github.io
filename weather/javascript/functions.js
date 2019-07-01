@@ -283,7 +283,8 @@ function getStationId(stationsURL) {
 // Gets current weather information for a specific weather station from the NWS API
 function getWeather(stationId) { 
     // This is the URL for current observation data 
-    const URL = 'https://api.weather.gov/stations/' + stationId + '/observations/latest';
+    // const URL = 'https://api.weather.gov/stations/' + stationId + '/observations/latest';
+    const URL = 'https://api.weather.gov/gridpoints/PIH/125,87/forecast/hourly';
     // NWS User-Agent header (built above) will be the second parameter 
     fetch(URL, idHeader) 
     .then(function(response){
