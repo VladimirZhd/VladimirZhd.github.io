@@ -72,7 +72,6 @@ dt:first-child::before {
 #logo-image {
     width: 7%;
     height: auto;
-    float: left;
     border-radius: 25%;
 }
 #name {
