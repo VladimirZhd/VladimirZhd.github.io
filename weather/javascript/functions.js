@@ -222,7 +222,8 @@ function getGeoLocation() {
 
 // Gets location information from the NWS API
 function getLocation(locale) {
-    const URL = "https://api.weather.gov/points/" + locale; 
+    // const URL = "https://api.weather.gov/points/" + locale; 
+    const URL = 'https://api.weather.gov/points/43.8093999,-111.7883';
     // NWS User-Agent header (built above) will be the second parameter 
     fetch(URL, idHeader) 
     .then(function(response){
@@ -241,8 +242,8 @@ function getLocation(locale) {
       let gridXValue = data.properties.gridX;
       let gridYValue = data.properties.gridY;
       let cwaValue = data.properties.cwa;
-      let hourlyLink = cwaValue + '/' + gridXValue + ',' + gridYValue; // concatinate a part of url
-      storage.setItem('hourlyLink', hourlyLink);
+      let gridPoints = cwaValue + '/' + gridXValue + ',' + gridYValue; // concatinate a part of url
+      storage.setItem('gridPoints', gridPoints);
       document.getElementById('test2').innerHTML = 'Here we get City name';
       
    
@@ -331,9 +332,9 @@ function getWeather(stationId) {
 
 // gets hourly forcast from local storage
 function getHourly(nextHour) {
-    let hourlyLink = storage.getItem('hourlyLink');
+    let gridPoints = storage.getItem('gridPoints');
     // This is URl for hourly forcast
-    // const URL = 'https://api.weather.gov/gridpoints/' + hourlyLink + '/forecast/hourly';
+    // const URL = 'https://api.weather.gov/gridpoints/' + gridPoints + '/forecast/hourly';
     const URL = 'https://api.weather.gov/gridpoints/PIH/125,87/forecast/hourly';
     fetch(URL, idHeader)
     .then(function(response){
@@ -369,7 +370,7 @@ function getHourly(nextHour) {
 
 function getForcast() {
 
-    let gridPoints = storage.getItem('hourlyLink');
+    let gridPoints = storage.getItem('gridPoints');
     const URL = 'https://api.weather.gov/gridpoints/' + gridPoints + '/forecast'
 
     fetch(URL, idHeader)
