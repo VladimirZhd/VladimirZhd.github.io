@@ -243,6 +243,7 @@ function getLocation(locale) {
       let cwaValue = data.properties.cwa;
       let hourlyLink = cwaValue + '/' + gridXValue + ',' + gridYValue; // concatinate a part of url
       storage.setItem('hourlyLink', hourlyLink);
+      document.getElementById('test2').innerHTML = hourlyLink;
       
    
       // Next, get the weather station ID before requesting current conditions 
@@ -280,6 +281,7 @@ function getStationId(stationsURL) {
       // Store data to localstorage 
       storage.setItem("stationId", stationId); 
       storage.setItem("stationElevation", stationElevation); 
+      document.getElementById('test3').innerHTML = stationId;
    
       // Request the Current Weather for this station 
       getWeather(stationId);
@@ -316,6 +318,7 @@ function getWeather(stationId) {
     //   storage.setItem("gusts", data.properties.windGust.value);
       storage.setItem("windSpeed", data.properties.windSpeed.value);
     
+      document.getElementById('test4').innerHTML = 'json: ' + data;
     
    
    
@@ -487,6 +490,8 @@ function buildPage() {
 
     // set summary name
     document.getElementById('cond').innerHTML = locSummary; 
+
+    document.getElementById('test5').innerHTML = 'Here we should build our page';
 
     // set visability
     contentContainer.setAttribute('class', ''); // removes the hide class
