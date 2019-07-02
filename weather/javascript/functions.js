@@ -385,9 +385,13 @@ function getForcast() {
 
         if (thisAfternoon == true) {
             storage.setItem('maxTemp', data.properties.periods[0].temperature);
+        }else{
+            storage.setItem('minTemp', data.properties.periods[0].temperature);
         }
         if (tonight != true) {
             storage.setItem('minTemp', data.properties.periods[1].temperature);
+        }else{
+            storage.setItem('maxTemp', data.properties.periods[1].temperature);
         }
         
         storage.setItem('gusts', data.properties.periods[0].windSpeed);    
