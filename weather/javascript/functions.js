@@ -226,7 +226,7 @@ function getLocation(locale) {
     document.getElementById('test2').innerHTML = 'get location tyt';
     const URL = 'https://api.weather.gov/points/43.8093999,-111.7883';
     // NWS User-Agent header (built above) will be the second parameter 
-    fetch(URL, idHeader) 
+    fetch(URL) 
     .then(function(response){
       if(response.ok){ 
         document.getElementById('test2').innerHTML = 'recieve response ok tyt';
@@ -268,7 +268,7 @@ function getLocation(locale) {
 // Gets weather station list and the nearest weather station ID from the NWS API
 function getStationId(stationsURL) { 
     // NWS User-Agent header (built above) will be the second parameter 
-    fetch(stationsURL, idHeader) 
+    fetch(stationsURL) 
     .then(function(response){
       if(response.ok){ 
        return response.json(); 
@@ -303,7 +303,7 @@ function getWeather(stationId) {
     // This is the URL for current observation data 
     const URL = 'https://api.weather.gov/stations/' + stationId + '/observations/latest';
     // NWS User-Agent header (built above) will be the second parameter 
-    fetch(URL, idHeader) 
+    fetch(URL) 
     .then(function(response){
       if(response.ok){ 
        return response.json(); 
@@ -342,7 +342,7 @@ function getHourly(nextHour) {
     // This is URl for hourly forcast
     // const URL = 'https://api.weather.gov/gridpoints/' + gridPoints + '/forecast/hourly';
     const URL = 'https://api.weather.gov/gridpoints/PIH/125,87/forecast/hourly';
-    fetch(URL, idHeader)
+    fetch(URL)
     .then(function(response){
         if(response.ok){ 
          return response.json(); 
@@ -379,7 +379,7 @@ function getForcast() {
     let gridPoints = storage.getItem('gridPoints');
     const URL = 'https://api.weather.gov/gridpoints/' + gridPoints + '/forecast'
 
-    fetch(URL, idHeader)
+    fetch(URL)
     .then(function (response){
         if (response.ok) {
            return response.json();
@@ -556,11 +556,11 @@ function convertToFahrenheit(celsius) {
 let date = new Date();
 let nextHour = date.getHours() + 1;
 console.log(nextHour);
-var idHeader = {
-    headers: {
-      "User-Agent": "Student Learning Project - zhd18001@byui.edu"
-    }
-  };
+// va = {
+//     headers: {
+//       "User-Agent": "Student Learning Project - zhd18001@byui.edu"
+//     }
+//   };
 
 
 var storage = window.localStorage;
