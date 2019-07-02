@@ -195,8 +195,8 @@ function getGeoLocation() {
             latt = pos.lat;
             lngg = pos.lng;
 
-        //  const lat = position.coords.latitude;
-        //  const long = position.coords.longitude;
+         //  const lat = position.coords.latitude;
+         //  const long = position.coords.longitude;
       
          // Combine the values
          const locale = latt + "," + lngg;
@@ -209,9 +209,9 @@ function getGeoLocation() {
 
          // Call getLocation function, send locale
          getLocation(locale);
+        }, function() {
       
-      
-        })
+        });
        } else {
         status.innerHTML = "Your browser doesn't support Geolocation or it is not enabled!";
        }
