@@ -188,16 +188,23 @@ function getGeoLocation() {
     status.innerHTML = 'Getting Location...';
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-         const lat = position.coords.latitude;
-         const long = position.coords.longitude;
+            pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            latt = pos.lat;
+            lngg = pos.lng;
+
+        //  const lat = position.coords.latitude;
+        //  const long = position.coords.longitude;
       
          // Combine the values
-         const locale = lat + "," + long;
+         const locale = latt + "," + lngg;
          console.log(`Lat and Long are: ${locale}.`);
 
          // Set lon lat to localStorage
-         storage.setItem('long', long.toFixed(2));
-         storage.setItem('lat', lat.toFixed(2));
+         storage.setItem('long', lngg.toFixed(2));
+         storage.setItem('lat', latt.toFixed(2));
 
 
          // Call getLocation function, send locale
@@ -299,8 +306,8 @@ function getWeather(stationId) {
     
       // Store weather information to localStorage 
       storage.setItem("temperature", data.properties.temperature.value);
-      storage.setItem("maxTemperature", data.properties.maxTemperatureLast24Hours.value);
-      storage.setItem("minTemperature", data.properties.minTemperatureLast24Hours.value);
+    //   storage.setItem("maxTemperature", data.properties.maxTemperatureLast24Hours.value);
+    //   storage.setItem("minTemperature", data.properties.minTemperatureLast24Hours.value);
       storage.setItem("summary", data.properties.textDescription);
       storage.setItem("feelsLike", data.properties.heatIndex.value);
       storage.setItem("windDirection", data.properties.windDirection.value);
@@ -355,6 +362,44 @@ function getHourly(nextHour) {
 
 }
 
+function getForcast() {
+
+    let gridPoints = storage.getItem('hourlyLink');
+    const URL = 'https://api.weather.gov/gridpoints/' + gridPoints + '/forecast'
+
+    fetch(URL, idHeader)
+    .then(function (response){
+        if (response.ok) {
+           return response.json();
+        }
+        throw new ERROR('Response not OK.');
+
+        })
+        .then(function(data) {
+
+        console.log('getForcast data: ', data);
+        let thisAfternoon = data.properties.periods[0].isDaytime;
+        let tonight = data.properties.periods[1].isDaytime;
+
+        console.log(thisAfternoon, tonight);
+
+        if (thisAfternoon == true) {
+            storage.setItem('maxTemp', data.properties.periods[0].temperature);
+        }
+        if (tonight != true) {
+            storage.setItem('minTemp', data.properties.periods[1].temperature);
+        }
+
+            
+
+        })
+
+        .catch(error => console.log('There was a getWeather error: ', error)) 
+
+}
+
+
+
 // function build the page
 function buildPage() {
     // Getting all data from local storage
@@ -366,10 +411,10 @@ function buildPage() {
     locGusts = storage.getItem('gusts'),
     locElev = storage.getItem('stationElevation'),
     locTemp = storage.getItem('temperature'),
-    locMaxTemp = storage.getItem('maxTemperature'),
-    locMinTemp = storage.getItem('minTemperature'),
+    locMaxTemp = storage.getItem('maxTemp'),
+    locMinTemp = storage.getItem('minTemp'),
     locSummary = storage.getItem('summary'),
-    locFeelsLike = storage.getItem('feelslike'),
+    // locFeelsLike = storage.getItem('feelslike'),
     locWindDirect = storage.getItem('windDirection');
 
     // variables for hiding the page
@@ -392,10 +437,12 @@ function buildPage() {
     // convert celcius to fahrenheit for temperature
     let tempFahr = convertToFahrenheit(locTemp);
     console.log('Temperature in fahrenheits: ', tempFahr);
+
     // convert celcius to fahrenheit for max temperature
-    let maxTempFahr = convertToFahrenheit(locMaxTemp);
+    // let maxTempFahr = convertToFahrenheit(locMaxTemp);
     // convert celcius to fahrenheit for min temperature
-    let minTempFahr = convertToFahrenheit(locMinTemp);
+    // let minTempFahr = convertToFahrenheit(locMinTemp);
+
     // build wind chill 
     let feelsLike = buildWC(locWindSpeed, tempFahr);
     console.log('feels like temp: ', feelsLike);
@@ -409,7 +456,7 @@ function buildPage() {
     // inserts the fullName value before any other content that might exist
     pageTitle.insertBefore(fullNameNode, pageTitle.childNodes[0]);
     // When this is done the title should look something like this:
-    // Greenville, SC | The Weather Site
+    
 
     // Set the Location information
     // Get the h1 to display the city location
@@ -421,9 +468,10 @@ function buildPage() {
     document.getElementById('lat').innerHTML = locLat + '&deg;';
 
     // set temperature on the page
+    getForcast();
     document.getElementById('temperature').innerHTML = tempFahr;
-    document.getElementById('high').innerHTML = maxTempFahr + '&deg;F &nbsp;';
-    document.getElementById('low').innerHTML = minTempFahr + '&deg;F';
+    document.getElementById('high').innerHTML = locMaxTemp + '&deg;F &nbsp;';
+    document.getElementById('low').innerHTML = locMinTemp + '&deg;F';
     document.getElementById('feelTemp').innerHTML = feelsLike;
 
     // set wind information
