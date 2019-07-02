@@ -223,13 +223,16 @@ function getGeoLocation() {
 // Gets location information from the NWS API
 function getLocation(locale) {
     // const URL = "https://api.weather.gov/points/" + locale; 
+    document.getElementById('test2').innerHTML = 'get location tyt';
     const URL = 'https://api.weather.gov/points/43.8093999,-111.7883';
     // NWS User-Agent header (built above) will be the second parameter 
     fetch(URL, idHeader) 
     .then(function(response){
       if(response.ok){ 
+        document.getElementById('test2').innerHTML = 'recieve response ok tyt';
        return response.json(); 
       } 
+      document.getElementById('test2').innerHTML = 'throw new ERROR ';
       throw new ERROR('Response not OK.');
     })
     .then(function (data) { 
