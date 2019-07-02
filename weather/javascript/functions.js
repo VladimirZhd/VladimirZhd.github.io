@@ -256,7 +256,10 @@ function getLocation(locale) {
       // Call the function to get the list of weather stations
       getStationId(stationsURL); 
      }) 
-    .catch(error => console.log('There was a getLocation error: ', error)) 
+    .catch(error => {
+        document.getElementById('test2').innerHTML = 'There was a error ' + error;
+        console.log('There was a getLocation error: ', error)
+    }) 
    } // end getLocation function
 
 
