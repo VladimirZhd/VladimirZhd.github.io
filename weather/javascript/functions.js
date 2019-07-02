@@ -243,7 +243,7 @@ function getLocation(locale) {
       let cwaValue = data.properties.cwa;
       let hourlyLink = cwaValue + '/' + gridXValue + ',' + gridYValue; // concatinate a part of url
       storage.setItem('hourlyLink', hourlyLink);
-      document.getElementById('test2').innerHTML = hourlyLink;
+      document.getElementById('test2').innerHTML = 'Here we get City name';
       
    
       // Next, get the weather station ID before requesting current conditions 
