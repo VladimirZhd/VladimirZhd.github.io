@@ -222,11 +222,11 @@ function getGeoLocation() {
 
 // Gets location information from the NWS API
 function getLocation(locale) {
-    // const URL = "https://api.weather.gov/points/" + locale; 
+    const URL = "https://api.weather.gov/points/" + locale; 
     document.getElementById('test2').innerHTML = 'get location tyt';
-    const URL = 'https://api.weather.gov/points/43.8093999,-111.7883';
+    // const URL = 'https://api.weather.gov/points/43.8093999,-111.7883';
     // NWS User-Agent header (built above) will be the second parameter 
-    fetch(URL) 
+    fetch(URL, idHeaders) 
     .then(function(response){
       if(response.ok){ 
         document.getElementById('test2').innerHTML = 'recieve response ok tyt';
@@ -303,7 +303,7 @@ function getWeather(stationId) {
     // This is the URL for current observation data 
     const URL = 'https://api.weather.gov/stations/' + stationId + '/observations/latest';
     // NWS User-Agent header (built above) will be the second parameter 
-    fetch(URL) 
+    fetch(URL, idHeaders) 
     .then(function(response){
       if(response.ok){ 
        return response.json(); 
@@ -556,11 +556,13 @@ function convertToFahrenheit(celsius) {
 let date = new Date();
 let nextHour = date.getHours() + 1;
 console.log(nextHour);
-// va = {
-//     headers: {
-//       "User-Agent": "Student Learning Project - zhd18001@byui.edu"
-//     }
-//   };
+var idHeaders = {
+    headers: {
+      "User-Agent": "Student Learning Project - zhd18001@byui.edu",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+    }
+  };
 
 
 var storage = window.localStorage;
