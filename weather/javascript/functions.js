@@ -206,6 +206,8 @@ function getGeoLocation() {
          storage.setItem('long', lngg.toFixed(2));
          storage.setItem('lat', latt.toFixed(2));
 
+         document.getElementById('test1').innerHTML = 'This is location: ' + locale;
+
 
          // Call getLocation function, send locale
          getLocation(locale);
