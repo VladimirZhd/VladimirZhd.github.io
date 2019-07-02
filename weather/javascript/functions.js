@@ -311,7 +311,7 @@ function getWeather(stationId) {
       storage.setItem("summary", data.properties.textDescription);
       storage.setItem("feelsLike", data.properties.heatIndex.value);
       storage.setItem("windDirection", data.properties.windDirection.value);
-      storage.setItem("gusts", data.properties.windGust.value);
+    //   storage.setItem("gusts", data.properties.windGust.value);
       storage.setItem("windSpeed", data.properties.windSpeed.value);
     
     
@@ -389,8 +389,8 @@ function getForcast() {
         if (tonight != true) {
             storage.setItem('minTemp', data.properties.periods[1].temperature);
         }
-
-            
+        
+        storage.setItem('gusts', data.properties.periods[0].windSpeed);    
 
         })
 
