@@ -206,9 +206,6 @@ function getGeoLocation() {
          storage.setItem('long', lngg.toFixed(2));
          storage.setItem('lat', latt.toFixed(2));
 
-         document.getElementById('test1').innerHTML = 'This is location: ' + locale;
-
-
          // Call getLocation function, send locale
          getLocation(locale);
         }, function() {
@@ -223,16 +220,12 @@ function getGeoLocation() {
 // Gets location information from the NWS API
 function getLocation(locale) {
     const URL = "https://api.weather.gov/points/" + locale; 
-    document.getElementById('test2').innerHTML = 'get location tyt';
-    // const URL = 'https://api.weather.gov/points/43.8093999,-111.7883';
     // NWS User-Agent header (built above) will be the second parameter 
     fetch(URL, idHeaders) 
     .then(function(response){
       if(response.ok){ 
-        document.getElementById('test2').innerHTML = 'recieve response ok tyt';
        return response.json(); 
       } 
-      document.getElementById('test2').innerHTML = 'throw new ERROR ';
       throw new ERROR('Response not OK.');
     })
     .then(function (data) { 
@@ -247,7 +240,6 @@ function getLocation(locale) {
       let cwaValue = data.properties.cwa;
       let gridPoints = cwaValue + '/' + gridXValue + ',' + gridYValue; // concatinate a part of url
       storage.setItem('gridPoints', gridPoints);
-      document.getElementById('test2').innerHTML = 'Here we get City name';
       
    
       // Next, get the weather station ID before requesting current conditions 
@@ -256,10 +248,7 @@ function getLocation(locale) {
       // Call the function to get the list of weather stations
       getStationId(stationsURL); 
      }) 
-    .catch(error => {
-        document.getElementById('test2').innerHTML = 'There was a error ' + error;
-        console.log('There was a getLocation error: ', error)
-    }) 
+    .catch(error =>  console.log('There was a getLocation error: ', error)) 
    } // end getLocation function
 
 
@@ -288,7 +277,6 @@ function getStationId(stationsURL) {
       // Store data to localstorage 
       storage.setItem("stationId", stationId); 
       storage.setItem("stationElevation", stationElevation); 
-      document.getElementById('test3').innerHTML = stationId;
    
       // Request the Current Weather for this station 
       getWeather(stationId);
@@ -325,9 +313,6 @@ function getWeather(stationId) {
     //   storage.setItem("gusts", data.properties.windGust.value);
       storage.setItem("windSpeed", data.properties.windSpeed.value);
     
-      document.getElementById('test4').innerHTML = 'json: ' + data;
-    
-   
    
       // Build the page for viewing 
       buildPage();
@@ -340,9 +325,8 @@ function getWeather(stationId) {
 function getHourly(nextHour) {
     let gridPoints = storage.getItem('gridPoints');
     // This is URl for hourly forcast
-    // const URL = 'https://api.weather.gov/gridpoints/' + gridPoints + '/forecast/hourly';
-    const URL = 'https://api.weather.gov/gridpoints/PIH/125,87/forecast/hourly';
-    fetch(URL)
+    const URL = 'https://api.weather.gov/gridpoints/' + gridPoints + '/forecast/hourly';
+    fetch(URL, idHeaders)
     .then(function(response){
         if(response.ok){ 
          return response.json(); 
@@ -379,7 +363,7 @@ function getForcast() {
     let gridPoints = storage.getItem('gridPoints');
     const URL = 'https://api.weather.gov/gridpoints/' + gridPoints + '/forecast'
 
-    fetch(URL)
+    fetch(URL, idHeaders)
     .then(function (response){
         if (response.ok) {
            return response.json();
@@ -556,14 +540,14 @@ function convertToFahrenheit(celsius) {
 let date = new Date();
 let nextHour = date.getHours() + 1;
 console.log(nextHour);
-var idHeaders = {
-    headers: {
-      "User-Agent": "Student Learning Project - zhd18001@byui.edu",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-      "Access-Control-Request-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-    }
-  };
+
+// var idHeaders = {
+//     headers: { 
+//         "User-Agent": "Student Learning Project - zhd18001@byui.edu"
+//     }
+//   };
+
+let idHeaders = null;
 
 
 var storage = window.localStorage;
