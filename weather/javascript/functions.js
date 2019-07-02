@@ -188,29 +188,23 @@ function getGeoLocation() {
     status.innerHTML = 'Getting Location...';
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            latt = pos.lat;
-            lngg = pos.lng;
 
-         //  const lat = position.coords.latitude;
-         //  const long = position.coords.longitude;
+          const lat = position.coords.latitude;
+          const long = position.coords.longitude;
       
          // Combine the values
-         const locale = latt + "," + lngg;
+         const locale = lat + "," + long;
          console.log(`Lat and Long are: ${locale}.`);
 
          // Set lon lat to localStorage
-         storage.setItem('long', lngg.toFixed(2));
-         storage.setItem('lat', latt.toFixed(2));
+         storage.setItem('long', long.toFixed(2));
+         storage.setItem('lat', lat.toFixed(2));
 
          // Call getLocation function, send locale
          getLocation(locale);
-        }, function() {
-      
+
         });
+
        } else {
         status.innerHTML = "Your browser doesn't support Geolocation or it is not enabled!";
        }
@@ -224,7 +218,7 @@ function getLocation(locale) {
     fetch(URL, idHeaders) 
     .then(function(response){
       if(response.ok){ 
-       return response.json(); 
+        return response.json(); 
       } 
       throw new ERROR('Response not OK.');
     })
@@ -482,7 +476,6 @@ function buildPage() {
     // set summary name
     document.getElementById('cond').innerHTML = locSummary; 
 
-    document.getElementById('test5').innerHTML = 'Here we should build our page';
 
     // set visability
     contentContainer.setAttribute('class', ''); // removes the hide class
