@@ -15,6 +15,9 @@
 /* 2. General */
 
 /* general rules for elements */
+* {
+    transition: all 1s;
+}
 body {
     font-family: helvetica, sans-serif;
     position: relative;
@@ -243,9 +246,9 @@ ul#horizontal-list li {
     width: 400px;
     height: 500px;
 }
-#background {
+/* #background {
     padding: 1%;
-}
+} */
 
 
 
@@ -325,6 +328,9 @@ ul#horizontal-list li {
     #hour {
         font-size: 30px;
         margin: 0;
+    }
+    #scroll-bar {
+        margin-left: -35px;
     }
 }
 
@@ -451,5 +457,8 @@ ul#horizontal-list li {
         background-size: cover;
         background-repeat: no-repeat;
         margin: 10px auto; 
+    }
+    #scroll-bar li {
+        font-size: 30px;
     }
 }

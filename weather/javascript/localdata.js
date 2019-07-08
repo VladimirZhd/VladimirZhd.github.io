@@ -1,7 +1,5 @@
 let weatherURL = "./javascript/weather.json";
-fetchData(weatherURL);
-
-
+//fetchData(weatherURL);
 
 
 
@@ -9,8 +7,24 @@ let pageNav = document.getElementById('nav-section');
 let statusContainer = document.getElementById('status');
 let contentContainer = document.getElementById('main-section');
 
-function fetchData(weatherURL){
-  let cityName = 'Greenville'; // The data we want from the weather.json file
+pageNav.addEventListener('click', function(evt){
+
+// get city name
+let cityName = evt.target.innerHTML;
+console.log(cityName);
+switch (cityName) {
+  case "Franklin":
+  case "Greenville":
+  case "Springfield":
+  evt.preventDefault();    
+  break;
+  case "Current":
+  buildPage();
+  }
+
+
+//function fetchData(weatherURL){
+ // let cityName = 'Greenville'; // The data we want from the weather.json file
   fetch(weatherURL)
   .then(function(response) {
   if(response.ok){
@@ -63,6 +77,9 @@ function fetchData(weatherURL){
     // Create a text node containing the full name 
     let fullNameNode = document.createTextNode(fullName);
     // inserts the fullName value before any other content that might exist
+    if (pageTitle.childNodes.length > 1) {
+      pageTitle.removeChild(pageTitle.childNodes[0]);
+    }
     pageTitle.insertBefore(fullNameNode, pageTitle.childNodes[0]);
     // When this is done the title should look something like this:
     // Greenville, SC | The Weather Site
@@ -91,6 +108,7 @@ function fetchData(weatherURL){
     document.getElementById('windS').innerHTML = getWind;
     document.getElementById('dir').innerHTML = getDirection;
     document.getElementById('gustsV').innerHTML = getGusts;
+    windDial(getDirection);
      
 
     // Set the current conditions information
@@ -115,4 +133,4 @@ function fetchData(weatherURL){
   console.log('There was a fetch problem: ', error.message);
   statusContainer.innerHTML = 'Sorry, the data could not be processed.';
   })
-}
+})

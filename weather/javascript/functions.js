@@ -535,16 +535,20 @@ let nextHour = date.getHours() + 1;
 console.log(nextHour);
 
 // var idHeaders = {
-//     headers: { 
+//     headers: {
 //         "User-Agent": "Student Learning Project - zhd18001@byui.edu"
 //     }
 //   };
 
-let idHeaders = null;
+// var idHeader = new Headers({
+//     "User-Agent" : "Student Learning Project - zhd18001@byui.edu"
+//     });
 
+var idHeaders = null;
 
 var storage = window.localStorage;
 
+
 // Calling wind direction function
-windDial(direction);
+//windDial(direction);
 getHourly(nextHour);
