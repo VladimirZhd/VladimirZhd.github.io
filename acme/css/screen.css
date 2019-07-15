@@ -149,7 +149,6 @@
    figure {
        display: flex;
        flex-direction: column;
-       flex-shrink: 50%;
        margin: 0;
    }
    #recipe-list img.rec-image {
