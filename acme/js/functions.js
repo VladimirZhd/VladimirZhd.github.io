@@ -51,7 +51,6 @@ pageNav.addEventListener('click', function(evt){
         evt.preventDefault();    
         break;
       case "Home":
-        document.getElementById('page-title').innerHTML = 'Welcome to Acme!';
         sectionA.setAttribute("class", " ");
         sectionB.setAttribute("class", "hide");
         evt.preventDefault();

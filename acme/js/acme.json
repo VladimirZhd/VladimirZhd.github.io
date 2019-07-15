@@ -31,6 +31,14 @@
       "price": "20.00",
       "reviews": "2.6"
     },
+    "Home":{
+      "name": "Welcome to Acme!",
+      "path": "./#",
+      "description": " ",
+      "manufacturer": " ",
+      "price": " ",
+      "reviews": " "
+    },
     
     "navigation": ["Home", "Anvils", "Explosives", "Decoys", "Traps"]
 }
