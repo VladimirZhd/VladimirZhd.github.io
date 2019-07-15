@@ -12,11 +12,17 @@
 
    /* 2. General Rules */
 
-   html {
+   /* html {
        box-sizing: border-box;
    } 
    html * {
        box-sizing: border-box;
+   } */
+   html {
+       height: 100%;
+   }
+   body {
+       height: 100%;
    }
    #section-a.hide {
        display: none;
@@ -168,9 +174,9 @@
 /* 3. Mobile Rules */
 
 @media only screen and (max-width: 698px) {
-    body {
+    /* body {
         height: 150vh;
-    }
+    } */
 }
 
 
