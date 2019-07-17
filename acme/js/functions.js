@@ -68,7 +68,7 @@ pageNav.addEventListener('click', function(evt){
         console.log(data);
 
         let g = data[pageName];
-
+        // get data from JSON
         let itemDesc = g.description;
         let itemManuf = g.manufacturer;
         let itemName = g.name; 
@@ -78,7 +78,7 @@ pageNav.addEventListener('click', function(evt){
 
         console.log(itemPicture);
 
-
+        //set page name in the tab
         let pageTitle = document.getElementById('title');
 
         let pageNameNode = document.createTextNode(pageName);
@@ -87,7 +87,7 @@ pageNav.addEventListener('click', function(evt){
             pageTitle.removeChild(pageTitle.childNodes[0]);
         }
         pageTitle.insertBefore(pageNameNode, pageTitle.childNodes[0]);
-
+        //build the product page
         document.getElementById('page-title').innerHTML = itemName;
         document.getElementById('item-img').innerHTML = '<img src = "' + itemPicture + '"' + ' alt = "' + itemName + '"' + ' id = "item-pic">';
         document.getElementById('desc').innerHTML = itemDesc;
