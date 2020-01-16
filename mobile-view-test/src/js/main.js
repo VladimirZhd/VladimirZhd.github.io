@@ -35,7 +35,9 @@ let floorsWidget = document.getElementById("floorLayers");
 
 view.ui.add(floorsWidget, "bottom-right");
 view.ui.move('zoom', "bottom-right");
-if (screen.width < 768) {
+if (screen.width < 1024) {
+    view.ui.add(locate, "bottom-right");
+} else if (device == true) {
     view.ui.add(locate, "bottom-right");
 }
 
@@ -45,7 +47,7 @@ let search = new Search({
 });
 
 view.ui.add(search, "top-right");
-if (screen.width > 768) {
+if (screen.width > 767) {
     view.ui.move(search, "top-left"); 
 }
 
