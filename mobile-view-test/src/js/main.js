@@ -35,7 +35,7 @@ let floorsWidget = document.getElementById("floorLayers");
 
 view.ui.add(floorsWidget, "bottom-right");
 view.ui.move('zoom', "bottom-right");
-if (screen.width < 1024) {
+if (screen.width < 768) {
     view.ui.add(locate, "bottom-right");
 } else if (device == true) {
     view.ui.add(locate, "bottom-right");
