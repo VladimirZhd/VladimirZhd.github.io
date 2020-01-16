@@ -144,7 +144,8 @@ body,
     top: .5em;
     outline: none;
     padding: 0;
-    margin: 0; }
+    margin: 0;
+    font-size: 20px; }
   .button-floor {
     background-color: #fff;
     margin-bottom: 2px;
