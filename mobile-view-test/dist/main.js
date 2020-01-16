@@ -42,7 +42,7 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
 
     var locate = new _Locate2.default({
         view: view,
-        scale: 20
+        scale: 1200
     });
     var floorsWidget = document.getElementById("floorLayers");
     var device = isMobileDevice();
