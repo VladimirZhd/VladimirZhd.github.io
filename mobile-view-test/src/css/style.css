@@ -63,7 +63,8 @@ body,
   padding: 0;
   margin: 0;
   height: 100%;
-  width: 100%; }
+  width: 100%;
+  outline: none; }
 
 .esri-locate {
   border-radius: 50%;
@@ -173,7 +174,8 @@ body,
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: .5em 1em; }
+    padding: 1em 1em;
+    font-size: 18px; }
     .menu-list li a {
       text-decoration: none;
       color: black; }

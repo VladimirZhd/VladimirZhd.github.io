@@ -15,6 +15,7 @@ body,
     margin: 0;
     height: 100%;
     width: 100%;
+    outline: none;
 }
 
 .esri-locate {
@@ -168,7 +169,8 @@ body,
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            padding: .5em 1em;
+            padding: 1em 1em;
+            font-size: 18px;
 
             a {
                 text-decoration: none;
