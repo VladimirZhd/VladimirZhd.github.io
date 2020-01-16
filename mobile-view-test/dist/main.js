@@ -44,12 +44,13 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
         view: view
     });
     var floorsWidget = document.getElementById("floorLayers");
-
+    var device = isMobileDevice();
     view.ui.add(floorsWidget, "bottom-right");
     view.ui.move('zoom', "bottom-right");
     if (screen.width < 768) {
         view.ui.add(locate, "bottom-right");
-    } else if (device == true) {
+    }
+    if (device == true) {
         view.ui.add(locate, "bottom-right");
     }
 
@@ -62,6 +63,5 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
         view.ui.move(search, "top-left");
     }
 
-    var device = isMobileDevice();
     console.log(device);
 });

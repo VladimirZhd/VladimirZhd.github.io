@@ -32,15 +32,15 @@ let locate = new Locate({
     view: view
 });
 let floorsWidget = document.getElementById("floorLayers");
-
+let device = isMobileDevice();
 view.ui.add(floorsWidget, "bottom-right");
 view.ui.move('zoom', "bottom-right");
 if (screen.width < 768) {
     view.ui.add(locate, "bottom-right");
-} else if (device == true) {
+} 
+if (device == true) {
     view.ui.add(locate, "bottom-right");
 }
-
 
 let search = new Search({
     view: view
@@ -51,6 +51,6 @@ if (screen.width > 767) {
     view.ui.move(search, "top-left"); 
 }
 
-let device = isMobileDevice();
+
 console.log(device);
 
