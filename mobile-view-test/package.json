@@ -16,8 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "@types/arcgis-js-api": "^4.14.0",
-    "npm-watch": "^0.6.0",
-    "node-sass": "4.13.0"
+    "jquery-touchswipe": "^1.6.19",
+    "node-sass": "4.13.0",
+    "npm-watch": "^0.6.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

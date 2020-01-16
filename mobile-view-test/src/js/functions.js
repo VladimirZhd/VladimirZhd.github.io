@@ -6,12 +6,14 @@ $(document).ready(function(){
         $(".hide").animate({left: "-340px"});
     })
 
-    $(".hide").on("swipe", function(){
-        $(this).hide();
+    $(function() {
+        $(".hide").swipe({
+            swipe:function() {
+                $(".button-close").click();
+            }
+        });
     });
-
-    $(".viewDiv").on("click", function(){
-        $(".hide").hide();
-    }); 
 });
+
+
 
