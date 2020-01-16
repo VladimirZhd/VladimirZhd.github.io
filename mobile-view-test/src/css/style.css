@@ -216,5 +216,9 @@ hr {
   right: 0;
   bottom: 110px; }
 
+@media only screen and (min-width: 1024px) {
+  .floor-layers {
+    bottom: 70px; } }
+
 #floorLayers.floor-layers.esri-component {
   box-shadow: none; }

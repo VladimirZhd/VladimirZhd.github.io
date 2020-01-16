@@ -51,6 +51,9 @@ if (screen.width > 767) {
     view.ui.move(search, "top-left"); 
 }
 
+if (screen.width >= 1024 && device == true) {
+    document.getElementById("floorLayers").style.bottom = "110px";
+}
 
 console.log(device);
 

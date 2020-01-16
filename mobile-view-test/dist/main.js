@@ -63,5 +63,9 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
         view.ui.move(search, "top-left");
     }
 
+    if (screen.width >= 1024 && device == true) {
+        document.getElementById("floorLayers").style.bottom = "110px";
+    }
+
     console.log(device);
 });
