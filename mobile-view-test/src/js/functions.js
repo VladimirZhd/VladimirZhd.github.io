@@ -13,6 +13,10 @@ $(document).ready(function(){
             }
         });
     });
+
+    $("#viewDiv").on("click", function(){
+        $(".button-close").click();
+    });
 });
 
 function isMobileDevice() {
