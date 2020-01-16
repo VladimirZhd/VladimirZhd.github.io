@@ -49,3 +49,6 @@ if (screen.width > 768) {
     view.ui.move(search, "top-left"); 
 }
 
+let device = isMobileDevice();
+console.log(device);
+
