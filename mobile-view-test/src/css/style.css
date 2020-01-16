@@ -96,14 +96,6 @@ body,
   background-color: white;
   overflow: scroll; }
 
-.esri-ui-top-right {
-  width: 100%;
-  border-radius: 1em; }
-
-@media only screen and (min-width: 768px) {
-  .esri-ui-top-right {
-    max-width: 30%; } }
-
 .esri-search {
   width: 100%;
   border-radius: 1em; }
@@ -124,6 +116,14 @@ body,
   .esri-search__submit-button {
     border-radius: 0 1em 1em 0;
     outline: none; }
+
+.esri-ui-top-right {
+  width: 100%;
+  border-radius: 1em; }
+
+@media only screen and (min-width: 768px) {
+  .esri-ui-top-right {
+    max-width: 30%; } }
 
 @media only screen and (min-width: 768px) {
   .esri-search {

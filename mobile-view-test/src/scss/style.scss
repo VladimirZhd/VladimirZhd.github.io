@@ -7,7 +7,7 @@ $mediumScreen: 24em;
 * {
     box-sizing: border-box;
 }
-
+// Basic styles for displaying the map on the page
 html,
 body,
 #viewDiv {
@@ -17,19 +17,19 @@ body,
     width: 100%;
     outline: none;
 }
-
+// Styles for locator widget
 .esri-locate {
     border-radius: 50%;
     outline: none;
     margin-top: .4em;
 }
-
+//Removing outline from widget buttons
 .esri-widget {
     &--button {
         outline: none;
     }
 }
-
+//Styles for esri zoom widget
 .esri-zoom {
     border-radius: 5px;
 
@@ -50,7 +50,7 @@ body,
         }
     }
 }
-
+// Stiles for sliding menu
 .hide {
     display: block;
     position: absolute;
@@ -61,18 +61,7 @@ body,
     background-color: white;
     overflow: scroll;
 }
-
-.esri-ui-top-right {
-    width: 100%;
-    border-radius: 1em;
-}
-
-@media only screen and (min-width: 768px) {
-    .esri-ui-top-right {
-        max-width: 30%;
-    }
-}
-
+// Customization for search widget
 .esri-search {
     width: 100%;
     border-radius: 1em;
@@ -103,7 +92,17 @@ body,
         outline: none;
     }
 }
-
+// Make a container for search widget's width 100% for mobile view
+.esri-ui-top-right {
+    width: 100%;
+    border-radius: 1em;
+}
+// Make a container for search widget's width 30% for large and medium screen view
+@media only screen and (min-width: 768px) {
+    .esri-ui-top-right {
+        max-width: 30%;
+    }
+}
 @media only screen and (min-width: 768px) {
     .esri-search {
         width: 170%;
