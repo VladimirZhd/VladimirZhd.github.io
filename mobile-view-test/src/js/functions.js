@@ -8,7 +8,7 @@ $(document).ready(function(){
 
     $(function() {
         $(".hide").swipe({
-            swipe:function() {
+            swipeLeft:function() {
                 $(".button-close").click();
             }
         });
