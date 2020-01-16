@@ -5,4 +5,7 @@ $(document).ready(function(){
     $(".button-close").click(function(){
         $(".hide").animate({left: "-340px"});
     })
+    $(".hide").on("swipe", function(){
+        $(this).hide();
+    });
 });
