@@ -46,6 +46,6 @@ let search = new Search({
 
 view.ui.add(search, "top-right");
 if (screen.width > 768) {
-    view.ui.move(search, "top-left");
+    view.ui.move(search, "top-left"); 
 }
 
