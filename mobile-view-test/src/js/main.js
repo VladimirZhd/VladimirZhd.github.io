@@ -30,7 +30,7 @@ var view = new MapView({
 
 let locate = new Locate({
     view: view,
-    scale: 1200
+    scale: 900
 });
 let floorsWidget = document.getElementById("floorLayers");
 let device = isMobileDevice();
