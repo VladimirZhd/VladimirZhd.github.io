@@ -70,8 +70,7 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
 
     /* Create a search widget*/
     var search = new _Search2.default({
-        view: view,
-        id: "searchWidget"
+        view: view
     });
 
     /* Insert the search widget to the top right of the page*/
@@ -87,7 +86,7 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
 
     console.log(device);
 
-    var arraySearchBar = _dom2.default.byId("searchWidget-source-menu");
+    var arraySearchBar = _dom2.default.byId("hello-source-menu");
 
     // let searchBar = arraySearchBar;
     console.log(arraySearchBar);

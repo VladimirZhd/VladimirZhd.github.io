@@ -58,8 +58,7 @@ if (device == true) {
 
 /* Create a search widget*/
 let search = new Search({
-    view: view,
-    id: "searchWidget"
+    view: view
 });
 
 /* Insert the search widget to the top right of the page*/
@@ -75,7 +74,7 @@ if (screen.width >= 1024 && device == true) {
 
 console.log(device);
 
-let arraySearchBar = dom.byId("searchWidget-source-menu");
+let arraySearchBar = dom.byId("hello-source-menu");
 
 
 // let searchBar = arraySearchBar;
