@@ -128,7 +128,8 @@ body,
 
 .button {
   position: absolute;
-  z-index: 1; }
+  z-index: 1;
+  cursor: pointer; }
   .button-menu {
     background: transparent;
     outline: none;
@@ -153,7 +154,8 @@ body,
     width: 32px;
     height: 32px;
     color: #6e6e6e;
-    outline: none; }
+    outline: none;
+    cursor: pointer; }
     .button-floor:hover {
       background-color: #f0f0f0;
       color: #2e2e2e; }
@@ -175,7 +177,8 @@ body,
     font-size: 18px; }
     .menu-list li a {
       text-decoration: none;
-      color: black; }
+      color: black;
+      cursor: pointer; }
       .menu-list li a:hover {
         color: grey; }
 

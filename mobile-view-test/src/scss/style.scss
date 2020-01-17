@@ -107,6 +107,7 @@ body,
 .button {
     position: absolute;
     z-index: 1;
+    cursor: pointer;
 
     // menu hamburger button
     &-menu {
@@ -141,6 +142,7 @@ body,
         height: 32px;
         color: #6e6e6e;
         outline: none;
+        cursor: pointer;
 
         &:hover {
             background-color: #f0f0f0;
@@ -175,6 +177,7 @@ body,
             a {
                 text-decoration: none;
                 color: black;
+                cursor: pointer;
 
                 &:hover {
                     color: grey;

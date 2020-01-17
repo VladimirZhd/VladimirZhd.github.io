@@ -6,6 +6,8 @@ import Search from "esri/widgets/Search";
 import Basemap from "esri/Basemap";
 import VectorTileLayer from "esri/layers/VectorTileLayer";
 import dom from "dojo/dom";
+import FeaturedLayer from "esri/layers/FeatureLayer";
+import MapImageLayer from "esri/layers/MapImageLayer";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -67,16 +69,9 @@ view.ui.add(search, "top-right");
 if (screen.width > 767) {
     view.ui.move(search, "top-left"); 
 }
-
+/* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
 if (screen.width >= 1024 && device == true) {
     document.getElementsByName("floorLayers").style.bottom = "110px";
 }
 
 console.log(device);
-
-let arraySearchBar = dom.byId("hello-source-menu");
-
-
-// let searchBar = arraySearchBar;
-console.log(arraySearchBar);
-// console.log(searchBar);

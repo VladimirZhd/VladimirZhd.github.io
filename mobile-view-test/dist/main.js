@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/Basemap", "esri/layers/VectorTileLayer", "dojo/dom"], function (_Map, _MapView, _Locate, _Search, _Basemap, _VectorTileLayer, _dom) {
+define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/Basemap", "esri/layers/VectorTileLayer", "dojo/dom", "esri/layers/FeatureLayer", "esri/layers/MapImageLayer"], function (_Map, _MapView, _Locate, _Search, _Basemap, _VectorTileLayer, _dom, _FeatureLayer, _MapImageLayer) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -14,6 +14,10 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
     var _VectorTileLayer2 = _interopRequireDefault(_VectorTileLayer);
 
     var _dom2 = _interopRequireDefault(_dom);
+
+    var _FeatureLayer2 = _interopRequireDefault(_FeatureLayer);
+
+    var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -79,16 +83,10 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
     if (screen.width > 767) {
         view.ui.move(search, "top-left");
     }
-
+    /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
     if (screen.width >= 1024 && device == true) {
         document.getElementsByName("floorLayers").style.bottom = "110px";
     }
 
     console.log(device);
-
-    var arraySearchBar = _dom2.default.byId("hello-source-menu");
-
-    // let searchBar = arraySearchBar;
-    console.log(arraySearchBar);
-    // console.log(searchBar);
 });
