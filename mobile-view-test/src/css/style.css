@@ -127,7 +127,7 @@ body,
 
 @media only screen and (min-width: 768px) {
   .esri-search {
-    width: 170%; } }
+    width: 200%; } }
 
 .button {
   position: absolute;
@@ -197,9 +197,6 @@ body,
   padding: 0;
   margin-left: 2em;
   line-height: 50px; }
-
-.close-icon {
-  width: 10%; }
 
 .esri-ui-bottom-right {
   display: flex;
