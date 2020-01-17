@@ -107,8 +107,8 @@ body,
     width: 100%; }
   .esri-search__input {
     position: relative;
-    left: 10%;
-    width: 90%;
+    left: 15%;
+    width: 85%;
     outline: none; }
   .esri-search__submit-button {
     border-radius: 0 1em 1em 0;
@@ -133,8 +133,8 @@ body,
     background: transparent;
     outline: none;
     border: none;
-    top: 19px;
-    left: 15px; }
+    top: 21px;
+    left: 11px; }
   .button-close {
     background: transparent;
     border: none;
@@ -161,7 +161,7 @@ body,
       background-color: #e2f1fb; }
 
 .menu-icon {
-  width: 70%; }
+  width: 60%; }
 
 .menu-list {
   list-style: none;
