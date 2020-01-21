@@ -4,6 +4,10 @@
 * {
     box-sizing: border-box;
 }
+
+html {
+    overscroll-behavior: none;
+}
 // Basic styles for displaying the map on the page
 html,
 body,
