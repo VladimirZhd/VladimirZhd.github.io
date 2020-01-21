@@ -157,6 +157,7 @@ body,
 //styles sliding menu related elements
 .menu {
     touch-action: none;
+    overscroll-behavior: none;
     // style for humburger png icon
     &-icon {
         width: 60%;

@@ -163,7 +163,8 @@ body,
       background-color: #e2f1fb; }
 
 .menu {
-  touch-action: none; }
+  touch-action: none;
+  overscroll-behavior: none; }
   .menu-icon {
     width: 60%; }
   .menu-list {
