@@ -6,7 +6,7 @@
 }
 
 html {
-    overscroll-behavior: none;
+    overscroll-behavior-y: contain;
 }
 // Basic styles for displaying the map on the page
 html,
