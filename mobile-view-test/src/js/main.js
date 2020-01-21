@@ -5,9 +5,6 @@ import Locate from "esri/widgets/Locate";
 import Search from "esri/widgets/Search";
 import Basemap from "esri/Basemap";
 import VectorTileLayer from "esri/layers/VectorTileLayer";
-import dom from "dojo/dom";
-import FeaturedLayer from "esri/layers/FeatureLayer";
-import MapImageLayer from "esri/layers/MapImageLayer";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({

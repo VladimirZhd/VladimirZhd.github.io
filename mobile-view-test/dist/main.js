@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/Basemap", "esri/layers/VectorTileLayer", "dojo/dom", "esri/layers/FeatureLayer", "esri/layers/MapImageLayer"], function (_Map, _MapView, _Locate, _Search, _Basemap, _VectorTileLayer, _dom, _FeatureLayer, _MapImageLayer) {
+define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/Basemap", "esri/layers/VectorTileLayer"], function (_Map, _MapView, _Locate, _Search, _Basemap, _VectorTileLayer) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -13,12 +13,6 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
 
     var _VectorTileLayer2 = _interopRequireDefault(_VectorTileLayer);
 
-    var _dom2 = _interopRequireDefault(_dom);
-
-    var _FeatureLayer2 = _interopRequireDefault(_FeatureLayer);
-
-    var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
-
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
             default: obj
@@ -26,6 +20,7 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
     }
 
     /* create a basemap using a community map with trees*/
+    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -37,7 +32,6 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
     });
 
     /* Creating a map with our tree basemap*/
-    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });

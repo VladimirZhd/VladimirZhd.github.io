@@ -163,26 +163,27 @@ body,
 
     // style for unordered lists
     &-list {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
+        list-style: none;       
 
         li {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 1em 1em;
+            padding: 0em 1em;
             font-size: 18px;
+            cursor: pointer;
 
             a {
                 text-decoration: none;
                 color: black;
-                cursor: pointer;
 
                 &:hover {
                     color: grey;
                 }
             }
+        }
+        label {
+            position: relative;
+            left: 220px;
+            bottom: 40px;
+            margin: 0;
         }
     }
 
@@ -203,6 +204,10 @@ body,
         margin-left: 2em;
         line-height: 50px;
     }
+}
+
+.basemap-list {
+    display: flex;
 }
 // Styles for widget's container in the bottom right corner
 .esri-ui-bottom-right {
@@ -233,3 +238,5 @@ hr {
 #floorLayers.floor-layers.esri-component {
     box-shadow: none;
 }
+
+
