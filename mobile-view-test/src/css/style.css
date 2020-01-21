@@ -58,7 +58,7 @@ label:active:after {
   box-sizing: border-box; }
 
 html {
-  overscroll-behavior-y: contain; }
+  overscroll-behavior-y: none; }
 
 html,
 body,
