@@ -162,41 +162,39 @@ body,
     .button-floor:active {
       background-color: #e2f1fb; }
 
-.menu-icon {
-  width: 60%; }
-
-.menu-list {
-  list-style: none; }
-  .menu-list li {
-    padding: 0em 1em;
-    font-size: 18px;
-    cursor: pointer; }
-    .menu-list li a {
-      text-decoration: none;
-      color: black; }
-      .menu-list li a:hover {
-        color: grey; }
-  .menu-list label {
-    position: relative;
-    left: 220px;
-    bottom: 40px;
+.menu {
+  touch-action: none; }
+  .menu-icon {
+    width: 60%; }
+  .menu-list {
+    list-style: none; }
+    .menu-list li {
+      padding: 0em 1em;
+      font-size: 18px;
+      cursor: pointer; }
+      .menu-list li a {
+        text-decoration: none;
+        color: black; }
+        .menu-list li a:hover {
+          color: grey; }
+    .menu-list label {
+      position: relative;
+      left: 220px;
+      bottom: 40px;
+      margin: 0; }
+  .menu-h3 {
+    margin-left: 3em; }
+  .menu-byui-logo {
+    background-color: black;
+    width: 100%;
+    height: 50px;
     margin: 0; }
-
-.menu-h3 {
-  margin-left: 3em; }
-
-.menu-byui-logo {
-  background-color: black;
-  width: 100%;
-  height: 50px;
-  margin: 0; }
-
-.menu-map-title {
-  color: white;
-  margin: 0;
-  padding: 0;
-  margin-left: 2em;
-  line-height: 50px; }
+  .menu-map-title {
+    color: white;
+    margin: 0;
+    padding: 0;
+    margin-left: 2em;
+    line-height: 50px; }
 
 .basemap-list {
   display: flex; }
