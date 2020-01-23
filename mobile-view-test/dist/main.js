@@ -97,6 +97,8 @@ define(["esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/S
 
     var floorButton = new _floorButtons2.default({});
 
+    console.log(_watchUtils2.default);
+
     /* Check for map extent change */
     _watchUtils2.default.whenFalse(view, 'stationary', function (evt) {
         if (!view.stationary) {
