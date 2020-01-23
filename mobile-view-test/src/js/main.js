@@ -7,8 +7,8 @@ import Basemap from "esri/Basemap";
 import VectorTileLayer from "esri/layers/VectorTileLayer";
 import dom from "dojo/dom";
 import watchUtils from "esri/core/watchUtils";
-import layerFunctions from "./extras/layerFunctions";
-import floorButtons from "./extras/floorButtons";
+import layerFunctions from "extras/layerFunctions";
+import floorButtons from "extras/floorButtons";
 
 
 
