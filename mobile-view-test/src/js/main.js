@@ -10,6 +10,8 @@ import watchUtils from "esri/core/watchUtils";
 import layerFunctions from "./extras/layerFunctions";
 import floorButtons from "./extras/floorButtons";
 
+
+
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
     baseLayers: [
@@ -103,6 +105,8 @@ watchUtils.whenFalse(view, 'stationary', function (evt) {
         });
     }
 })
+
+
 
 on(dom.byId("0floor"), "click", function () { floorButton.setVisibleFloor("0", lf.interiorReferenceLayer, dom) });
 on(dom.byId("1floor"), "click", function () { floorButton.setVisibleFloor("1", lf.interiorReferenceLayer, dom) });
