@@ -8,6 +8,7 @@
 html {
     overscroll-behavior-y: none;
 }
+
 // Basic styles for displaying the map on the page
 html,
 body,
@@ -18,18 +19,21 @@ body,
     width: 100%;
     outline: none;
 }
+
 // Styles for locator widget
 .esri-locate {
     border-radius: 50%;
     outline: none;
     margin-top: .4em;
 }
+
 //Removing outline from widget buttons
 .esri-widget {
     &--button {
         outline: none;
     }
 }
+
 //Styles for esri zoom widget
 .esri-zoom {
     border-radius: 5px;
@@ -51,6 +55,7 @@ body,
         }
     }
 }
+
 // Stiles for sliding menu
 .hide {
     display: block;
@@ -62,10 +67,12 @@ body,
     background-color: white;
     overflow: scroll;
 }
+
 // Customization for search widget's width and border radius
 .esri-search {
     width: 100%;
     border-radius: 1em;
+
     &__container {
         width: 100%;
     }
@@ -90,23 +97,27 @@ body,
         outline: none;
     }
 }
+
 // Make the container for search widget's width 100% for mobile view
 .esri-ui-top-right {
     width: 100%;
     border-radius: 1em;
 }
+
 // Make the container for search widget's max-width 30% for large and medium screen view
 @media only screen and (min-width: 768px) {
     .esri-ui-top-right {
         max-width: 30%;
     }
 }
+
 // Make the search widget's width 200% of the container
 @media only screen and (min-width: 768px) {
     .esri-search {
         width: 200%;
     }
 }
+
 // styles for buttons
 .button {
     position: absolute;
@@ -115,7 +126,7 @@ body,
 
     // menu hamburger button
     &-menu {
-        
+
         background: transparent;
         outline: none;
         border: none;
@@ -152,8 +163,20 @@ body,
             background-color: #f0f0f0;
             color: #2e2e2e;
         }
+
         &:active {
             background-color: #e2f1fb
+        }
+
+        &-selected {
+            background-color: #e2f1fb;
+            margin-bottom: 2px;
+            border-radius: 5px;
+            border: solid 1px rgba(110, 110, 110, 0.3);
+            width: 32px;
+            height: 32px;
+            outline: none;
+            cursor: pointer;
         }
     }
 }
@@ -162,6 +185,7 @@ body,
 .menu {
     touch-action: none;
     overscroll-behavior: none;
+
     // style for humburger png icon
     &-icon {
         width: 60%;
@@ -169,7 +193,7 @@ body,
 
     // style for unordered lists
     &-list {
-        list-style: none;       
+        list-style: none;
 
         li {
             padding: 0em 1em;
@@ -185,6 +209,7 @@ body,
                 }
             }
         }
+
         label {
             position: relative;
             left: 220px;
@@ -203,7 +228,8 @@ body,
         height: 50px;
         margin: 0;
     }
-    &-map-title{
+
+    &-map-title {
         color: white;
         margin: 0;
         padding: 0;
@@ -215,6 +241,7 @@ body,
 .basemap-list {
     display: flex;
 }
+
 // Styles for widget's container in the bottom right corner
 .esri-ui-bottom-right {
     display: flex;
@@ -225,6 +252,7 @@ body,
 hr {
     width: 95%;
 }
+
 // styles for floor button's container
 .floor-layers {
     display: flex;
@@ -237,13 +265,13 @@ hr {
     bottom: 110px;
     touch-action: none;
 }
+
 @media only screen and (min-width: 1024px) {
     .floor-layers {
         bottom: 70px;
     }
 }
+
 #floorLayers.floor-layers.esri-component {
     box-shadow: none;
 }
-
-

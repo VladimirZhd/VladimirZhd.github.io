@@ -1,16 +1,21 @@
 /* import all of the libraries from esri that we need to use */
 import Map from "esri/Map";
+import Basemap from "esri/Basemap";
 import MapView from "esri/views/MapView";
+
 import Locate from "esri/widgets/Locate";
 import Search from "esri/widgets/Search";
-import Basemap from "esri/Basemap";
+
 import VectorTileLayer from "esri/layers/VectorTileLayer";
+import { whenFalse } from "esri/core/watchUtils";
+import { whenTrueOnce } from "esri/core/watchUtils";
+import { whenFalseOnce } from "esri/core/watchUtils";
+
 import dom from "dojo/dom";
-import watchUtils from "esri/core/watchUtils";
-import layerFunctions from "extras/layerFunctions";
-import floorButtons from "extras/floorButtons";
+import on from "dojo/on";
 
-
+import layerFunctions from "./extras/layerFunctions";
+import floorButtons from "./extras/floorButtons";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -85,9 +90,9 @@ lf.addBaseReferenceLayers(map);
 let floorButton = new floorButtons({});
 
 /* Check for map extent change */
-watchUtils.whenFalse(view, 'stationary', function (evt) {
+whenFalse(view, 'stationary', function (evt) {
     if (!view.stationary) {
-        watchUtils.whenTrueOnce(view, 'stationary', function (evt) {
+        whenTrueOnce(view, 'stationary', function (evt) {
             if (view.extent) {
                 if (lf.getInteriorReferenceLayerMinScale()) {
                     if (lf.interiorReferenceLayerMinScale >= view.scale) {
@@ -100,7 +105,7 @@ watchUtils.whenFalse(view, 'stationary', function (evt) {
             }
         });
     } else {
-        watchUtils.whenFalseOnce(view, 'interacting', function (evt) {
+        whenFalseOnce(view, 'interacting', function (evt) {
             console.log(view.extent);
         });
     }
