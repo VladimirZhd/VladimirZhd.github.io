@@ -158,7 +158,8 @@ body,
     height: 32px;
     color: #6e6e6e;
     outline: none;
-    cursor: pointer; }
+    cursor: pointer;
+    display: none; }
     .button-floor:hover {
       background-color: #f0f0f0;
       color: #2e2e2e; }

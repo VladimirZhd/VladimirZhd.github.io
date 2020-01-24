@@ -89,8 +89,6 @@ lf.addBaseReferenceLayers(map);
 
 let floorButton = new floorButtons({});
 
-console.log(watchUtils)
-
 /* Check for map extent change */
 whenFalse(view, 'stationary', function (evt) {
     if (!view.stationary) {
