@@ -7,6 +7,7 @@ import Locate from "esri/widgets/Locate";
 import Search from "esri/widgets/Search";
 
 import VectorTileLayer from "esri/layers/VectorTileLayer";
+import FeatureLayer from "esri/layers/FeatureLayer";
 import { whenFalse } from "esri/core/watchUtils";
 import { whenTrueOnce } from "esri/core/watchUtils";
 import { whenFalseOnce } from "esri/core/watchUtils";
@@ -31,12 +32,12 @@ let basemap = new Basemap({
 });
 
 /* Creating a map with our tree basemap*/
-var map = new Map({
+const map = new Map({
     basemap: basemap
 });
 
 /* Creating a view centered on BYUI campus*/
-var view = new MapView({
+const view = new MapView({
     container: "viewDiv",
     map: map,
     zoom: 15,
@@ -46,7 +47,7 @@ var view = new MapView({
 /* Create the locator widget with scaling on locating*/
 let locate = new Locate({
     view: view,
-    scale: 900
+    scale: 400
 });
 
 
@@ -113,8 +114,13 @@ whenFalse(view, 'stationary', function (evt) {
 
 
 
-on(dom.byId("0floor"), "click", function () { floorButton.setVisibleFloor("0", lf.interiorReferenceLayer, dom) });
-on(dom.byId("1floor"), "click", function () { floorButton.setVisibleFloor("1", lf.interiorReferenceLayer, dom) });
-on(dom.byId("2floor"), "click", function () { floorButton.setVisibleFloor("2", lf.interiorReferenceLayer, dom) });
-on(dom.byId("3floor"), "click", function () { floorButton.setVisibleFloor("3", lf.interiorReferenceLayer, dom) });
-on(dom.byId("4floor"), "click", function () { floorButton.setVisibleFloor("4", lf.interiorReferenceLayer, dom) });
+on(dom.byId("0floor"), "click", function () {
+    floorButton.setVisibleFloor("0", lf.interiorReferenceLayer, dom)});
+on(dom.byId("1floor"), "click", function () {
+    floorButton.setVisibleFloor("1", lf.interiorReferenceLayer, dom)});
+on(dom.byId("2floor"), "click", function () {
+    floorButton.setVisibleFloor("2", lf.interiorReferenceLayer, dom)});
+on(dom.byId("3floor"), "click", function () {
+    floorButton.setVisibleFloor("3", lf.interiorReferenceLayer, dom)});
+on(dom.byId("4floor"), "click", function () {
+    floorButton.setVisibleFloor("4", lf.interiorReferenceLayer, dom)});

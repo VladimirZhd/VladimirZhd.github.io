@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/core/watchUtils", "dojo/dom", "dojo/on", "./extras/layerFunctions", "./extras/floorButtons"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _watchUtils, _dom, _on, _layerFunctions, _floorButtons) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/FeatureLayer", "esri/core/watchUtils", "dojo/dom", "dojo/on", "./extras/layerFunctions", "./extras/floorButtons"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _FeatureLayer, _watchUtils, _dom, _on, _layerFunctions, _floorButtons) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -12,6 +12,8 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     var _Search2 = _interopRequireDefault(_Search);
 
     var _VectorTileLayer2 = _interopRequireDefault(_VectorTileLayer);
+
+    var _FeatureLayer2 = _interopRequireDefault(_FeatureLayer);
 
     var _dom2 = _interopRequireDefault(_dom);
 
@@ -28,6 +30,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     }
 
     /* create a basemap using a community map with trees*/
+    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -39,7 +42,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     /* Creating a map with our tree basemap*/
-    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -55,7 +57,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     /* Create the locator widget with scaling on locating*/
     var locate = new _Locate2.default({
         view: view,
-        scale: 900
+        scale: 400
     });
 
     var floorsWidget = document.getElementById("floorLayers"); //Get floor buttons container 
