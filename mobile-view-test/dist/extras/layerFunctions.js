@@ -4,8 +4,9 @@
     "esri/core/watchUtils",
     "esri/layers/MapImageLayer",
     "esri/layers/TileLayer",
+    "esri/layers/VectorTileLayer"
 ],
-    function (declare, lang, watchUtils, MapImageLayer, TileLayer) {
+    function (declare, lang, watchUtils, MapImageLayer, TileLayer, VectorTileLayer) {
         return declare(null, {
             interiorReferenceLayer: null,
             interiorReferenceLayerMinScale: null,
@@ -22,14 +23,14 @@
                     maxScale: 1500
                 });
 
-                map.add(tileLayer3DBuilding);
+                // map.add(tileLayer3DBuilding);
 
                 /*Add interior reference layer to map. This layer shows interior room numbers, bathrooms, drinking fountains. It is toggled by the floor buttons*/
                 this.interiorReferenceLayer = new MapImageLayer({
                     id: "interiorReferenceLayer",
-                    url: "https://maps.byui.edu/arcgis/rest/services/Interactive/InteriorReference/MapServer"
+                    url: "https://maps.byui.edu/arcgis/rest/services/Interactive/InteriorReference/MapServer/"
                 });
-
+                
                 map.add(this.interiorReferenceLayer);                                             
             },
 

@@ -77,14 +77,14 @@
                 //Change Food and Dining visible by floor
 
                 //Reset the floor buttons to show which floor was selected
-                dom.byId("0floor").className = "floorButton";
-                dom.byId("1floor").className = "floorButton";
-                dom.byId("2floor").className = "floorButton";
-                dom.byId("3floor").className = "floorButton";
-                dom.byId("4floor").className = "floorButton";
+                dom.byId("0floor").className = "button-floor";
+                dom.byId("1floor").className = "button-floor";
+                dom.byId("2floor").className = "button-floor";
+                dom.byId("3floor").className = "button-floor";
+                dom.byId("4floor").className = "button-floor";
                 // dom.byId("5floor").className = "floorButton";
 
-                dom.byId(floorNumber + 'floor').className = "selectedFloorButton";
+                dom.byId(floorNumber + 'floor').className = "button-floor-selected";
             },
 
             changeInteriorReferenceLayerVisibleFloor: function (floorNumber, interiorReferenceLayer) {
