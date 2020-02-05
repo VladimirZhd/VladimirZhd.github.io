@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/css/main.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <script>
+        let locationPath = location.pathname.replace(/\/[^\/]+$/, "");
+        window.dojoConfig = {
+            async: true,
+            packages: [
+                {
+                    name: "app",
+                    location: locationPath + "/dist"
+                },
+            ]
+        };
+        let dojoConfig = {
+            paths: {
+                extras: locationPath + "dist/extras"
+            }
+        };
+    </script>
+    <script src="https://js.arcgis.com/4.14/"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="dist/extras/jquery.touchSwipe.js"></script>
+    <title>Mobile view Test</title>
+</head>
+
+<body>
+    <button type="button" class="button button-menu"><img src="src/img/hamburger.png" alt="hamburger icon for menu"
+            class="menu-icon"></button>
+    <div class="floor-layers" id="floorLayers">
+        <button class="button-floor" id="5floor">4</button>
+        <button class="button-floor" id="4floor">4</button>
+        <button class="button-floor" id="3floor">3</button>
+        <button class="button-floor" id="2floor">2</button>
+        <button class="button-floor-selected" id="1floor">1</button>
+        <button class="button-floor" id="0floor">B</button>
+    </div>
+    <div class="hide" id="hidden-menu">
+        <div class="menu-byui-logo">
+            <h2 class="menu-map-title">BYU-Idaho Map</h2>
+        </div>
+        <button class="button button-close" type="button"><b>X</b></button>
+        <h3 class="menu-h3">Basemap</h3>
+        <ul class="basemap-list menu-list" id="list1">
+            <li class="basemap-thumbnail"><a href="#">Roads</a></li>
+            <li class="basemap-thumbnail"><a href="#">Satellite</a></li>
+        </ul>
+        <hr>
+        <h3 class="menu-h3">Campus Information</h3>
+        <ul class="layers-navigation menu-list" id="list2">
+            <li class="layer-item" id="layer-item--baby">Baby Changing</li>
+            <input type="checkbox" class="toggle" id="baby">
+            <label for="baby"></label>
+            <li class="layer-item" id="layer-item--bike">Bike Rack</li>
+            <input type="checkbox" class="toggle" id="bike">
+            <label for="bike" class="toogle-label"></label>
+            <li class="layer-item" id="layer-item--booth">Booth</li>
+            <input type="checkbox" class="toggle" id="booth">
+            <label for="booth"></label>
+            <li class="layer-item" id="layer-item--boundary">BYU-I Boundary</li>
+            <input type="checkbox" class="toggle" id="boundary">
+            <label for="boundary"></label>
+            <li class="layer-item" id="layer-item--food">Food and Dining</li>
+            <input type="checkbox" class="toggle" id="food">
+            <label for="food"></label>
+            <li class="layer-item" id="layer-item--mothers-lounge">Mother's Lounge</li>
+            <input type="checkbox" class="toggle" id="mothers-lounge">
+            <label for="mothers-lounge"></label>
+            <li class="layer-item" id="layer-item--printer-location">Printer Location</li>
+            <input type="checkbox" class="toggle" id="printer-location">
+            <label for="printer-location"></label>
+            <li class="layer-item" id="layer-item--bw-printer">-B&W Printer</li>
+            <input type="checkbox" class="toggle" id="bw-printer">
+            <label for="bw-printer"></label>
+            <li class="layer-item" id="layer-item--clr-printer">-Color Printer</li>
+            <input type="checkbox" class="toggle" id="clr-printer">
+            <label for="clr-printer"></label>
+            <li class="layer-item" id="layer-item--copy-scan">-Copy, Scan, Email</li>
+            <input type="checkbox" class="toggle" id="copy-scan">
+            <label for="copy-scan"></label>
+            <li class="layer-item" id="layer-item--outdoor">Outdoor Places</li>
+            <input type="checkbox" class="toggle" id="outdoor">
+            <label for="outdoor"></label>
+            <li class="layer-item" id="layer-item--spaces">-Spaces</li>
+            <input type="checkbox" class="toggle" id="spaces">
+            <label for="spaces"></label>
+            <li class="layer-item" id="layer-item--playfield">Playfield</li>
+            <input type="checkbox" class="toggle" id="playfield">
+            <label for="playfield"></label>
+            <li class="layer-item" id="layer-item--vending">Vending</li>
+            <input type="checkbox" class="toggle" id="vending">
+            <label for="vending"></label>
+        </ul>
+    </div>
+    <div id="viewDiv"></div>
+    <script src="dist/extras/functions.js"></script>
+    <!-- <script src="dist/main.js"></script> -->
+    <script>require(["app/main"]);</script>
+</body>
+
+</html>
