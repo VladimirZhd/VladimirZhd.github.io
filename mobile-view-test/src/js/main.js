@@ -16,7 +16,7 @@ import dom from "dojo/dom";
 import on from "dojo/on";
 
 import layerFunctions from "./extras/layerFunctions";
-import floorButtons from "./extras/floorButtons";
+import Buttons from "./extras/floorButtons";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -40,7 +40,7 @@ const map = new Map({
 const view = new MapView({
     container: "viewDiv",
     map: map,
-    zoom: 15,
+    zoom: 16,
     center: [-111.784, 43.818],
 });
 
@@ -82,26 +82,25 @@ if (screen.width > 767) {
 }
 /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
 if (screen.width >= 1024 && device == true) {
-    document.getElementsByName("floorLayers").style.bottom = "110px";
+    document.getElementById("floorLayers").style.bottom = "110px";
 }
 
 let lf = new layerFunctions({});
-lf.addBaseReferenceLayers(map);
+lf.addVectorLayersToMap(map);
 
-let floorButton = new floorButtons({});
+let floorButton = new Buttons({});
 
-/* Check for map extent change */
-whenFalse(view, 'stationary', function (evt) {
+floorButton.cid = 1;
+
+
+whenFalse(view, "stationary", function () {
     if (!view.stationary) {
-        whenTrueOnce(view, 'stationary', function (evt) {
+        whenTrueOnce(view, 'stationary', function () {
             if (view.extent) {
-                if (lf.getInteriorReferenceLayerMinScale()) {
-                    if (lf.interiorReferenceLayerMinScale >= view.scale) {
-                        floorButton.displayFloorButtons(view.extent, dom);
-                    }
-                    else {
-                        floorButton.hideFloorButtons(dom);
-                    }
+                if (view.scale <= 1128.497176) {
+                    floorButton.displayFloorButtons(view.extent, dom);
+                } else {
+                    floorButton.hideFloorButtons(dom);
                 }
             }
         });
@@ -110,17 +109,11 @@ whenFalse(view, 'stationary', function (evt) {
             console.log(view.extent);
         });
     }
-})
+});
 
-
-
-on(dom.byId("0floor"), "click", function () {
-    floorButton.setVisibleFloor("0", lf.interiorReferenceLayer, dom)});
-on(dom.byId("1floor"), "click", function () {
-    floorButton.setVisibleFloor("1", lf.interiorReferenceLayer, dom)});
-on(dom.byId("2floor"), "click", function () {
-    floorButton.setVisibleFloor("2", lf.interiorReferenceLayer, dom)});
-on(dom.byId("3floor"), "click", function () {
-    floorButton.setVisibleFloor("3", lf.interiorReferenceLayer, dom)});
-on(dom.byId("4floor"), "click", function () {
-    floorButton.setVisibleFloor("4", lf.interiorReferenceLayer, dom)});
+on(dom.byId("0floor"), "click", function () { floorButton.setVisibleFloor("0", lf.floors, dom) });
+on(dom.byId("1floor"), "click", function () { floorButton.setVisibleFloor("1", lf.floors, dom) });
+on(dom.byId("2floor"), "click", function () { floorButton.setVisibleFloor("2", lf.floors, dom) });
+on(dom.byId("3floor"), "click", function () { floorButton.setVisibleFloor("3", lf.floors, dom) });
+on(dom.byId("4floor"), "click", function () { floorButton.setVisibleFloor("4", lf.floors, dom) });
+on(dom.byId("5floor"), "click", function () { floorButton.setVisibleFloor("5", lf.floors, dom) });

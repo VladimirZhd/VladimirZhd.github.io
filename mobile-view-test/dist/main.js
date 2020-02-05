@@ -50,7 +50,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     var view = new _MapView2.default({
         container: "viewDiv",
         map: map,
-        zoom: 15,
+        zoom: 16,
         center: [-111.784, 43.818]
     });
 
@@ -91,25 +91,24 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     }
     /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
     if (screen.width >= 1024 && device == true) {
-        document.getElementsByName("floorLayers").style.bottom = "110px";
+        document.getElementById("floorLayers").style.bottom = "110px";
     }
 
     var lf = new _layerFunctions2.default({});
-    lf.addBaseReferenceLayers(map);
+    lf.addVectorLayersToMap(map);
 
     var floorButton = new _floorButtons2.default({});
 
-    /* Check for map extent change */
-    (0, _watchUtils.whenFalse)(view, 'stationary', function (evt) {
+    floorButton.cid = 1;
+
+    (0, _watchUtils.whenFalse)(view, "stationary", function () {
         if (!view.stationary) {
-            (0, _watchUtils.whenTrueOnce)(view, 'stationary', function (evt) {
+            (0, _watchUtils.whenTrueOnce)(view, 'stationary', function () {
                 if (view.extent) {
-                    if (lf.getInteriorReferenceLayerMinScale()) {
-                        if (lf.interiorReferenceLayerMinScale >= view.scale) {
-                            floorButton.displayFloorButtons(view.extent, _dom2.default);
-                        } else {
-                            floorButton.hideFloorButtons(_dom2.default);
-                        }
+                    if (view.scale <= 1128.497176) {
+                        floorButton.displayFloorButtons(view.extent, _dom2.default);
+                    } else {
+                        floorButton.hideFloorButtons(_dom2.default);
                     }
                 }
             });
@@ -121,18 +120,21 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     (0, _on2.default)(_dom2.default.byId("0floor"), "click", function () {
-        floorButton.setVisibleFloor("0", lf.interiorReferenceLayer, _dom2.default);
+        floorButton.setVisibleFloor("0", lf.floors, _dom2.default);
     });
     (0, _on2.default)(_dom2.default.byId("1floor"), "click", function () {
-        floorButton.setVisibleFloor("1", lf.interiorReferenceLayer, _dom2.default);
+        floorButton.setVisibleFloor("1", lf.floors, _dom2.default);
     });
     (0, _on2.default)(_dom2.default.byId("2floor"), "click", function () {
-        floorButton.setVisibleFloor("2", lf.interiorReferenceLayer, _dom2.default);
+        floorButton.setVisibleFloor("2", lf.floors, _dom2.default);
     });
     (0, _on2.default)(_dom2.default.byId("3floor"), "click", function () {
-        floorButton.setVisibleFloor("3", lf.interiorReferenceLayer, _dom2.default);
+        floorButton.setVisibleFloor("3", lf.floors, _dom2.default);
     });
     (0, _on2.default)(_dom2.default.byId("4floor"), "click", function () {
-        floorButton.setVisibleFloor("4", lf.interiorReferenceLayer, _dom2.default);
+        floorButton.setVisibleFloor("4", lf.floors, _dom2.default);
+    });
+    (0, _on2.default)(_dom2.default.byId("5floor"), "click", function () {
+        floorButton.setVisibleFloor("5", lf.floors, _dom2.default);
     });
 });
