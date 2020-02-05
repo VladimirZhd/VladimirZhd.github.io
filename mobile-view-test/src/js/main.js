@@ -117,3 +117,5 @@ on(dom.byId("2floor"), "click", function () { floorButton.setVisibleFloor("2", l
 on(dom.byId("3floor"), "click", function () { floorButton.setVisibleFloor("3", lf.floors, dom) });
 on(dom.byId("4floor"), "click", function () { floorButton.setVisibleFloor("4", lf.floors, dom) });
 on(dom.byId("5floor"), "click", function () { floorButton.setVisibleFloor("5", lf.floors, dom) });
+
+
