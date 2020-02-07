@@ -1,8 +1,10 @@
 ﻿define([
     'esri/layers/VectorTileLayer',
     'dojo/_base/declare',
-    'esri/layers/FeatureLayer'
-], function (VectorTileLayer, declare, FeatureLayer) {
+    'esri/layers/FeatureLayer',
+    'esri/tasks/support/Query',
+    'esri/tasks/QueryTask'
+], function (VectorTileLayer, declare, FeatureLayer, Query, QueryTask) {
     return declare(null, {
         floors: null,
         interriorReferenceLayer: null,
@@ -67,6 +69,16 @@
             } else {
                 this.interriorReferenceLayerMinScale = buildingInteriorSpace.minScale;
             }
+        },
+
+        setLayerFloor: function (layerId, floor) {
+            let floorQueryTask = new QueryTask(layerId);
+            let floorQuery = new Query();
+            floorQuery.where = floor;
+            floorQueryTask.returnGeometry = false;
+            floorQueryTask.execute(floorQuery).then(function () {
+                
+            })
         }
     });
 });

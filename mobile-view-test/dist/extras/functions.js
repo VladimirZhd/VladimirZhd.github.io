@@ -21,16 +21,36 @@ $(document).ready(function () {
     $("#viewDiv").on("click", function () {
         $(".button-close").click();
     });
-    $("#list2 li").click(function(){
-        let item = this.id; 
+    $("#list2 li").click(function () {
+        let item = this.id;
         let toggle = $("#" + item).next("input").attr("id");
         $("#" + toggle).click();
         console.log(toggle);
         item = "";
     });
-    
+
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
+
+function whatFloorIsActive() {
+    let activeClass = "button-floor-selected";
+    let basement = document.getElementById('0floor');
+    basement.onclick = function () {
+        let basementClass = basement.className;
+        if (basementClass == activeClass) {
+            console.log(basementClass);
+            return basement.innerText;
+        }
+    }
+
+    let firstFloor = document.getElementById('1floor');
+    firstFloor.onclick = function () {
+        let firstFloorClass = firstFloor.className;
+        if (firstFloorClass == activeClass) {
+            return firstFloor.innerHTML;
+        }
+    }
+}

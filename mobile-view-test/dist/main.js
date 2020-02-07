@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/FeatureLayer", "esri/core/watchUtils", "dojo/dom", "dojo/on", "./extras/layerFunctions", "./extras/floorButtons"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _FeatureLayer, _watchUtils, _dom, _on, _layerFunctions, _floorButtons) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/FeatureLayer", "esri/core/watchUtils", "dojo/dom", "dojo/on", "./extras/layerFunctions", "./extras/floorButtons", "./extras/featureLayers"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _FeatureLayer, _watchUtils, _dom, _on, _layerFunctions, _floorButtons, _featureLayers) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -23,6 +23,8 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _floorButtons2 = _interopRequireDefault(_floorButtons);
 
+    var _featureLayers2 = _interopRequireDefault(_featureLayers);
+
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
             default: obj
@@ -30,7 +32,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     }
 
     /* create a basemap using a community map with trees*/
-    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -42,6 +43,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     /* Creating a map with our tree basemap*/
+    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -136,5 +138,49 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
     (0, _on2.default)(_dom2.default.byId("5floor"), "click", function () {
         floorButton.setVisibleFloor("5", lf.floors, _dom2.default);
+    });
+
+    /* Change basemap on click */
+
+    (0, _on2.default)(_dom2.default.byId('basemapRoads'), 'click', function () {
+        map.basemap = 'streets';
+    });
+    (0, _on2.default)(_dom2.default.byId('basemapSatellite'), 'click', function () {
+        map.basemap = 'satellite';
+    });
+
+    /* Add feature layers event listener */
+
+    var fl = new _featureLayers2.default({});
+
+    var activeFloor = whatFloorIsActive();
+    console.log(activeFloor);
+
+    (0, _on2.default)(_dom2.default.byId('baby'), 'click', function () {
+        fl.turnOnLayer('baby', map, _dom2.default.byId('baby').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('bike'), 'click', function () {
+        fl.turnOnLayer('bike', map);
+    });
+    (0, _on2.default)(_dom2.default.byId('booth'), 'click', function () {
+        fl.turnOnLayer('booth', map);
+    });
+    (0, _on2.default)(_dom2.default.byId('food'), 'click', function () {
+        fl.turnOnLayer('food', map);
+    });
+    (0, _on2.default)(_dom2.default.byId('mothers-lounge'), 'click', function () {
+        fl.turnOnLayer('mother-lounge', map);
+    });
+    (0, _on2.default)(_dom2.default.byId('bw-printer'), 'click', function () {
+        fl.turnOnLayer('bw-printer', map);
+    });
+    (0, _on2.default)(_dom2.default.byId('clr-printer'), 'click', function () {
+        fl.turnOnLayer('clr-printer', map);
+    });
+    (0, _on2.default)(_dom2.default.byId('copy-scan'), 'click', function () {
+        fl.turnOnLayer('copy-scan', map);
+    });
+    (0, _on2.default)(_dom2.default.byId('vending'), 'click', function () {
+        fl.turnOnLayer('vending', map);
     });
 });

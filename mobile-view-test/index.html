@@ -34,7 +34,7 @@
     <button type="button" class="button button-menu"><img src="src/img/hamburger.png" alt="hamburger icon for menu"
             class="menu-icon"></button>
     <div class="floor-layers" id="floorLayers">
-        <button class="button-floor" id="5floor">4</button>
+        <button class="button-floor" id="5floor">5</button>
         <button class="button-floor" id="4floor">4</button>
         <button class="button-floor" id="3floor">3</button>
         <button class="button-floor" id="2floor">2</button>
@@ -48,8 +48,8 @@
         <button class="button button-close" type="button"><b>X</b></button>
         <h3 class="menu-h3">Basemap</h3>
         <ul class="basemap-list menu-list" id="list1">
-            <li class="basemap-thumbnail"><a href="#">Roads</a></li>
-            <li class="basemap-thumbnail"><a href="#">Satellite</a></li>
+            <li class="basemap-thumbnail" id="basemapRoads"><a href="#">Roads</a></li>
+            <li class="basemap-thumbnail" id="basemapSatellite"><a href="#">Satellite</a></li>
         </ul>
         <hr>
         <h3 class="menu-h3">Campus Information</h3>
@@ -72,9 +72,9 @@
             <li class="layer-item" id="layer-item--mothers-lounge">Mother's Lounge</li>
             <input type="checkbox" class="toggle" id="mothers-lounge">
             <label for="mothers-lounge"></label>
-            <li class="layer-item" id="layer-item--printer-location">Printer Location</li>
+            <!-- <li class="layer-item" id="layer-item--printer-location">Printer Location</li>
             <input type="checkbox" class="toggle" id="printer-location">
-            <label for="printer-location"></label>
+            <label for="printer-location"></label> -->
             <li class="layer-item" id="layer-item--bw-printer">-B&W Printer</li>
             <input type="checkbox" class="toggle" id="bw-printer">
             <label for="bw-printer"></label>

@@ -17,6 +17,7 @@ import on from "dojo/on";
 
 import layerFunctions from "./extras/layerFunctions";
 import Buttons from "./extras/floorButtons";
+import menuLayers from "./extras/featureLayers";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -118,4 +119,26 @@ on(dom.byId("3floor"), "click", function () { floorButton.setVisibleFloor("3", l
 on(dom.byId("4floor"), "click", function () { floorButton.setVisibleFloor("4", lf.floors, dom) });
 on(dom.byId("5floor"), "click", function () { floorButton.setVisibleFloor("5", lf.floors, dom) });
 
+
+/* Change basemap on click */
+
+on(dom.byId('basemapRoads'), 'click', function () {map.basemap = 'streets'});
+on(dom.byId('basemapSatellite'), 'click', function () {map.basemap = 'satellite'});
+
+/* Add feature layers event listener */
+
+let fl = new menuLayers({});
+
+let activeFloor = whatFloorIsActive();
+console.log(activeFloor);
+
+on(dom.byId('baby'), 'click', function () {fl.turnOnLayer('baby', map, dom.byId('baby').checked)});
+on(dom.byId('bike'), 'click', function () {fl.turnOnLayer('bike', map)});
+on(dom.byId('booth'), 'click', function () {fl.turnOnLayer('booth', map)});
+on(dom.byId('food'), 'click', function () {fl.turnOnLayer('food', map)});
+on(dom.byId('mothers-lounge'), 'click', function () {fl.turnOnLayer('mother-lounge', map)});
+on(dom.byId('bw-printer'), 'click', function () {fl.turnOnLayer('bw-printer', map)});
+on(dom.byId('clr-printer'), 'click', function () {fl.turnOnLayer('clr-printer', map)});
+on(dom.byId('copy-scan'), 'click', function () {fl.turnOnLayer('copy-scan', map)});
+on(dom.byId('vending'), 'click', function () {fl.turnOnLayer('vending', map)});
 
