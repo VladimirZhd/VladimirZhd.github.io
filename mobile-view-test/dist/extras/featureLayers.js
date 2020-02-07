@@ -8,10 +8,10 @@ define([
 
 
         turnOnLayer: function (layerId, map, checked) {
-            this.featureLayer = new FeatureLayer({});
             console.log(checked);
             switch (layerId) {
                 case 'baby':
+                    this.featureLayer = new FeatureLayer({});
                     this.featureLayer.url = "https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/1";
                     this.iconRenderer = {
                         type: 'simple',
@@ -27,7 +27,9 @@ define([
                         map.add(this.featureLayer);
                     }
                     if (checked == false) {
-                        this.featureLayer.visible 
+                        this.featureLayer.visible = false;
+                        this.featureLayer = null;
+                        
                     }
                     break;
 

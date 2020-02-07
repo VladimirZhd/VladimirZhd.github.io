@@ -129,8 +129,6 @@ on(dom.byId('basemapSatellite'), 'click', function () {map.basemap = 'satellite'
 
 let fl = new menuLayers({});
 
-let activeFloor = whatFloorIsActive();
-console.log(activeFloor);
 
 on(dom.byId('baby'), 'click', function () {fl.turnOnLayer('baby', map, dom.byId('baby').checked)});
 on(dom.byId('bike'), 'click', function () {fl.turnOnLayer('bike', map)});

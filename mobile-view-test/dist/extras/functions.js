@@ -34,23 +34,3 @@ $(document).ready(function () {
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
-
-function whatFloorIsActive() {
-    let activeClass = "button-floor-selected";
-    let basement = document.getElementById('0floor');
-    basement.onclick = function () {
-        let basementClass = basement.className;
-        if (basementClass == activeClass) {
-            console.log(basementClass);
-            return basement.innerText;
-        }
-    }
-
-    let firstFloor = document.getElementById('1floor');
-    firstFloor.onclick = function () {
-        let firstFloorClass = firstFloor.className;
-        if (firstFloorClass == activeClass) {
-            return firstFloor.innerHTML;
-        }
-    }
-}
