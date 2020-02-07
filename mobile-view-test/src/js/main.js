@@ -133,12 +133,12 @@ let activeFloor = whatFloorIsActive();
 console.log(activeFloor);
 
 on(dom.byId('baby'), 'click', function () {fl.turnOnLayer('baby', map, dom.byId('baby').checked)});
-on(dom.byId('bike'), 'click', function () {fl.turnOnLayer('bike', map)});
-on(dom.byId('booth'), 'click', function () {fl.turnOnLayer('booth', map)});
-on(dom.byId('food'), 'click', function () {fl.turnOnLayer('food', map)});
-on(dom.byId('mothers-lounge'), 'click', function () {fl.turnOnLayer('mother-lounge', map)});
-on(dom.byId('bw-printer'), 'click', function () {fl.turnOnLayer('bw-printer', map)});
-on(dom.byId('clr-printer'), 'click', function () {fl.turnOnLayer('clr-printer', map)});
-on(dom.byId('copy-scan'), 'click', function () {fl.turnOnLayer('copy-scan', map)});
-on(dom.byId('vending'), 'click', function () {fl.turnOnLayer('vending', map)});
+on(dom.byId('bike'), 'click', function () {fl.turnOnLayer('bike', map, dom.byId('bike').checked)});
+on(dom.byId('booth'), 'click', function () {fl.turnOnLayer('booth', map, dom.byId('booth').checked)});
+on(dom.byId('food'), 'click', function () {fl.turnOnLayer('food', map, dom.byId('food').checked)});
+on(dom.byId('mothers-lounge'), 'click', function () {fl.turnOnLayer('mothers-lounge', map, dom.byId('mothers-lounge').checked)});
+on(dom.byId('bw-printer'), 'click', function () {fl.turnOnLayer('bw-printer', map, dom.byId('bw-printer').checked)});
+on(dom.byId('clr-printer'), 'click', function () {fl.turnOnLayer('clr-printer', map, dom.byId('clr-printer').checked)});
+on(dom.byId('copy-scan'), 'click', function () {fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked)});
+on(dom.byId('vending'), 'click', function () {fl.turnOnLayer('vending', map, dom.byId('vending').checked)});
 

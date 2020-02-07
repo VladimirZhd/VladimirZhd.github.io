@@ -160,27 +160,27 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         fl.turnOnLayer('baby', map, _dom2.default.byId('baby').checked);
     });
     (0, _on2.default)(_dom2.default.byId('bike'), 'click', function () {
-        fl.turnOnLayer('bike', map);
+        fl.turnOnLayer('bike', map, _dom2.default.byId('bike').checked);
     });
     (0, _on2.default)(_dom2.default.byId('booth'), 'click', function () {
-        fl.turnOnLayer('booth', map);
+        fl.turnOnLayer('booth', map, _dom2.default.byId('booth').checked);
     });
     (0, _on2.default)(_dom2.default.byId('food'), 'click', function () {
-        fl.turnOnLayer('food', map);
+        fl.turnOnLayer('food', map, _dom2.default.byId('food').checked);
     });
     (0, _on2.default)(_dom2.default.byId('mothers-lounge'), 'click', function () {
-        fl.turnOnLayer('mother-lounge', map);
+        fl.turnOnLayer('mothers-lounge', map, _dom2.default.byId('mothers-lounge').checked);
     });
     (0, _on2.default)(_dom2.default.byId('bw-printer'), 'click', function () {
-        fl.turnOnLayer('bw-printer', map);
+        fl.turnOnLayer('bw-printer', map, _dom2.default.byId('bw-printer').checked);
     });
     (0, _on2.default)(_dom2.default.byId('clr-printer'), 'click', function () {
-        fl.turnOnLayer('clr-printer', map);
+        fl.turnOnLayer('clr-printer', map, _dom2.default.byId('clr-printer').checked);
     });
     (0, _on2.default)(_dom2.default.byId('copy-scan'), 'click', function () {
-        fl.turnOnLayer('copy-scan', map);
+        fl.turnOnLayer('copy-scan', map, _dom2.default.byId('copy-scan').checked);
     });
     (0, _on2.default)(_dom2.default.byId('vending'), 'click', function () {
-        fl.turnOnLayer('vending', map);
+        fl.turnOnLayer('vending', map, _dom2.default.byId('vending').checked);
     });
 });
