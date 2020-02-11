@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/FeatureLayer", "esri/core/watchUtils", "dojo/dom", "dojo/on", "./extras/layerFunctions", "./extras/floorButtons", "./extras/featureLayers"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _FeatureLayer, _watchUtils, _dom, _on, _layerFunctions, _floorButtons, _featureLayers) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/FeatureLayer", "esri/core/watchUtils", "dojo/dom", "dojo/on", "./extras/layerFunctions", "./extras/floorButtons", "./extras/featureLayers", "./extras/activeFloor"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _FeatureLayer, _watchUtils, _dom, _on, _layerFunctions, _floorButtons, _featureLayers, _activeFloor) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -25,6 +25,8 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _featureLayers2 = _interopRequireDefault(_featureLayers);
 
+    var _activeFloor2 = _interopRequireDefault(_activeFloor);
+
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
             default: obj
@@ -32,6 +34,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     }
 
     /* create a basemap using a community map with trees*/
+    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -43,7 +46,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     /* Creating a map with our tree basemap*/
-    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -153,11 +155,10 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var fl = new _featureLayers2.default({});
 
-    var activeFloor = whatFloorIsActive();
-    console.log(activeFloor);
-
     (0, _on2.default)(_dom2.default.byId('baby'), 'click', function () {
-        fl.turnOnLayer('baby', map, _dom2.default.byId('baby').checked);
+        var active = 2;
+        console.log(active);
+        fl.turnOnLayer('baby', map, _dom2.default.byId('baby').checked, active);
     });
     (0, _on2.default)(_dom2.default.byId('bike'), 'click', function () {
         fl.turnOnLayer('bike', map, _dom2.default.byId('bike').checked);

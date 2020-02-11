@@ -18,6 +18,7 @@ import on from "dojo/on";
 import layerFunctions from "./extras/layerFunctions";
 import Buttons from "./extras/floorButtons";
 import menuLayers from "./extras/featureLayers";
+import ActiveFloor from "./extras/activeFloor";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -130,7 +131,11 @@ on(dom.byId('basemapSatellite'), 'click', function () {map.basemap = 'satellite'
 let fl = new menuLayers({});
 
 
-on(dom.byId('baby'), 'click', function () {fl.turnOnLayer('baby', map, dom.byId('baby').checked)});
+on(dom.byId('baby'), 'click', function () {
+    let active = 2;
+    console.log(active);
+    fl.turnOnLayer('baby', map, dom.byId('baby').checked, active);
+});
 on(dom.byId('bike'), 'click', function () {fl.turnOnLayer('bike', map, dom.byId('bike').checked)});
 on(dom.byId('booth'), 'click', function () {fl.turnOnLayer('booth', map, dom.byId('booth').checked)});
 on(dom.byId('food'), 'click', function () {fl.turnOnLayer('food', map, dom.byId('food').checked)});
@@ -139,4 +144,3 @@ on(dom.byId('bw-printer'), 'click', function () {fl.turnOnLayer('bw-printer', ma
 on(dom.byId('clr-printer'), 'click', function () {fl.turnOnLayer('clr-printer', map, dom.byId('clr-printer').checked)});
 on(dom.byId('copy-scan'), 'click', function () {fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked)});
 on(dom.byId('vending'), 'click', function () {fl.turnOnLayer('vending', map, dom.byId('vending').checked)});
-

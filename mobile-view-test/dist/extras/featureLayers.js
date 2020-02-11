@@ -1,15 +1,22 @@
 define([
     'dojo/_base/declare',
-    'esri/layers/FeatureLayer'
-], function (declare, FeatureLayer) {
+    'esri/layers/FeatureLayer',
+    'dojo/on',
+    'dojo/dom'
+], function (declare, FeatureLayer, on, dom) {
     return declare(null, {
         featureLayerBaby: new FeatureLayer({
             url: "https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/1",
+            outFields: ['*'],
+            popupTemplate: {
+                title: '{TYPE} restroom',
+                content: 'This is a {TYPE} restroom on the {FLOOR} floor'
+            },
             renderer: {
                 type: 'simple',
                 symbol: {
                     type: 'picture-marker',
-                    url: "http://127.0.0.1:5502/src/img/changingStation.png",
+                    url: "https://tomlinson.byui.edu/portal/sharing/rest/content/items/b91ec1d719704cc9809d5aa519418f3d/data",
                     width: '50px',
                     height: '50px'
                 }
@@ -22,7 +29,7 @@ define([
                 type: 'simple',
                 symbol: {
                     type: 'picture-marker',
-                    url: "http://127.0.0.1:5502/src/img/bikerack.png",
+                    url: "https://tomlinson.byui.edu/portal/sharing/rest/content/items/eeea98a8ae2b4b41bcb7a85abb33d010/data",
                     width: '50px',
                     height: '50px'
                 }
@@ -35,7 +42,7 @@ define([
                 type: 'simple',
                 symbol: {
                     type: 'picture-marker',
-                    url: "http://127.0.0.1:5502/src/img/booth.png",
+                    url: "https://tomlinson.byui.edu/portal/sharing/rest/content/items/251eb928faf645d2b6eb6d210e2b8f2c/data",
                     width: '50px',
                     height: '50px'
                 }
@@ -48,7 +55,7 @@ define([
                 type: 'simple',
                 symbol: {
                     type: 'picture-marker',
-                    url: "http://127.0.0.1:5502/src/img/foodAndDining.png",
+                    url: "https://tomlinson.byui.edu/portal/sharing/rest/content/items/54215fb119fe49c68855fd42078e7069/data",
                     width: '50px',
                     height: '50px'
                 }
@@ -61,7 +68,7 @@ define([
                 type: 'simple',
                 symbol: {
                     type: 'picture-marker',
-                    url: "http://127.0.0.1:5502/src/img/mothersLounge.png",
+                    url: "https://tomlinson.byui.edu/portal/sharing/rest/content/items/55ce763449f84cdca3bac2debcdc4776/data",
                     width: '50px',
                     height: '50px'
                 }
@@ -69,12 +76,12 @@ define([
         }),
 
         featureLayerBwPrinter: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/7',
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/6',
             renderer: {
                 type: 'simple',
                 symbol: {
                     type: 'picture-marker',
-                    url: "http://127.0.0.1:5502/src/img/bwprinter.png",
+                    url: "https://tomlinson.byui.edu/portal/sharing/rest/content/items/9daeacb316954b4dbd5bb5380c82c9b4/data",
                     width: '50px',
                     height: '50px'
                 }
@@ -82,12 +89,12 @@ define([
         }),
 
         featureLayerClrPrinter: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/8',
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/7',
             renderer: {
                 type: 'simple',
                 symbol: {
                     type: 'picture-marker',
-                    url: "http://127.0.0.1:5502/src/img/colorprinter.png",
+                    url: "https://tomlinson.byui.edu/portal/sharing/rest/content/items/d9109de72b154d30a6b639f0ab678cc2/data",
                     width: '50px',
                     height: '50px'
                 }
@@ -95,12 +102,12 @@ define([
         }),
 
         featureLayerCopyScan: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/9',
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/8',
             renderer: {
                 type: 'simple',
                 symbol: {
                     type: 'picture-marker',
-                    url: "http://127.0.0.1:5502/src/img/copyscanemail.png",
+                    url: "https://tomlinson.byui.edu/portal/sharing/rest/content/items/eb70818451354c98bf49128e9c7442dd/data",
                     width: '50px',
                     height: '50px'
                 }
@@ -113,46 +120,25 @@ define([
                 type: 'simple',
                 symbol: {
                     type: 'picture-marker',
-                    url: "http://127.0.0.1:5502/src/img/vendingMachine.png",
+                    url: "https://tomlinson.byui.edu/portal/sharing/rest/content/items/855a85653467457c94cebc6edfcdacbf/data",
                     width: '50px',
                     height: '50px'
                 }
             }
         }),
 
-        turnOnLayer: function (layerId, map, checked) {
-<<<<<<< HEAD
-            console.log(checked);
+        turnOnLayer: function (layerId, map, checked, floor) {
             switch (layerId) {
                 case 'baby':
-                    this.featureLayer = new FeatureLayer({});
-                    this.featureLayer.url = "https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/1";
-                    this.iconRenderer = {
-                        type: 'simple',
-                        symbol: {
-                            type: 'picture-marker',
-                            url: "http://127.0.0.1:5502/src/img/changingStation.png",
-                            width: '50px',
-                            height: '50px'
-                        }
-                    };
-                    this.featureLayer.renderer = this.iconRenderer;
                     if (checked == true) {
-                        map.add(this.featureLayer);
-                    }
-                    if (checked == false) {
-                        this.featureLayer.visible = false;
-                        this.featureLayer = null;
-                        
-                    }
-=======
-            switch (layerId) {
-                case 'baby':
-                    if (checked == true)
+                        console.log(floor);
+                        let sqlExpression = 'FLOOR = ' + floor;
+                        console.log(sqlExpression);
+                        this.featureLayerBaby.definitionExpression = sqlExpression;
                         map.add(this.featureLayerBaby);
+                    }
                     else
                         map.remove(this.featureLayerBaby);
->>>>>>> b8f7a7b8f66dfc3528b88f4b50e90b5c0ba43a76
                     break;
 
                 case 'bike':
@@ -212,6 +198,16 @@ define([
                     break;
                 default:
             }
+        },
+
+        activeFloor: function () {
+            let floor;
+            on(dom.byId('floorLayers'), 'click', function () { 
+                let active = dom.byId(document.getElementsByClassName("button-floor-selected"));
+                floor = active[0].innerText;
+                console.log(floor);
+            });
+            return floor;
         }
     })
 })
