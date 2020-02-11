@@ -3,6 +3,8 @@ define([
     'esri/layers/FeatureLayer'
 ], function (declare, FeatureLayer) {
     return declare(null, {
+        currentFloor: "1",
+
         featureLayerBaby: new FeatureLayer({
             url: "https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/1",
             renderer: {
@@ -120,93 +122,96 @@ define([
             }
         }),
 
+        changeCurrentFloor: function (floorId) {
+            this.currentFloor = floorId;
+        },
+
         turnOnLayer: function (layerId, map, checked) {
-<<<<<<< HEAD
-            console.log(checked);
             switch (layerId) {
                 case 'baby':
-                    this.featureLayer = new FeatureLayer({});
-                    this.featureLayer.url = "https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/1";
-                    this.iconRenderer = {
-                        type: 'simple',
-                        symbol: {
-                            type: 'picture-marker',
-                            url: "http://127.0.0.1:5502/src/img/changingStation.png",
-                            width: '50px',
-                            height: '50px'
-                        }
-                    };
-                    this.featureLayer.renderer = this.iconRenderer;
                     if (checked == true) {
-                        map.add(this.featureLayer);
-                    }
-                    if (checked == false) {
-                        this.featureLayer.visible = false;
-                        this.featureLayer = null;
-                        
-                    }
-=======
-            switch (layerId) {
-                case 'baby':
-                    if (checked == true)
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerBaby.definitionExpression = sql;
                         map.add(this.featureLayerBaby);
+                    }
                     else
                         map.remove(this.featureLayerBaby);
->>>>>>> b8f7a7b8f66dfc3528b88f4b50e90b5c0ba43a76
                     break;
 
                 case 'bike':
-                    if (checked == true)
+                    if (checked == true) {
                         map.add(this.featureLayerBike);
+                    }
                     else
                         map.remove(this.featureLayerBike);
                     break;
 
                 case 'booth':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerBooth.definitionExpression = sql;
                         map.add(this.featureLayerBooth);
+                    }
                     else
                         map.remove(this.featureLayerBooth);
                     break;
 
                 case 'food':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerFood.definitionExpression = sql;
                         map.add(this.featureLayerFood);
+                    }
                     else
                         map.remove(this.featureLayerFood);
                     break;
 
                 case 'mothers-lounge':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerMothersLounge.definitionExpression = sql;
                         map.add(this.featureLayerMothersLounge);
+                    }
                     else
                         map.remove(this.featureLayerMothersLounge);
                     break;
 
                 case 'bw-printer':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerBwPrinter.definitionExpression = sql;
                         map.add(this.featureLayerBwPrinter);
+                    }
                     else
                         map.remove(this.featureLayerBwPrinter);
                     break;
 
                 case 'clr-printer':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerClrPrinter.definitionExpression = sql;
                         map.add(this.featureLayerClrPrinter);
+                    }
                     else
                         map.remove(this.featureLayerClrPrinter);
                     break;
 
                 case 'copy-scan':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerCopyScan.definitionExpression = sql;
                         map.add(this.featureLayerCopyScan);
+                    }
                     else
                         map.remove(this.featureLayerCopyScan);
                     break;
 
                 case 'vending':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerVending.definitionExpression = sql;
                         map.add(this.featureLayerVending);
+                    }
                     else
                         map.remove(this.featureLayerVending);
                     break;

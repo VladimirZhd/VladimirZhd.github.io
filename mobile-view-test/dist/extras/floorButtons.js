@@ -1,11 +1,12 @@
 ﻿define([
     'dojo/_base/declare',
     'esri/tasks/support/Query',
-    'esri/tasks/QueryTask'
-], function (declare, Query, QueryTask) {
-    return declare(null, {
+    'esri/tasks/QueryTask',
+    'dojo/Stateful'
+], function (declare, Query, QueryTask, Stateful) {
+    return declare([Stateful], {
         selectedFloor: null,
-        cid: null,
+        cid: "1",
 
         constructor: function (options) {
             this.selectedFloor = options.selectedFloor || '1';
@@ -65,7 +66,7 @@
             dom.byId(floorNumber + 'floor').className = "button-floor-selected";
 
             floorVectorTileLayers[this.cid].visible = false;
-            this.cid = floorNumber;
+            this.set("cid", floorNumber);
             floorVectorTileLayers[floorNumber].visible = true;
         },
 
