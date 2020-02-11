@@ -92,7 +92,7 @@ lf.addVectorLayersToMap(map);
 
 let floorButton = new Buttons({});
 
-floorButton.cid = 1;
+floorButton.cid = "1";
 
 
 whenFalse(view, "stationary", function () {
@@ -129,7 +129,18 @@ on(dom.byId('basemapSatellite'), 'click', function () {map.basemap = 'satellite'
 /* Add feature layers event listener */
 
 let fl = new menuLayers({});
-
+floorButton.watch("cid", function() {
+    fl.changeCurrentFloor(floorButton.get("cid"));
+    fl.turnOnLayer('baby', map, dom.byId('baby').checked);
+    fl.turnOnLayer('bike', map, dom.byId('bike').checked);
+    fl.turnOnLayer('booth', map, dom.byId('booth').checked);
+    fl.turnOnLayer('food', map, dom.byId('food').checked);
+    fl.turnOnLayer('mothers-lounge', map, dom.byId('mothers-lounge').checked);
+    fl.turnOnLayer('bw-printer', map, dom.byId('bw-printer').checked);
+    fl.turnOnLayer('clr-printer', map, dom.byId('clr-printer').checked);
+    fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked);
+    fl.turnOnLayer('vending', map, dom.byId('vending').checked);
+});
 
 on(dom.byId('baby'), 'click', function () {
     let active = 2;

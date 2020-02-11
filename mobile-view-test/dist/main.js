@@ -103,7 +103,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var floorButton = new _floorButtons2.default({});
 
-    floorButton.cid = 1;
+    floorButton.cid = "1";
 
     (0, _watchUtils.whenFalse)(view, "stationary", function () {
         if (!view.stationary) {
@@ -154,6 +154,18 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     /* Add feature layers event listener */
 
     var fl = new _featureLayers2.default({});
+    floorButton.watch("cid", function () {
+        fl.changeCurrentFloor(floorButton.get("cid"));
+        fl.turnOnLayer('baby', map, _dom2.default.byId('baby').checked);
+        fl.turnOnLayer('bike', map, _dom2.default.byId('bike').checked);
+        fl.turnOnLayer('booth', map, _dom2.default.byId('booth').checked);
+        fl.turnOnLayer('food', map, _dom2.default.byId('food').checked);
+        fl.turnOnLayer('mothers-lounge', map, _dom2.default.byId('mothers-lounge').checked);
+        fl.turnOnLayer('bw-printer', map, _dom2.default.byId('bw-printer').checked);
+        fl.turnOnLayer('clr-printer', map, _dom2.default.byId('clr-printer').checked);
+        fl.turnOnLayer('copy-scan', map, _dom2.default.byId('copy-scan').checked);
+        fl.turnOnLayer('vending', map, _dom2.default.byId('vending').checked);
+    });
 
     (0, _on2.default)(_dom2.default.byId('baby'), 'click', function () {
         var active = 2;

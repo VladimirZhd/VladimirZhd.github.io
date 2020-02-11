@@ -5,6 +5,8 @@ define([
     'dojo/dom'
 ], function (declare, FeatureLayer, on, dom) {
     return declare(null, {
+        currentFloor: "1",
+
         featureLayerBaby: new FeatureLayer({
             url: "https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/1",
             outFields: ['*'],
@@ -127,14 +129,16 @@ define([
             }
         }),
 
-        turnOnLayer: function (layerId, map, checked, floor) {
+        changeCurrentFloor: function (floorId) {
+            this.currentFloor = floorId;
+        },
+
+        turnOnLayer: function (layerId, map, checked) {
             switch (layerId) {
                 case 'baby':
                     if (checked == true) {
-                        console.log(floor);
-                        let sqlExpression = 'FLOOR = ' + floor;
-                        console.log(sqlExpression);
-                        this.featureLayerBaby.definitionExpression = sqlExpression;
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerBaby.definitionExpression = sql;
                         map.add(this.featureLayerBaby);
                     }
                     else
@@ -142,57 +146,79 @@ define([
                     break;
 
                 case 'bike':
-                    if (checked == true)
+                    if (checked == true) {
                         map.add(this.featureLayerBike);
+                    }
                     else
                         map.remove(this.featureLayerBike);
                     break;
 
                 case 'booth':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerBooth.definitionExpression = sql;
                         map.add(this.featureLayerBooth);
+                    }
                     else
                         map.remove(this.featureLayerBooth);
                     break;
 
                 case 'food':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerFood.definitionExpression = sql;
                         map.add(this.featureLayerFood);
+                    }
                     else
                         map.remove(this.featureLayerFood);
                     break;
 
                 case 'mothers-lounge':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerMothersLounge.definitionExpression = sql;
                         map.add(this.featureLayerMothersLounge);
+                    }
                     else
                         map.remove(this.featureLayerMothersLounge);
                     break;
 
                 case 'bw-printer':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerBwPrinter.definitionExpression = sql;
                         map.add(this.featureLayerBwPrinter);
+                    }
                     else
                         map.remove(this.featureLayerBwPrinter);
                     break;
 
                 case 'clr-printer':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerClrPrinter.definitionExpression = sql;
                         map.add(this.featureLayerClrPrinter);
+                    }
                     else
                         map.remove(this.featureLayerClrPrinter);
                     break;
 
                 case 'copy-scan':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerCopyScan.definitionExpression = sql;
                         map.add(this.featureLayerCopyScan);
+                    }
                     else
                         map.remove(this.featureLayerCopyScan);
                     break;
 
                 case 'vending':
-                    if (checked == true)
+                    if (checked == true) {
+                        let sql = "FLOOR = " + this.currentFloor;
+                        this.featureLayerVending.definitionExpression = sql;
                         map.add(this.featureLayerVending);
+                    }
                     else
                         map.remove(this.featureLayerVending);
                     break;
