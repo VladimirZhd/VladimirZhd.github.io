@@ -93,30 +93,27 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             latitude: coords.latitude,
             longitude: coords.longitude
         });
-        floorButton.watch('cid', function () {
-            findNear.changeCurrentFloor(floorButton.get('cid'));
-        });
 
         (0, _on2.default)(_dom2.default.byId('nearest-restroom'), 'click', function () {
-            findNear.displayNearest('nearest-restroom', locationPoint, map, view);
+            findNear.displayNearest('nearest-restroom', locationPoint, map, view, 0);
         });
         (0, _on2.default)(_dom2.default.byId('nearest-printer'), 'click', function () {
-            findNear.displayNearest('nearest-printer', locationPoint, map, view);
+            findNear.displayNearest('nearest-printer', locationPoint, map, view, 1);
         });
         (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
-            findNear.displayNearest('nearest-aed', locationPoint, map, view);
+            findNear.displayNearest('nearest-aed', locationPoint, map, view, 2);
         });
         (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
-            findNear.displayNearest('nearest-fire', locationPoint, map, view);
+            findNear.displayNearest('nearest-fire', locationPoint, map, view, 3);
         });
         (0, _on2.default)(_dom2.default.byId('nearest-elevator'), 'click', function () {
-            findNear.displayNearest('nearest-elevator', locationPoint, map, view);
+            findNear.displayNearest('nearest-elevator', locationPoint, map, view, 4);
         });
         (0, _on2.default)(_dom2.default.byId('nearest-vending'), 'click', function () {
-            findNear.displayNearest('nearest-vending', locationPoint, map, view);
+            findNear.displayNearest('nearest-vending', locationPoint, map, view, 5);
         });
         (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
-            findNear.displayNearest('nearest-fountain', locationPoint, map, view);
+            findNear.displayNearest('nearest-fountain', locationPoint, map, view, 6);
         });
     }
 
@@ -271,6 +268,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     (0, _on2.default)(_dom2.default.byId('btn-clear'), 'click', function () {
-        findNear.graphicsLayer.removeAll();
+        findNear.graphicsLayer.removeAll();findNear.selectedOptions.fill(false);
     });
 });

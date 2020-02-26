@@ -79,20 +79,15 @@ function positionRecieved(pos) {
         latitude: coords.latitude,
         longitude: coords.longitude
     });
-    floorButton.watch('cid', function () {
-        findNear.changeCurrentFloor(floorButton.get('cid'));
-    })
 
-    on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest('nearest-restroom', locationPoint, map, view) });
-    on(dom.byId('nearest-printer'), 'click', function () { findNear.displayNearest('nearest-printer', locationPoint, map, view) });
-    on(dom.byId('nearest-aed'), 'click', function () { findNear.displayNearest('nearest-aed', locationPoint, map, view) });
-    on(dom.byId('nearest-fire'), 'click', function () { findNear.displayNearest('nearest-fire', locationPoint, map, view) });
-    on(dom.byId('nearest-elevator'), 'click', function () { findNear.displayNearest('nearest-elevator', locationPoint, map, view) });
-    on(dom.byId('nearest-vending'), 'click', function () { findNear.displayNearest('nearest-vending', locationPoint, map, view) });
-    on(dom.byId('nearest-fountain'), 'click', function () { findNear.displayNearest('nearest-fountain', locationPoint, map, view) });
+    on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest('nearest-restroom', locationPoint, map, view, 0) });
+    on(dom.byId('nearest-printer'), 'click', function () { findNear.displayNearest('nearest-printer', locationPoint, map, view, 1) });
+    on(dom.byId('nearest-aed'), 'click', function () { findNear.displayNearest('nearest-aed', locationPoint, map, view, 2) });
+    on(dom.byId('nearest-fire'), 'click', function () { findNear.displayNearest('nearest-fire', locationPoint, map, view, 3) });
+    on(dom.byId('nearest-elevator'), 'click', function () { findNear.displayNearest('nearest-elevator', locationPoint, map, view, 4) });
+    on(dom.byId('nearest-vending'), 'click', function () { findNear.displayNearest('nearest-vending', locationPoint, map, view, 5) });
+    on(dom.byId('nearest-fountain'), 'click', function () { findNear.displayNearest('nearest-fountain', locationPoint, map, view, 6) });
 }
-
-
 
 function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
@@ -210,5 +205,5 @@ on(dom.byId('clr-printer'), 'click', function () { fl.turnOnLayer('clr-printer',
 on(dom.byId('copy-scan'), 'click', function () { fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked) });
 on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, dom.byId('vending').checked) });
 
-on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll() });
+on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.selectedOptions.fill(false) });
 
