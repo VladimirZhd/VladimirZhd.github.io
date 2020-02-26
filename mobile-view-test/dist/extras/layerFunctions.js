@@ -2,9 +2,7 @@
     'esri/layers/VectorTileLayer',
     'dojo/_base/declare',
     'esri/layers/FeatureLayer',
-    'esri/tasks/support/Query',
-    'esri/tasks/QueryTask'
-], function (VectorTileLayer, declare, FeatureLayer, Query, QueryTask) {
+], function (VectorTileLayer, declare, FeatureLayer) {
     return declare(null, {
         floors: null,
         interriorReferenceLayer: null,
@@ -19,13 +17,13 @@
             let basement = new VectorTileLayer({
                 url: "https://tomlinson.byui.edu/arcgis/rest/services/Hosted/Basement/VectorTileServer",
                 visible: false,
-                id: "B"
+                id: "B",
             });
 
             let firstFloor = new VectorTileLayer({
                 url: "https://tomlinson.byui.edu/arcgis/rest/services/Hosted/1st_Floor/VectorTileServer",
                 visible: true,
-                id: 1
+                id: 1,
             });
 
             let secondFoor = new VectorTileLayer({
@@ -69,16 +67,6 @@
             } else {
                 this.interriorReferenceLayerMinScale = buildingInteriorSpace.minScale;
             }
-        },
-
-        setLayerFloor: function (layerId, floor) {
-            let floorQueryTask = new QueryTask(layerId);
-            let floorQuery = new Query();
-            floorQuery.where = floor;
-            floorQueryTask.returnGeometry = false;
-            floorQueryTask.execute(floorQuery).then(function () {
-                
-            })
         }
     });
 });

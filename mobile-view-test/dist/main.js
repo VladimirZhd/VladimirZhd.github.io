@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/FeatureLayer", "esri/core/watchUtils", "dojo/dom", "dojo/on", "./extras/layerFunctions", "./extras/floorButtons", "./extras/featureLayers", "./extras/activeFloor"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _FeatureLayer, _watchUtils, _dom, _on, _layerFunctions, _floorButtons, _featureLayers, _activeFloor) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/PopupTemplate", "esri/layers/VectorTileLayer", "esri/layers/GraphicsLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "dojo/dom", "dojo/on", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest"], function (_Map, _Basemap, _MapView, _Locate, _Search, _PopupTemplate, _VectorTileLayer, _GraphicsLayer, _watchUtils, _Point, _Graphic, _dom, _on, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -11,21 +11,29 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _Search2 = _interopRequireDefault(_Search);
 
+    var _PopupTemplate2 = _interopRequireDefault(_PopupTemplate);
+
     var _VectorTileLayer2 = _interopRequireDefault(_VectorTileLayer);
 
-    var _FeatureLayer2 = _interopRequireDefault(_FeatureLayer);
+    var _GraphicsLayer2 = _interopRequireDefault(_GraphicsLayer);
+
+    var _Point2 = _interopRequireDefault(_Point);
+
+    var _Graphic2 = _interopRequireDefault(_Graphic);
 
     var _dom2 = _interopRequireDefault(_dom);
 
     var _on2 = _interopRequireDefault(_on);
 
-    var _layerFunctions2 = _interopRequireDefault(_layerFunctions);
+    var _LayerFunctions2 = _interopRequireDefault(_LayerFunctions);
 
-    var _floorButtons2 = _interopRequireDefault(_floorButtons);
+    var _FloorButtons2 = _interopRequireDefault(_FloorButtons);
 
-    var _featureLayers2 = _interopRequireDefault(_featureLayers);
+    var _FeatureLayers2 = _interopRequireDefault(_FeatureLayers);
 
-    var _activeFloor2 = _interopRequireDefault(_activeFloor);
+    var _Sources3 = _interopRequireDefault(_Sources2);
+
+    var _FindNearest2 = _interopRequireDefault(_FindNearest);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -61,8 +69,62 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     /* Create the locator widget with scaling on locating*/
     var locate = new _Locate2.default({
         view: view,
-        scale: 400
+        scale: 250
     });
+
+    var findNear = new _FindNearest2.default({});
+    map.add(findNear.graphicsLayer);
+
+    var graphicsLayer = new _GraphicsLayer2.default();
+    map.add(graphicsLayer);
+
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
+
+    var floorButton = new _FloorButtons2.default({});
+    floorButton.cid = "1";
+
+    function positionRecieved(pos) {
+        var coords = pos.coords;
+        var locationPoint = new _Point2.default({
+            latitude: coords.latitude,
+            longitude: coords.longitude
+        });
+        floorButton.watch('cid', function () {
+            findNear.changeCurrentFloor(floorButton.get('cid'));
+        });
+
+        (0, _on2.default)(_dom2.default.byId('nearest-restroom'), 'click', function () {
+            findNear.displayNearest('nearest-restroom', locationPoint, map, view);
+        });
+        (0, _on2.default)(_dom2.default.byId('nearest-printer'), 'click', function () {
+            findNear.displayNearest('nearest-printer', locationPoint, map, view);
+        });
+        (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
+            findNear.displayNearest('nearest-aed', locationPoint, map, view);
+        });
+        (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
+            findNear.displayNearest('nearest-fire', locationPoint, map, view);
+        });
+        (0, _on2.default)(_dom2.default.byId('nearest-elevator'), 'click', function () {
+            findNear.displayNearest('nearest-elevator', locationPoint, map, view);
+        });
+        (0, _on2.default)(_dom2.default.byId('nearest-vending'), 'click', function () {
+            findNear.displayNearest('nearest-vending', locationPoint, map, view);
+        });
+        (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
+            findNear.displayNearest('nearest-fountain', locationPoint, map, view);
+        });
+    }
+
+    function error(err) {
+        console.warn("ERROR(" + err.code + "): " + err.message);
+    }
+
+    navigator.geolocation.getCurrentPosition(positionRecieved, error, options);
 
     var floorsWidget = document.getElementById("floorLayers"); //Get floor buttons container 
 
@@ -84,13 +146,30 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     var search = new _Search2.default({
         view: view,
         sources: [],
-        allPlaceholder: "Find a place"
+        allPlaceholder: "Kimball or KIM170",
+        includeDefaultSources: false
+    });
+
+    var _Sources = (0, _Sources3.default)(),
+        sources = _Sources.sources;
+
+    search.sources = sources;
+
+    search.on('select-result', function (evt) {
+        var floorNumber = evt.target.selectedResult.feature.attributes.FLOOR;
+        console.log(evt.target.selectedResult);
+        if (floorNumber) {
+            floorButton.setVisibleFloor(floorNumber, lf.floors, _dom2.default);
+            view.scale = 400;
+        } else {
+            floorButton.setVisibleFloor('1', lf.floors, _dom2.default);
+        }
     });
 
     /* Insert the search widget to the top right of the page*/
     view.ui.add(search, "top-right");
     /* For the bigger screens we want to move the search widget to  */
-    if (screen.width > 767) {
+    if (screen.width > 600) {
         view.ui.move(search, "top-left");
     }
     /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
@@ -98,12 +177,8 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         document.getElementById("floorLayers").style.bottom = "110px";
     }
 
-    var lf = new _layerFunctions2.default({});
+    var lf = new _LayerFunctions2.default({});
     lf.addVectorLayersToMap(map);
-
-    var floorButton = new _floorButtons2.default({});
-
-    floorButton.cid = "1";
 
     (0, _watchUtils.whenFalse)(view, "stationary", function () {
         if (!view.stationary) {
@@ -153,7 +228,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     /* Add feature layers event listener */
 
-    var fl = new _featureLayers2.default({});
+    var fl = new _FeatureLayers2.default({});
     floorButton.watch("cid", function () {
         fl.changeCurrentFloor(floorButton.get("cid"));
         fl.turnOnLayer('baby', map, _dom2.default.byId('baby').checked);
@@ -168,9 +243,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     (0, _on2.default)(_dom2.default.byId('baby'), 'click', function () {
-        var active = 2;
-        console.log(active);
-        fl.turnOnLayer('baby', map, _dom2.default.byId('baby').checked, active);
+        fl.turnOnLayer('baby', map, _dom2.default.byId('baby').checked);
     });
     (0, _on2.default)(_dom2.default.byId('bike'), 'click', function () {
         fl.turnOnLayer('bike', map, _dom2.default.byId('bike').checked);
@@ -195,5 +268,9 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
     (0, _on2.default)(_dom2.default.byId('vending'), 'click', function () {
         fl.turnOnLayer('vending', map, _dom2.default.byId('vending').checked);
+    });
+
+    (0, _on2.default)(_dom2.default.byId('btn-clear'), 'click', function () {
+        findNear.graphicsLayer.removeAll();
     });
 });
