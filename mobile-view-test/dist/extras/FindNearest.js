@@ -10,7 +10,7 @@ define([
     'esri/geometry/Extent'
 ], function (declare, Graphic, geometryEngine, FeatureLayer, Query, QueryTask, webMercatorUtils, GraphicsLayer, Extent) {
     return declare(null, {
-        currentFloor: '1',
+        selectedOptions: new Array(7).fill(false),
         restroom: new FeatureLayer({
             url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/12',
         }),
@@ -32,7 +32,7 @@ define([
         vending: new FeatureLayer({
             url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/0'
         }),
-        graphicsLayer: new GraphicsLayer(),
+        graphicsLayer: new GraphicsLayer({}),
 
 
         queryNearest: function (featureLayer, layerBufferWebMercator) {
@@ -43,10 +43,6 @@ define([
             queryBuff.outFields = ['*'];
             let result = queryBuffTask.execute(queryBuff);
             return result;
-        },
-
-        changeCurrentFloor: function (floorId) {
-            this.currentFloor = floorId;
         },
 
         displayNearest: function (layerId, locationPoint, map, view, index) {
@@ -72,9 +68,9 @@ define([
             });
             newGraphicsLayer.add(pointGraphic);
             let floor = this.currentFloor;
+            this.selectedOptions[index] = true;
             switch (layerId) {
                 case 'nearest-restroom':
-
                     result = this.incrementBuffer(locationPoint, this.restroom.parsedUrl.path);
                     this.graphicsLayer.removeAll();
                     result.then(function (evt) {
@@ -82,7 +78,7 @@ define([
                         view.extent = evt[1];
                         console.log(view.extent);
                         evt[0].features.forEach(function (feature) {
-                            if (feature.attributes.FLOOR == floor) {
+                            if (feature.attributes.FLOOR == floor && this.selectedOptions[0] == true) {
                                 console.log(feature);
                                 let g = new Graphic();
                                 if (feature.attributes.TYPE == 'FEMALE') {
@@ -140,7 +136,7 @@ define([
                                 newGraphicsLayer.add(g);
                             }
                         });
-                    });
+                    }.bind(this.selectedOptions));
                     break;
                 case 'nearest-printer':
                     result = this.incrementBuffer(locationPoint, this.printer.parsedUrl.path);
@@ -149,7 +145,7 @@ define([
                         view.center = evt[2];
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
-                            if (feature.attributes.Floor == floor) {
+                            if (feature.attributes.Floor == floor && this.selectedOptions[1] == true) {
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -173,7 +169,7 @@ define([
                         view.center = evt[2];
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
-                            if (feature.attributes.FLOOR == floor) {
+                            if (feature.attributes.FLOOR == floor && this.selectedOptions[2] == true) {
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -199,7 +195,7 @@ define([
                         view.center = evt[2];
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
-                            if (feature.attributes.FLOOR == floor) {
+                            if (feature.attributes.FLOOR == floor && this.selectedOptions[3] == true) {
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -223,7 +219,7 @@ define([
                         view.center = evt[2];
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
-                            if (feature.attributes.FLOOR == floor) {
+                            if (feature.attributes.FLOOR == floor && this.selectedOptions[4] == true) {
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -249,7 +245,7 @@ define([
                         view.center = evt[2];
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
-                            if (feature.attributes.Floor == floor) {
+                            if (feature.attributes.Floor == floor && this.selectedOptions[5] == true) {
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -267,26 +263,28 @@ define([
                     });
                     break;
                 case 'nearest-fire':
-                    result = this.incrementBuffer(locationPoint, this.fire.parsedUrl.path);
-                    this.graphicsLayer.removeAll();
-                    result.then(function (evt) {
-                        view.center = evt[2];
-                        view.extent = evt[1];
-                        evt[0].features.forEach(function (feature) {
-                            let g = new Graphic({
-                                geometry: feature.geometry,
-                                attributes: feature.attributes,
-                                symbol: {
-                                    type: 'picture-marker',
-                                    url: 'https://tomlinson.byui.edu/portal/sharing/rest/content/items/3c9d050e2d9a4dd5930ca54e558b24e9/data',
-                                    width: '64px',
-                                    height: '64px',
-                                    yoffset: '32px'
-                                }
+                    if (this.selectedOptions[6] == true) {
+                        result = this.incrementBuffer(locationPoint, this.fire.parsedUrl.path);
+                        this.graphicsLayer.removeAll();
+                        result.then(function (evt) {
+                            view.center = evt[2];
+                            view.extent = evt[1];
+                            evt[0].features.forEach(function (feature) {
+                                let g = new Graphic({
+                                    geometry: feature.geometry,
+                                    attributes: feature.attributes,
+                                    symbol: {
+                                        type: 'picture-marker',
+                                        url: 'https://tomlinson.byui.edu/portal/sharing/rest/content/items/3c9d050e2d9a4dd5930ca54e558b24e9/data',
+                                        width: '64px',
+                                        height: '64px',
+                                        yoffset: '32px'
+                                    }
+                                });
+                                newGraphicsLayer.add(g);
                             });
-                            newGraphicsLayer.add(g);
                         });
-                    });
+                    }
                     break;
                 default:
             }

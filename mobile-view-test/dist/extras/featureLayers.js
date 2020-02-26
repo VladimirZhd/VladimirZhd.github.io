@@ -145,11 +145,7 @@ define([
                     break;
 
                 case 'bike':
-<<<<<<< HEAD
-                    if (checked == true)
-=======
                     if (checked == true) 
->>>>>>> 645af536bda53642ae9db2c93a777a7b91eef249
                         map.add(this.featureLayerBike);
                     else
                         map.remove(this.featureLayerBike);
@@ -157,14 +153,10 @@ define([
 
                 case 'booth':
                     if (checked == true) {
-<<<<<<< HEAD
-                        let sql = "Floor = " + this.currentFloor;
-=======
                         let sql = "FLOOR = '" + this.currentFloor + "'";
                         if (this.currentFloor == '1') {
                             sql += " OR FLOOR = 'EX'";
                         }
->>>>>>> 645af536bda53642ae9db2c93a777a7b91eef249
                         this.featureLayerBooth.definitionExpression = sql;
                         map.add(this.featureLayerBooth);
                     }
