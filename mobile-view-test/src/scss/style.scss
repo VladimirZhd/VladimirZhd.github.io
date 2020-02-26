@@ -57,7 +57,7 @@ body,
 }
 
 // Stiles for sliding menu
-.hide {
+.hide, .nearest-div {
     display: block;
     position: absolute;
     width: 320px;
@@ -96,6 +96,10 @@ body,
         border-radius: 0 1em 1em 0;
         outline: none;
     }
+
+    &__sources-button {
+        border-radius: 1em 0 0 1em;
+    }
 }
 
 // Make the container for search widget's width 100% for mobile view
@@ -126,12 +130,11 @@ body,
 
     // menu hamburger button
     &-menu {
-
         background: transparent;
         outline: none;
         border: none;
         top: 21px;
-        left: 11px;
+        left: 50px;
     }
 
     // menu close button
@@ -180,6 +183,25 @@ body,
             cursor: pointer;
         }
     }
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            text-decoration: none;
+            padding: 1rem 0.4rem;
+            margin-left: 2.5rem;
+            margin-top: 2rem;
+            background: #0076B6;
+            color: #fff;
+            width: 75%;
+            text-align: center;
+            border-radius: 0.5rem;
+            outline: none;
+            cursor: pointer;
+        }
+    }
 }
 
 //styles sliding menu related elements
@@ -224,18 +246,27 @@ body,
     }
 
     &-byui-logo {
-        background-color: black;
+        background-color: #0076B6;
         width: 100%;
         height: 50px;
         margin: 0;
+        text-align: center;
     }
 
-    &-map-title {
+    &-map {
         color: white;
         margin: 0;
         padding: 0;
-        margin-left: 2em;
+        margin-left: -2.2rem;
         line-height: 50px;
+
+        &-title {
+            color: white;
+            margin: 0;
+            padding: 0;
+            margin-left: -2.2rem;
+            line-height: 50px;
+        }
     }
 }
 
@@ -275,4 +306,63 @@ hr {
 
 #floorLayers.floor-layers.esri-component {
     box-shadow: none;
+}
+
+.esri-popup {
+    &__header {
+        background: #333;
+        color: white;
+
+        &-container {
+            outline: none;
+        }
+
+        &-title {
+            &:hover {
+                transition: none;
+                color: white;
+                background-color: #333;
+            }
+        }
+    }
+
+    p {
+        margin: 0;
+        padding: 0.2rem 0.4rem;
+    }
+}
+
+.nearest {
+    &-link {
+        cursor: pointer;
+    }
+}
+
+.clear-nearest {
+    background: #fff;
+    width: 100%;
+    height: 50px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+}
+@media only screen and (min-width: 1024px) {
+    .clear-nearest {
+        width: 200px;
+        right: 60px;
+        bottom: 30px;
+        border-radius: 10px;
+    }
+}
+
+.btn-clear {
+    background: #0076B6;
+    color:#fff;
+    padding: 0.6rem;
+    border: none;
+    outline: none;
+    border-radius: 10px;
 }

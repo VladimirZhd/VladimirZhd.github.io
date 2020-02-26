@@ -52,6 +52,8 @@
             <li class="basemap-thumbnail" id="basemapSatellite"><a href="#">Satellite</a></li>
         </ul>
         <hr>
+        <h3 class="nearest-link menu-h3" id="find-nearest">Find Nearest</h3>
+        <hr>
         <h3 class="menu-h3">Campus Information</h3>
         <ul class="layers-navigation menu-list" id="list2">
             <li class="layer-item" id="layer-item--baby">Baby Changing</li>
@@ -72,9 +74,6 @@
             <li class="layer-item" id="layer-item--mothers-lounge">Mother's Lounge</li>
             <input type="checkbox" class="toggle" id="mothers-lounge">
             <label for="mothers-lounge"></label>
-            <!-- <li class="layer-item" id="layer-item--printer-location">Printer Location</li>
-            <input type="checkbox" class="toggle" id="printer-location">
-            <label for="printer-location"></label> -->
             <li class="layer-item" id="layer-item--bw-printer">-B&W Printer</li>
             <input type="checkbox" class="toggle" id="bw-printer">
             <label for="bw-printer"></label>
@@ -98,6 +97,26 @@
             <label for="vending"></label>
         </ul>
     </div>
+    <div class="nearest-div">
+        <div class="menu-byui-logo">
+            <h2 class="menu-map">Find Nearest</h2>
+        </div>
+        <button class="button button-close" type="button"><b>X</b></button>
+        <div class="button-container">
+            <a href="#" id="nearest-printer" class="near">Printer</a>
+            <a href="#" id="nearest-restroom" class="near">Restroom</a>
+            <a href="#" id="nearest-fountain" class="near">Drinking Fountain</a>
+            <a href="#" id="nearest-elevator" class="near">Elevator</a>
+            <a href="#" id="nearest-vending" class="near">Vending Machine</a>
+            <a href="#" id="nearest-aed" class="near">AED</a>
+            <a href="#" id="nearest-fire" class="near">Fire Extinguisher</a>
+        </div>
+    </div>
+    <div class="clear-nearest">
+        <button class="btn btn-clear" id="btn-clear">
+            Clear Results
+        </button>
+    </div>
     <div id="viewDiv"></div>
     <script src="dist/extras/functions.js"></script>
     <!-- <script src="dist/main.js"></script> -->
@@ -105,3 +124,5 @@
 </body>
 
 </html>
+
+

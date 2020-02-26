@@ -89,7 +89,7 @@ body,
         border-top: solid 1px rgba(110, 110, 110, 0.3);
         border-radius: 0 0 5px 5px; }
 
-.hide {
+.hide, .nearest-div {
   display: block;
   position: absolute;
   width: 320px;
@@ -116,6 +116,8 @@ body,
   .esri-search__submit-button {
     border-radius: 0 1em 1em 0;
     outline: none; }
+  .esri-search__sources-button {
+    border-radius: 1em 0 0 1em; }
 
 .esri-ui-top-right {
   width: 100%;
@@ -138,7 +140,7 @@ body,
     outline: none;
     border: none;
     top: 21px;
-    left: 11px; }
+    left: 50px; }
   .button-close {
     background: transparent;
     border: none;
@@ -174,6 +176,21 @@ body,
       height: 32px;
       outline: none;
       cursor: pointer; }
+  .button-container {
+    display: flex;
+    flex-direction: column; }
+    .button-container a {
+      text-decoration: none;
+      padding: 1rem 0.4rem;
+      margin-left: 2.5rem;
+      margin-top: 2rem;
+      background: #0076B6;
+      color: #fff;
+      width: 75%;
+      text-align: center;
+      border-radius: 0.5rem;
+      outline: none;
+      cursor: pointer; }
 
 .menu {
   touch-action: none;
@@ -199,16 +216,23 @@ body,
   .menu-h3 {
     margin-left: 3em; }
   .menu-byui-logo {
-    background-color: black;
+    background-color: #0076B6;
     width: 100%;
     height: 50px;
-    margin: 0; }
-  .menu-map-title {
+    margin: 0;
+    text-align: center; }
+  .menu-map {
     color: white;
     margin: 0;
     padding: 0;
-    margin-left: 2em;
+    margin-left: -2.2rem;
     line-height: 50px; }
+    .menu-map-title {
+      color: white;
+      margin: 0;
+      padding: 0;
+      margin-left: -2.2rem;
+      line-height: 50px; }
 
 .basemap-list {
   display: flex; }
@@ -237,3 +261,46 @@ hr {
 
 #floorLayers.floor-layers.esri-component {
   box-shadow: none; }
+
+.esri-popup__header {
+  background: #333;
+  color: white; }
+  .esri-popup__header-container {
+    outline: none; }
+  .esri-popup__header-title:hover {
+    transition: none;
+    color: white;
+    background-color: #333; }
+
+.esri-popup p {
+  margin: 0;
+  padding: 0.2rem 0.4rem; }
+
+.nearest-link {
+  cursor: pointer; }
+
+.clear-nearest {
+  background: #fff;
+  width: 100%;
+  height: 50px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  bottom: 0; }
+
+@media only screen and (min-width: 1024px) {
+  .clear-nearest {
+    width: 200px;
+    right: 60px;
+    bottom: 30px;
+    border-radius: 10px; } }
+
+.btn-clear {
+  background: #0076B6;
+  color: #fff;
+  padding: 0.6rem;
+  border: none;
+  outline: none;
+  border-radius: 10px; }

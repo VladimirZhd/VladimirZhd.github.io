@@ -8,10 +8,6 @@
         selectedFloor: null,
         cid: "1",
 
-        constructor: function (options) {
-            this.selectedFloor = options.selectedFloor || '1';
-            this.selectedFloorTitle = options.selectedFloorTitle || "1st Floor";
-        },
 
         displayFloorButtons: function (geometryInput, dom) {
             this.hideFloorButtons(dom);

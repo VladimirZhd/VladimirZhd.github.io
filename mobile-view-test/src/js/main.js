@@ -6,18 +6,25 @@ import MapView from "esri/views/MapView";
 import Locate from "esri/widgets/Locate";
 import Search from "esri/widgets/Search";
 
+import PopupTemplate from 'esri/PopupTemplate';
+
 import VectorTileLayer from "esri/layers/VectorTileLayer";
-import FeatureLayer from "esri/layers/FeatureLayer";
+import GraphicsLayer from 'esri/layers/GraphicsLayer';
 import { whenFalse } from "esri/core/watchUtils";
 import { whenTrueOnce } from "esri/core/watchUtils";
 import { whenFalseOnce } from "esri/core/watchUtils";
+import Point from 'esri/geometry/Point';
+import Graphic from 'esri/Graphic';
 
 import dom from "dojo/dom";
 import on from "dojo/on";
 
-import layerFunctions from "./extras/layerFunctions";
-import Buttons from "./extras/floorButtons";
-import menuLayers from "./extras/featureLayers";
+import LayerFunctions from "./extras/LayerFunctions";
+import Buttons from "./extras/FloorButtons";
+import MenuLayers from "./extras/FeatureLayers";
+import Sources from "./extras/Sources";
+import FindNearest from "./extras/FindNearest";
+
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -48,9 +55,50 @@ const view = new MapView({
 /* Create the locator widget with scaling on locating*/
 let locate = new Locate({
     view: view,
-    scale: 400
+    scale: 250
 });
 
+const findNear = new FindNearest({});
+map.add(findNear.graphicsLayer);
+
+let graphicsLayer = new GraphicsLayer();
+map.add(graphicsLayer);
+
+let options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+
+let floorButton = new Buttons({});
+floorButton.cid = "1";
+
+function positionRecieved(pos) {
+    let coords = pos.coords;
+    let locationPoint = new Point({
+        latitude: coords.latitude,
+        longitude: coords.longitude
+    });
+    floorButton.watch('cid', function () {
+        findNear.changeCurrentFloor(floorButton.get('cid'));
+    })
+
+    on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest('nearest-restroom', locationPoint, map, view) });
+    on(dom.byId('nearest-printer'), 'click', function () { findNear.displayNearest('nearest-printer', locationPoint, map, view) });
+    on(dom.byId('nearest-aed'), 'click', function () { findNear.displayNearest('nearest-aed', locationPoint, map, view) });
+    on(dom.byId('nearest-fire'), 'click', function () { findNear.displayNearest('nearest-fire', locationPoint, map, view) });
+    on(dom.byId('nearest-elevator'), 'click', function () { findNear.displayNearest('nearest-elevator', locationPoint, map, view) });
+    on(dom.byId('nearest-vending'), 'click', function () { findNear.displayNearest('nearest-vending', locationPoint, map, view) });
+    on(dom.byId('nearest-fountain'), 'click', function () { findNear.displayNearest('nearest-fountain', locationPoint, map, view) });
+}
+
+
+
+function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(positionRecieved, error, options);
 
 let floorsWidget = document.getElementById("floorLayers"); //Get floor buttons container 
 
@@ -72,13 +120,27 @@ if (device == true) {
 let search = new Search({
     view: view,
     sources: [],
-    allPlaceholder: "Find a place"
+    allPlaceholder: "Kimball or KIM170",
+    includeDefaultSources: false
+});
+const { sources } = Sources();
+search.sources = sources;
+
+search.on('select-result', function (evt) {
+    let floorNumber = evt.target.selectedResult.feature.attributes.FLOOR;
+    console.log(evt.target.selectedResult);
+    if (floorNumber) {
+        floorButton.setVisibleFloor(floorNumber, lf.floors, dom);
+        view.scale = 400;
+    } else {
+        floorButton.setVisibleFloor('1', lf.floors, dom);
+    }
 });
 
 /* Insert the search widget to the top right of the page*/
 view.ui.add(search, "top-right");
 /* For the bigger screens we want to move the search widget to  */
-if (screen.width > 767) {
+if (screen.width > 600) {
     view.ui.move(search, "top-left");
 }
 /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
@@ -86,13 +148,8 @@ if (screen.width >= 1024 && device == true) {
     document.getElementById("floorLayers").style.bottom = "110px";
 }
 
-let lf = new layerFunctions({});
+let lf = new LayerFunctions({});
 lf.addVectorLayersToMap(map);
-
-let floorButton = new Buttons({});
-
-floorButton.cid = "1";
-
 
 whenFalse(view, "stationary", function () {
     if (!view.stationary) {
@@ -112,7 +169,9 @@ whenFalse(view, "stationary", function () {
     }
 });
 
-on(dom.byId("0floor"), "click", function () { floorButton.setVisibleFloor("0", lf.floors, dom) });
+on(dom.byId("0floor"), "click", function () {
+    floorButton.setVisibleFloor("0", lf.floors, dom);
+});
 on(dom.byId("1floor"), "click", function () { floorButton.setVisibleFloor("1", lf.floors, dom) });
 on(dom.byId("2floor"), "click", function () { floorButton.setVisibleFloor("2", lf.floors, dom) });
 on(dom.byId("3floor"), "click", function () { floorButton.setVisibleFloor("3", lf.floors, dom) });
@@ -122,13 +181,13 @@ on(dom.byId("5floor"), "click", function () { floorButton.setVisibleFloor("5", l
 
 /* Change basemap on click */
 
-on(dom.byId('basemapRoads'), 'click', function () {map.basemap = 'streets'});
-on(dom.byId('basemapSatellite'), 'click', function () {map.basemap = 'satellite'});
+on(dom.byId('basemapRoads'), 'click', function () { map.basemap = 'streets' });
+on(dom.byId('basemapSatellite'), 'click', function () { map.basemap = 'satellite' });
 
 /* Add feature layers event listener */
 
-let fl = new menuLayers({});
-floorButton.watch("cid", function() {
+let fl = new MenuLayers({});
+floorButton.watch("cid", function () {
     fl.changeCurrentFloor(floorButton.get("cid"));
     fl.turnOnLayer('baby', map, dom.byId('baby').checked);
     fl.turnOnLayer('bike', map, dom.byId('bike').checked);
@@ -141,12 +200,15 @@ floorButton.watch("cid", function() {
     fl.turnOnLayer('vending', map, dom.byId('vending').checked);
 });
 
-on(dom.byId('baby'), 'click', function () {fl.turnOnLayer('baby', map, dom.byId('baby').checked)});
-on(dom.byId('bike'), 'click', function () {fl.turnOnLayer('bike', map, dom.byId('bike').checked)});
-on(dom.byId('booth'), 'click', function () {fl.turnOnLayer('booth', map, dom.byId('booth').checked)});
-on(dom.byId('food'), 'click', function () {fl.turnOnLayer('food', map, dom.byId('food').checked)});
-on(dom.byId('mothers-lounge'), 'click', function () {fl.turnOnLayer('mothers-lounge', map, dom.byId('mothers-lounge').checked)});
-on(dom.byId('bw-printer'), 'click', function () {fl.turnOnLayer('bw-printer', map, dom.byId('bw-printer').checked)});
-on(dom.byId('clr-printer'), 'click', function () {fl.turnOnLayer('clr-printer', map, dom.byId('clr-printer').checked)});
-on(dom.byId('copy-scan'), 'click', function () {fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked)});
-on(dom.byId('vending'), 'click', function () {fl.turnOnLayer('vending', map, dom.byId('vending').checked)});
+on(dom.byId('baby'), 'click', function () { fl.turnOnLayer('baby', map, dom.byId('baby').checked); });
+on(dom.byId('bike'), 'click', function () { fl.turnOnLayer('bike', map, dom.byId('bike').checked) });
+on(dom.byId('booth'), 'click', function () { fl.turnOnLayer('booth', map, dom.byId('booth').checked) });
+on(dom.byId('food'), 'click', function () { fl.turnOnLayer('food', map, dom.byId('food').checked) });
+on(dom.byId('mothers-lounge'), 'click', function () { fl.turnOnLayer('mothers-lounge', map, dom.byId('mothers-lounge').checked) });
+on(dom.byId('bw-printer'), 'click', function () { fl.turnOnLayer('bw-printer', map, dom.byId('bw-printer').checked) });
+on(dom.byId('clr-printer'), 'click', function () { fl.turnOnLayer('clr-printer', map, dom.byId('clr-printer').checked) });
+on(dom.byId('copy-scan'), 'click', function () { fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked) });
+on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, dom.byId('vending').checked) });
+
+on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll() });
+
