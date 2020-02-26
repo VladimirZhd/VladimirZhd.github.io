@@ -139,16 +139,15 @@ define([
                     break;
 
                 case 'bike':
-                    if (checked == true) {
+                    if (checked == true)
                         map.add(this.featureLayerBike);
-                    }
                     else
                         map.remove(this.featureLayerBike);
                     break;
 
                 case 'booth':
                     if (checked == true) {
-                        let sql = "FLOOR = " + this.currentFloor;
+                        let sql = "Floor = " + this.currentFloor;
                         this.featureLayerBooth.definitionExpression = sql;
                         map.add(this.featureLayerBooth);
                     }
