@@ -178,13 +178,11 @@ define([
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
                                     symbol: {
-                                        type: 'simple-marker',
-                                        color: [0, 0, 0],
-                                        outline: {
-                                            color: [0, 255, 255],
-                                            width: 2
-                                        },
-                                        size: '20px'
+                                        type: 'picture-marker',
+                                        url: 'https://tomlinson.byui.edu/portal/sharing/rest/content/items/927b05e70d3d4a33978a55bd34d98156/data',
+                                        width: '64px',
+                                        height: '64px',
+                                        yoffset: '32px'
                                     }
                                 });
                                 newGraphicsLayer.add(g);
@@ -228,13 +226,11 @@ define([
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
                                     symbol: {
-                                        type: 'simple-marker',
-                                        color: [0, 0, 0],
-                                        outline: {
-                                            color: [0, 255, 255],
-                                            width: 2
-                                        },
-                                        size: '20px'
+                                        type: 'picture-marker',
+                                        url: 'https://tomlinson.byui.edu/portal/sharing/rest/content/items/444d4103775c425aaa84490b8611cf61/data',
+                                        width: '64px',
+                                        height: '64px',
+                                        yoffset: '32px'
                                     }
                                 });
                                 newGraphicsLayer.add(g);
