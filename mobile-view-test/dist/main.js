@@ -127,10 +127,10 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
                 findNear.displayNearest('nearest-printer', locationOnClick, map, view, 1);
             });
             (0, _on2.default)(_dom2.default.byId('near-fountain'), 'click', function () {
-                findNear.displayNearest('nearest-aed', locationOnClick, map, view, 2);
+                findNear.displayNearest('nearest-fountain', locationOnClick, map, view, 2);
             });
             (0, _on2.default)(_dom2.default.byId('near-aed'), 'click', function () {
-                findNear.displayNearest('nearest-fire', locationOnClick, map, view, 3);
+                findNear.displayNearest('nearest-aed', locationOnClick, map, view, 3);
             });
             (0, _on2.default)(_dom2.default.byId('near-elevator'), 'click', function () {
                 findNear.displayNearest('nearest-elevator', locationOnClick, map, view, 4);
@@ -139,7 +139,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
                 findNear.displayNearest('nearest-vending', locationOnClick, map, view, 5);
             });
             (0, _on2.default)(_dom2.default.byId('near-fire'), 'click', function () {
-                findNear.displayNearest('nearest-fountain', locationOnClick, map, view, 6);
+                findNear.displayNearest('nearest-fire', locationOnClick, map, view, 6);
             });
 
             $(document).ready(function () {
@@ -162,11 +162,11 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             (0, _on2.default)(_dom2.default.byId('nearest-printer'), 'click', function () {
                 findNear.displayNearest('nearest-printer', locationPoint, map, view, 1);
             });
-            (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
-                findNear.displayNearest('nearest-aed', locationPoint, map, view, 2);
+            (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
+                findNear.displayNearest('nearest-fountain', locationPoint, map, view, 2);
             });
-            (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
-                findNear.displayNearest('nearest-fire', locationPoint, map, view, 3);
+            (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
+                findNear.displayNearest('nearest-aed', locationPoint, map, view, 3);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-elevator'), 'click', function () {
                 findNear.displayNearest('nearest-elevator', locationPoint, map, view, 4);
@@ -174,8 +174,8 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             (0, _on2.default)(_dom2.default.byId('nearest-vending'), 'click', function () {
                 findNear.displayNearest('nearest-vending', locationPoint, map, view, 5);
             });
-            (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
-                findNear.displayNearest('nearest-fountain', locationPoint, map, view, 6);
+            (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
+                findNear.displayNearest('nearest-fire', locationPoint, map, view, 6);
             });
         };
 
