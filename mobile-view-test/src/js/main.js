@@ -83,6 +83,11 @@ floorButton.cid = "1";
 
 let device = isMobileDevice();  //calling function to identify the device
 
+floorButton.watch('cid', function () {
+    findNear.changeCurrentFloor(floorButton.get('cid'));
+    findNear.displayNearest(locationPoint, map, view, findNear.currentSelection);
+});
+
 if (screen.width >= 1024) {
     view.on('click', function (evt) {
         let locationOnClick = new Point({
@@ -114,13 +119,13 @@ if (screen.width >= 1024) {
         
         view.popup.reposition();
 
-        on(dom.byId('near-restroom'), 'click', function () { findNear.displayNearest('nearest-restroom', locationOnClick, map, view, 0); });
-        on(dom.byId('near-printer'), 'click', function () { findNear.displayNearest('nearest-printer', locationOnClick, map, view, 1) });
-        on(dom.byId('near-fountain'), 'click', function () { findNear.displayNearest('nearest-aed', locationOnClick, map, view, 2) });
-        on(dom.byId('near-aed'), 'click', function () { findNear.displayNearest('nearest-fire', locationOnClick, map, view, 3) });
-        on(dom.byId('near-elevator'), 'click', function () { findNear.displayNearest('nearest-elevator', locationOnClick, map, view, 4) });
-        on(dom.byId('near-vending'), 'click', function () { findNear.displayNearest('nearest-vending', locationOnClick, map, view, 5) });
-        on(dom.byId('near-fire'), 'click', function () { findNear.displayNearest('nearest-fountain', locationOnClick, map, view, 6) });
+        on(dom.byId('near-restroom'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 0); });
+        on(dom.byId('near-printer'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 1) });
+        on(dom.byId('near-fountain'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 2) });
+        on(dom.byId('near-aed'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 3) });
+        on(dom.byId('near-elevator'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 4) });
+        on(dom.byId('near-vending'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 5) });
+        on(dom.byId('near-fire'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 6) });
 
         $(document).ready(function() {
             $('.near-lg').click(function() {
@@ -142,13 +147,13 @@ if (screen.width >= 1024) {
             longitude: coords.longitude
         });
 
-        on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest('nearest-restroom', locationPoint, map, view, 0) });
-        on(dom.byId('nearest-printer'), 'click', function () { findNear.displayNearest('nearest-printer', locationPoint, map, view, 1) });
-        on(dom.byId('nearest-aed'), 'click', function () { findNear.displayNearest('nearest-aed', locationPoint, map, view, 2) });
-        on(dom.byId('nearest-fire'), 'click', function () { findNear.displayNearest('nearest-fire', locationPoint, map, view, 3) });
-        on(dom.byId('nearest-elevator'), 'click', function () { findNear.displayNearest('nearest-elevator', locationPoint, map, view, 4) });
-        on(dom.byId('nearest-vending'), 'click', function () { findNear.displayNearest('nearest-vending', locationPoint, map, view, 5) });
-        on(dom.byId('nearest-fountain'), 'click', function () { findNear.displayNearest('nearest-fountain', locationPoint, map, view, 6) });
+        on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 0) });
+        on(dom.byId('nearest-printer'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 1) });
+        on(dom.byId('nearest-aed'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 2) });
+        on(dom.byId('nearest-fire'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 3) });
+        on(dom.byId('nearest-elevator'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 4) });
+        on(dom.byId('nearest-vending'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 5) });
+        on(dom.byId('nearest-fountain'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 6) });
     }
 
     function error(err) {
