@@ -12,7 +12,7 @@
         displayFloorButtons: function (geometryInput, dom) {
             this.hideFloorButtons(dom);
 
-            let floorQueryTask = new QueryTask("https://tomlinson.byui.edu/arcgis/rest/services/interactive/campusFeatures/MapServer/7");
+            let floorQueryTask = new QueryTask("https://tomlinson.byui.edu/arcgis/rest/services/interactive/campusFeatures/MapServer/0");
             let floorQuery = new Query();
             floorQuery.geometry = geometryInput;
             floorQuery.returnGeometry = false;

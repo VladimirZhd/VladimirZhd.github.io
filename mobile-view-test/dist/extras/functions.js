@@ -40,9 +40,14 @@ $(document).ready(function () {
         $('.clear-nearest').css('display', 'flex');
     });
 
+    $(".near-lg").on("click", function () {
+        $('.clear-nearest').css('display', 'flex');
+    });
+
     $('#btn-clear').on('click', function() {
         $('.clear-nearest').css('display', 'none');
     });
+
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {

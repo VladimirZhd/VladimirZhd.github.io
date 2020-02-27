@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/PopupTemplate", "esri/layers/VectorTileLayer", "esri/layers/GraphicsLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "dojo/dom", "dojo/on", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest"], function (_Map, _Basemap, _MapView, _Locate, _Search, _PopupTemplate, _VectorTileLayer, _GraphicsLayer, _watchUtils, _Point, _Graphic, _dom, _on, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/PopupTemplate", "esri/layers/VectorTileLayer", "esri/layers/GraphicsLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/MapImageLayer", "dojo/dom", "dojo/on", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest"], function (_Map, _Basemap, _MapView, _Locate, _Search, _PopupTemplate, _VectorTileLayer, _GraphicsLayer, _watchUtils, _Point, _Graphic, _MapImageLayer, _dom, _on, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -21,6 +21,8 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _Graphic2 = _interopRequireDefault(_Graphic);
 
+    var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
+
     var _dom2 = _interopRequireDefault(_dom);
 
     var _on2 = _interopRequireDefault(_on);
@@ -42,7 +44,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     }
 
     /* create a basemap using a community map with trees*/
-    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -54,6 +55,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     /* Creating a map with our tree basemap*/
+    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -65,6 +67,16 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         zoom: 16,
         center: [-111.784, 43.818]
     });
+
+    var construction = new _MapImageLayer2.default({
+        url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/campusFeatures/MapServer',
+        sublayers: [{
+            id: 1,
+            visible: true
+        }]
+    });
+    console.log(construction);
+    map.add(construction);
 
     /* Create the locator widget with scaling on locating*/
     var locate = new _Locate2.default({
@@ -78,54 +90,110 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     var graphicsLayer = new _GraphicsLayer2.default();
     map.add(graphicsLayer);
 
-    var options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-    };
-
     var floorButton = new _FloorButtons2.default({});
     floorButton.cid = "1";
 
-    function positionRecieved(pos) {
-        var coords = pos.coords;
-        var locationPoint = new _Point2.default({
-            latitude: coords.latitude,
-            longitude: coords.longitude
-        });
+    var device = isMobileDevice(); //calling function to identify the device
 
-        (0, _on2.default)(_dom2.default.byId('nearest-restroom'), 'click', function () {
-            findNear.displayNearest('nearest-restroom', locationPoint, map, view, 0);
+    if (screen.width >= 1024) {
+        view.on('click', function (evt) {
+            var locationOnClick = new _Point2.default({
+                latitude: evt.mapPoint.latitude,
+                longitude: evt.mapPoint.longitude
+            });
+
+            var _content = '<a href="#" id="near-printer" class="near-lg">Printer</a>' + '<a href="#" id="near-restroom" class="near-lg">Restroom</a>' + '<a href="#" id="near-fountain" class="near-lg">Drinking Fountain</a>' + '<a href="#" id="near-elevator" class="near-lg">Elevator</a>' + '<a href="#" id="near-vending" class="near-lg">Vending Machine</a>' + '<a href="#" id="near-aed" class="near-lg">AED</a>' + '<a href="#" id="near-fire" class="near-lg">Fire Extinguisher</a>';
+
+            var template = {
+                content: function content() {
+                    var div = document.createElement('div');
+                    div.className = 'buttons-container';
+                    div.innerHTML = _content;
+                    return div;
+                }
+            };
+
+            view.popup.visible = true;
+            view.popup.location = locationOnClick;
+            view.popup.title = "Find Nearest";
+            view.popup.content = template.content();
+
+            view.popup.reposition();
+
+            (0, _on2.default)(_dom2.default.byId('near-restroom'), 'click', function () {
+                findNear.displayNearest('nearest-restroom', locationOnClick, map, view, 0);
+            });
+            (0, _on2.default)(_dom2.default.byId('near-printer'), 'click', function () {
+                findNear.displayNearest('nearest-printer', locationOnClick, map, view, 1);
+            });
+            (0, _on2.default)(_dom2.default.byId('near-fountain'), 'click', function () {
+                findNear.displayNearest('nearest-aed', locationOnClick, map, view, 2);
+            });
+            (0, _on2.default)(_dom2.default.byId('near-aed'), 'click', function () {
+                findNear.displayNearest('nearest-fire', locationOnClick, map, view, 3);
+            });
+            (0, _on2.default)(_dom2.default.byId('near-elevator'), 'click', function () {
+                findNear.displayNearest('nearest-elevator', locationOnClick, map, view, 4);
+            });
+            (0, _on2.default)(_dom2.default.byId('near-vending'), 'click', function () {
+                findNear.displayNearest('nearest-vending', locationOnClick, map, view, 5);
+            });
+            (0, _on2.default)(_dom2.default.byId('near-fire'), 'click', function () {
+                findNear.displayNearest('nearest-fountain', locationOnClick, map, view, 6);
+            });
+
+            $(document).ready(function () {
+                $('.near-lg').click(function () {
+                    view.popup.close();
+                });
+            });
         });
-        (0, _on2.default)(_dom2.default.byId('nearest-printer'), 'click', function () {
-            findNear.displayNearest('nearest-printer', locationPoint, map, view, 1);
-        });
-        (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
-            findNear.displayNearest('nearest-aed', locationPoint, map, view, 2);
-        });
-        (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
-            findNear.displayNearest('nearest-fire', locationPoint, map, view, 3);
-        });
-        (0, _on2.default)(_dom2.default.byId('nearest-elevator'), 'click', function () {
-            findNear.displayNearest('nearest-elevator', locationPoint, map, view, 4);
-        });
-        (0, _on2.default)(_dom2.default.byId('nearest-vending'), 'click', function () {
-            findNear.displayNearest('nearest-vending', locationPoint, map, view, 5);
-        });
-        (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
-            findNear.displayNearest('nearest-fountain', locationPoint, map, view, 6);
-        });
+    } else {
+        var positionRecieved = function positionRecieved(pos) {
+            var coords = pos.coords;
+            var locationPoint = new _Point2.default({
+                latitude: coords.latitude,
+                longitude: coords.longitude
+            });
+
+            (0, _on2.default)(_dom2.default.byId('nearest-restroom'), 'click', function () {
+                findNear.displayNearest('nearest-restroom', locationPoint, map, view, 0);
+            });
+            (0, _on2.default)(_dom2.default.byId('nearest-printer'), 'click', function () {
+                findNear.displayNearest('nearest-printer', locationPoint, map, view, 1);
+            });
+            (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
+                findNear.displayNearest('nearest-aed', locationPoint, map, view, 2);
+            });
+            (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
+                findNear.displayNearest('nearest-fire', locationPoint, map, view, 3);
+            });
+            (0, _on2.default)(_dom2.default.byId('nearest-elevator'), 'click', function () {
+                findNear.displayNearest('nearest-elevator', locationPoint, map, view, 4);
+            });
+            (0, _on2.default)(_dom2.default.byId('nearest-vending'), 'click', function () {
+                findNear.displayNearest('nearest-vending', locationPoint, map, view, 5);
+            });
+            (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
+                findNear.displayNearest('nearest-fountain', locationPoint, map, view, 6);
+            });
+        };
+
+        var error = function error(err) {
+            console.warn("ERROR(" + err.code + "): " + err.message);
+        };
+
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        navigator.geolocation.getCurrentPosition(positionRecieved, error, options);
     }
-
-    function error(err) {
-        console.warn("ERROR(" + err.code + "): " + err.message);
-    }
-
-    navigator.geolocation.getCurrentPosition(positionRecieved, error, options);
 
     var floorsWidget = document.getElementById("floorLayers"); //Get floor buttons container 
 
-    var device = isMobileDevice(); //calling function to identify the device
 
     view.ui.add(floorsWidget, "bottom-right"); //inserting floor buttons to an esri container on the page
     view.ui.move('zoom', "bottom-right"); //move zoome widget to bottom right corner
@@ -268,6 +336,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     (0, _on2.default)(_dom2.default.byId('btn-clear'), 'click', function () {
-        findNear.graphicsLayer.removeAll();findNear.selectedOptions.fill(false);
+        findNear.graphicsLayer.removeAll();
     });
 });

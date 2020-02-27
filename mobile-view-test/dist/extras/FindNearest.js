@@ -316,10 +316,5 @@ define([
             let center = [layerBufferWebMercator.extent.center.longitude, layerBufferWebMercator.extent.center.latitude]
             return [tempR, ext, center];
         },
-
-        getExtentOfResult: function (locationPoint) {
-            let layerBuffer = geometryEngine.geodesicBuffer(locationPoint, 150, 'feet');
-            console.log(layerBuffer);
-        }
     })
 })

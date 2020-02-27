@@ -15,6 +15,7 @@ import { whenTrueOnce } from "esri/core/watchUtils";
 import { whenFalseOnce } from "esri/core/watchUtils";
 import Point from 'esri/geometry/Point';
 import Graphic from 'esri/Graphic';
+import MapImageLayer from 'esri/layers/MapImageLayer';
 
 import dom from "dojo/dom";
 import on from "dojo/on";
@@ -24,6 +25,7 @@ import Buttons from "./extras/FloorButtons";
 import MenuLayers from "./extras/FeatureLayers";
 import Sources from "./extras/Sources";
 import FindNearest from "./extras/FindNearest";
+
 
 
 /* create a basemap using a community map with trees*/
@@ -52,6 +54,18 @@ const view = new MapView({
     center: [-111.784, 43.818],
 });
 
+let construction = new MapImageLayer({
+    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/campusFeatures/MapServer',
+    sublayers: [
+        {
+            id: 1,
+            visible: true
+        }
+    ]
+});
+console.log(construction);
+map.add(construction);
+
 /* Create the locator widget with scaling on locating*/
 let locate = new Locate({
     view: view,
@@ -64,40 +78,89 @@ map.add(findNear.graphicsLayer);
 let graphicsLayer = new GraphicsLayer();
 map.add(graphicsLayer);
 
-let options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-};
-
 let floorButton = new Buttons({});
 floorButton.cid = "1";
 
-function positionRecieved(pos) {
-    let coords = pos.coords;
-    let locationPoint = new Point({
-        latitude: coords.latitude,
-        longitude: coords.longitude
+let device = isMobileDevice();  //calling function to identify the device
+
+if (screen.width >= 1024) {
+    view.on('click', function (evt) {
+        let locationOnClick = new Point({
+            latitude: evt.mapPoint.latitude,
+            longitude: evt.mapPoint.longitude
+        })
+
+        let content = '<a href="#" id="near-printer" class="near-lg">Printer</a>' + 
+        '<a href="#" id="near-restroom" class="near-lg">Restroom</a>' +
+        '<a href="#" id="near-fountain" class="near-lg">Drinking Fountain</a>' +
+        '<a href="#" id="near-elevator" class="near-lg">Elevator</a>' +
+        '<a href="#" id="near-vending" class="near-lg">Vending Machine</a>' +
+        '<a href="#" id="near-aed" class="near-lg">AED</a>' +
+        '<a href="#" id="near-fire" class="near-lg">Fire Extinguisher</a>';
+        
+        let template = {
+            content: function() {
+                let div = document.createElement('div');
+                div.className = 'buttons-container';
+                div.innerHTML = content;
+                return div;
+            }
+        }
+        
+        view.popup.visible = true;
+        view.popup.location = locationOnClick;
+        view.popup.title = "Find Nearest";
+        view.popup.content = template.content();
+        
+        view.popup.reposition();
+
+        on(dom.byId('near-restroom'), 'click', function () { findNear.displayNearest('nearest-restroom', locationOnClick, map, view, 0); });
+        on(dom.byId('near-printer'), 'click', function () { findNear.displayNearest('nearest-printer', locationOnClick, map, view, 1) });
+        on(dom.byId('near-fountain'), 'click', function () { findNear.displayNearest('nearest-aed', locationOnClick, map, view, 2) });
+        on(dom.byId('near-aed'), 'click', function () { findNear.displayNearest('nearest-fire', locationOnClick, map, view, 3) });
+        on(dom.byId('near-elevator'), 'click', function () { findNear.displayNearest('nearest-elevator', locationOnClick, map, view, 4) });
+        on(dom.byId('near-vending'), 'click', function () { findNear.displayNearest('nearest-vending', locationOnClick, map, view, 5) });
+        on(dom.byId('near-fire'), 'click', function () { findNear.displayNearest('nearest-fountain', locationOnClick, map, view, 6) });
+
+        $(document).ready(function() {
+            $('.near-lg').click(function() {
+                view.popup.close();
+            });
+        });
     });
+} else {
+    let options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
 
-    on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest('nearest-restroom', locationPoint, map, view, 0) });
-    on(dom.byId('nearest-printer'), 'click', function () { findNear.displayNearest('nearest-printer', locationPoint, map, view, 1) });
-    on(dom.byId('nearest-aed'), 'click', function () { findNear.displayNearest('nearest-aed', locationPoint, map, view, 2) });
-    on(dom.byId('nearest-fire'), 'click', function () { findNear.displayNearest('nearest-fire', locationPoint, map, view, 3) });
-    on(dom.byId('nearest-elevator'), 'click', function () { findNear.displayNearest('nearest-elevator', locationPoint, map, view, 4) });
-    on(dom.byId('nearest-vending'), 'click', function () { findNear.displayNearest('nearest-vending', locationPoint, map, view, 5) });
-    on(dom.byId('nearest-fountain'), 'click', function () { findNear.displayNearest('nearest-fountain', locationPoint, map, view, 6) });
+    function positionRecieved(pos) {
+        let coords = pos.coords;
+        let locationPoint = new Point({
+            latitude: coords.latitude,
+            longitude: coords.longitude
+        });
+
+        on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest('nearest-restroom', locationPoint, map, view, 0) });
+        on(dom.byId('nearest-printer'), 'click', function () { findNear.displayNearest('nearest-printer', locationPoint, map, view, 1) });
+        on(dom.byId('nearest-aed'), 'click', function () { findNear.displayNearest('nearest-aed', locationPoint, map, view, 2) });
+        on(dom.byId('nearest-fire'), 'click', function () { findNear.displayNearest('nearest-fire', locationPoint, map, view, 3) });
+        on(dom.byId('nearest-elevator'), 'click', function () { findNear.displayNearest('nearest-elevator', locationPoint, map, view, 4) });
+        on(dom.byId('nearest-vending'), 'click', function () { findNear.displayNearest('nearest-vending', locationPoint, map, view, 5) });
+        on(dom.byId('nearest-fountain'), 'click', function () { findNear.displayNearest('nearest-fountain', locationPoint, map, view, 6) });
+    }
+
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(positionRecieved, error, options);
 }
 
-function error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-}
-
-navigator.geolocation.getCurrentPosition(positionRecieved, error, options);
 
 let floorsWidget = document.getElementById("floorLayers"); //Get floor buttons container 
 
-let device = isMobileDevice();  //calling function to identify the device
 
 view.ui.add(floorsWidget, "bottom-right"); //inserting floor buttons to an esri container on the page
 view.ui.move('zoom', "bottom-right"); //move zoome widget to bottom right corner
@@ -164,9 +227,7 @@ whenFalse(view, "stationary", function () {
     }
 });
 
-on(dom.byId("0floor"), "click", function () {
-    floorButton.setVisibleFloor("0", lf.floors, dom);
-});
+on(dom.byId("0floor"), "click", function () { floorButton.setVisibleFloor("0", lf.floors, dom) });
 on(dom.byId("1floor"), "click", function () { floorButton.setVisibleFloor("1", lf.floors, dom) });
 on(dom.byId("2floor"), "click", function () { floorButton.setVisibleFloor("2", lf.floors, dom) });
 on(dom.byId("3floor"), "click", function () { floorButton.setVisibleFloor("3", lf.floors, dom) });
@@ -205,5 +266,5 @@ on(dom.byId('clr-printer'), 'click', function () { fl.turnOnLayer('clr-printer',
 on(dom.byId('copy-scan'), 'click', function () { fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked) });
 on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, dom.byId('vending').checked) });
 
-on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.selectedOptions.fill(false) });
+on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll() });
 

@@ -14,7 +14,7 @@
             packages: [
                 {
                     name: "app",
-                    location: locationPath + "/dist"
+                    location: locationPath + "dist"
                 },
             ]
         };
@@ -27,7 +27,7 @@
     <script src="https://js.arcgis.com/4.14/"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="dist/extras/jquery.touchSwipe.js"></script>
-    <title>Mobile view Test</title>
+    <title>Interactive Map</title>
 </head>
 
 <body>
@@ -109,7 +109,7 @@
             <a href="#" id="nearest-elevator" class="near">Elevator</a>
             <a href="#" id="nearest-vending" class="near">Vending Machine</a>
             <a href="#" id="nearest-aed" class="near">AED</a>
-            <a href="#" id="nearest-fire" class="near">Fire Extinguisher</a>
+            <a href="#" id="nearest-fire" class="near ">Fire Extinguisher</a>
         </div>
     </div>
     <div class="clear-nearest">
@@ -119,7 +119,6 @@
     </div>
     <div id="viewDiv"></div>
     <script src="dist/extras/functions.js"></script>
-    <!-- <script src="dist/main.js"></script> -->
     <script>require(["app/main"]);</script>
 </body>
 
