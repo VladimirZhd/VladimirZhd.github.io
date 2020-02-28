@@ -48,6 +48,10 @@ $(document).ready(function () {
         $('.clear-nearest').css('display', 'none');
     });
 
+    $('#btn-warning').click(function() {
+        $('popup-warning').css('display', 'none');
+    });
+
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {

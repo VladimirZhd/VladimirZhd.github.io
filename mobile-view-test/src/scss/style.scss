@@ -149,6 +149,18 @@ body,
         margin: 0;
         color: white;
         font-size: 20px;
+
+        &-warning {
+            background: transparent;
+            border: none;
+            left: 220px;
+            top: 15px;
+            outline: none;
+            padding: 0;
+            margin: 0;
+            color: black;
+            font-size: 20px;
+        }
     }
 
     // floor layers buttons
@@ -393,6 +405,7 @@ hr {
 
 .show-lg {
     display: none;
+
     p {
         margin: auto;
         padding: 1rem;
@@ -409,4 +422,30 @@ hr {
     .show-lg {
         display: block;
     }
+}
+
+.popup-warning {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(110, 110, 110, 0.3);
+    display: none;
+    .helper {
+        margin: auto;
+        margin-top: 50%;
+        width: 250px;
+        height: 150px;
+        z-index: 1;
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+
+        p {
+            font-size: 1.2rem;
+            margin: 2rem;
+        }
+    }
+
+    
 }
