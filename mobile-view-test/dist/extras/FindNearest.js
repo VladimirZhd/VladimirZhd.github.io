@@ -263,7 +263,6 @@ define([
                     });
                     break;
                 case 6:
-                    if (this.selectedOptions[6] == true) {
                         result = this.incrementBuffer(locationPoint, this.fire.parsedUrl.path);
                         this.graphicsLayer.removeAll();
                         result.then(function (evt) {
@@ -284,7 +283,6 @@ define([
                                 newGraphicsLayer.add(g);
                             });
                         });
-                    }
                     break;
                 default:
             }

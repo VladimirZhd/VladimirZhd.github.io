@@ -75,9 +75,6 @@ let locate = new Locate({
 const findNear = new FindNearest({});
 map.add(findNear.graphicsLayer);
 
-let graphicsLayer = new GraphicsLayer();
-map.add(graphicsLayer);
-
 let floorButton = new Buttons({});
 floorButton.cid = "1";
 
@@ -159,11 +156,11 @@ if (screen.width >= 1024) {
 
         on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 0) });
         on(dom.byId('nearest-printer'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 1) });
-        on(dom.byId('nearest-aed'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 2) });
-        on(dom.byId('nearest-fire'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 3) });
+        on(dom.byId('nearest-fountain'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 2) });
+        on(dom.byId('nearest-aed'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 3) });
         on(dom.byId('nearest-elevator'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 4) });
         on(dom.byId('nearest-vending'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 5) });
-        on(dom.byId('nearest-fountain'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 6) });
+        on(dom.byId('nearest-fire'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 6) });
     }
 
     function error(err) {
@@ -281,5 +278,5 @@ on(dom.byId('clr-printer'), 'click', function () { fl.turnOnLayer('clr-printer',
 on(dom.byId('copy-scan'), 'click', function () { fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked) });
 on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, dom.byId('vending').checked) });
 
-on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll() });
+on(dom.byId('btn-clear'), 'click', function () {console.log(findNear.graphicsLayer);  findNear.graphicsLayer.removeAll() });
 

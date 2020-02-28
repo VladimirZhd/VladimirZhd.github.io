@@ -87,9 +87,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     var findNear = new _FindNearest2.default({});
     map.add(findNear.graphicsLayer);
 
-    var graphicsLayer = new _GraphicsLayer2.default();
-    map.add(graphicsLayer);
-
     var floorButton = new _FloorButtons2.default({});
     floorButton.cid = "1";
 
@@ -176,10 +173,10 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             (0, _on2.default)(_dom2.default.byId('nearest-printer'), 'click', function () {
                 findNear.displayNearest(locationPoint, map, view, 1);
             });
-            (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
+            (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
                 findNear.displayNearest(locationPoint, map, view, 2);
             });
-            (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
+            (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
                 findNear.displayNearest(locationPoint, map, view, 3);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-elevator'), 'click', function () {
@@ -188,7 +185,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             (0, _on2.default)(_dom2.default.byId('nearest-vending'), 'click', function () {
                 findNear.displayNearest(locationPoint, map, view, 5);
             });
-            (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
+            (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
                 findNear.displayNearest(locationPoint, map, view, 6);
             });
         };
@@ -350,6 +347,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     (0, _on2.default)(_dom2.default.byId('btn-clear'), 'click', function () {
-        findNear.graphicsLayer.removeAll();
+        console.log(findNear.graphicsLayer);findNear.graphicsLayer.removeAll();
     });
 });
