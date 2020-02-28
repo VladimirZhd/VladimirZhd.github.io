@@ -321,3 +321,17 @@ hr {
   border: none;
   outline: none;
   border-radius: 10px; }
+
+.show-lg {
+  display: none; }
+  .show-lg p {
+    margin: auto;
+    padding: 1rem;
+    font-weight: 150;
+    font-size: 1.2rem; }
+
+@media only screen and (min-width: 1024px) {
+  .nearest-div {
+    display: none; }
+  .show-lg {
+    display: block; } }
