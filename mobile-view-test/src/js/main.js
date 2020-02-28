@@ -132,6 +132,10 @@ if (screen.width >= 1024) {
             $('.near-lg').click(function() {
                 view.popup.close();
             });
+
+            $(".near-lg").on("click", function () {
+                $('.clear-nearest').css('display', 'flex');
+            });
         });
     });
 } else {
