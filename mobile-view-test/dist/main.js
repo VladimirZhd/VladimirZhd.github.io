@@ -120,26 +120,42 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
             view.popup.reposition();
 
+            floorButton.watch('cid', function () {
+                findNear.changeCurrentFloor(floorButton.get('cid'));
+                findNear.displayNearest(locationOnClick, map, view, findNear.currentSelection);
+            });
+
             (0, _on2.default)(_dom2.default.byId('near-restroom'), 'click', function () {
-                findNear.displayNearest('nearest-restroom', locationOnClick, map, view, 0);
+                findNear.displayNearest(locationOnClick, map, view, 0);
             });
             (0, _on2.default)(_dom2.default.byId('near-printer'), 'click', function () {
-                findNear.displayNearest('nearest-printer', locationOnClick, map, view, 1);
+                findNear.displayNearest(locationOnClick, map, view, 1);
             });
             (0, _on2.default)(_dom2.default.byId('near-fountain'), 'click', function () {
+<<<<<<< HEAD
                 findNear.displayNearest('nearest-fountain', locationOnClick, map, view, 2);
             });
             (0, _on2.default)(_dom2.default.byId('near-aed'), 'click', function () {
                 findNear.displayNearest('nearest-aed', locationOnClick, map, view, 3);
+=======
+                findNear.displayNearest(locationOnClick, map, view, 2);
+            });
+            (0, _on2.default)(_dom2.default.byId('near-aed'), 'click', function () {
+                findNear.displayNearest(locationOnClick, map, view, 3);
+>>>>>>> Sergei_Branch
             });
             (0, _on2.default)(_dom2.default.byId('near-elevator'), 'click', function () {
-                findNear.displayNearest('nearest-elevator', locationOnClick, map, view, 4);
+                findNear.displayNearest(locationOnClick, map, view, 4);
             });
             (0, _on2.default)(_dom2.default.byId('near-vending'), 'click', function () {
-                findNear.displayNearest('nearest-vending', locationOnClick, map, view, 5);
+                findNear.displayNearest(locationOnClick, map, view, 5);
             });
             (0, _on2.default)(_dom2.default.byId('near-fire'), 'click', function () {
+<<<<<<< HEAD
                 findNear.displayNearest('nearest-fire', locationOnClick, map, view, 6);
+=======
+                findNear.displayNearest(locationOnClick, map, view, 6);
+>>>>>>> Sergei_Branch
             });
 
             $(document).ready(function () {
@@ -156,26 +172,44 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
                 longitude: coords.longitude
             });
 
+            floorButton.watch('cid', function () {
+                findNear.changeCurrentFloor(floorButton.get('cid'));
+                findNear.displayNearest(locationPoint, map, view, findNear.currentSelection);
+            });
+
             (0, _on2.default)(_dom2.default.byId('nearest-restroom'), 'click', function () {
-                findNear.displayNearest('nearest-restroom', locationPoint, map, view, 0);
+                findNear.displayNearest(locationPoint, map, view, 0);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-printer'), 'click', function () {
-                findNear.displayNearest('nearest-printer', locationPoint, map, view, 1);
+                findNear.displayNearest(locationPoint, map, view, 1);
             });
+<<<<<<< HEAD
             (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
                 findNear.displayNearest('nearest-fountain', locationPoint, map, view, 2);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
                 findNear.displayNearest('nearest-aed', locationPoint, map, view, 3);
-            });
-            (0, _on2.default)(_dom2.default.byId('nearest-elevator'), 'click', function () {
-                findNear.displayNearest('nearest-elevator', locationPoint, map, view, 4);
-            });
-            (0, _on2.default)(_dom2.default.byId('nearest-vending'), 'click', function () {
-                findNear.displayNearest('nearest-vending', locationPoint, map, view, 5);
+=======
+            (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
+                findNear.displayNearest(locationPoint, map, view, 2);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
+                findNear.displayNearest(locationPoint, map, view, 3);
+>>>>>>> Sergei_Branch
+            });
+            (0, _on2.default)(_dom2.default.byId('nearest-elevator'), 'click', function () {
+                findNear.displayNearest(locationPoint, map, view, 4);
+            });
+            (0, _on2.default)(_dom2.default.byId('nearest-vending'), 'click', function () {
+                findNear.displayNearest(locationPoint, map, view, 5);
+            });
+<<<<<<< HEAD
+            (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
                 findNear.displayNearest('nearest-fire', locationPoint, map, view, 6);
+=======
+            (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
+                findNear.displayNearest(locationPoint, map, view, 6);
+>>>>>>> Sergei_Branch
             });
         };
 
