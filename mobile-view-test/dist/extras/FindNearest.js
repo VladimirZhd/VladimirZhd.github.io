@@ -1,5 +1,6 @@
 define([
     'dojo/_base/declare',
+    'dojo/dom',
     'esri/Graphic',
     'esri/geometry/geometryEngine',
     'esri/layers/FeatureLayer',
@@ -8,7 +9,7 @@ define([
     'esri/geometry/support/webMercatorUtils',
     "esri/layers/GraphicsLayer",
     'esri/geometry/Extent'
-], function (declare, Graphic, geometryEngine, FeatureLayer, Query, QueryTask, webMercatorUtils, GraphicsLayer, Extent) {
+], function (declare, dom, Graphic, geometryEngine, FeatureLayer, Query, QueryTask, webMercatorUtils, GraphicsLayer, Extent) {
     return declare(null, {
         currentFloor: '1',
         currentSelection: null,
@@ -74,6 +75,8 @@ define([
             });
             newGraphicsLayer.add(pointGraphic);
             let floor = this.currentFloor;
+            let count = 0;
+            let popup = dom.byId('popup-warning');
             switch (index) {
                 case 0:
                     result = this.incrementBuffer(locationPoint, this.restroom.parsedUrl.path);
@@ -83,7 +86,9 @@ define([
                         view.extent = evt[1];
                         console.log(view.extent);
                         evt[0].features.forEach(function (feature) {
+                            console.log(feature);
                             if (feature.attributes.FLOOR == floor) {
+                                count++;
                                 let g = new Graphic();
                                 if (feature.attributes.TYPE == 'FEMALE') {
                                     g = {
@@ -138,6 +143,10 @@ define([
                                     }
                                 }
                                 newGraphicsLayer.add(g);
+                                if (count == 0) {
+                                    popup.style.display = 'block';
+                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
+                                }
                             }
                         });
                     });
@@ -150,6 +159,7 @@ define([
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.Floor == floor) {
+                                count++;
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -163,6 +173,10 @@ define([
                                 });
                                 newGraphicsLayer.add(g);
                             }
+                            if (count == 0) {
+                                popup.style.display = 'block';
+                                setTimeout(function() {popup.style.display = 'none';}, 4000);
+                            }
                         });
                     });
                     break;
@@ -173,6 +187,7 @@ define([
                         view.center = evt[2];
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
+                            count++;
                             if (feature.attributes.FLOOR == floor) {
                                 let g = new Graphic({
                                     geometry: feature.geometry,
@@ -186,6 +201,10 @@ define([
                                     }
                                 });
                                 newGraphicsLayer.add(g);
+                                if (count == 0) {
+                                    popup.style.display = 'block';
+                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
+                                }
                             }
                         });
                     });
@@ -198,6 +217,7 @@ define([
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.FLOOR == floor) {
+                                count++;
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -210,6 +230,10 @@ define([
                                     }
                                 });
                                 newGraphicsLayer.add(g);
+                                if (count == 0) {
+                                    popup.style.display = 'block';
+                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
+                                }
                             }
                         });
                     });
@@ -222,6 +246,7 @@ define([
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.FLOOR == floor) {
+                                count++;
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -234,6 +259,10 @@ define([
                                     }
                                 });
                                 newGraphicsLayer.add(g);
+                                if (count == 0) {
+                                    popup.style.display = 'block';
+                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
+                                }
                             }
                         });
                     });
@@ -246,6 +275,7 @@ define([
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.Floor == floor) {
+                                count++;
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -258,6 +288,10 @@ define([
                                     }
                                 });
                                 newGraphicsLayer.add(g);
+                                if (count == 0) {
+                                    popup.style.display = 'block';
+                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
+                                }
                             }
                         });
                     });
