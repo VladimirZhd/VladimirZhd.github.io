@@ -83,11 +83,6 @@ floorButton.cid = "1";
 
 let device = isMobileDevice();  //calling function to identify the device
 
-floorButton.watch('cid', function () {
-    findNear.changeCurrentFloor(floorButton.get('cid'));
-    findNear.displayNearest(locationPoint, map, view, findNear.currentSelection);
-});
-
 if (screen.width >= 1024) {
     view.on('click', function (evt) {
         let locationOnClick = new Point({
@@ -119,6 +114,12 @@ if (screen.width >= 1024) {
         
         view.popup.reposition();
 
+        floorButton.watch('cid', function () {
+            findNear.changeCurrentFloor(floorButton.get('cid'));
+            findNear.displayNearest(locationOnClick, map, view, findNear.currentSelection);
+        });
+
+
         on(dom.byId('near-restroom'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 0); });
         on(dom.byId('near-printer'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 1) });
         on(dom.byId('near-fountain'), 'click', function () { findNear.displayNearest(locationOnClick, map, view, 2) });
@@ -145,6 +146,11 @@ if (screen.width >= 1024) {
         let locationPoint = new Point({
             latitude: coords.latitude,
             longitude: coords.longitude
+        });
+
+        floorButton.watch('cid', function () {
+            findNear.changeCurrentFloor(floorButton.get('cid'));
+            findNear.displayNearest(locationPoint, map, view, findNear.currentSelection);
         });
 
         on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest(locationPoint, map, view, 0) });
