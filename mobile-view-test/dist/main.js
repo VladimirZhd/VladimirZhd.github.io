@@ -346,6 +346,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     (0, _on2.default)(_dom2.default.byId('btn-clear'), 'click', function () {
-        console.log(findNear.graphicsLayer);findNear.graphicsLayer.removeAll();
+        findNear.graphicsLayer.removeAll();
     });
 });

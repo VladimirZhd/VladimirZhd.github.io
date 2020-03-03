@@ -277,5 +277,7 @@ on(dom.byId('clr-printer'), 'click', function () { fl.turnOnLayer('clr-printer',
 on(dom.byId('copy-scan'), 'click', function () { fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked) });
 on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, dom.byId('vending').checked) });
 
-on(dom.byId('btn-clear'), 'click', function () {console.log(findNear.graphicsLayer);  findNear.graphicsLayer.removeAll() });
+on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll() });
+
+
 

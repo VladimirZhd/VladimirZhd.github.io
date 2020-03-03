@@ -77,6 +77,7 @@ define([
             let floor = this.currentFloor;
             let count = 0;
             let popup = dom.byId('popup-warning');
+            let floors = [];
             switch (index) {
                 case 0:
                     result = this.incrementBuffer(locationPoint, this.restroom.parsedUrl.path);
@@ -143,9 +144,14 @@ define([
                                     }
                                 }
                                 newGraphicsLayer.add(g);
+                                floors += feature.attributes.FLOOR + ', ';
                                 if (count == 0) {
+                                    document.getElementById('nearest-item').innerHTML = 'restrooms';
+                                    document.getElementById('found-item').innerHTML = 'restroom(s)';
                                     popup.style.display = 'block';
-                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
+                                    document.getElementById('found').style.display = 'block';
+                                    document.getElementById('found-floor').innerHTML = floors;
+                                    setTimeout(function () { popup.style.display = 'none'; }, 4000);
                                 }
                             }
                         });
@@ -173,9 +179,14 @@ define([
                                 });
                                 newGraphicsLayer.add(g);
                             }
+                            floors += feature.attributes.Floor + ', ';
                             if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'printers';
+                                document.getElementById('found-item').innerHTML = 'printer(s)';
                                 popup.style.display = 'block';
-                                setTimeout(function() {popup.style.display = 'none';}, 4000);
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
                             }
                         });
                     });
@@ -187,8 +198,9 @@ define([
                         view.center = evt[2];
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
-                            count++;
                             if (feature.attributes.FLOOR == floor) {
+                                count++;
+                                console.log(count);
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -201,10 +213,15 @@ define([
                                     }
                                 });
                                 newGraphicsLayer.add(g);
-                                if (count == 0) {
-                                    popup.style.display = 'block';
-                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
-                                }
+                            }
+                            floors += feature.attributes.FLOOR + ', ';
+                            if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'drinking fountains';
+                                document.getElementById('found-item').innerHTML = 'drinking fountain(s)';
+                                popup.style.display = 'block';
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
                             }
                         });
                     });
@@ -230,10 +247,15 @@ define([
                                     }
                                 });
                                 newGraphicsLayer.add(g);
-                                if (count == 0) {
-                                    popup.style.display = 'block';
-                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
-                                }
+                            }
+                            floors += feature.attributes.FLOOR + ', ';
+                            if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'AEDs';
+                                document.getElementById('found-item').innerHTML = 'AED(s)';
+                                popup.style.display = 'block';
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
                             }
                         });
                     });
@@ -259,10 +281,15 @@ define([
                                     }
                                 });
                                 newGraphicsLayer.add(g);
-                                if (count == 0) {
-                                    popup.style.display = 'block';
-                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
-                                }
+                            }
+                            floors += feature.attributes.FLOOR + ', ';
+                            if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'elevators';
+                                document.getElementById('found-item').innerHTML = 'elevator(s)';
+                                popup.style.display = 'block';
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
                             }
                         });
                     });
@@ -288,35 +315,40 @@ define([
                                     }
                                 });
                                 newGraphicsLayer.add(g);
-                                if (count == 0) {
-                                    popup.style.display = 'block';
-                                    setTimeout(function() {popup.style.display = 'none';}, 4000);
-                                }
+                            }
+                            floors += feature.attributes.Floor + ', ';
+                            if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'vending machines';
+                                document.getElementById('found-item').innerHTML = 'vending machine(s)';
+                                popup.style.display = 'block';
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
                             }
                         });
                     });
                     break;
                 case 6:
-                        result = this.incrementBuffer(locationPoint, this.fire.parsedUrl.path);
-                        this.graphicsLayer.removeAll();
-                        result.then(function (evt) {
-                            view.center = evt[2];
-                            view.extent = evt[1];
-                            evt[0].features.forEach(function (feature) {
-                                let g = new Graphic({
-                                    geometry: feature.geometry,
-                                    attributes: feature.attributes,
-                                    symbol: {
-                                        type: 'picture-marker',
-                                        url: 'https://tomlinson.byui.edu/portal/sharing/rest/content/items/3c9d050e2d9a4dd5930ca54e558b24e9/data',
-                                        width: '64px',
-                                        height: '64px',
-                                        yoffset: '32px'
-                                    }
-                                });
-                                newGraphicsLayer.add(g);
+                    result = this.incrementBuffer(locationPoint, this.fire.parsedUrl.path);
+                    this.graphicsLayer.removeAll();
+                    result.then(function (evt) {
+                        view.center = evt[2];
+                        view.extent = evt[1];
+                        evt[0].features.forEach(function (feature) {
+                            let g = new Graphic({
+                                geometry: feature.geometry,
+                                attributes: feature.attributes,
+                                symbol: {
+                                    type: 'picture-marker',
+                                    url: 'https://tomlinson.byui.edu/portal/sharing/rest/content/items/3c9d050e2d9a4dd5930ca54e558b24e9/data',
+                                    width: '64px',
+                                    height: '64px',
+                                    yoffset: '32px'
+                                }
                             });
+                            newGraphicsLayer.add(g);
                         });
+                    });
                     break;
                 default:
             }
