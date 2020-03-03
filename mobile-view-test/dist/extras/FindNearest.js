@@ -51,7 +51,16 @@ define([
             this.currentFloor = floorId;
         },
 
-        displayNearest: function (layer, locationPoint, map, view, index) {
+        displayPopUp(floors) {
+            document.getElementById('nearest-item').innerHTML = 'printers';
+            document.getElementById('found-item').innerHTML = 'printer(s)';
+            popup.style.display = 'block';
+            document.getElementById('found').style.display = 'block';
+            document.getElementById('found-floor').innerHTML = floors;
+            setTimeout(function () { popup.style.display = 'none'; }, 4000);
+        },
+
+        displayNearest: async function (layer, locationPoint, map, view, index) {
             this.currentSelection = index;
             //let newGraphicsLayer = new GraphicsLayer();
             let result;
@@ -74,7 +83,6 @@ define([
                 symbol: pointMarker
             });
             this.graphicsLayer.removeAll();
-            console.log(this.graphicsLayer);
             layer.add(pointGraphic);
             let floor = this.currentFloor;
             let count = 0;
@@ -87,7 +95,6 @@ define([
                         view.center = evt[2];
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
-                            console.log(feature);
                             if (feature.attributes.FLOOR == floor) {
                                 count++;
                                 let g = new Graphic();
@@ -147,6 +154,11 @@ define([
                             }
                         });
                     });
+                    if (await result) {
+                        if (count == 0) {
+                            displayPopUp(floors);
+                        }
+                    }
                     break;
                 case 1:
                     result = this.incrementBuffer(locationPoint, this.printer.parsedUrl.path);
@@ -168,19 +180,17 @@ define([
                                         yoffset: '32px'
                                     }
                                 });
-                                newGraphicsLayer.add(g);
+                                layer.add(g);
                             }
+                            console.log(count);
                             floors += feature.attributes.Floor + ', ';
-                            if (count == 0) {
-                                document.getElementById('nearest-item').innerHTML = 'printers';
-                                document.getElementById('found-item').innerHTML = 'printer(s)';
-                                popup.style.display = 'block';
-                                document.getElementById('found').style.display = 'block';
-                                document.getElementById('found-floor').innerHTML = floors;
-                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
-                            }
                         });
                     });
+                    if (await result) {
+                        if (count == 0) {
+                            displayPopUp(floors);
+                        }
+                    }
                     break;
                 case 2:
                     result = this.incrementBuffer(locationPoint, this.fountain.parsedUrl.path);
@@ -191,7 +201,6 @@ define([
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.FLOOR == floor) {
                                 count++;
-                                console.log(count);
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -203,19 +212,16 @@ define([
                                         yoffset: '32px'
                                     }
                                 });
-                                newGraphicsLayer.add(g);
+                                layer.add(g);
                             }
                             floors += feature.attributes.FLOOR + ', ';
-                            if (count == 0) {
-                                document.getElementById('nearest-item').innerHTML = 'drinking fountains';
-                                document.getElementById('found-item').innerHTML = 'drinking fountain(s)';
-                                popup.style.display = 'block';
-                                document.getElementById('found').style.display = 'block';
-                                document.getElementById('found-floor').innerHTML = floors;
-                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
-                            }
                         });
                     });
+                    if (await result) {
+                        if (count == 0) {
+                            displayPopUp(floors);
+                        }
+                    }
                     break;
                 case 3:
                     result = this.incrementBuffer(locationPoint, this.aed.parsedUrl.path);
@@ -237,19 +243,16 @@ define([
                                         yoffset: '32px'
                                     }
                                 });
-                                newGraphicsLayer.add(g);
+                                layer.add(g);
                             }
                             floors += feature.attributes.FLOOR + ', ';
-                            if (count == 0) {
-                                document.getElementById('nearest-item').innerHTML = 'AEDs';
-                                document.getElementById('found-item').innerHTML = 'AED(s)';
-                                popup.style.display = 'block';
-                                document.getElementById('found').style.display = 'block';
-                                document.getElementById('found-floor').innerHTML = floors;
-                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
-                            }
                         });
                     });
+                    if (await result) {
+                        if (count == 0) {
+                            displayPopUp(floors);
+                        }
+                    }
                     break;
                 case 4:
                     result = this.incrementBuffer(locationPoint, this.elevator.parsedUrl.path);
@@ -271,19 +274,21 @@ define([
                                         yoffset: '32px'
                                     }
                                 });
-                                newGraphicsLayer.add(g);
+                                layer.add(g);
                             }
                             floors += feature.attributes.FLOOR + ', ';
-                            if (count == 0) {
-                                document.getElementById('nearest-item').innerHTML = 'elevators';
-                                document.getElementById('found-item').innerHTML = 'elevator(s)';
-                                popup.style.display = 'block';
-                                document.getElementById('found').style.display = 'block';
-                                document.getElementById('found-floor').innerHTML = floors;
-                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
-                            }
                         });
                     });
+                    if (await result) {
+                        if (count == 0) {
+                            document.getElementById('nearest-item').innerHTML = 'printers';
+                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            popup.style.display = 'block';
+                            document.getElementById('found').style.display = 'block';
+                            document.getElementById('found-floor').innerHTML = floors;
+                            setTimeout(function () { popup.style.display = 'none'; }, 4000);
+                        }
+                    }
                     break;
                 case 5:
                     result = this.incrementBuffer(locationPoint, this.vending.parsedUrl.path);
@@ -305,19 +310,21 @@ define([
                                         yoffset: '32px'
                                     }
                                 });
-                                newGraphicsLayer.add(g);
+                                layer.add(g);
                             }
                             floors += feature.attributes.Floor + ', ';
-                            if (count == 0) {
-                                document.getElementById('nearest-item').innerHTML = 'vending machines';
-                                document.getElementById('found-item').innerHTML = 'vending machine(s)';
-                                popup.style.display = 'block';
-                                document.getElementById('found').style.display = 'block';
-                                document.getElementById('found-floor').innerHTML = floors;
-                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
-                            }
                         });
                     });
+                    if (await result) {
+                        if (count == 0) {
+                            document.getElementById('nearest-item').innerHTML = 'printers';
+                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            popup.style.display = 'block';
+                            document.getElementById('found').style.display = 'block';
+                            document.getElementById('found-floor').innerHTML = floors;
+                            setTimeout(function () { popup.style.display = 'none'; }, 4000);
+                        }
+                    }
                     break;
                 case 6:
                     result = this.incrementBuffer(locationPoint, this.fire.parsedUrl.path);
@@ -337,7 +344,7 @@ define([
                                     yoffset: '32px'
                                 }
                             });
-                            newGraphicsLayer.add(g);
+                            layer.add(g);
                         });
                     });
                     break;
