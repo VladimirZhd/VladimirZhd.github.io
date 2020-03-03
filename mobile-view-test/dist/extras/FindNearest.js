@@ -51,7 +51,7 @@ define([
             this.currentFloor = floorId;
         },
 
-        displayPopUp(floors) {
+        displayPopUp(floors, popup) {
             document.getElementById('nearest-item').innerHTML = 'printers';
             document.getElementById('found-item').innerHTML = 'printer(s)';
             popup.style.display = 'block';
@@ -156,7 +156,12 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            displayPopUp(floors);
+                            document.getElementById('nearest-item').innerHTML = 'printers';
+                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            popup.style.display = 'block';
+                            document.getElementById('found').style.display = 'block';
+                            document.getElementById('found-floor').innerHTML = floors;
+                            setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
                     }
                     break;
@@ -188,7 +193,12 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            displayPopUp(floors);
+                            document.getElementById('nearest-item').innerHTML = 'printers';
+                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            popup.style.display = 'block';
+                            document.getElementById('found').style.display = 'block';
+                            document.getElementById('found-floor').innerHTML = floors;
+                            setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
                     }
                     break;
@@ -219,7 +229,12 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            displayPopUp(floors);
+                            document.getElementById('nearest-item').innerHTML = 'printers';
+                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            popup.style.display = 'block';
+                            document.getElementById('found').style.display = 'block';
+                            document.getElementById('found-floor').innerHTML = floors;
+                            setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
                     }
                     break;
@@ -250,7 +265,12 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            displayPopUp(floors);
+                            document.getElementById('nearest-item').innerHTML = 'printers';
+                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            popup.style.display = 'block';
+                            document.getElementById('found').style.display = 'block';
+                            document.getElementById('found-floor').innerHTML = floors;
+                            setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
                     }
                     break;
@@ -281,7 +301,12 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            displayPopUp(floors);
+                            document.getElementById('nearest-item').innerHTML = 'printers';
+                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            popup.style.display = 'block';
+                            document.getElementById('found').style.display = 'block';
+                            document.getElementById('found-floor').innerHTML = floors;
+                            setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
                     }
                     break;
@@ -312,7 +337,12 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            displayPopUp(floors);
+                            document.getElementById('nearest-item').innerHTML = 'printers';
+                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            popup.style.display = 'block';
+                            document.getElementById('found').style.display = 'block';
+                            document.getElementById('found-floor').innerHTML = floors;
+                            setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
                     }
                     break;
