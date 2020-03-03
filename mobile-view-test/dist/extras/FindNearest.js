@@ -50,9 +50,9 @@ define([
             this.currentFloor = floorId;
         },
 
-        displayNearest: function (locationPoint, map, view, index) {
+        displayNearest: function (layer, locationPoint, map, view, index) {
             this.currentSelection = index;
-            let newGraphicsLayer = new GraphicsLayer();
+            //let newGraphicsLayer = new GraphicsLayer();
             let result;
             let point = {
                 type: 'point',
@@ -72,16 +72,16 @@ define([
                 geometry: point,
                 symbol: pointMarker
             });
-            newGraphicsLayer.add(pointGraphic);
+            this.graphicsLayer.removeAll();
+            console.log(this.graphicsLayer);
+            layer.add(pointGraphic);
             let floor = this.currentFloor;
             switch (index) {
                 case 0:
                     result = this.incrementBuffer(locationPoint, this.restroom.parsedUrl.path);
-                    this.graphicsLayer.removeAll();
                     result.then(function (evt) {
                         view.center = evt[2];
                         view.extent = evt[1];
-                        console.log(view.extent);
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.FLOOR == floor) {
                                 let g = new Graphic();
@@ -137,7 +137,7 @@ define([
                                         }
                                     }
                                 }
-                                newGraphicsLayer.add(g);
+                                layer.add(g);
                             }
                         });
                     });
@@ -263,33 +263,32 @@ define([
                     });
                     break;
                 case 6:
-                        result = this.incrementBuffer(locationPoint, this.fire.parsedUrl.path);
-                        this.graphicsLayer.removeAll();
-                        result.then(function (evt) {
-                            view.center = evt[2];
-                            view.extent = evt[1];
-                            evt[0].features.forEach(function (feature) {
-                                let g = new Graphic({
-                                    geometry: feature.geometry,
-                                    attributes: feature.attributes,
-                                    symbol: {
-                                        type: 'picture-marker',
-                                        url: 'https://tomlinson.byui.edu/portal/sharing/rest/content/items/3c9d050e2d9a4dd5930ca54e558b24e9/data',
-                                        width: '64px',
-                                        height: '64px',
-                                        yoffset: '32px'
-                                    }
-                                });
-                                newGraphicsLayer.add(g);
+                    result = this.incrementBuffer(locationPoint, this.fire.parsedUrl.path);
+                    this.graphicsLayer.removeAll();
+                    result.then(function (evt) {
+                        view.center = evt[2];
+                        view.extent = evt[1];
+                        evt[0].features.forEach(function (feature) {
+                            let g = new Graphic({
+                                geometry: feature.geometry,
+                                attributes: feature.attributes,
+                                symbol: {
+                                    type: 'picture-marker',
+                                    url: 'https://tomlinson.byui.edu/portal/sharing/rest/content/items/3c9d050e2d9a4dd5930ca54e558b24e9/data',
+                                    width: '64px',
+                                    height: '64px',
+                                    yoffset: '32px'
+                                }
                             });
+                            newGraphicsLayer.add(g);
                         });
+                    });
                     break;
                 default:
             }
-
-            map.remove(map.findLayerById(this.graphicsLayer.uid));
-            this.graphicsLayer = newGraphicsLayer;
-            map.add(this.graphicsLayer);
+            map.remove(map.findLayerById(layer.uid));
+            //this.graphicsLayer = newGraphicsLayer;
+            map.add(layer);
         },
 
         incrementBuffer: async function (locationPoint, featureLayer) {

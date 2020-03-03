@@ -118,30 +118,31 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             view.popup.reposition();
 
             floorButton.watch('cid', function () {
+                console.log("I'm here");
                 findNear.changeCurrentFloor(floorButton.get('cid'));
-                findNear.displayNearest(locationOnClick, map, view, findNear.currentSelection);
+                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
             });
 
             (0, _on2.default)(_dom2.default.byId('near-restroom'), 'click', function () {
-                findNear.displayNearest(locationOnClick, map, view, 0);
+                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 0);
             });
             (0, _on2.default)(_dom2.default.byId('near-printer'), 'click', function () {
-                findNear.displayNearest(locationOnClick, map, view, 1);
+                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 1);
             });
             (0, _on2.default)(_dom2.default.byId('near-fountain'), 'click', function () {
-                findNear.displayNearest(locationOnClick, map, view, 2);
+                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 2);
             });
             (0, _on2.default)(_dom2.default.byId('near-aed'), 'click', function () {
-                findNear.displayNearest(locationOnClick, map, view, 3);
+                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 3);
             });
             (0, _on2.default)(_dom2.default.byId('near-elevator'), 'click', function () {
-                findNear.displayNearest(locationOnClick, map, view, 4);
+                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 4);
             });
             (0, _on2.default)(_dom2.default.byId('near-vending'), 'click', function () {
-                findNear.displayNearest(locationOnClick, map, view, 5);
+                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 5);
             });
             (0, _on2.default)(_dom2.default.byId('near-fire'), 'click', function () {
-                findNear.displayNearest(locationOnClick, map, view, 6);
+                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 6);
             });
 
             $(document).ready(function () {
@@ -164,29 +165,29 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
             floorButton.watch('cid', function () {
                 findNear.changeCurrentFloor(floorButton.get('cid'));
-                findNear.displayNearest(locationPoint, map, view, findNear.currentSelection);
+                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, findNear.currentSelection);
             });
 
             (0, _on2.default)(_dom2.default.byId('nearest-restroom'), 'click', function () {
-                findNear.displayNearest(locationPoint, map, view, 0);
+                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, 0);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-printer'), 'click', function () {
-                findNear.displayNearest(locationPoint, map, view, 1);
+                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, 1);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-fountain'), 'click', function () {
-                findNear.displayNearest(locationPoint, map, view, 2);
+                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, 2);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-aed'), 'click', function () {
-                findNear.displayNearest(locationPoint, map, view, 3);
+                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, 3);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-elevator'), 'click', function () {
-                findNear.displayNearest(locationPoint, map, view, 4);
+                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, 4);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-vending'), 'click', function () {
-                findNear.displayNearest(locationPoint, map, view, 5);
+                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, 5);
             });
             (0, _on2.default)(_dom2.default.byId('nearest-fire'), 'click', function () {
-                findNear.displayNearest(locationPoint, map, view, 6);
+                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, 6);
             });
         };
 
@@ -347,6 +348,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     (0, _on2.default)(_dom2.default.byId('btn-clear'), 'click', function () {
-        console.log(findNear.graphicsLayer);findNear.graphicsLayer.removeAll();
+        findNear.graphicsLayer.removeAll();
     });
 });
