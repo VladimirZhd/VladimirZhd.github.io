@@ -63,7 +63,6 @@ let construction = new MapImageLayer({
         }
     ]
 });
-console.log(construction);
 map.add(construction);
 
 /* Create the locator widget with scaling on locating*/

@@ -1,5 +1,6 @@
 define([
     'dojo/_base/declare',
+    'dojo/dom',
     'esri/Graphic',
     'esri/geometry/geometryEngine',
     'esri/layers/FeatureLayer',
@@ -8,7 +9,7 @@ define([
     'esri/geometry/support/webMercatorUtils',
     "esri/layers/GraphicsLayer",
     'esri/geometry/Extent'
-], function (declare, Graphic, geometryEngine, FeatureLayer, Query, QueryTask, webMercatorUtils, GraphicsLayer, Extent) {
+], function (declare, dom, Graphic, geometryEngine, FeatureLayer, Query, QueryTask, webMercatorUtils, GraphicsLayer, Extent) {
     return declare(null, {
         currentFloor: '1',
         currentSelection: null,
@@ -76,6 +77,9 @@ define([
             console.log(this.graphicsLayer);
             layer.add(pointGraphic);
             let floor = this.currentFloor;
+            let count = 0;
+            let popup = dom.byId('popup-warning');
+            let floors = [];
             switch (index) {
                 case 0:
                     result = this.incrementBuffer(locationPoint, this.restroom.parsedUrl.path);
@@ -83,7 +87,9 @@ define([
                         view.center = evt[2];
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
+                            console.log(feature);
                             if (feature.attributes.FLOOR == floor) {
+                                count++;
                                 let g = new Graphic();
                                 if (feature.attributes.TYPE == 'FEMALE') {
                                     g = {
@@ -150,6 +156,7 @@ define([
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.Floor == floor) {
+                                count++;
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -163,6 +170,15 @@ define([
                                 });
                                 newGraphicsLayer.add(g);
                             }
+                            floors += feature.attributes.Floor + ', ';
+                            if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'printers';
+                                document.getElementById('found-item').innerHTML = 'printer(s)';
+                                popup.style.display = 'block';
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
+                            }
                         });
                     });
                     break;
@@ -174,6 +190,8 @@ define([
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.FLOOR == floor) {
+                                count++;
+                                console.log(count);
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -187,6 +205,15 @@ define([
                                 });
                                 newGraphicsLayer.add(g);
                             }
+                            floors += feature.attributes.FLOOR + ', ';
+                            if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'drinking fountains';
+                                document.getElementById('found-item').innerHTML = 'drinking fountain(s)';
+                                popup.style.display = 'block';
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
+                            }
                         });
                     });
                     break;
@@ -198,6 +225,7 @@ define([
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.FLOOR == floor) {
+                                count++;
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -211,6 +239,15 @@ define([
                                 });
                                 newGraphicsLayer.add(g);
                             }
+                            floors += feature.attributes.FLOOR + ', ';
+                            if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'AEDs';
+                                document.getElementById('found-item').innerHTML = 'AED(s)';
+                                popup.style.display = 'block';
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
+                            }
                         });
                     });
                     break;
@@ -222,6 +259,7 @@ define([
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.FLOOR == floor) {
+                                count++;
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -235,6 +273,15 @@ define([
                                 });
                                 newGraphicsLayer.add(g);
                             }
+                            floors += feature.attributes.FLOOR + ', ';
+                            if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'elevators';
+                                document.getElementById('found-item').innerHTML = 'elevator(s)';
+                                popup.style.display = 'block';
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
+                            }
                         });
                     });
                     break;
@@ -246,6 +293,7 @@ define([
                         view.extent = evt[1];
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.Floor == floor) {
+                                count++;
                                 let g = new Graphic({
                                     geometry: feature.geometry,
                                     attributes: feature.attributes,
@@ -258,6 +306,15 @@ define([
                                     }
                                 });
                                 newGraphicsLayer.add(g);
+                            }
+                            floors += feature.attributes.Floor + ', ';
+                            if (count == 0) {
+                                document.getElementById('nearest-item').innerHTML = 'vending machines';
+                                document.getElementById('found-item').innerHTML = 'vending machine(s)';
+                                popup.style.display = 'block';
+                                document.getElementById('found').style.display = 'block';
+                                document.getElementById('found-floor').innerHTML = floors;
+                                setTimeout(function () { popup.style.display = 'none'; }, 4000);
                             }
                         });
                     });

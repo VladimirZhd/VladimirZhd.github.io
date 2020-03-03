@@ -75,7 +75,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             visible: true
         }]
     });
-    console.log(construction);
     map.add(construction);
 
     /* Create the locator widget with scaling on locating*/
