@@ -62,7 +62,6 @@ define([
 
         displayNearest: async function (layer, locationPoint, map, view, index) {
             this.currentSelection = index;
-            //let newGraphicsLayer = new GraphicsLayer();
             let result;
             let point = {
                 type: 'point',
@@ -86,6 +85,7 @@ define([
             layer.add(pointGraphic);
             let floor = this.currentFloor;
             let count = 0;
+            let set = new Set();
             let popup = dom.byId('popup-warning');
             let floors = [];
             switch (index) {
@@ -152,22 +152,22 @@ define([
                                 }
                                 layer.add(g);
                             }
+                            set.add(feature.attributes.FLOOR);
+                            floors = [...set];
                         });
                     });
                     if (await result) {
                         if (count == 0) {
-                            document.getElementById('nearest-item').innerHTML = 'printers';
-                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            document.getElementById('nearest-item').innerHTML = 'restrooms';
+                            document.getElementById('found-item').innerHTML = 'restroom(s)';
                             popup.style.display = 'block';
-                            document.getElementById('found').style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
-                            setTimeout(function () { popup.style.display = 'none'; }, 4000);
+                            setTimeout(function () { popup.style.display = 'none'; }, 5000);
                         }
                     }
                     break;
                 case 1:
                     result = this.incrementBuffer(locationPoint, this.printer.parsedUrl.path);
-                    this.graphicsLayer.removeAll();
                     result.then(function (evt) {
                         view.center = evt[2];
                         view.extent = evt[1];
@@ -187,8 +187,8 @@ define([
                                 });
                                 layer.add(g);
                             }
-                            console.log(count);
-                            floors += feature.attributes.Floor + ', ';
+                            set.add(feature.attributes.Floor);
+                            floors = [...set];
                         });
                     });
                     if (await result) {
@@ -196,7 +196,6 @@ define([
                             document.getElementById('nearest-item').innerHTML = 'printers';
                             document.getElementById('found-item').innerHTML = 'printer(s)';
                             popup.style.display = 'block';
-                            document.getElementById('found').style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
                             setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
@@ -204,7 +203,6 @@ define([
                     break;
                 case 2:
                     result = this.incrementBuffer(locationPoint, this.fountain.parsedUrl.path);
-                    this.graphicsLayer.removeAll();
                     result.then(function (evt) {
                         view.center = evt[2];
                         view.extent = evt[1];
@@ -224,7 +222,8 @@ define([
                                 });
                                 layer.add(g);
                             }
-                            floors += feature.attributes.FLOOR + ', ';
+                            set.add(feature.attributes.FLOOR);
+                            floors = [...set];
                         });
                     });
                     if (await result) {
@@ -232,7 +231,6 @@ define([
                             document.getElementById('nearest-item').innerHTML = 'printers';
                             document.getElementById('found-item').innerHTML = 'printer(s)';
                             popup.style.display = 'block';
-                            document.getElementById('found').style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
                             setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
@@ -240,7 +238,6 @@ define([
                     break;
                 case 3:
                     result = this.incrementBuffer(locationPoint, this.aed.parsedUrl.path);
-                    this.graphicsLayer.removeAll();
                     result.then(function (evt) {
                         view.center = evt[2];
                         view.extent = evt[1];
@@ -260,7 +257,8 @@ define([
                                 });
                                 layer.add(g);
                             }
-                            floors += feature.attributes.FLOOR + ', ';
+                            set.add(feature.attributes.FLOOR);
+                            floors = [...set];
                         });
                     });
                     if (await result) {
@@ -268,7 +266,6 @@ define([
                             document.getElementById('nearest-item').innerHTML = 'printers';
                             document.getElementById('found-item').innerHTML = 'printer(s)';
                             popup.style.display = 'block';
-                            document.getElementById('found').style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
                             setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
@@ -276,7 +273,6 @@ define([
                     break;
                 case 4:
                     result = this.incrementBuffer(locationPoint, this.elevator.parsedUrl.path);
-                    this.graphicsLayer.removeAll();
                     result.then(function (evt) {
                         view.center = evt[2];
                         view.extent = evt[1];
@@ -296,7 +292,8 @@ define([
                                 });
                                 layer.add(g);
                             }
-                            floors += feature.attributes.FLOOR + ', ';
+                            set.add(feature.attributes.FLOOR);
+                            floors = [...set];
                         });
                     });
                     if (await result) {
@@ -304,7 +301,6 @@ define([
                             document.getElementById('nearest-item').innerHTML = 'printers';
                             document.getElementById('found-item').innerHTML = 'printer(s)';
                             popup.style.display = 'block';
-                            document.getElementById('found').style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
                             setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
@@ -312,7 +308,6 @@ define([
                     break;
                 case 5:
                     result = this.incrementBuffer(locationPoint, this.vending.parsedUrl.path);
-                    this.graphicsLayer.removeAll();
                     result.then(function (evt) {
                         view.center = evt[2];
                         view.extent = evt[1];
@@ -332,7 +327,8 @@ define([
                                 });
                                 layer.add(g);
                             }
-                            floors += feature.attributes.Floor + ', ';
+                            set.add(feature.attributes.Floor);
+                            floors = [...set];
                         });
                     });
                     if (await result) {
@@ -340,7 +336,6 @@ define([
                             document.getElementById('nearest-item').innerHTML = 'printers';
                             document.getElementById('found-item').innerHTML = 'printer(s)';
                             popup.style.display = 'block';
-                            document.getElementById('found').style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
                             setTimeout(function () { popup.style.display = 'none'; }, 4000);
                         }
@@ -348,7 +343,6 @@ define([
                     break;
                 case 6:
                     result = this.incrementBuffer(locationPoint, this.fire.parsedUrl.path);
-                    this.graphicsLayer.removeAll();
                     result.then(function (evt) {
                         view.center = evt[2];
                         view.extent = evt[1];
@@ -371,7 +365,6 @@ define([
                 default:
             }
             map.remove(map.findLayerById(layer.uid));
-            //this.graphicsLayer = newGraphicsLayer;
             map.add(layer);
         },
 

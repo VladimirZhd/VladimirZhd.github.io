@@ -111,7 +111,6 @@ if (screen.width >= 1024) {
         view.popup.reposition();
 
         floorButton.watch('cid', function () {
-            console.log("I'm here");
             findNear.changeCurrentFloor(floorButton.get('cid'));
             findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
         });
