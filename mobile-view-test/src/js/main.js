@@ -111,7 +111,8 @@ if (screen.width >= 1024) {
         view.popup.reposition();
 
         floorButton.watch('cid', function () {
-            if (findNear.currentSelection) {
+            if (findNear.currentSelection != null) {
+                console.log("Inside if");
                 findNear.changeCurrentFloor(floorButton.get('cid'));
                 findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
             }
@@ -151,7 +152,7 @@ if (screen.width >= 1024) {
         });
 
         floorButton.watch('cid', function () {
-            if (findNear.currentSelection) {
+            if (findNear.currentSelection != null) {
                 findNear.changeCurrentFloor(floorButton.get('cid'));
                 findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, findNear.currentSelection);
             }
