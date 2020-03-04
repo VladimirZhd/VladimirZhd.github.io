@@ -117,9 +117,10 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             view.popup.reposition();
 
             floorButton.watch('cid', function () {
-                console.log("I'm here");
-                findNear.changeCurrentFloor(floorButton.get('cid'));
-                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
+                if (findNear.currentSelection) {
+                    findNear.changeCurrentFloor(floorButton.get('cid'));
+                    findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
+                }
             });
 
             (0, _on2.default)(_dom2.default.byId('near-restroom'), 'click', function () {
@@ -163,8 +164,10 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             });
 
             floorButton.watch('cid', function () {
-                findNear.changeCurrentFloor(floorButton.get('cid'));
-                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, findNear.currentSelection);
+                if (findNear.currentSelection) {
+                    findNear.changeCurrentFloor(floorButton.get('cid'));
+                    findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, findNear.currentSelection);
+                }
             });
 
             (0, _on2.default)(_dom2.default.byId('nearest-restroom'), 'click', function () {
@@ -347,6 +350,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     (0, _on2.default)(_dom2.default.byId('btn-clear'), 'click', function () {
-        findNear.graphicsLayer.removeAll();
+        findNear.graphicsLayer.removeAll();findNear.currentSelection = null;
     });
 });

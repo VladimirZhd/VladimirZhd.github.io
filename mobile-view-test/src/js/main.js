@@ -86,34 +86,35 @@ if (screen.width >= 1024) {
             longitude: evt.mapPoint.longitude
         })
 
-        let content = '<a href="#" id="near-printer" class="near-lg">Printer</a>' + 
-        '<a href="#" id="near-restroom" class="near-lg">Restroom</a>' +
-        '<a href="#" id="near-fountain" class="near-lg">Drinking Fountain</a>' +
-        '<a href="#" id="near-elevator" class="near-lg">Elevator</a>' +
-        '<a href="#" id="near-vending" class="near-lg">Vending Machine</a>' +
-        '<a href="#" id="near-aed" class="near-lg">AED</a>' +
-        '<a href="#" id="near-fire" class="near-lg">Fire Extinguisher</a>';
-        
+        let content = '<a href="#" id="near-printer" class="near-lg">Printer</a>' +
+            '<a href="#" id="near-restroom" class="near-lg">Restroom</a>' +
+            '<a href="#" id="near-fountain" class="near-lg">Drinking Fountain</a>' +
+            '<a href="#" id="near-elevator" class="near-lg">Elevator</a>' +
+            '<a href="#" id="near-vending" class="near-lg">Vending Machine</a>' +
+            '<a href="#" id="near-aed" class="near-lg">AED</a>' +
+            '<a href="#" id="near-fire" class="near-lg">Fire Extinguisher</a>';
+
         let template = {
-            content: function() {
+            content: function () {
                 let div = document.createElement('div');
                 div.className = 'buttons-container';
                 div.innerHTML = content;
                 return div;
             }
         }
-        
+
         view.popup.visible = true;
         view.popup.location = locationOnClick;
         view.popup.title = "Find Nearest";
         view.popup.content = template.content();
-        
+
         view.popup.reposition();
 
         floorButton.watch('cid', function () {
-            console.log("I'm here");
-            findNear.changeCurrentFloor(floorButton.get('cid'));
-            findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
+            if (findNear.currentSelection) {
+                findNear.changeCurrentFloor(floorButton.get('cid'));
+                findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
+            }
         });
 
 
@@ -125,8 +126,8 @@ if (screen.width >= 1024) {
         on(dom.byId('near-vending'), 'click', function () { findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 5) });
         on(dom.byId('near-fire'), 'click', function () { findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 6) });
 
-        $(document).ready(function() {
-            $('.near-lg').click(function() {
+        $(document).ready(function () {
+            $('.near-lg').click(function () {
                 view.popup.close();
             });
 
@@ -150,8 +151,10 @@ if (screen.width >= 1024) {
         });
 
         floorButton.watch('cid', function () {
-            findNear.changeCurrentFloor(floorButton.get('cid'));
-            findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, findNear.currentSelection);
+            if (findNear.currentSelection) {
+                findNear.changeCurrentFloor(floorButton.get('cid'));
+                findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, findNear.currentSelection);
+            }
         });
 
         on(dom.byId('nearest-restroom'), 'click', function () { findNear.displayNearest(findNear.graphicsLayer, locationPoint, map, view, 0) });
@@ -278,5 +281,5 @@ on(dom.byId('clr-printer'), 'click', function () { fl.turnOnLayer('clr-printer',
 on(dom.byId('copy-scan'), 'click', function () { fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked) });
 on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, dom.byId('vending').checked) });
 
-on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll() });
+on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.currentSelection = null; });
 
