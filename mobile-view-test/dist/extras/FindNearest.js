@@ -62,6 +62,7 @@ define([
 
         displayNearest: async function (layer, locationPoint, map, view, index) {
             this.currentSelection = index;
+            layer.removeAll();
             let result;
             let point = {
                 type: 'point',
@@ -81,7 +82,6 @@ define([
                 geometry: point,
                 symbol: pointMarker
             });
-            this.graphicsLayer.removeAll();
             layer.add(pointGraphic);
             let floor = this.currentFloor;
             let count = 0;
