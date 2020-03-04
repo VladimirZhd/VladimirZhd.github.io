@@ -117,7 +117,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
             view.popup.reposition();
 
             floorButton.watch('cid', function () {
-                console.log("I'm here");
                 findNear.changeCurrentFloor(floorButton.get('cid'));
                 findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
             });
