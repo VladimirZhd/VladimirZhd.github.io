@@ -52,13 +52,59 @@ $(document).ready(function () {
         $('popup-warning').css('display', 'none');
     });
 
+    var $dragging = null;
+
+    $(document.body).on("mousemove", function(e) {
+        console.log(e.clientY);
+        if ($dragging) {
+            $dragging.offset({
+                top: e.clientY
+            });
+        }
+    });
+
+
+    $('#near-mobile').on("mousedown", function (e) {
+        $dragging = $(e.target);
+        console.log(e);
+        let positionY = e.clientY;
+        
+    });
+
+    $(document.body).on("mouseup", function (e) {
+        $dragging = null;
+        // let menu = document.getElementById('near-mobile');
+        // menu.style.transform = 'translateY(0px)';
+    });
+
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
 
+// const eventContract = new jsaction.EventContract();
 
+// eventContract.addContainer(document.getElementById('near-mobile'));
 
+// eventContract.addEvent('pointerleave');
+// console.log(eventContract);
 
+// const dispatcher = new new jsaction.Dispatcher();
+// eventContract.dispatchTo(dispatcher.dispatch.bind(dispatcher));
+
+// const hideMenu = function(flow) {
+//     let menu = document.getElementById('near-mobile');
+//     menu.style.transition = 'none 0s ease 0s';
+//     menu.style.willChange = 'transform';
+//     menu.style.transform = 'matrix(1, 0, 0, 1, 0, -410) translateY(0px)';
+// }
+
+// dispatcher.registerHandlers(
+//     'start',
+//     null,
+//     {
+//         'drag': hideMenu
+//     }
+// );
 

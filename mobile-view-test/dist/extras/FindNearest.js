@@ -152,7 +152,7 @@ define([
                                 }
                                 layer.add(g);
                             }
-                            set.add(feature.attributes.FLOOR);
+                            set.add(" " + feature.attributes.FLOOR);
                             floors = [...set];
                         });
                     });
@@ -187,7 +187,7 @@ define([
                                 });
                                 layer.add(g);
                             }
-                            set.add(feature.attributes.Floor);
+                            set.add(' ' + feature.attributes.Floor);
                             floors = [...set];
                         });
                     });
@@ -228,8 +228,8 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            document.getElementById('nearest-item').innerHTML = 'printers';
-                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            document.getElementById('nearest-item').innerHTML = 'drinking fountains';
+                            document.getElementById('found-item').innerHTML = 'drinking fontain(s)';
                             popup.style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
                             setTimeout(function () { popup.style.display = 'none'; }, 4000);
@@ -263,8 +263,8 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            document.getElementById('nearest-item').innerHTML = 'printers';
-                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            document.getElementById('nearest-item').innerHTML = "AED's";
+                            document.getElementById('found-item').innerHTML = 'AED(s)';
                             popup.style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
                             setTimeout(function () { popup.style.display = 'none'; }, 4000);
@@ -298,8 +298,8 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            document.getElementById('nearest-item').innerHTML = 'printers';
-                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            document.getElementById('nearest-item').innerHTML = 'elevators';
+                            document.getElementById('found-item').innerHTML = 'elevator(s)';
                             popup.style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
                             setTimeout(function () { popup.style.display = 'none'; }, 4000);
@@ -333,8 +333,8 @@ define([
                     });
                     if (await result) {
                         if (count == 0) {
-                            document.getElementById('nearest-item').innerHTML = 'printers';
-                            document.getElementById('found-item').innerHTML = 'printer(s)';
+                            document.getElementById('nearest-item').innerHTML = 'vendings';
+                            document.getElementById('found-item').innerHTML = 'vending(s)';
                             popup.style.display = 'block';
                             document.getElementById('found-floor').innerHTML = floors;
                             setTimeout(function () { popup.style.display = 'none'; }, 4000);
@@ -393,6 +393,6 @@ define([
             });
             let center = [layerBufferWebMercator.extent.center.longitude, layerBufferWebMercator.extent.center.latitude]
             return [tempR, ext, center];
-        },
+        }
     })
 })

@@ -19,6 +19,7 @@ import MapImageLayer from 'esri/layers/MapImageLayer';
 
 import dom from "dojo/dom";
 import on from "dojo/on";
+import touch from 'dojo/touch';
 
 import LayerFunctions from "./extras/LayerFunctions";
 import Buttons from "./extras/FloorButtons";
@@ -283,3 +284,7 @@ on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, do
 
 on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.currentSelection = null; });
 
+
+on(dom.byId('near-mobile'), 'drag', function(e) {
+    console.log(e);
+})
