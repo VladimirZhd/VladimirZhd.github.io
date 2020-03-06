@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/css/main.css">
     <link rel="stylesheet" href="src/css/style.css">
+    <script src="https://kit.fontawesome.com/b228c3546b.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/jsaction/contract.js"></script>
     <script>
         let locationPath = location.pathname.replace(/\/[^\/]+$/, "");
         window.dojoConfig = {
@@ -112,12 +114,25 @@
             <a href="#" id="nearest-fire" class="near ">Fire Extinguisher</a>
         </div>
     </div>
+    <div id="near-mobile" class="nearest-mobile">
+        <div class="menu-top">
+            <i class="fas fa-minus"></i> <br>
+            <h2>Find Nearest</h2>
+        </div>
+        <div class="nearest-icons">
+            <ul class='icons-container'>
+                <li id='nearest-printer'><img src="./src/img/circleIcons/bwPrinterCircle.png" alt=""></i></li>
+                <li id='nearest-restroom'><img src="./src/img/circleIcons/familyRestroomCircle.png" alt=""></li>
+                <li id='nearest-elevator'><img src="./src/img/circleIcons/elevatorCircle.png" alt=""></li>
+            </ul>
+        </div>
+    </div>
     <div class="nearest-div show-lg">
         <div class="menu-byui-logo">
             <h2 class="menu-map">Find Nearest</h2>
         </div>
         <button class="button button-close" type="button"><b>X</b></button>
-        <p>Please right click on the map to find nearest features arount selected area.</p>
+        <p>Please right click on the map to find nearest features arount choosen area.</p>
     </div>
     <div class="clear-nearest">
         <button class="btn btn-clear" id="btn-clear">
@@ -127,11 +142,12 @@
     <div class="popup-warning" id="popup-warning">
         <div class="helper">
             <p>No <span id="nearest-item">items</span> were found on selected floor.<br>
-                Please select different floor.</p>
-                <p id="found">There <span id="found-item">items</span> on <span id="found-floor"></span> floor(s).</p>
+                Please select different floor.</p><br>
+            <p>There are <span id="found-item">items</span> on <span id="found-floor"></span> floor(s).</p>
         </div>
     </div>
     <div id="viewDiv"></div>
+    <script src="https://www.gstatic.com/jsaction/dispatcher.js" async></script>
     <script src="dist/extras/functions.js"></script>
     <script>require(["app/main"]);</script>
 </body>

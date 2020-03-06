@@ -58,7 +58,8 @@ label:active:after {
   box-sizing: border-box; }
 
 html {
-  overscroll-behavior-y: none; }
+  overscroll-behavior-y: none;
+  overflow: hidden; }
 
 html,
 body,
@@ -370,3 +371,33 @@ hr {
   .popup-warning .helper {
     margin: auto;
     margin-top: 15%; } }
+
+.nearest-mobile {
+  z-index: 1;
+  background-color: #f8f9fa;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3);
+  margin-top: 268px;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  bottom: -400px;
+  touch-action: none;
+  width: 100%;
+  height: 545px;
+  transition: transform 0.3s;
+  transform: translateY(0%) translateY(350px); }
+
+.menu-top {
+  width: 100%;
+  text-align: center; }
+
+.icons-container {
+  margin: 0;
+  padding: .1rem 0;
+  display: flex;
+  list-style: none;
+  justify-content: space-around; }
+  .icons-container li img {
+    width: 60%;
+    margin-left: 1.5rem; }
