@@ -355,7 +355,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         findNear.graphicsLayer.removeAll();findNear.currentSelection = null;
     });
 
-    (0, _on2.default)(_dom2.default.byId('near-mobile'), 'drag', function (e) {
-        console.log(e);
-    });
+    // on(dom.byId('near-mobile'), 'drag', function(e) {
+    //     console.log(e);
+    // })
 });

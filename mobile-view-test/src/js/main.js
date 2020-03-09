@@ -285,6 +285,6 @@ on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, do
 on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.currentSelection = null; });
 
 
-on(dom.byId('near-mobile'), 'drag', function(e) {
-    console.log(e);
-})
+// on(dom.byId('near-mobile'), 'drag', function(e) {
+//     console.log(e);
+// })

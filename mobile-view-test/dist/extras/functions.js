@@ -52,30 +52,30 @@ $(document).ready(function () {
         $('popup-warning').css('display', 'none');
     });
 
-    var $dragging = null;
+    // var $dragging = null;
 
-    $(document.body).on("mousemove", function(e) {
-        console.log(e.clientY);
-        if ($dragging) {
-            $dragging.offset({
-                top: e.clientY
-            });
-        }
-    });
+    // $(document.body).on("mousemove", function(e) {
+    //     console.log(e.clientY);
+    //     if ($dragging) {
+    //         $dragging.offset({
+    //             top: e.clientY
+    //         });
+    //     }
+    // });
 
 
-    $('#near-mobile').on("mousedown", function (e) {
-        $dragging = $(e.target);
-        console.log(e);
-        let positionY = e.clientY;
+    // $('#near-mobile').on("mousedown", function (e) {
+    //     $dragging = $(e.target);
+    //     console.log(e);
+    //     let positionY = e.clientY;
         
-    });
+    // });
 
-    $(document.body).on("mouseup", function (e) {
-        $dragging = null;
-        // let menu = document.getElementById('near-mobile');
-        // menu.style.transform = 'translateY(0px)';
-    });
+    // $(document.body).on("mouseup", function (e) {
+    //     $dragging = null;
+    //     // let menu = document.getElementById('near-mobile');
+    //     // menu.style.transform = 'translateY(0px)';
+    // });
 
 });
 /* function to identify if user is using desktop or mobile device*/
@@ -108,3 +108,20 @@ function isMobileDevice() {
 //     }
 // );
 
+require([
+    'dojo/on',
+    'dojox/gesture/swipe',
+    'dojo/dom',
+    'dojo/dom-style'
+], function(on, swipe, dom, domStyle) {
+    const slideTarget = dom.byId("near-mobile");
+    let positionY = 0;
+
+    on(slideTarget, swipe, function(evt) {
+        domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px"});
+    });
+
+    on(slideTarget, swipe.end, function(evt) {
+        positionY += evt.dy;
+    });
+})
