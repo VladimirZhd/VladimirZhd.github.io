@@ -14,6 +14,7 @@ $(document).ready(function () {
     $('.button-close').click(function () {
         $('.nearest-div').animate({ left: '-340px' });
     });
+
     /* function to close the sliding menu with a swipe to left we are using a js plugin jquery.touchSwipe here*/
     $(function () {
         $(".hide").swipe({
@@ -44,38 +45,42 @@ $(document).ready(function () {
         $('.clear-nearest').css('display', 'flex');
     });
 
-    $('#btn-clear').on('click', function() {
+    $('#btn-clear').on('click', function () {
         $('.clear-nearest').css('display', 'none');
     });
 
-    $('#btn-warning').click(function() {
+    $('#btn-warning').click(function () {
         $('popup-warning').css('display', 'none');
     });
 
     var $dragging = null;
 
-    $(document.body).on("mousemove", function(e) {
-        console.log(e.clientY);
+
+    $('#near-mobile').mousemove(function (e) {
         if ($dragging) {
             $dragging.offset({
                 top: e.clientY
             });
         }
-    });
-
-
-    $('#near-mobile').on("mousedown", function (e) {
-        $dragging = $(e.target);
-        console.log(e);
-        let positionY = e.clientY;
+        console.log(e.clientY);
+        $( "span" ).first().text( "(event.pageY ) : " + e.clientY );
         
+        $('#near-mobile').on("mousedown", function (e) {
+            $dragging = $(e.target);
+            let positionY = e.clientY;
+            let menu = document.getElementById('near-mobile');
+            menu.style.transform = 'translateY(0px)';
+        });
+
+        $('#near-mobile').on("mouseup", function (e) {
+            $dragging = null;
+        });
+
+
     });
 
-    $(document.body).on("mouseup", function (e) {
-        $dragging = null;
-        // let menu = document.getElementById('near-mobile');
-        // menu.style.transform = 'translateY(0px)';
-    });
+
+
 
 });
 /* function to identify if user is using desktop or mobile device*/
