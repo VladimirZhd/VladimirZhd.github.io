@@ -386,7 +386,7 @@ hr {
   width: 100%;
   height: 545px;
   transition: transform 0.3s;
-  transform: translateY(0%) translateY(150px); }
+  transform: translateY(0%) translateY(350px); }
 
 .menu-top {
   width: 100%;
