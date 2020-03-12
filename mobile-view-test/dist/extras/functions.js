@@ -68,17 +68,18 @@ require([
     let positionY = 0;
 
     on(slideTarget, swipe, function (evt) {
-        if ((positionY + evt.dy) > -315) {
+        if ((positionY + evt.dy) > -185) {
+            console.log(slideTarget.style.top);
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
     });
 
     on(slideTarget, swipe.end, function (evt) {
-        if ((positionY + evt.dy) > -315) {
+        if ((positionY + evt.dy) > -185) {
             positionY += (evt.dy - 1);
         }
         else {
-            positionY = -315;
+            positionY = -185;
         }
     });
 })

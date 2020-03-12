@@ -2,493 +2,510 @@
 @import "partials/toggle-switch"; //import styles for toggle switch
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    overscroll-behavior-y: none;
-    overflow: hidden;
+  overscroll-behavior-y: none;
+  overflow: hidden;
 }
 
 // Basic styles for displaying the map on the page
 html,
 body,
 #viewDiv {
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    outline: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  outline: none;
 }
 
 // Styles for locator widget
 .esri-locate {
-    border-radius: 50%;
-    outline: none;
-    margin-top: .4em;
+  border-radius: 50%;
+  outline: none;
+  margin-top: 0.4em;
 }
 
 //Removing outline from widget buttons
 .esri-widget {
-    &--button {
-        outline: none;
-    }
+  &--button {
+    outline: none;
+  }
 }
 
 //Styles for esri zoom widget
 .esri-zoom {
+  border-radius: 5px;
+
+  .esri-widget {
     border-radius: 5px;
 
-    .esri-widget {
-        border-radius: 5px;
+    &--button {
+      box-shadow: none;
 
-        &--button {
-            box-shadow: none;
+      &:first-child {
+        margin-bottom: 0;
+      }
 
-            &:first-child {
-                margin-bottom: 0;
-            }
-
-            &:last-child {
-                border-top: solid 1px rgba(110, 110, 110, 0.3);
-                border-radius: 0 0 5px 5px;
-            }
-        }
+      &:last-child {
+        border-top: solid 1px rgba(110, 110, 110, 0.3);
+        border-radius: 0 0 5px 5px;
+      }
     }
+  }
 }
 
 // Stiles for sliding menu
 .hide,
 .nearest-div {
-    display: block;
-    position: absolute;
-    width: 320px;
-    left: -340px;
-    height: 100%;
-    z-index: 1;
-    background-color: white;
-    overflow: scroll;
+  display: block;
+  position: absolute;
+  width: 320px;
+  left: -340px;
+  height: 100%;
+  z-index: 1;
+  background-color: white;
+  overflow: scroll;
 }
 
 // Customization for search widget's width and border radius
 .esri-search {
+  width: 100%;
+  border-radius: 1em;
+
+  &__container {
     width: 100%;
-    border-radius: 1em;
+  }
 
-    &__container {
-        width: 100%;
-    }
+  &__input-container {
+    width: 100%;
+  }
 
-    &__input-container {
-        width: 100%;
-    }
+  &__form {
+    width: 100%;
+  }
 
-    &__form {
-        width: 100%;
-    }
+  &__input {
+    position: relative;
+    left: 15%;
+    width: 85%;
+    outline: none;
+  }
 
-    &__input {
-        position: relative;
-        left: 15%;
-        width: 85%;
-        outline: none;
-    }
+  &__submit-button {
+    border-radius: 0 1em 1em 0;
+    outline: none;
+  }
 
-    &__submit-button {
-        border-radius: 0 1em 1em 0;
-        outline: none;
-    }
-
-    &__sources-button {
-        border-radius: 1em 0 0 1em;
-    }
+  &__sources-button {
+    border-radius: 1em 0 0 1em;
+  }
 }
 
 // Make the container for search widget's width 100% for mobile view
 .esri-ui-top-right {
-    width: 100%;
-    border-radius: 1em;
+  width: 100%;
+  border-radius: 1em;
 }
 
 // Make the container for search widget's max-width 30% for large and medium screen view
 @media only screen and (min-width: 768px) {
-    .esri-ui-top-right {
-        max-width: 30%;
-    }
+  .esri-ui-top-right {
+    max-width: 30%;
+  }
 }
 
 // Make the search widget's width 200% of the container
 @media only screen and (min-width: 768px) {
-    .esri-search {
-        width: 200%;
-    }
+  .esri-search {
+    width: 200%;
+  }
 }
 
 // styles for buttons
 .button {
-    position: absolute;
-    z-index: 1;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+
+  // menu hamburger button
+  &-menu {
+    background: transparent;
+    outline: none;
+    border: none;
+    top: 21px;
+    left: 50px;
+  }
+
+  // menu close button
+  &-close {
+    background: transparent;
+    border: none;
+    left: 290px;
+    top: 15px;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-size: 20px;
+
+    &-warning {
+      background: transparent;
+      border: none;
+      left: 220px;
+      top: 15px;
+      outline: none;
+      padding: 0;
+      margin: 0;
+      color: black;
+      font-size: 20px;
+    }
+  }
+
+  // floor layers buttons
+  &-floor {
+    background-color: #fff;
+    margin-bottom: 2px;
+    border-radius: 5px;
+    border: solid 1px rgba(110, 110, 110, 0.3);
+    width: 32px;
+    height: 32px;
+    color: #6e6e6e;
+    outline: none;
     cursor: pointer;
+    display: snone;
 
-    // menu hamburger button
-    &-menu {
-        background: transparent;
-        outline: none;
-        border: none;
-        top: 21px;
-        left: 50px;
+    &:hover {
+      background-color: #f0f0f0;
+      color: #2e2e2e;
     }
 
-    // menu close button
-    &-close {
-        background: transparent;
-        border: none;
-        left: 290px;
-        top: 15px;
-        outline: none;
-        padding: 0;
-        margin: 0;
-        color: white;
-        font-size: 20px;
-
-        &-warning {
-            background: transparent;
-            border: none;
-            left: 220px;
-            top: 15px;
-            outline: none;
-            padding: 0;
-            margin: 0;
-            color: black;
-            font-size: 20px;
-        }
+    &:active {
+      background-color: #e2f1fb;
     }
 
-    // floor layers buttons
-    &-floor {
-        background-color: #fff;
-        margin-bottom: 2px;
-        border-radius: 5px;
-        border: solid 1px rgba(110, 110, 110, 0.3);
-        width: 32px;
-        height: 32px;
-        color: #6e6e6e;
-        outline: none;
-        cursor: pointer;
-        display: snone;
-
-        &:hover {
-            background-color: #f0f0f0;
-            color: #2e2e2e;
-        }
-
-        &:active {
-            background-color: #e2f1fb
-        }
-
-        &-selected {
-            background-color: #e2f1fb;
-            margin-bottom: 2px;
-            border-radius: 5px;
-            border: solid 1px rgba(110, 110, 110, 0.3);
-            width: 32px;
-            height: 32px;
-            outline: none;
-            cursor: pointer;
-        }
+    &-selected {
+      background-color: #e2f1fb;
+      margin-bottom: 2px;
+      border-radius: 5px;
+      border: solid 1px rgba(110, 110, 110, 0.3);
+      width: 32px;
+      height: 32px;
+      outline: none;
+      cursor: pointer;
     }
+  }
 
-    &-container {
-        display: flex;
-        flex-direction: column;
+  &-container {
+    display: flex;
+    flex-direction: column;
 
-        a {
-            text-decoration: none;
-            padding: 1rem 0.4rem;
-            margin-left: 2.5rem;
-            margin-top: 2rem;
-            background: #0076B6;
-            color: #fff;
-            width: 75%;
-            text-align: center;
-            border-radius: 0.5rem;
-            outline: none;
-            cursor: pointer;
-        }
+    a {
+      text-decoration: none;
+      padding: 1rem 0.4rem;
+      margin-left: 2.5rem;
+      margin-top: 2rem;
+      background: #0076b6;
+      color: #fff;
+      width: 75%;
+      text-align: center;
+      border-radius: 0.5rem;
+      outline: none;
+      cursor: pointer;
     }
+  }
 }
 
 //styles sliding menu related elements
 .menu {
-    touch-action: none;
-    overscroll-behavior: none;
+  touch-action: none;
+  overscroll-behavior: none;
 
-    // style for humburger png icon
-    &-icon {
-        width: 60%;
-    }
+  // style for humburger png icon
+  &-icon {
+    width: 60%;
+  }
 
-    // style for unordered lists
-    &-list {
-        list-style: none;
+  // style for unordered lists
+  &-list {
+    list-style: none;
 
-        li {
-            padding: 0em 1em;
-            font-size: 18px;
-            cursor: pointer;
+    li {
+      padding: 0em 1em;
+      font-size: 18px;
+      cursor: pointer;
 
-            a {
-                text-decoration: none;
-                color: black;
+      a {
+        text-decoration: none;
+        color: black;
 
-                &:hover {
-                    color: grey;
-                }
-            }
+        &:hover {
+          color: grey;
         }
-
-        label {
-            position: relative;
-            left: 220px;
-            bottom: 40px;
-            margin: 0;
-        }
+      }
     }
 
-    &-h3 {
-        margin-left: 3em;
+    label {
+      position: relative;
+      left: 220px;
+      bottom: 40px;
+      margin: 0;
     }
+  }
 
-    &-byui-logo {
-        background-color: #0076B6;
-        width: 100%;
-        height: 50px;
-        margin: 0;
-        text-align: center;
+  &-h3 {
+    margin-left: 3em;
+  }
+
+  &-byui-logo {
+    background-color: #0076b6;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    text-align: center;
+  }
+
+  &-map {
+    color: white;
+    margin: 0;
+    padding: 0;
+    margin-left: -2.2rem;
+    line-height: 50px;
+
+    &-title {
+      color: white;
+      margin: 0;
+      padding: 0;
+      margin-left: -2.2rem;
+      line-height: 50px;
     }
-
-    &-map {
-        color: white;
-        margin: 0;
-        padding: 0;
-        margin-left: -2.2rem;
-        line-height: 50px;
-
-        &-title {
-            color: white;
-            margin: 0;
-            padding: 0;
-            margin-left: -2.2rem;
-            line-height: 50px;
-        }
-    }
+  }
 }
 
 .basemap-list {
-    display: flex;
+  display: flex;
 }
 
 // Styles for widget's container in the bottom right corner
 .esri-ui-bottom-right {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 // width for the horisontal line
 hr {
-    width: 95%;
+  width: 95%;
 }
 
 // styles for floor button's container
 .floor-layers {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 1;
-    background: none;
-    outline: none;
-    right: 0;
-    bottom: 110px;
-    touch-action: none;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1;
+  background: none;
+  outline: none;
+  right: 0;
+  bottom: 110px;
+  touch-action: none;
 }
 
 @media only screen and (min-width: 1024px) {
-    .floor-layers {
-        bottom: 70px;
-    }
+  .floor-layers {
+    bottom: 70px;
+  }
 }
 
 #floorLayers.floor-layers.esri-component {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .esri-popup {
-    &__header {
-        background: #333;
+  &__header {
+    background: #333;
+    color: white;
+
+    &-container {
+      outline: none;
+    }
+
+    &-title {
+      &:hover {
+        transition: none;
         color: white;
-
-        &-container {
-            outline: none;
-        }
-
-        &-title {
-            &:hover {
-                transition: none;
-                color: white;
-                background-color: #333;
-            }
-        }
+        background-color: #333;
+      }
     }
+  }
 
-    p {
-        margin: 0;
-        padding: 0.2rem 0.4rem;
+  p {
+    margin: 0;
+    padding: 0.2rem 0.4rem;
+  }
+
+  &__content {
+    div {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        text-decoration: none;
+        padding: 1rem 0.4rem;
+        margin-left: 2.5rem;
+        margin-top: 2rem;
+        background: #0076b6;
+        color: #fff;
+        width: 75%;
+        text-align: center;
+        border-radius: 0.5rem;
+        outline: none;
+        cursor: pointer;
+      }
     }
-
-    &__content {
-        div {
-            display: flex;
-            flex-direction: column;
-
-            a {
-                text-decoration: none;
-                padding: 1rem 0.4rem;
-                margin-left: 2.5rem;
-                margin-top: 2rem;
-                background: #0076B6;
-                color: #fff;
-                width: 75%;
-                text-align: center;
-                border-radius: 0.5rem;
-                outline: none;
-                cursor: pointer;
-            }
-
-        }
-    }
+  }
 }
 
 .nearest {
-    &-link {
-        cursor: pointer;
-    }
+  &-link {
+    cursor: pointer;
+  }
 }
 
 .clear-nearest {
-    background: #fff;
-    width: 100%;
-    height: 50px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    z-index: 1;
-    bottom: 0;
+  background: #fff;
+  width: 100%;
+  height: 50px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
 }
 
 @media only screen and (min-width: 1024px) {
-    .clear-nearest {
-        width: 200px;
-        right: 60px;
-        bottom: 30px;
-        border-radius: 10px;
-    }
+  .clear-nearest {
+    width: 200px;
+    right: 60px;
+    bottom: 30px;
+    border-radius: 10px;
+  }
 }
 
 .btn-clear {
-    background: #0076B6;
-    color: #fff;
-    padding: 0.6rem;
-    border: none;
-    outline: none;
-    border-radius: 10px;
+  background: #0076b6;
+  color: #fff;
+  padding: 0.6rem;
+  border: none;
+  outline: none;
+  border-radius: 10px;
 }
 
 .show-lg {
-    display: none;
+  display: none;
 
-    p {
-        margin: auto;
-        padding: 1rem;
-        font-weight: 150;
-        font-size: 1.2rem;
-    }
+  p {
+    margin: auto;
+    padding: 1rem;
+    font-weight: 150;
+    font-size: 1.2rem;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
-    .nearest-div {
-        display: none;
-    }
+  .nearest-div {
+    display: none;
+  }
 
-    .show-lg {
-        display: block;
-    }
+  .show-lg {
+    display: block;
+  }
 }
 
 .popup-warning {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgba(110, 110, 110, 0.3);
+  display: none;
+  .helper {
+    margin: auto;
+    margin-top: 50%;
+    width: 250px;
+    height: 300px;
     z-index: 1;
-    background: rgba(110, 110, 110, 0.3);
-    display: none;
-    .helper {
-        margin: auto;
-        margin-top: 50%;
-        width: 250px;
-        height: 300px;
-        z-index: 1;
-        background: white;
-        border-radius: 10px;
-        border: 1px solid #ccc;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ccc;
 
-        p {
-            font-size: 1.2rem;
-            margin: 1.8rem;
-        }
+    p {
+      font-size: 1.2rem;
+      margin: 1.8rem;
     }
+  }
 }
 
 @media only screen and (min-width: 1024px) {
-    .popup-warning {
-        .helper {
-            margin: auto;
-            margin-top: 15%;
-        }
+  .popup-warning {
+    .helper {
+      margin: auto;
+      margin-top: 15%;
     }
+  }
 }
 
+// .nearest-mobile {
+//     z-index: 1;
+//     background-color: #f8f9fa;
+//     border-radius: 10px 10px 0 0;
+//     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3);
+//     margin: 0;
+//     padding: 0;
+//     position: absolute;
+//     bottom: 0;
+//     touch-action: none;
+//     width: 100%;
+//     height: 600px;
+//     transition: transform 0.3s;
+//     transform: translateY(0%) translateY(400px); }
+
 .nearest-mobile {
-    z-index: 1;
-    background-color: #f8f9fa;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3);
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    bottom: 0;
-    touch-action: none;
-    width: 100%;
-    height: 600px;
-    transition: transform 0.3s;
-    transform: translateY(0%) translateY(400px); }
+  display: block;
+  z-index: 1;
+  background-color: #f8f9fa;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3);
+  margin-top: 268px;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  bottom: -400px;
+  touch-action: none;
+  width: 100%;
+  height: 545px;
+  transition: transform 0.3s;
+  transform: translateY(0%) translateY(350px);
+}
 
 .menu-top {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .icons-container {
-    margin: 0;
-    padding: .1rem 0;
-    display: flex;
-    list-style: none;
-    justify-content: space-around;
+  margin: 0;
+  padding: 0.1rem 0;
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
 
-    li {
-        img {
-            width: 60%;
-            margin-left: 1.5rem;
-        }
+  li {
+    img {
+      width: 60%;
+      margin-left: 1.5rem;
     }
+  }
 }
