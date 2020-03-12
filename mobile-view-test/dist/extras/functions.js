@@ -44,11 +44,11 @@ $(document).ready(function () {
         $('.clear-nearest').css('display', 'flex');
     });
 
-    $('#btn-clear').on('click', function() {
+    $('#btn-clear').on('click', function () {
         $('.clear-nearest').css('display', 'none');
     });
 
-    $('#btn-warning').click(function() {
+    $('#btn-warning').click(function () {
         $('popup-warning').css('display', 'none');
     });
 
@@ -68,7 +68,7 @@ $(document).ready(function () {
     //     $dragging = $(e.target);
     //     console.log(e);
     //     let positionY = e.clientY;
-        
+
     // });
 
     // $(document.body).on("mouseup", function (e) {
@@ -113,15 +113,22 @@ require([
     'dojox/gesture/swipe',
     'dojo/dom',
     'dojo/dom-style'
-], function(on, swipe, dom, domStyle) {
+], function (on, swipe, dom, domStyle, domGeom) {
     const slideTarget = dom.byId("near-mobile");
     let positionY = 0;
 
-    on(slideTarget, swipe, function(evt) {
-        domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px"});
+    on(slideTarget, swipe, function (evt) {
+        if ((positionY + evt.dy) > -315) {
+            domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
+        }
     });
 
-    on(slideTarget, swipe.end, function(evt) {
-        positionY += evt.dy;
+    on(slideTarget, swipe.end, function (evt) {
+        if ((positionY + evt.dy) > -315) {
+            positionY += (evt.dy - 1);
+        }
+        else {
+            positionY = -315;
+        }
     });
 })
