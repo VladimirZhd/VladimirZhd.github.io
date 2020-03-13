@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/PopupTemplate", "esri/layers/VectorTileLayer", "esri/layers/GraphicsLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/MapImageLayer", "dojo/dom", "dojo/on", "dojo/touch", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest"], function (_Map, _Basemap, _MapView, _Locate, _Search, _PopupTemplate, _VectorTileLayer, _GraphicsLayer, _watchUtils, _Point, _Graphic, _MapImageLayer, _dom, _on, _touch, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/layers/MapImageLayer", "dojo/dom", "dojo/on", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _watchUtils, _Point, _MapImageLayer, _dom, _on, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -11,23 +11,15 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _Search2 = _interopRequireDefault(_Search);
 
-    var _PopupTemplate2 = _interopRequireDefault(_PopupTemplate);
-
     var _VectorTileLayer2 = _interopRequireDefault(_VectorTileLayer);
 
-    var _GraphicsLayer2 = _interopRequireDefault(_GraphicsLayer);
-
     var _Point2 = _interopRequireDefault(_Point);
-
-    var _Graphic2 = _interopRequireDefault(_Graphic);
 
     var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
 
     var _dom2 = _interopRequireDefault(_dom);
 
     var _on2 = _interopRequireDefault(_on);
-
-    var _touch2 = _interopRequireDefault(_touch);
 
     var _LayerFunctions2 = _interopRequireDefault(_LayerFunctions);
 
@@ -39,6 +31,8 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _FindNearest2 = _interopRequireDefault(_FindNearest);
 
+    var _ParkingLayer2 = _interopRequireDefault(_ParkingLayer);
+
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
             default: obj
@@ -46,7 +40,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     }
 
     /* create a basemap using a community map with trees*/
-    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -58,6 +51,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     /* Creating a map with our tree basemap*/
+    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -356,7 +350,42 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         findNear.graphicsLayer.removeAll();findNear.currentSelection = null;
     });
 
-    (0, _on2.default)(_dom2.default.byId('near-mobile'), 'drag', function (e) {
-        console.log(e);
+    var pl = new _ParkingLayer2.default();
+
+    (0, _on2.default)(_dom2.default.byId('event'), 'click', function () {
+        pl.turnOnParkingLayer('event', map, _dom2.default.byId('event').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('child'), 'click', function () {
+        pl.turnOnParkingLayer('child', map, _dom2.default.byId('child').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('staff'), 'click', function () {
+        pl.turnOnParkingLayer('staff', map, _dom2.default.byId('staff').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('ward'), 'click', function () {
+        pl.turnOnParkingLayer('ward', map, _dom2.default.byId('ward').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('north'), 'click', function () {
+        pl.turnOnParkingLayer('north', map, _dom2.default.byId('north').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('south'), 'click', function () {
+        pl.turnOnParkingLayer('south', map, _dom2.default.byId('south').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('housing'), 'click', function () {
+        pl.turnOnParkingLayer('housing', map, _dom2.default.byId('housing').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('longTerm'), 'click', function () {
+        pl.turnOnParkingLayer('longTerm', map, _dom2.default.byId('longTerm').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('winterLT'), 'click', function () {
+        pl.turnOnParkingLayer('winterLT', map, _dom2.default.byId('winterLT').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('FaWiLT'), 'click', function () {
+        pl.turnOnParkingLayer('FaWiLT', map, _dom2.default.byId('FaWiLT').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('economy'), 'click', function () {
+        pl.turnOnParkingLayer('economy', map, _dom2.default.byId('economy').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('visitors'), 'click', function () {
+        pl.turnOnParkingLayer('visitors', map, _dom2.default.byId('visitors').checked);
     });
 });

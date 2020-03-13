@@ -35,6 +35,13 @@ $(document).ready(function () {
         item = "";
     });
 
+    $("#list3 li").click(function () {
+        let item = this.id;
+        let toggle = $("#" + item).next("input").attr("id");
+        $("#" + toggle).click();
+        item = "";
+    });
+
 
     $(".near").on("click", function () {
         $(".button-close").click();
@@ -79,8 +86,13 @@ $(document).ready(function () {
 
     });
 
+    $('#campus-drop').click(() => {
+        $('#campus-dropdown').slideToggle(330);
+    });
 
-
+    $('#parking-drop').click(() => {
+        $('#parking-dropdown').slideToggle(330);
+    })
 
 });
 /* function to identify if user is using desktop or mobile device*/

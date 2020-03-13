@@ -231,7 +231,6 @@ body,
     // style for unordered lists
     &-list {
         list-style: none;
-
         li {
             padding: 0em 1em;
             font-size: 18px;
@@ -257,6 +256,7 @@ body,
 
     &-h3 {
         margin-left: 3em;
+        cursor: pointer;
     }
 
     &-byui-logo {
@@ -459,7 +459,7 @@ hr {
 }
 
 .nearest-mobile {
-    // display: none;
+    display: none;
     z-index: 1;
     background-color: #f8f9fa;
     border-radius: 10px 10px 0 0;
@@ -494,4 +494,9 @@ hr {
             margin-left: 1.5rem;
         }
     }
+}
+
+#campus-dropdown,
+#parking-dropdown {
+    display: none;
 }

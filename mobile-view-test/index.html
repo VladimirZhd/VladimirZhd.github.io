@@ -56,48 +56,92 @@
         <hr>
         <h3 class="nearest-link menu-h3" id="find-nearest">Find Nearest</h3>
         <hr>
-        <h3 class="menu-h3">Campus Information</h3>
-        <ul class="layers-navigation menu-list" id="list2">
-            <li class="layer-item" id="layer-item--baby">Baby Changing</li>
-            <input type="checkbox" class="toggle" id="baby">
-            <label for="baby"></label>
-            <li class="layer-item" id="layer-item--bike">Bike Rack</li>
-            <input type="checkbox" class="toggle" id="bike">
-            <label for="bike" class="toogle-label"></label>
-            <li class="layer-item" id="layer-item--booth">Booth</li>
-            <input type="checkbox" class="toggle" id="booth">
-            <label for="booth"></label>
-            <li class="layer-item" id="layer-item--boundary">BYU-I Boundary</li>
-            <input type="checkbox" class="toggle" id="boundary">
-            <label for="boundary"></label>
-            <li class="layer-item" id="layer-item--food">Food and Dining</li>
-            <input type="checkbox" class="toggle" id="food">
-            <label for="food"></label>
-            <li class="layer-item" id="layer-item--mothers-lounge">Mother's Lounge</li>
-            <input type="checkbox" class="toggle" id="mothers-lounge">
-            <label for="mothers-lounge"></label>
-            <li class="layer-item" id="layer-item--bw-printer">-B&W Printer</li>
-            <input type="checkbox" class="toggle" id="bw-printer">
-            <label for="bw-printer"></label>
-            <li class="layer-item" id="layer-item--clr-printer">-Color Printer</li>
-            <input type="checkbox" class="toggle" id="clr-printer">
-            <label for="clr-printer"></label>
-            <li class="layer-item" id="layer-item--copy-scan">-Copy, Scan, Email</li>
-            <input type="checkbox" class="toggle" id="copy-scan">
-            <label for="copy-scan"></label>
-            <li class="layer-item" id="layer-item--outdoor">Outdoor Places</li>
-            <input type="checkbox" class="toggle" id="outdoor">
-            <label for="outdoor"></label>
-            <li class="layer-item" id="layer-item--spaces">-Spaces</li>
-            <input type="checkbox" class="toggle" id="spaces">
-            <label for="spaces"></label>
-            <li class="layer-item" id="layer-item--playfield">Playfield</li>
-            <input type="checkbox" class="toggle" id="playfield">
-            <label for="playfield"></label>
-            <li class="layer-item" id="layer-item--vending">Vending</li>
-            <input type="checkbox" class="toggle" id="vending">
-            <label for="vending"></label>
-        </ul>
+        <h3 class="menu-h3" id="campus-drop">Campus Information</h3>
+        <div id="campus-dropdown">
+            <ul class="layers-navigation menu-list" id="list2">
+                <li class="layer-item" id="layer-item--baby">Baby Changing</li>
+                <input type="checkbox" class="toggle" id="baby">
+                <label for="baby"></label>
+                <li class="layer-item" id="layer-item--bike">Bike Rack</li>
+                <input type="checkbox" class="toggle" id="bike">
+                <label for="bike" class="toogle-label"></label>
+                <li class="layer-item" id="layer-item--booth">Booth</li>
+                <input type="checkbox" class="toggle" id="booth">
+                <label for="booth"></label>
+                <li class="layer-item" id="layer-item--boundary">BYU-I Boundary</li>
+                <input type="checkbox" class="toggle" id="boundary">
+                <label for="boundary"></label>
+                <li class="layer-item" id="layer-item--food">Food and Dining</li>
+                <input type="checkbox" class="toggle" id="food">
+                <label for="food"></label>
+                <li class="layer-item" id="layer-item--mothers-lounge">Mother's Lounge</li>
+                <input type="checkbox" class="toggle" id="mothers-lounge">
+                <label for="mothers-lounge"></label>
+                <li class="layer-item" id="layer-item--bw-printer">-B&W Printer</li>
+                <input type="checkbox" class="toggle" id="bw-printer">
+                <label for="bw-printer"></label>
+                <li class="layer-item" id="layer-item--clr-printer">-Color Printer</li>
+                <input type="checkbox" class="toggle" id="clr-printer">
+                <label for="clr-printer"></label>
+                <li class="layer-item" id="layer-item--copy-scan">-Copy, Scan, Email</li>
+                <input type="checkbox" class="toggle" id="copy-scan">
+                <label for="copy-scan"></label>
+                <li class="layer-item" id="layer-item--outdoor">Outdoor Places</li>
+                <input type="checkbox" class="toggle" id="outdoor">
+                <label for="outdoor"></label>
+                <li class="layer-item" id="layer-item--spaces">-Spaces</li>
+                <input type="checkbox" class="toggle" id="spaces">
+                <label for="spaces"></label>
+                <li class="layer-item" id="layer-item--playfield">Playfield</li>
+                <input type="checkbox" class="toggle" id="playfield">
+                <label for="playfield"></label>
+                <li class="layer-item" id="layer-item--vending">Vending</li>
+                <input type="checkbox" class="toggle" id="vending">
+                <label for="vending"></label>
+            </ul>
+        </div>
+        <hr>
+        <h3 id="parking-drop" class="menu-h3">Parking</h3>
+        <div id="parking-dropdown">
+            <ul class="layers-navigation menu-list" id="list3">
+                <li class="layer-item" id="parking-item--event">Event Parking Locations</li>
+                <input type="checkbox" class="toggle" id="event">
+                <label for="event"></label>
+                <li class="layer-item" id="parking-item--child">Child Lab</li>
+                <input type="checkbox" class="toggle" id="child">
+                <label for="child" class="toogle-label"></label>
+                <li class="layer-item" id="parking-item--staff">Faculty / Staff</li>
+                <input type="checkbox" class="toggle" id="staff">
+                <label for="staff"></label>
+                <li class="layer-item" id="parking-item--ward">4th Ward Meetinghouse</li>
+                <input type="checkbox" class="toggle" id="ward">
+                <label for="ward"></label>
+                <li class="layer-item" id="parking-item--north">North Zone</li>
+                <input type="checkbox" class="toggle" id="north">
+                <label for="north"></label>
+                <li class="layer-item" id="parking-item--mothers-south">South Zone</li>
+                <input type="checkbox" class="toggle" id="south">
+                <label for="south"></label>
+                <li class="layer-item" id="parking-item--housing">On-Campus Housing</li>
+                <input type="checkbox" class="toggle" id="housing">
+                <label for="housing"></label>
+                <li class="layer-item" id="parking-item--long">Long-Term Contract</li>
+                <input type="checkbox" class="toggle" id="longTerm">
+                <label for="longTerm"></label>
+                <li class="layer-item" id="parking-item--winterLong">Winter Long-Term</li>
+                <input type="checkbox" class="toggle" id="winterLT">
+                <label for="winterLT"></label>
+                <li class="layer-item" id="parking-item--fwLong">Fall/Winter Long-Term</li>
+                <input type="checkbox" class="toggle" id="FaWiLT">
+                <label for="FaWiLT"></label>
+                <li class="layer-item" id="parking-item--economy">Economy</li>
+                <input type="checkbox" class="toggle" id="economy">
+                <label for="economy"></label>
+                <li class="layer-item" id="parking-item--visitors">Visitors</li>
+                <input type="checkbox" class="toggle" id="visitors">
+                <label for="visitors"></label>
+            </ul>
+        </div>
     </div>
     <div class="nearest-div">
         <div class="menu-byui-logo">

@@ -226,7 +226,8 @@ body,
       bottom: 40px;
       margin: 0; }
   .menu-h3 {
-    margin-left: 3em; }
+    margin-left: 3em;
+    cursor: pointer; }
   .menu-byui-logo {
     background-color: #0076B6;
     width: 100%;
@@ -373,6 +374,7 @@ hr {
     margin-top: 15%; } }
 
 .nearest-mobile {
+  display: none;
   z-index: 1;
   background-color: #f8f9fa;
   border-radius: 10px 10px 0 0;
@@ -401,3 +403,7 @@ hr {
   .icons-container li img {
     width: 60%;
     margin-left: 1.5rem; }
+
+#campus-dropdown,
+#parking-dropdown {
+  display: none; }

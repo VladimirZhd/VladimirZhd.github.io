@@ -6,26 +6,22 @@ import MapView from "esri/views/MapView";
 import Locate from "esri/widgets/Locate";
 import Search from "esri/widgets/Search";
 
-import PopupTemplate from 'esri/PopupTemplate';
-
 import VectorTileLayer from "esri/layers/VectorTileLayer";
-import GraphicsLayer from 'esri/layers/GraphicsLayer';
 import { whenFalse } from "esri/core/watchUtils";
 import { whenTrueOnce } from "esri/core/watchUtils";
 import { whenFalseOnce } from "esri/core/watchUtils";
 import Point from 'esri/geometry/Point';
-import Graphic from 'esri/Graphic';
 import MapImageLayer from 'esri/layers/MapImageLayer';
 
 import dom from "dojo/dom";
 import on from "dojo/on";
-import touch from 'dojo/touch';
 
 import LayerFunctions from "./extras/LayerFunctions";
 import Buttons from "./extras/FloorButtons";
 import MenuLayers from "./extras/FeatureLayers";
 import Sources from "./extras/Sources";
 import FindNearest from "./extras/FindNearest";
+import ParkingLayer from "./extras/ParkingLayer";
 
 
 
@@ -285,7 +281,17 @@ on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, do
 
 on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.currentSelection = null; });
 
+let pl = new ParkingLayer();
 
-on(dom.byId('near-mobile'), 'drag', function(e) {
-    console.log(e);
-})
+on(dom.byId('event'), 'click', function () { pl.turnOnParkingLayer('event', map, dom.byId('event').checked) });
+on(dom.byId('child'), 'click', function () { pl.turnOnParkingLayer('child', map, dom.byId('child').checked) });
+on(dom.byId('staff'), 'click', function () { pl.turnOnParkingLayer('staff', map, dom.byId('staff').checked) });
+on(dom.byId('ward'), 'click', function () { pl.turnOnParkingLayer('ward', map, dom.byId('ward').checked) });
+on(dom.byId('north'), 'click', function () { pl.turnOnParkingLayer('north', map, dom.byId('north').checked) });
+on(dom.byId('south'), 'click', function () { pl.turnOnParkingLayer('south', map, dom.byId('south').checked) });
+on(dom.byId('housing'), 'click', function () { pl.turnOnParkingLayer('housing', map, dom.byId('housing').checked) });
+on(dom.byId('longTerm'), 'click', function () { pl.turnOnParkingLayer('longTerm', map, dom.byId('longTerm').checked) });
+on(dom.byId('winterLT'), 'click', function () { pl.turnOnParkingLayer('winterLT', map, dom.byId('winterLT').checked) });
+on(dom.byId('FaWiLT'), 'click', function () { pl.turnOnParkingLayer('FaWiLT', map, dom.byId('FaWiLT').checked) });
+on(dom.byId('economy'), 'click', function () { pl.turnOnParkingLayer('economy', map, dom.byId('economy').checked) });
+on(dom.byId('visitors'), 'click', function () { pl.turnOnParkingLayer('visitors', map, dom.byId('visitors').checked) });
