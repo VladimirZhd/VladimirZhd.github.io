@@ -60,6 +60,14 @@ $(document).ready(function () {
         $('popup-warning').css('display', 'none');
     });
 
+    $('#campus-drop').click(() => {
+        $('#campus-dropdown').slideToggle(330);
+    });
+
+    $('#parking-drop').click(() => {
+        $('#parking-dropdown').slideToggle(330);
+    })
+
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {
@@ -71,18 +79,23 @@ require([
     'dojox/gesture/swipe',
     'dojo/dom',
     'dojo/dom-style'
-], function(on, swipe, dom, domStyle) {
+], function (on, swipe, dom, domStyle, domGeom) {
     const slideTarget = dom.byId("near-mobile");
     let positionY = 0;
 
-    on(slideTarget, swipe, function(evt) {
-        if (domStyle.getComputedStyle(slideTarget).top != '-185px') {
-            domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px"});
+    on(slideTarget, swipe, function (evt) {
+        if ((positionY + evt.dy) > -185) {
+            console.log(slideTarget.style.top);
+            domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
-        console.log(domStyle.getComputedStyle(slideTarget).top);
     });
 
-    on(slideTarget, swipe.end, function(evt) {
-        positionY += evt.dy;
+    on(slideTarget, swipe.end, function (evt) {
+        if ((positionY + evt.dy) > -185) {
+            positionY += (evt.dy - 1);
+        }
+        else {
+            positionY = -185;
+        }
     });
 })
