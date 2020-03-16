@@ -355,7 +355,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         findNear.graphicsLayer.removeAll();findNear.currentSelection = null;
     });
 
-<<<<<<< HEAD
     var pl = new _ParkingLayer2.default();
 
     (0, _on2.default)(_dom2.default.byId('event'), 'click', function () {
@@ -394,9 +393,4 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     (0, _on2.default)(_dom2.default.byId('visitors'), 'click', function () {
         pl.turnOnParkingLayer('visitors', map, _dom2.default.byId('visitors').checked);
     });
-=======
-    // on(dom.byId('near-mobile'), 'drag', function(e) {
-    //     console.log(e);
-    // })
->>>>>>> origin/master
 });
