@@ -222,6 +222,7 @@ if (screen.width > 600) {
 /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
 if (screen.width >= 1024 && device == true) {
     document.getElementById("floorLayers").style.bottom = "110px";
+    document.getElementById('near-mobile').style.display = 'none';
 }
 
 let lf = new LayerFunctions({});

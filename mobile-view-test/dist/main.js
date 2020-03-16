@@ -256,6 +256,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
     if (screen.width >= 1024 && device == true) {
         document.getElementById("floorLayers").style.bottom = "110px";
+        document.getElementById('near-mobile').style.display = 'none';
     }
 
     var lf = new _LayerFunctions2.default({});
