@@ -60,43 +60,29 @@ $(document).ready(function () {
         $('popup-warning').css('display', 'none');
     });
 
-    var $dragging = null;
-
-
-    $('#near-mobile').mousemove(function (e) {
-        if ($dragging) {
-            $dragging.offset({
-                top: e.clientY
-            });
-        }
-        console.log(e.clientY);
-        $( "span" ).first().text( "(event.pageY ) : " + e.clientY );
-        
-        $('#near-mobile').on("mousedown", function (e) {
-            $dragging = $(e.target);
-            let positionY = e.clientY;
-            let menu = document.getElementById('near-mobile');
-            menu.style.transform = 'translateY(0px)';
-        });
-
-        $('#near-mobile').on("mouseup", function (e) {
-            $dragging = null;
-        });
-
-
-    });
-
-    $('#campus-drop').click(() => {
-        $('#campus-dropdown').slideToggle(330);
-    });
-
-    $('#parking-drop').click(() => {
-        $('#parking-dropdown').slideToggle(330);
-    })
-
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
 
+require([
+    'dojo/on',
+    'dojox/gesture/swipe',
+    'dojo/dom',
+    'dojo/dom-style'
+], function(on, swipe, dom, domStyle) {
+    const slideTarget = dom.byId("near-mobile");
+    let positionY = 0;
+
+    on(slideTarget, swipe, function(evt) {
+        if (domStyle.getComputedStyle(slideTarget).top != '-185px') {
+            domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px"});
+        }
+        console.log(domStyle.getComputedStyle(slideTarget).top);
+    });
+
+    on(slideTarget, swipe.end, function(evt) {
+        positionY += evt.dy;
+    });
+})

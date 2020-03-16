@@ -109,7 +109,6 @@ if (screen.width >= 1024) {
 
         floorButton.watch('cid', function () {
             if (findNear.currentSelection != null) {
-                console.log("Inside if");
                 findNear.changeCurrentFloor(floorButton.get('cid'));
                 findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
             }

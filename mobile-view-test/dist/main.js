@@ -114,7 +114,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
             floorButton.watch('cid', function () {
                 if (findNear.currentSelection != null) {
-                    console.log("Inside if");
                     findNear.changeCurrentFloor(floorButton.get('cid'));
                     findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, findNear.currentSelection);
                 }
@@ -356,6 +355,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         findNear.graphicsLayer.removeAll();findNear.currentSelection = null;
     });
 
+<<<<<<< HEAD
     var pl = new _ParkingLayer2.default();
 
     (0, _on2.default)(_dom2.default.byId('event'), 'click', function () {
@@ -394,4 +394,9 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     (0, _on2.default)(_dom2.default.byId('visitors'), 'click', function () {
         pl.turnOnParkingLayer('visitors', map, _dom2.default.byId('visitors').checked);
     });
+=======
+    // on(dom.byId('near-mobile'), 'drag', function(e) {
+    //     console.log(e);
+    // })
+>>>>>>> origin/master
 });
