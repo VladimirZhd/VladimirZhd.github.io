@@ -219,10 +219,13 @@ view.ui.add(search, "top-right");
 if (screen.width > 600) {
     view.ui.move(search, "top-left");
 }
+console.log(device);
 /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
 if (screen.width >= 1024 && device == true) {
     document.getElementById("floorLayers").style.bottom = "110px";
-    document.getElementById('near-mobile').style.display = 'none';
+}
+if (screen.width <= 1024) {
+    document.getElementById("near-mobile").style.display = "block";
 }
 
 let lf = new LayerFunctions({});

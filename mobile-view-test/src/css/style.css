@@ -374,7 +374,7 @@ hr {
     margin-top: 15%; } }
 
 .nearest-mobile {
-  display: block;
+  display: none;
   z-index: 1;
   background-color: #f8f9fa;
   border-radius: 10px 10px 0 0;
