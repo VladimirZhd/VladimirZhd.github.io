@@ -208,6 +208,12 @@ search.on('select-result', function (evt) {
     }
 });
 
+let searchLog = '';
+search.on('search-start', () => {
+    searchLog += [search.searchTerm] + ", ";
+    console.log(searchLog);
+})
+
 /* Insert the search widget to the top right of the page*/
 view.ui.add(search, "top-right");
 /* For the bigger screens we want to move the search widget to  */

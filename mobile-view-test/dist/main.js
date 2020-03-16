@@ -242,6 +242,12 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         }
     });
 
+    var searchLog = '';
+    search.on('search-start', function () {
+        searchLog += [search.searchTerm] + ", ";
+        console.log(searchLog);
+    });
+
     /* Insert the search widget to the top right of the page*/
     view.ui.add(search, "top-right");
     /* For the bigger screens we want to move the search widget to  */

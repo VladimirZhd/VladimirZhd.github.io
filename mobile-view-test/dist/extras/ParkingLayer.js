@@ -4,36 +4,84 @@ define([
     'esri/layers/MapImageLayer'
 ], function (declare, FeatureLayer, MapImageLayer) {
     return declare(null, {
-        event: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/0'
+        event: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 0,
+                    visible: true
+                }
+            ]
         }),
 
-        child: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/1'
+        child: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 1,
+                    visible: true
+                }
+            ]
         }),
 
-        staff: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/2'
+        staff: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 2,
+                    visible: true
+                }
+            ]
         }),
 
-        ward: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/3'
+        ward: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 3,
+                    visible: true
+                }
+            ]
         }),
 
-        north: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/4'
+        north: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 4,
+                    visible: true
+                }
+            ]
         }),
 
-        south: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/5'
+        south: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 5,
+                    visible: true
+                }
+            ]
         }),
 
-        housing: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/6'
+        housing: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 6,
+                    visible: true
+                }
+            ]
         }),
 
-        longTerm: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/7'
+        longTerm: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 7,
+                    visible: true
+                }
+            ]
         }),
 
         winterLT: new MapImageLayer({
@@ -56,12 +104,24 @@ define([
             ]
         }),
 
-        economy: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/10'
+        economy: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 10,
+                    visible: true
+                }
+            ]
         }),
 
-        visitors: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/FeatureServer/11'
+        visitors: new MapImageLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer',
+            sublayers: [
+                {
+                    id: 11,
+                    visible: true
+                }
+            ]
         }),
 
 
