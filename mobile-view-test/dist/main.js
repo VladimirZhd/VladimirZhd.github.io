@@ -1,9 +1,11 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/layers/MapImageLayer", "dojo/dom", "dojo/on", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _watchUtils, _Point, _MapImageLayer, _dom, _on, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer) {
+define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "dojo/dom", "dojo/on", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology"], function (_Map, _Basemap, _request, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _dom, _on, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
 
     var _Basemap2 = _interopRequireDefault(_Basemap);
+
+    var _request2 = _interopRequireDefault(_request);
 
     var _MapView2 = _interopRequireDefault(_MapView);
 
@@ -13,9 +15,9 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _VectorTileLayer2 = _interopRequireDefault(_VectorTileLayer);
 
-    var _Point2 = _interopRequireDefault(_Point);
-
     var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
+
+    var _Point2 = _interopRequireDefault(_Point);
 
     var _dom2 = _interopRequireDefault(_dom);
 
@@ -32,6 +34,8 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     var _FindNearest2 = _interopRequireDefault(_FindNearest);
 
     var _ParkingLayer2 = _interopRequireDefault(_ParkingLayer);
+
+    var _ParkingSymbology2 = _interopRequireDefault(_ParkingSymbology);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -354,6 +358,18 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     (0, _on2.default)(_dom2.default.byId('vending'), 'click', function () {
         fl.turnOnLayer('vending', map, _dom2.default.byId('vending').checked);
     });
+    (0, _on2.default)(_dom2.default.byId('outdoor'), 'click', function () {
+        fl.turnOnLayer('outdoor', map, _dom2.default.byId('outdoor').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('spaces'), 'click', function () {
+        fl.turnOnLayer('spaces', map, _dom2.default.byId('spaces').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('playfield'), 'click', function () {
+        fl.turnOnLayer('playfield', map, _dom2.default.byId('playfield').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('boundary'), 'click', function () {
+        fl.turnOnLayer('boundary', map, _dom2.default.byId('boundary').checked);
+    });
 
     (0, _on2.default)(_dom2.default.byId('btn-clear'), 'click', function () {
         findNear.graphicsLayer.removeAll();findNear.currentSelection = null;
@@ -397,4 +413,34 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     (0, _on2.default)(_dom2.default.byId('visitors'), 'click', function () {
         pl.turnOnParkingLayer('visitors', map, _dom2.default.byId('visitors').checked);
     });
+
+    /* Get symbology for parking layers menu */
+    // const parkingSymbology = async () => {
+    //     esriRequest({
+    //         url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer/queryLegends?size=640&f=pjson',
+    //         responseType: 'json'
+    //     }).then(() => {
+
+    //     });
+
+    //     parkingLayerLegend.then(function(evt) {
+    //         console.log(evt);
+    //     })
+    //     console.log(parkingLayerLegend);
+
+    //     await parkingLayerLegend.then(parkingRequestSucceeded, parkingRequestFailed);
+
+    //     function parkingRequestSucceeded(data) {
+    //         console.log(data);
+    //     }
+
+    //     function parkingRequestFailed(error) {
+    //         console.log('Error: ', error);
+    //     }
+    // }
+
+    // parkingSymbology();
+
+    var ps = new _ParkingSymbology2.default();
+    ps.getParkingSymbols();
 });

@@ -1,17 +1,18 @@
 /* import all of the libraries from esri that we need to use */
 import Map from "esri/Map";
 import Basemap from "esri/Basemap";
+import esriRequest from 'esri/request';
 import MapView from "esri/views/MapView";
 
 import Locate from "esri/widgets/Locate";
 import Search from "esri/widgets/Search";
 
 import VectorTileLayer from "esri/layers/VectorTileLayer";
+import MapImageLayer from 'esri/layers/MapImageLayer';
 import { whenFalse } from "esri/core/watchUtils";
 import { whenTrueOnce } from "esri/core/watchUtils";
 import { whenFalseOnce } from "esri/core/watchUtils";
 import Point from 'esri/geometry/Point';
-import MapImageLayer from 'esri/layers/MapImageLayer';
 
 import dom from "dojo/dom";
 import on from "dojo/on";
@@ -22,6 +23,8 @@ import MenuLayers from "./extras/FeatureLayers";
 import Sources from "./extras/Sources";
 import FindNearest from "./extras/FindNearest";
 import ParkingLayer from "./extras/ParkingLayer";
+import ParkingSymbology from "./extras/ParkingSymbology";
+
 
 
 
@@ -287,6 +290,10 @@ on(dom.byId('bw-printer'), 'click', function () { fl.turnOnLayer('bw-printer', m
 on(dom.byId('clr-printer'), 'click', function () { fl.turnOnLayer('clr-printer', map, dom.byId('clr-printer').checked) });
 on(dom.byId('copy-scan'), 'click', function () { fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked) });
 on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, dom.byId('vending').checked) });
+on(dom.byId('outdoor'), 'click', function () { fl.turnOnLayer('outdoor', map, dom.byId('outdoor').checked) });
+on(dom.byId('spaces'), 'click', function () { fl.turnOnLayer('spaces', map, dom.byId('spaces').checked) });
+on(dom.byId('playfield'), 'click', function () { fl.turnOnLayer('playfield', map, dom.byId('playfield').checked) });
+on(dom.byId('boundary'), 'click', function () { fl.turnOnLayer('boundary', map, dom.byId('boundary').checked) });
 
 on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.currentSelection = null; });
 
@@ -304,3 +311,34 @@ on(dom.byId('winterLT'), 'click', function () { pl.turnOnParkingLayer('winterLT'
 on(dom.byId('FaWiLT'), 'click', function () { pl.turnOnParkingLayer('FaWiLT', map, dom.byId('FaWiLT').checked) });
 on(dom.byId('economy'), 'click', function () { pl.turnOnParkingLayer('economy', map, dom.byId('economy').checked) });
 on(dom.byId('visitors'), 'click', function () { pl.turnOnParkingLayer('visitors', map, dom.byId('visitors').checked) });
+
+
+/* Get symbology for parking layers menu */
+// const parkingSymbology = async () => {
+//     esriRequest({
+//         url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer/queryLegends?size=640&f=pjson',
+//         responseType: 'json'
+//     }).then(() => {
+
+//     });
+
+//     parkingLayerLegend.then(function(evt) {
+//         console.log(evt);
+//     })
+//     console.log(parkingLayerLegend);
+
+//     await parkingLayerLegend.then(parkingRequestSucceeded, parkingRequestFailed);
+
+//     function parkingRequestSucceeded(data) {
+//         console.log(data);
+//     }
+
+//     function parkingRequestFailed(error) {
+//         console.log('Error: ', error);
+//     }
+// }
+
+// parkingSymbology();
+
+let ps = new ParkingSymbology();
+ps.getParkingSymbols();

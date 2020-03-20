@@ -247,15 +247,15 @@ body,
                 }
             }
 
+            label {
+                position: relative;
+                left: 200px;
+                bottom: 20px;
+                margin: 0;
+            }
 
         }
 
-        label {
-            position: relative;
-            left: 220px;
-            bottom: 40px;
-            margin: 0;
-        }
     }
 
     &-h3 {
@@ -503,19 +503,238 @@ hr {
 .icons-container {
     margin: 0;
     padding: 0.1rem 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     list-style: none;
     justify-content: space-around;
 
     li {
         img {
             width: 60%;
+            margin: 1rem;
             margin-left: 1.5rem;
         }
+    }
+}
+
+.open-nearest {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    align-items: center;
+    background-color: white;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    color: #6e6e6e;
+    
+    
+    i {
+        margin-left: 2rem;
+    }
+
+    p {
+        margin-left: 2rem;
+        font-weight: 100;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .open-nearest {
+        display: none;
     }
 }
 
 #campus-dropdown,
 #parking-dropdown {
     display: none;
+}
+
+h4 {
+    margin-top: 0;
+    text-decoration: underline;
+}
+
+#layer-item {
+    &--baby {
+        &:before {
+            background-image: url('../img/changingStation.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--bike {
+        &:before {
+            background-image: url('../img/bikerack.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--booth {
+        &:before {
+            background-image: url('../img/booth.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--boundary {
+        &:before {
+            background-image: url('../img/byuiBoundary.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--food {
+        &:before {
+            background-image: url('../img/foodAndDining.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--mothers-lounge {
+        &:before {
+            background-image: url('../img/mothersLounge.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--bw-printer {
+        &:before {
+            background-image: url('../img/bwprinter.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--clr-printer {
+        &:before {
+            background-image: url('../img/colorprinter.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--copy-scan {
+        &:before {
+            background-image: url('../img/copyscanemail.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--outdoor {
+        &:before {
+            background-image: url('../img/outdoorPlace.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--spaces {
+        &:before {
+            background-image: url('../img/outdoorSpace.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--playfield {
+        &:before {
+            background-image: url('../img/playfield.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
+
+    &--vending {
+        &:before {
+            background-image: url('../img/vendingMachine.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            padding-right: 8px;
+            margin-bottom: -10px;
+            content: '';
+        }
+    }
 }

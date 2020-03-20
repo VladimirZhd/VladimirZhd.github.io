@@ -24,6 +24,14 @@ $(document).ready(function () {
         });
     });
 
+    // $(function () {
+    //     $('#near-mobile').swipe({
+    //         swipeDown: () => {
+    //             $('#near-mobile').css('transform', 'translateY(850px)');
+    //         }
+    //     })
+    // })
+
     /* function to close the sliding menu by typing on the map*/
     $("#viewDiv").on("click", function () {
         $(".button-close").click();
@@ -44,8 +52,9 @@ $(document).ready(function () {
 
 
     $(".near").on("click", function () {
-        $(".button-close").click();
+        $("#near-mobile").css('top', '197px');
         $('.clear-nearest').css('display', 'flex');
+        $('.esri-ui-bottom-right').css('bottom', '30px')
     });
 
     $(".near-lg").on("click", function () {
@@ -54,6 +63,7 @@ $(document).ready(function () {
 
     $('#btn-clear').on('click', function () {
         $('.clear-nearest').css('display', 'none');
+        $('.open-nearest').css('display', 'flex');
     });
 
     $('#btn-warning').click(function () {
@@ -68,6 +78,9 @@ $(document).ready(function () {
         $('#parking-dropdown').slideToggle(330);
     })
 
+    $('.open-nearest').click(() => {
+        $('.open-nearest').css('display', 'none');
+    });
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {
@@ -78,8 +91,9 @@ require([
     'dojo/on',
     'dojox/gesture/swipe',
     'dojo/dom',
-    'dojo/dom-style'
-], function (on, swipe, dom, domStyle, domGeom) {
+    'dojo/dom-style',
+    'dojo/fx'
+], function (on, swipe, dom, domStyle, domGeom, fx) {
     const slideTarget = dom.byId("near-mobile");
     let positionY = 0;
 
@@ -87,6 +101,12 @@ require([
         if ((positionY + evt.dy) > -185) {
             console.log(slideTarget.style.top);
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
+            // domStyle.set(slideTarget, { transform: `translate${positionY + evt.dy}px` })
+        }
+        if ((positionY + evt.dy) >= 165) {
+            domStyle.set(slideTarget, { top: "197px" });
+            $('.open-nearest').css('display', 'flex');
+            $('.esri-ui-bottom-right').css('bottom', '30px')
         }
     });
 
@@ -98,4 +118,13 @@ require([
             positionY = -185;
         }
     });
+
+    on(dom.byId('open-nearest'), 'click', () => {
+        console.log(fx);
+        fx.slideTo({
+            node: slideTarget,
+            top: '0',
+            units: 'px'
+        }).play();
+    })
 })
