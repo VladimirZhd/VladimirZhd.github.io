@@ -24,14 +24,6 @@ $(document).ready(function () {
         });
     });
 
-    // $(function () {
-    //     $('#near-mobile').swipe({
-    //         swipeDown: () => {
-    //             $('#near-mobile').css('transform', 'translateY(850px)');
-    //         }
-    //     })
-    // })
-
     /* function to close the sliding menu by typing on the map*/
     $("#viewDiv").on("click", function () {
         $(".button-close").click();
@@ -63,7 +55,9 @@ $(document).ready(function () {
 
     $('#btn-clear').on('click', function () {
         $('.clear-nearest').css('display', 'none');
-        $('.open-nearest').css('display', 'flex');
+        if (screen.width < 1024) {
+            $('.open-nearest').css('display', 'flex');
+        }
     });
 
     $('#btn-warning').click(function () {
@@ -93,15 +87,14 @@ require([
     'dojo/dom',
     'dojo/dom-style',
     'dojo/fx'
-], function (on, swipe, dom, domStyle, domGeom, fx) {
+], function (on, swipe, dom, domStyle, fx) {
     const slideTarget = dom.byId("near-mobile");
     let positionY = 0;
 
     on(slideTarget, swipe, function (evt) {
-        if ((positionY + evt.dy) > -185) {
+        if ((positionY + evt.dy) > -250) {
             console.log(slideTarget.style.top);
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
-            // domStyle.set(slideTarget, { transform: `translate${positionY + evt.dy}px` })
         }
         if ((positionY + evt.dy) >= 165) {
             domStyle.set(slideTarget, { top: "197px" });
@@ -111,20 +104,20 @@ require([
     });
 
     on(slideTarget, swipe.end, function (evt) {
-        if ((positionY + evt.dy) > -185) {
+        if ((positionY + evt.dy) > -250) {
             positionY += (evt.dy - 1);
         }
         else {
-            positionY = -185;
+            positionY = -250;
         }
     });
 
     on(dom.byId('open-nearest'), 'click', () => {
-        console.log(fx);
         fx.slideTo({
             node: slideTarget,
             top: '0',
             units: 'px'
         }).play();
+        positionY = 0;
     })
 })

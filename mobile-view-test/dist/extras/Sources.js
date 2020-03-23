@@ -7,7 +7,7 @@ define([
         sources: [
             {
                 layer: new FeatureLayer({
-                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/16',
+                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/4',
                     outFields: ['*']
                 }),
                 searchFields: ["BUILDINGID", "SHORTNAME", "LONGNAME", "SEARCHALIAS", "INFORMATION", "MAINNAVIGATIONROOM"],
@@ -29,7 +29,7 @@ define([
             },
             {
                 layer: new FeatureLayer({
-                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/2',
+                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/0',
                     outFields: ['*']
                 }),
                 searchFields: ['LONGNAME', 'FLOOR', 'SHORTNAME', 'SPACETYPE', 'BUILDING'],
@@ -61,7 +61,7 @@ define([
             },
             {
                 layer: new FeatureLayer({
-                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/17',
+                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/5',
                     outFields: ['*']
                 }),
                 searchFields: ['SHORTNAME', 'LONGNAME', 'OBJECTID', 'DESCRIP', 'SPACETYPE'],
@@ -82,7 +82,7 @@ define([
             },
             {
                 layer: new FeatureLayer({
-                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/9',
+                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/1',
                     outFields: ['*']
                 }),
                 searchFields: ['NAME', 'BUILDING', 'FLOOR', 'HOURS', 'DESCRIP'],
@@ -111,7 +111,7 @@ define([
             },
             {
                 layer: new FeatureLayer({
-                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/14',
+                    url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/2',
                     outFields: ['*']
                 }),
                 searchFields: ['LOTNAME', 'PERMITTYPE'],
