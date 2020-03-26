@@ -75,6 +75,10 @@ $(document).ready(function () {
     $('.open-nearest').click(() => {
         $('.open-nearest').css('display', 'none');
     });
+
+    $('#popup-warning').click(() => {
+        $('#popup-warning').css('display', 'none');
+    })
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {
@@ -96,7 +100,7 @@ require([
             console.log(slideTarget.style.top);
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
-        if ((positionY + evt.dy) >= 165) {
+        if ((positionY + evt.dy) >= 147) {
             domStyle.set(slideTarget, { top: "197px" });
             $('.open-nearest').css('display', 'flex');
             $('.esri-ui-bottom-right').css('bottom', '30px')

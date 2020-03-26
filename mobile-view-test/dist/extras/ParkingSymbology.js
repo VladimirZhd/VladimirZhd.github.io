@@ -14,9 +14,6 @@ define([
             }).catch((err) => {
                 console.error(err);
             });
-
         }
-
     })
-
 });

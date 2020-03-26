@@ -290,6 +290,14 @@ body,
 
 .basemap-list {
     display: flex;
+
+    li {
+        padding: 0;
+        img {
+            width: 80%;
+            margin-left: 1rem;
+        }
+    }
 }
 
 // Styles for widget's container in the bottom right corner

@@ -249,6 +249,11 @@ body,
 
 .basemap-list {
   display: flex; }
+  .basemap-list li {
+    padding: 0; }
+    .basemap-list li img {
+      width: 80%;
+      margin-left: 1rem; }
 
 .esri-ui-bottom-right {
   display: flex;
