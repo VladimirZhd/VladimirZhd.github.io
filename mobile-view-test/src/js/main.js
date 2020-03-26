@@ -16,10 +16,16 @@ import { whenFalseOnce } from "esri/core/watchUtils";
 import Point from 'esri/geometry/Point';
 import Graphic from 'esri/Graphic';
 import MapImageLayer from 'esri/layers/MapImageLayer';
+import FeatureLayer from 'esri/layers/FeatureLayer';
 
 import dom from "dojo/dom";
 import on from "dojo/on";
+import dojo from "dojo";
 import touch from 'dojo/touch';
+import query from 'esri/tasks/support/Query';
+import task from 'esri/tasks/QueryTask';
+import urlUtils from 'esri/core/urlUtils';
+import request from 'dojo/request';
 
 import LayerFunctions from "./extras/LayerFunctions";
 import Buttons from "./extras/FloorButtons";
@@ -202,7 +208,6 @@ search.sources = sources;
 
 search.on('select-result', function (evt) {
     let floorNumber = evt.target.selectedResult.feature.attributes.FLOOR;
-    console.log(evt.target.selectedResult);
     if (floorNumber) {
         floorButton.setVisibleFloor(floorNumber, lf.floors, dom);
         view.scale = 400;
@@ -284,7 +289,55 @@ on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, do
 
 on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.currentSelection = null; });
 
+let string = window.location.href;
+let url = new URL(string);
+let build = url.searchParams.get("building");
+let room = url.searchParams.get("room");
+let booth = url.searchParams.get("booth");
+let place = url.searchParams.get("space");
+let space = url.searchParams.get("place");
 
-// on(dom.byId('near-mobile'), 'drag', function(e) {
-//     console.log(e);
-// })
+if (build != null && room != null) {
+    search.searchTerm = build + room;
+}
+
+if (booth != null) {
+    search.searchTerm = booth;
+}
+
+if (place != null && space == null) {
+    search.searchTerm = place;
+}
+
+if (place != null && space != null) {
+    search.searchTerm = place + space;
+}
+
+if (build != null && room == null) {
+    let t = new task("https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/16");
+    let q = new query();
+
+    q.where = "BUILDINGID = " + "'" + build + "'";
+    q.outFields = "[SHORTNAME]";
+
+    t.execute(q).then(function (evt) {
+        search.searchTerm = evt.features[0].attributes.SHORTNAME;
+        console.log("Here " + search.searchTerm);
+    });
+}
+
+dojo.addOnLoad(function () {
+    $('.esri-search__submit-button')[0].click();
+});
+
+let phrase = "I'm a new phrase";
+let attributes = "features=[{'attributes':{'SEARCHPHRASE':" + phrase + "}}]&f=json";
+function doRequest() {
+    request.post("https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/MapServer/0/addFeatures?" + attributes)
+    .then(function (response) {
+        console.log(response);
+    })
+};
+
+doRequest();
+

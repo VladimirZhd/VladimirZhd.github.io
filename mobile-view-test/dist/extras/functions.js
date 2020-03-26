@@ -62,14 +62,23 @@ require([
     'dojo/on',
     'dojox/gesture/swipe',
     'dojo/dom',
-    'dojo/dom-style'
-], function (on, swipe, dom, domStyle, domGeom) {
+    'dojo/dom-style',
+    'dojo/number',
+    'dojo/fx'
+], function (on, swipe, dom, domStyle, number, fx) {
     const slideTarget = dom.byId("near-mobile");
-    let positionY = 0;
+    let positionY = number.parse(domStyle.getComputedStyle(slideTarget).top.match(/(\d+)/)[0]);
+
+    // I think it can be done if event listener is added to that small bar on the bottom
+    //
+    on(slideTarget, 'click', function (evt) {
+        console.log("Sliding");
+        fx.slideTo({ node: slideTarget, top: "-185", units: "px" }).play();
+        positionY = -185;
+    });
 
     on(slideTarget, swipe, function (evt) {
         if ((positionY + evt.dy) > -185) {
-            console.log(slideTarget.style.top);
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
     });
@@ -82,4 +91,6 @@ require([
             positionY = -185;
         }
     });
+
+
 })

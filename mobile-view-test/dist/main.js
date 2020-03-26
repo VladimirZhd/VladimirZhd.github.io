@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/PopupTemplate", "esri/layers/VectorTileLayer", "esri/layers/GraphicsLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/MapImageLayer", "dojo/dom", "dojo/on", "dojo/touch", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest"], function (_Map, _Basemap, _MapView, _Locate, _Search, _PopupTemplate, _VectorTileLayer, _GraphicsLayer, _watchUtils, _Point, _Graphic, _MapImageLayer, _dom, _on, _touch, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/PopupTemplate", "esri/layers/VectorTileLayer", "esri/layers/GraphicsLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "dojo/touch", "esri/tasks/support/Query", "esri/tasks/QueryTask", "esri/core/urlUtils", "dojo/request", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest"], function (_Map, _Basemap, _MapView, _Locate, _Search, _PopupTemplate, _VectorTileLayer, _GraphicsLayer, _watchUtils, _Point, _Graphic, _MapImageLayer, _FeatureLayer, _dom, _on, _dojo, _touch, _Query, _QueryTask, _urlUtils, _request, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -23,11 +23,23 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
 
+    var _FeatureLayer2 = _interopRequireDefault(_FeatureLayer);
+
     var _dom2 = _interopRequireDefault(_dom);
 
     var _on2 = _interopRequireDefault(_on);
 
+    var _dojo2 = _interopRequireDefault(_dojo);
+
     var _touch2 = _interopRequireDefault(_touch);
+
+    var _Query2 = _interopRequireDefault(_Query);
+
+    var _QueryTask2 = _interopRequireDefault(_QueryTask);
+
+    var _urlUtils2 = _interopRequireDefault(_urlUtils);
+
+    var _request2 = _interopRequireDefault(_request);
 
     var _LayerFunctions2 = _interopRequireDefault(_LayerFunctions);
 
@@ -238,7 +250,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     search.on('select-result', function (evt) {
         var floorNumber = evt.target.selectedResult.feature.attributes.FLOOR;
-        console.log(evt.target.selectedResult);
         if (floorNumber) {
             floorButton.setVisibleFloor(floorNumber, lf.floors, _dom2.default);
             view.scale = 400;
@@ -355,7 +366,54 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         findNear.graphicsLayer.removeAll();findNear.currentSelection = null;
     });
 
-    // on(dom.byId('near-mobile'), 'drag', function(e) {
-    //     console.log(e);
-    // })
+    var string = window.location.href;
+    var url = new URL(string);
+    var build = url.searchParams.get("building");
+    var room = url.searchParams.get("room");
+    var booth = url.searchParams.get("booth");
+    var place = url.searchParams.get("space");
+    var space = url.searchParams.get("place");
+
+    if (build != null && room != null) {
+        search.searchTerm = build + room;
+    }
+
+    if (booth != null) {
+        search.searchTerm = booth;
+    }
+
+    if (place != null && space == null) {
+        search.searchTerm = place;
+    }
+
+    if (place != null && space != null) {
+        search.searchTerm = place + space;
+    }
+
+    if (build != null && room == null) {
+        var t = new _QueryTask2.default("https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/16");
+        var q = new _Query2.default();
+
+        q.where = "BUILDINGID = " + "'" + build + "'";
+        q.outFields = "[SHORTNAME]";
+
+        t.execute(q).then(function (evt) {
+            search.searchTerm = evt.features[0].attributes.SHORTNAME;
+            console.log("Here " + search.searchTerm);
+        });
+    }
+
+    _dojo2.default.addOnLoad(function () {
+        $('.esri-search__submit-button')[0].click();
+    });
+
+    var phrase = "I'm a new phrase";
+    var attributes = "features=[{'attributes':{'SEARCHPHRASE':" + phrase + "}}]&f=json";
+    function doRequest() {
+        _request2.default.post("https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/MapServer/0/addFeatures?" + attributes).then(function (response) {
+            console.log(response);
+        });
+    };
+
+    doRequest();
 });
