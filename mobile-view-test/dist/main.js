@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/PopupTemplate", "esri/layers/VectorTileLayer", "esri/layers/GraphicsLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "dojo/touch", "esri/tasks/support/Query", "esri/tasks/QueryTask", "esri/core/urlUtils", "dojo/request", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest"], function (_Map, _Basemap, _MapView, _Locate, _Search, _PopupTemplate, _VectorTileLayer, _GraphicsLayer, _watchUtils, _Point, _Graphic, _MapImageLayer, _FeatureLayer, _dom, _on, _dojo, _touch, _Query, _QueryTask, _urlUtils, _request, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/PopupTemplate", "esri/layers/VectorTileLayer", "esri/layers/GraphicsLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "esri/tasks/support/Query", "esri/tasks/QueryTask", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest"], function (_Map, _Basemap, _MapView, _Locate, _Search, _PopupTemplate, _VectorTileLayer, _GraphicsLayer, _watchUtils, _Point, _Graphic, _MapImageLayer, _FeatureLayer, _dom, _on, _dojo, _Query, _QueryTask, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -31,15 +31,9 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _dojo2 = _interopRequireDefault(_dojo);
 
-    var _touch2 = _interopRequireDefault(_touch);
-
     var _Query2 = _interopRequireDefault(_Query);
 
     var _QueryTask2 = _interopRequireDefault(_QueryTask);
-
-    var _urlUtils2 = _interopRequireDefault(_urlUtils);
-
-    var _request2 = _interopRequireDefault(_request);
 
     var _LayerFunctions2 = _interopRequireDefault(_LayerFunctions);
 
@@ -58,7 +52,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     }
 
     /* create a basemap using a community map with trees*/
-    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -70,6 +63,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     /* Creating a map with our tree basemap*/
+    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -408,12 +402,29 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     var phrase = "I'm a new phrase";
-    var attributes = "features=[{'attributes':{'SEARCHPHRASE':" + phrase + "}}]&f=json";
-    function doRequest() {
-        _request2.default.post("https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/MapServer/0/addFeatures?" + attributes).then(function (response) {
-            console.log(response);
-        });
-    };
+    // let attributes = "[{'attributes':{'SEARCHPHRASE':" + phrase + "}}]";
 
-    doRequest();
+    // fetch("https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0/addFeatures",
+    //     { method: 'POST', mode: 'no-cors', body: JSON.stringify(attributes) }).then((response) => { console.log(response) });
+
+    // addFeatures({
+    //     url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0",
+    //     features: [{
+    //         attributes: { SEARCHPHRASE: "Completely new" }
+    //     }]
+    // }).then(function(response) {console.log(response)});
+    var phraseFeature = new _FeatureLayer2.default({
+        url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
+    });
+
+    var newFeature = {
+
+        "attributes": {
+            "SEARCHPHRASE": phrase
+        }
+
+    };
+    phraseFeature.applyEdits({
+        addFeatures: [newFeature]
+    });
 });

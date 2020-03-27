@@ -21,11 +21,8 @@ import FeatureLayer from 'esri/layers/FeatureLayer';
 import dom from "dojo/dom";
 import on from "dojo/on";
 import dojo from "dojo";
-import touch from 'dojo/touch';
 import query from 'esri/tasks/support/Query';
 import task from 'esri/tasks/QueryTask';
-import urlUtils from 'esri/core/urlUtils';
-import request from 'dojo/request';
 
 import LayerFunctions from "./extras/LayerFunctions";
 import Buttons from "./extras/FloorButtons";
@@ -331,13 +328,28 @@ dojo.addOnLoad(function () {
 });
 
 let phrase = "I'm a new phrase";
-let attributes = "features=[{'attributes':{'SEARCHPHRASE':" + phrase + "}}]&f=json";
-function doRequest() {
-    request.post("https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/MapServer/0/addFeatures?" + attributes)
-    .then(function (response) {
-        console.log(response);
-    })
-};
+// let attributes = "[{'attributes':{'SEARCHPHRASE':" + phrase + "}}]";
 
-doRequest();
+// fetch("https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0/addFeatures",
+//     { method: 'POST', mode: 'no-cors', body: JSON.stringify(attributes) }).then((response) => { console.log(response) });
 
+// addFeatures({
+//     url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0",
+//     features: [{
+//         attributes: { SEARCHPHRASE: "Completely new" }
+//     }]
+// }).then(function(response) {console.log(response)});
+let phraseFeature = new FeatureLayer({
+    url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
+});
+
+let newFeature = {
+
+        "attributes": {
+            "SEARCHPHRASE": phrase
+        }
+
+}
+phraseFeature.applyEdits({
+    addFeatures: [newFeature]
+});
