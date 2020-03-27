@@ -35,9 +35,11 @@ $(document).ready(function () {
         item = "";
     });
 
-    $("#list3 li").click(function () {
+    $("#list3 li").on('click', function () {
         let item = this.id;
-        let toggle = $("#" + item).next("input").attr("id");
+        console.log(item);
+        let toggle = item.slice(14);
+        console.log(toggle);
         $("#" + toggle).click();
         item = "";
     });

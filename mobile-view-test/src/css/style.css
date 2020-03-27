@@ -97,7 +97,7 @@ body,
   width: 320px;
   left: -340px;
   height: 100%;
-  z-index: 1;
+  z-index: 2;
   background-color: white;
   overflow: scroll; }
 
@@ -581,3 +581,8 @@ h4 {
   padding-right: 8px;
   margin-bottom: -10px;
   content: ''; }
+
+.parking-symbology {
+  position: relative;
+  top: 25px;
+  right: 20px; }

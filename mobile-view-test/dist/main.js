@@ -377,11 +377,11 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
 
     var pl = new _ParkingLayer2.default();
 
-    (0, _on2.default)(_dom2.default.byId('event'), 'click', function () {
-        pl.turnOnParkingLayer('event', map, _dom2.default.byId('event').checked);
+    (0, _on2.default)(_dom2.default.byId('event'), 'click', function (e) {
+        e.stopPropagation();pl.turnOnParkingLayer('event', map, _dom2.default.byId('event').checked);
     });
-    (0, _on2.default)(_dom2.default.byId('child'), 'click', function () {
-        pl.turnOnParkingLayer('child', map, _dom2.default.byId('child').checked);
+    (0, _on2.default)(_dom2.default.byId('child'), 'click', function (e) {
+        e.stopImmediatePropagation();pl.turnOnParkingLayer('child', map, _dom2.default.byId('child').checked);
     });
     (0, _on2.default)(_dom2.default.byId('staff'), 'click', function () {
         pl.turnOnParkingLayer('staff', map, _dom2.default.byId('staff').checked);

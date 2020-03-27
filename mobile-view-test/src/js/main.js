@@ -299,8 +299,8 @@ on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAl
 
 let pl = new ParkingLayer();
 
-on(dom.byId('event'), 'click', function () { pl.turnOnParkingLayer('event', map, dom.byId('event').checked) });
-on(dom.byId('child'), 'click', function () { pl.turnOnParkingLayer('child', map, dom.byId('child').checked) });
+on(dom.byId('event'), 'click', function (e) { e.stopPropagation(); pl.turnOnParkingLayer('event', map, dom.byId('event').checked) });
+on(dom.byId('child'), 'click', function (e) { e.stopImmediatePropagation(); pl.turnOnParkingLayer('child', map, dom.byId('child').checked) });
 on(dom.byId('staff'), 'click', function () { pl.turnOnParkingLayer('staff', map, dom.byId('staff').checked) });
 on(dom.byId('ward'), 'click', function () { pl.turnOnParkingLayer('ward', map, dom.byId('ward').checked) });
 on(dom.byId('north'), 'click', function () { pl.turnOnParkingLayer('north', map, dom.byId('north').checked) });
