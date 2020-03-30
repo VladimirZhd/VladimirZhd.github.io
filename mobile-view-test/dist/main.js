@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "esri/tasks/support/Query", "esri/tasks/QueryTask", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology"], function (_Map, _Basemap, _request, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _Graphic, _FeatureLayer, _dom, _on, _dojo, _Query, _QueryTask, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology) {
+define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "esri/tasks/support/Query", "esri/tasks/QueryTask", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology", "./extras/GetConnected"], function (_Map, _Basemap, _request, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _Graphic, _FeatureLayer, _dom, _on, _dojo, _Query, _QueryTask, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology, _GetConnected) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -47,6 +47,8 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
 
     var _ParkingSymbology2 = _interopRequireDefault(_ParkingSymbology);
 
+    var _GetConnected2 = _interopRequireDefault(_GetConnected);
+
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
             default: obj
@@ -54,7 +56,6 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
     }
 
     /* create a basemap using a community map with trees*/
-    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -66,6 +67,7 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
     });
 
     /* Creating a map with our tree basemap*/
+    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -103,6 +105,7 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
 
     if (screen.width >= 1024) {
         view.on('click', function (evt) {
+            evt.stopPropagation;
             var locationOnClick = new _Point2.default({
                 latitude: evt.mapPoint.latitude,
                 longitude: evt.mapPoint.longitude
@@ -443,10 +446,10 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
 
     var pl = new _ParkingLayer2.default();
 
-    (0, _on2.default)(_dom2.default.byId('event'), 'click', function (e) {
-        e.stopPropagation();pl.turnOnParkingLayer('event', map, _dom2.default.byId('event').checked);
+    (0, _on2.default)(_dom2.default.byId('event'), 'click', function () {
+        pl.turnOnParkingLayer('event', map, _dom2.default.byId('event').checked);
     });
-    (0, _on2.default)(_dom2.default.byId('child'), 'click', function (e) {
+    (0, _on2.default)(_dom2.default.byId('child'), 'click', function () {
         pl.turnOnParkingLayer('child', map, _dom2.default.byId('child').checked);
     });
     (0, _on2.default)(_dom2.default.byId('staff'), 'click', function () {
@@ -478,6 +481,45 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
     });
     (0, _on2.default)(_dom2.default.byId('visitors'), 'click', function () {
         pl.turnOnParkingLayer('visitors', map, _dom2.default.byId('visitors').checked);
+    });
+
+    var gt = new _GetConnected2.default();
+
+    (0, _on2.default)(_dom2.default.byId('convocation'), 'click', function () {
+        gt.turnOnLayer('convocation', map, _dom2.default.byId('convocation').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('parking'), 'click', function () {
+        gt.turnOnLayer('parking', map, _dom2.default.byId('parking').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('friday-events'), 'click', function () {
+        gt.turnOnLayer('friday-events', map, _dom2.default.byId('friday-events').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('friday-registration'), 'click', function () {
+        gt.turnOnLayer('friday-registration', map, _dom2.default.byId('friday-registration').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('saturday-events'), 'click', function () {
+        gt.turnOnLayer('saturday-events', map, _dom2.default.byId('saturday-events').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('saturday-registration'), 'click', function () {
+        gt.turnOnLayer('saturday-registration', map, _dom2.default.byId('saturday-registration').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('advising'), 'click', function () {
+        gt.turnOnLayer('advising', map, _dom2.default.byId('advising').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('bookstore'), 'click', function () {
+        gt.turnOnLayer('bookstore', map, _dom2.default.byId('bookstore').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('finance'), 'click', function () {
+        gt.turnOnLayer('finance', map, _dom2.default.byId('finance').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('health'), 'click', function () {
+        gt.turnOnLayer('health', map, _dom2.default.byId('health').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('iCard'), 'click', function () {
+        gt.turnOnLayer('iCard', map, _dom2.default.byId('iCard').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('parking-permit'), 'click', function () {
+        gt.turnOnLayer('parking-permit', map, _dom2.default.byId('parking-permit').checked);
     });
 
     var ps = new _ParkingSymbology2.default();

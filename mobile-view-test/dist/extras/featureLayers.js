@@ -163,7 +163,6 @@ define([
         },
 
         turnOnLayer: function (layerId, map, checked) {
-            console.log(checked);
             switch (layerId) {
                 case 'baby':
                     if (checked == true) {

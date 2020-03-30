@@ -13,48 +13,154 @@ define([
                 res.data.layers.forEach((layer) => {
                     let layerName = layer.layerName;
                     let symbol = layer.legend[0].imageData
-                    let img = "<img class='parking-symbology' src=\"data:image/png;base64," + symbol + "\" />";
 
                     switch (layerName) {
                         case 'Event Parking':
-                            $('#parking-item--event').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--event:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'Child Lab':
-                            $('#parking-item--child').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--child:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'Faculty / Staff':
-                            $('#parking-item--staff').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--staff:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case '4th Ward':
-                            $('#parking-item--ward').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--ward:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'North':
-                            $('#parking-item--north').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--north:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'South':
-                            $('#parking-item--south').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--south:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'Housing':
-                            $('#parking-item--housing').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--housing:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'Long-Term':
-                            $('#parking-item--long').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--long:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'Winter Long-Term':
-                            $('#parking-item--winterLong').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--winterLong:before { 
+                                content: url(data:image/png;base64,${symbol});
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'FW Long-Term':
-                            $('#parking-item--fwLong').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--fwLong:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'Economy':
-                            $('#parking-item--economy').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--economy:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         case 'Visitors':
-                            $('#parking-item--visitors').before(img);
+                            document.styleSheets[1].insertRule(`#parking-item--visitors:before { 
+                                content: url(data:image/png;base64,${symbol}); 
+                                background-size: 30px 30px;
+                                background-repeat: no-repeat;
+                                display: inline-block;
+                                width: 30px;
+                                height: 30px;
+                                padding-right: 8px;
+                                margin-bottom: -10px;
+                            }`, 0);
                             break;
                         default:
                     }
-                    // console.log(symbol);
                 })
             }).catch((err) => {
                 console.error(err);

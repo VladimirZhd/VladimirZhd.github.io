@@ -14,45 +14,11 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555; }
 
-input[type=checkbox] {
+input[type='checkbox'] {
   height: 0;
   width: 0;
   visibility: hidden;
   outline: none; }
-
-label {
-  cursor: pointer;
-  text-indent: -9999px;
-  width: 35px;
-  height: 20px;
-  background: grey;
-  display: block;
-  border-radius: 100px;
-  position: relative;
-  outline: none;
-  padding: 0;
-  margin: 0; }
-
-label:after {
-  content: '';
-  position: absolute;
-  top: 2.5px;
-  left: 5px;
-  width: 15px;
-  height: 15px;
-  background: #fff;
-  border-radius: 90px;
-  transition: 0.3s; }
-
-input:checked + label {
-  background: #bada55; }
-
-input:checked + label:after {
-  left: calc(100% - 5px);
-  transform: translateX(-100%); }
-
-label:active:after {
-  width: 10px; }
 
 * {
   box-sizing: border-box; }
@@ -212,19 +178,13 @@ body,
   .menu-list {
     list-style: none; }
     .menu-list li {
-      padding: 0em 1em;
+      padding: 0.5rem 1rem;
       font-size: 18px;
-      cursor: pointer; }
-      .menu-list li a {
-        text-decoration: none;
-        color: black; }
-        .menu-list li a:hover {
-          color: grey; }
-      .menu-list li label {
-        position: relative;
-        left: 200px;
-        bottom: 20px;
-        margin: 0; }
+      cursor: pointer;
+      display: flex; }
+      .menu-list li i {
+        margin-left: auto;
+        color: gray; }
   .menu-h3 {
     margin-left: 3em;
     cursor: pointer; }
@@ -432,7 +392,9 @@ hr {
     display: none; } }
 
 #campus-dropdown,
-#parking-dropdown {
+#parking-dropdown,
+#graduation-dropdown,
+#connected-dropdown {
   display: none; }
 
 h4 {
@@ -582,7 +544,134 @@ h4 {
   margin-bottom: -10px;
   content: ''; }
 
-.parking-symbology {
-  position: relative;
-  top: 25px;
-  right: 20px; }
+#connected-item--friday-events:before {
+  background-image: url("../img/getConnected/fridaygetconnectedevent.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#connected-item--friday-registration:before {
+  background-image: url("../img/getConnected/fridayregistration.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#connected-item--saturday-events:before {
+  background-image: url("../img/getConnected/saturdaygetconnectedevent.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#connected-item--saturday-registration:before {
+  background-image: url("../img/getConnected/saturdayregistration.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#connected-item--advising:before {
+  background-image: url("../img/getConnected/advising.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#connected-item--bookstore:before {
+  background-image: url("../img/getConnected/bookstore.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#connected-item--finance:before {
+  background-image: url("../img/getConnected/finance.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#connected-item--health:before {
+  background-image: url("../img/getConnected/health.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#connected-item--iCard:before {
+  background-image: url("../img/getConnected/i-card.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#connected-item--parking-permit:before {
+  background-image: url("../img/getConnected/parkingpermit.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#graduation-item--convocation:before {
+  background-image: url("../img/graduation/convocation.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#graduation-item--parking:before {
+  background-image: url("../img/graduation/Parking.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
