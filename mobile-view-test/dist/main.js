@@ -1,11 +1,9 @@
-define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "esri/tasks/support/Query", "esri/tasks/QueryTask", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology", "./extras/GetConnected"], function (_Map, _Basemap, _request, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _Graphic, _FeatureLayer, _dom, _on, _dojo, _Query, _QueryTask, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology, _GetConnected) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "esri/tasks/support/Query", "esri/tasks/QueryTask", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology", "./extras/GetConnected"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _FeatureLayer, _dom, _on, _dojo, _Query, _QueryTask, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology, _GetConnected) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
 
     var _Basemap2 = _interopRequireDefault(_Basemap);
-
-    var _request2 = _interopRequireDefault(_request);
 
     var _MapView2 = _interopRequireDefault(_MapView);
 
@@ -18,8 +16,6 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
     var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
 
     var _Point2 = _interopRequireDefault(_Point);
-
-    var _Graphic2 = _interopRequireDefault(_Graphic);
 
     var _FeatureLayer2 = _interopRequireDefault(_FeatureLayer);
 

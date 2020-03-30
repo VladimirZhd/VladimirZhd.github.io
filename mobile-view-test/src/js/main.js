@@ -1,7 +1,6 @@
 /* import all of the libraries from esri that we need to use */
 import Map from "esri/Map";
 import Basemap from "esri/Basemap";
-import esriRequest from 'esri/request';
 import MapView from "esri/views/MapView";
 
 import Locate from "esri/widgets/Locate";
@@ -13,7 +12,6 @@ import { whenFalse } from "esri/core/watchUtils";
 import { whenTrueOnce } from "esri/core/watchUtils";
 import { whenFalseOnce } from "esri/core/watchUtils";
 import Point from 'esri/geometry/Point';
-import Graphic from 'esri/Graphic';
 import FeatureLayer from 'esri/layers/FeatureLayer';
 
 import dom from "dojo/dom";

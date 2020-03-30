@@ -94,7 +94,6 @@ define([
                     result.then(function (evt) {
                         view.center = evt[2];
                         view.extent = evt[1];
-                        console.log(this.currentSelection);
                         evt[0].features.forEach(function (feature) {
                             if (feature.attributes.FLOOR == floor) {
                                 count++;
@@ -380,7 +379,6 @@ define([
                 layerBufferWebMercator = webMercatorUtils.geographicToWebMercator(layerBuffer);
                 tempR = await this.queryNearest(featureLayer, layerBufferWebMercator).then(function (evt) {
                     length = evt.features.length;
-                    console.log(length);
                     return evt;
                 });
                 increment += 25;
