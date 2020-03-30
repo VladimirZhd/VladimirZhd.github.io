@@ -24,6 +24,7 @@ import Sources from "./extras/Sources";
 import FindNearest from "./extras/FindNearest";
 import ParkingLayer from "./extras/ParkingLayer";
 import ParkingSymbology from "./extras/ParkingSymbology";
+import GetConnected from "./extras/GetConnected";
 
 
 
@@ -81,6 +82,7 @@ let device = isMobileDevice();  //calling function to identify the device
 
 if (screen.width >= 1024) {
     view.on('click', function (evt) {
+        evt.stopPropagation;
         let locationOnClick = new Point({
             latitude: evt.mapPoint.latitude,
             longitude: evt.mapPoint.longitude
@@ -299,8 +301,8 @@ on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAl
 
 let pl = new ParkingLayer();
 
-on(dom.byId('event'), 'click', function (e) { e.stopPropagation(); pl.turnOnParkingLayer('event', map, dom.byId('event').checked) });
-on(dom.byId('child'), 'click', function (e) { e.stopImmediatePropagation(); pl.turnOnParkingLayer('child', map, dom.byId('child').checked) });
+on(dom.byId('event'), 'click', function () { pl.turnOnParkingLayer('event', map, dom.byId('event').checked) });
+on(dom.byId('child'), 'click', function () { pl.turnOnParkingLayer('child', map, dom.byId('child').checked) });
 on(dom.byId('staff'), 'click', function () { pl.turnOnParkingLayer('staff', map, dom.byId('staff').checked) });
 on(dom.byId('ward'), 'click', function () { pl.turnOnParkingLayer('ward', map, dom.byId('ward').checked) });
 on(dom.byId('north'), 'click', function () { pl.turnOnParkingLayer('north', map, dom.byId('north').checked) });
@@ -312,33 +314,20 @@ on(dom.byId('FaWiLT'), 'click', function () { pl.turnOnParkingLayer('FaWiLT', ma
 on(dom.byId('economy'), 'click', function () { pl.turnOnParkingLayer('economy', map, dom.byId('economy').checked) });
 on(dom.byId('visitors'), 'click', function () { pl.turnOnParkingLayer('visitors', map, dom.byId('visitors').checked) });
 
+let gt = new GetConnected();
 
-/* Get symbology for parking layers menu */
-// const parkingSymbology = async () => {
-//     esriRequest({
-//         url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/Parking_Lots/MapServer/queryLegends?size=640&f=pjson',
-//         responseType: 'json'
-//     }).then(() => {
-
-//     });
-
-//     parkingLayerLegend.then(function(evt) {
-//         console.log(evt);
-//     })
-//     console.log(parkingLayerLegend);
-
-//     await parkingLayerLegend.then(parkingRequestSucceeded, parkingRequestFailed);
-
-//     function parkingRequestSucceeded(data) {
-//         console.log(data);
-//     }
-
-//     function parkingRequestFailed(error) {
-//         console.log('Error: ', error);
-//     }
-// }
-
-// parkingSymbology();
+on(dom.byId('convocation'), 'click', () => { gt.turnOnLayer('convocation', map, dom.byId('convocation').checked) });
+on(dom.byId('parking'), 'click', () => { gt.turnOnLayer('parking', map, dom.byId('parking').checked) });
+on(dom.byId('friday-events'), 'click', () => { gt.turnOnLayer('friday-events', map, dom.byId('friday-events').checked) });
+on(dom.byId('friday-registration'), 'click', () => { gt.turnOnLayer('friday-registration', map, dom.byId('friday-registration').checked) });
+on(dom.byId('saturday-events'), 'click', () => { gt.turnOnLayer('saturday-events', map, dom.byId('saturday-events').checked) });
+on(dom.byId('saturday-registration'), 'click', () => { gt.turnOnLayer('saturday-registration', map, dom.byId('saturday-registration').checked) });
+on(dom.byId('advising'), 'click', () => { gt.turnOnLayer('advising', map, dom.byId('advising').checked) });
+on(dom.byId('bookstore'), 'click', () => { gt.turnOnLayer('bookstore', map, dom.byId('bookstore').checked) });
+on(dom.byId('finance'), 'click', () => { gt.turnOnLayer('finance', map, dom.byId('finance').checked) });
+on(dom.byId('health'), 'click', () => { gt.turnOnLayer('health', map, dom.byId('health').checked) });
+on(dom.byId('iCard'), 'click', () => { gt.turnOnLayer('iCard', map, dom.byId('iCard').checked) });
+on(dom.byId('parking-permit'), 'click', () => { gt.turnOnLayer('parking-permit', map, dom.byId('parking-permit').checked) });
 
 let ps = new ParkingSymbology();
 ps.getParkingSymbols();

@@ -3,6 +3,8 @@ $(document).ready(function () {
     //function to show the sliding menu
     $(".button-menu").click(function () {
         $(".hide").animate({ left: "0" });
+        $("#near-mobile").css('top', '197px');
+        $('.open-nearest').css('display', 'flex');
     });
     $('.nearest-link').click(function () {
         $('.nearest-div').animate({ left: '0' });
@@ -28,20 +30,17 @@ $(document).ready(function () {
     $("#viewDiv").on("click", function () {
         $(".button-close").click();
     });
-    $("#list2 li").click(function () {
-        let item = this.id;
-        let toggle = $("#" + item).next("input").attr("id");
-        $("#" + toggle).click();
-        item = "";
-    });
 
-    $("#list3 li").on('click', function () {
-        let item = this.id;
-        console.log(item);
-        let toggle = item.slice(14);
-        console.log(toggle);
-        $("#" + toggle).click();
-        item = "";
+    $('li').on('click', function () {
+        this.children[0].click();
+
+        if (this.children[0].checked == true) {
+            $(this.children[1]).css('color', '#bada55');
+            $(this).css('color', '#0076b6');
+        } else {
+            $(this.children[1]).css('color', 'grey');
+            $(this).css('color', 'black');
+        }
     });
 
 
@@ -74,6 +73,14 @@ $(document).ready(function () {
         $('#parking-dropdown').slideToggle(330);
     })
 
+    $('#graduation-drop').on('click', () => {
+        $('#graduation-dropdown').slideToggle(330);
+    });
+
+    $('#connected-drop').on('click', () => {
+        $('#connected-dropdown').slideToggle(330);
+    })
+
     $('.open-nearest').click(() => {
         $('.open-nearest').css('display', 'none');
     });
@@ -99,7 +106,6 @@ require([
 
     on(slideTarget, swipe, function (evt) {
         if ((positionY + evt.dy) > -250) {
-            console.log(slideTarget.style.top);
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
         if ((positionY + evt.dy) >= 140) {
