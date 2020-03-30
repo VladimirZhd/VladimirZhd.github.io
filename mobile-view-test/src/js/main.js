@@ -1,21 +1,19 @@
 /* import all of the libraries from esri that we need to use */
 import Map from "esri/Map";
 import Basemap from "esri/Basemap";
+import esriRequest from 'esri/request';
 import MapView from "esri/views/MapView";
 
 import Locate from "esri/widgets/Locate";
 import Search from "esri/widgets/Search";
 
-import PopupTemplate from 'esri/PopupTemplate';
-
 import VectorTileLayer from "esri/layers/VectorTileLayer";
-import GraphicsLayer from 'esri/layers/GraphicsLayer';
+import MapImageLayer from 'esri/layers/MapImageLayer';
 import { whenFalse } from "esri/core/watchUtils";
 import { whenTrueOnce } from "esri/core/watchUtils";
 import { whenFalseOnce } from "esri/core/watchUtils";
 import Point from 'esri/geometry/Point';
 import Graphic from 'esri/Graphic';
-import MapImageLayer from 'esri/layers/MapImageLayer';
 import FeatureLayer from 'esri/layers/FeatureLayer';
 
 import dom from "dojo/dom";
@@ -29,8 +27,8 @@ import Buttons from "./extras/FloorButtons";
 import MenuLayers from "./extras/FeatureLayers";
 import Sources from "./extras/Sources";
 import FindNearest from "./extras/FindNearest";
-
-
+import ParkingLayer from "./extras/ParkingLayer";
+import ParkingSymbology from "./extras/ParkingSymbology";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -213,15 +211,41 @@ search.on('select-result', function (evt) {
     }
 });
 
+search.on('search-complete', function (evt) {
+    let phraseFeature = new FeatureLayer({
+        url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
+    });
+
+    if (search.searchTerm != "") {
+        let newFeature = {
+            "attributes": {
+                "SEARCHPHRASE": search.searchTerm
+            }
+        }
+        phraseFeature.applyEdits({
+            addFeatures: [newFeature]
+        });
+    }
+})
+
+let searchLog = '';
+search.on('search-start', () => {
+    searchLog += [search.searchTerm] + ", ";
+})
+
 /* Insert the search widget to the top right of the page*/
 view.ui.add(search, "top-right");
 /* For the bigger screens we want to move the search widget to  */
 if (screen.width > 600) {
     view.ui.move(search, "top-left");
 }
+console.log(device);
 /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
 if (screen.width >= 1024 && device == true) {
     document.getElementById("floorLayers").style.bottom = "110px";
+}
+if (screen.width <= 1024) {
+    document.getElementById("near-mobile").style.display = "block";
 }
 
 let lf = new LayerFunctions({});
@@ -283,6 +307,10 @@ on(dom.byId('bw-printer'), 'click', function () { fl.turnOnLayer('bw-printer', m
 on(dom.byId('clr-printer'), 'click', function () { fl.turnOnLayer('clr-printer', map, dom.byId('clr-printer').checked) });
 on(dom.byId('copy-scan'), 'click', function () { fl.turnOnLayer('copy-scan', map, dom.byId('copy-scan').checked) });
 on(dom.byId('vending'), 'click', function () { fl.turnOnLayer('vending', map, dom.byId('vending').checked) });
+on(dom.byId('outdoor'), 'click', function () { fl.turnOnLayer('outdoor', map, dom.byId('outdoor').checked) });
+on(dom.byId('spaces'), 'click', function () { fl.turnOnLayer('spaces', map, dom.byId('spaces').checked) });
+on(dom.byId('playfield'), 'click', function () { fl.turnOnLayer('playfield', map, dom.byId('playfield').checked) });
+on(dom.byId('boundary'), 'click', function () { fl.turnOnLayer('boundary', map, dom.byId('boundary').checked) });
 
 on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.currentSelection = null; });
 
@@ -327,29 +355,21 @@ dojo.addOnLoad(function () {
     $('.esri-search__submit-button')[0].click();
 });
 
-let phrase = "I'm a new phrase";
-// let attributes = "[{'attributes':{'SEARCHPHRASE':" + phrase + "}}]";
+let pl = new ParkingLayer();
 
-// fetch("https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0/addFeatures",
-//     { method: 'POST', mode: 'no-cors', body: JSON.stringify(attributes) }).then((response) => { console.log(response) });
+on(dom.byId('event'), 'click', function (e) { e.stopPropagation(); pl.turnOnParkingLayer('event', map, dom.byId('event').checked) });
+on(dom.byId('child'), 'click', function (e) { pl.turnOnParkingLayer('child', map, dom.byId('child').checked) });
+on(dom.byId('staff'), 'click', function () { pl.turnOnParkingLayer('staff', map, dom.byId('staff').checked) });
+on(dom.byId('ward'), 'click', function () { pl.turnOnParkingLayer('ward', map, dom.byId('ward').checked) });
+on(dom.byId('north'), 'click', function (e) { pl.turnOnParkingLayer('north', map, dom.byId('north').checked) });
+on(dom.byId('south'), 'click', function () { pl.turnOnParkingLayer('south', map, dom.byId('south').checked) });
+on(dom.byId('housing'), 'click', function () { pl.turnOnParkingLayer('housing', map, dom.byId('housing').checked) });
+on(dom.byId('longTerm'), 'click', function () { pl.turnOnParkingLayer('longTerm', map, dom.byId('longTerm').checked) });
+on(dom.byId('winterLT'), 'click', function () { pl.turnOnParkingLayer('winterLT', map, dom.byId('winterLT').checked) });
+on(dom.byId('FaWiLT'), 'click', function () { pl.turnOnParkingLayer('FaWiLT', map, dom.byId('FaWiLT').checked) });
+on(dom.byId('economy'), 'click', function () { pl.turnOnParkingLayer('economy', map, dom.byId('economy').checked) });
+on(dom.byId('visitors'), 'click', function () { pl.turnOnParkingLayer('visitors', map, dom.byId('visitors').checked) });
 
-// addFeatures({
-//     url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0",
-//     features: [{
-//         attributes: { SEARCHPHRASE: "Completely new" }
-//     }]
-// }).then(function(response) {console.log(response)});
-let phraseFeature = new FeatureLayer({
-    url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
-});
 
-let newFeature = {
-
-        "attributes": {
-            "SEARCHPHRASE": phrase
-        }
-
-}
-phraseFeature.applyEdits({
-    addFeatures: [newFeature]
-});
+let ps = new ParkingSymbology();
+ps.getParkingSymbols();

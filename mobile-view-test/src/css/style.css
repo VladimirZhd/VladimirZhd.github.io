@@ -97,7 +97,7 @@ body,
   width: 320px;
   left: -340px;
   height: 100%;
-  z-index: 1;
+  z-index: 2;
   background-color: white;
   overflow: scroll; }
 
@@ -220,13 +220,14 @@ body,
         color: black; }
         .menu-list li a:hover {
           color: grey; }
-    .menu-list label {
-      position: relative;
-      left: 220px;
-      bottom: 40px;
-      margin: 0; }
+      .menu-list li label {
+        position: relative;
+        left: 200px;
+        bottom: 20px;
+        margin: 0; }
   .menu-h3 {
-    margin-left: 3em; }
+    margin-left: 3em;
+    cursor: pointer; }
   .menu-byui-logo {
     background-color: #0076b6;
     width: 100%;
@@ -248,6 +249,11 @@ body,
 
 .basemap-list {
   display: flex; }
+  .basemap-list li {
+    padding: 0; }
+    .basemap-list li img {
+      width: 80%;
+      margin-left: 1rem; }
 
 .esri-ui-bottom-right {
   display: flex;
@@ -373,19 +379,21 @@ hr {
     margin-top: 15%; } }
 
 .nearest-mobile {
+  display: none;
   z-index: 1;
   background-color: #f8f9fa;
   border-radius: 10px 10px 0 0;
   box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3);
-  margin: 0;
+  margin-top: 268px;
   padding: 0;
   position: absolute;
-  bottom: 0;
+  top: 0;
+  bottom: -400px;
   touch-action: none;
   width: 100%;
-  height: 600px;
+  height: 545px;
   transition: transform 0.3s;
-  transform: translateY(0%) translateY(400px); }
+  transform: translateY(0%) translateY(350px); }
 
 .menu-top {
   width: 100%;
@@ -394,9 +402,187 @@ hr {
 .icons-container {
   margin: 0;
   padding: 0.1rem 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   list-style: none;
   justify-content: space-around; }
   .icons-container li img {
     width: 60%;
+    margin: 1rem;
     margin-left: 1.5rem; }
+
+.open-nearest {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  align-items: center;
+  background-color: white;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  color: #6e6e6e; }
+  .open-nearest i {
+    margin-left: 2rem; }
+  .open-nearest p {
+    margin-left: 2rem;
+    font-weight: 100; }
+
+@media only screen and (min-width: 1024px) {
+  .open-nearest {
+    display: none; } }
+
+#campus-dropdown,
+#parking-dropdown {
+  display: none; }
+
+h4 {
+  margin-top: 0;
+  text-decoration: underline; }
+
+#layer-item--baby:before {
+  background-image: url("../img/changingStation.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--bike:before {
+  background-image: url("../img/bikerack.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--booth:before {
+  background-image: url("../img/booth.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--boundary:before {
+  background-image: url("../img/byuiBoundary.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--food:before {
+  background-image: url("../img/foodAndDining.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--mothers-lounge:before {
+  background-image: url("../img/mothersLounge.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--bw-printer:before {
+  background-image: url("../img/bwprinter.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--clr-printer:before {
+  background-image: url("../img/colorprinter.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--copy-scan:before {
+  background-image: url("../img/copyscanemail.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--outdoor:before {
+  background-image: url("../img/outdoorPlace.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--spaces:before {
+  background-image: url("../img/outdoorSpace.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--playfield:before {
+  background-image: url("../img/playfield.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+#layer-item--vending:before {
+  background-image: url("../img/vendingMachine.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding-right: 8px;
+  margin-bottom: -10px;
+  content: ''; }
+
+.parking-symbology {
+  position: relative;
+  top: 25px;
+  right: 20px; }

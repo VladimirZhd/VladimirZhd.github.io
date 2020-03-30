@@ -14,25 +14,25 @@ define([
         currentFloor: '1',
         currentSelection: null,
         restroom: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/12',
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/10',
         }),
         fountain: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/7'
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/12'
         }),
         elevator: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/3'
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/13'
         }),
         printer: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/11'
-        }),
-        fire: new FeatureLayer({
             url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/8'
         }),
+        fire: new FeatureLayer({
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/11'
+        }),
         aed: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/4'
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/7'
         }),
         vending: new FeatureLayer({
-            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/0'
+            url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/9'
         }),
         graphicsLayer: new GraphicsLayer({}),
 
@@ -57,7 +57,7 @@ define([
             popup.style.display = 'block';
             document.getElementById('found').style.display = 'block';
             document.getElementById('found-floor').innerHTML = floors;
-            setTimeout(function () { popup.style.display = 'none'; }, 4000);
+            setTimeout(function () { popup.style.display = 'none'; }, 3000);
         },
 
         displayNearest: async function (layer, locationPoint, map, view, index) {

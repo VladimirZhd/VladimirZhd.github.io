@@ -14,6 +14,7 @@ $(document).ready(function () {
     $('.button-close').click(function () {
         $('.nearest-div').animate({ left: '-340px' });
     });
+
     /* function to close the sliding menu with a swipe to left we are using a js plugin jquery.touchSwipe here*/
     $(function () {
         $(".hide").swipe({
@@ -34,10 +35,15 @@ $(document).ready(function () {
         item = "";
     });
 
+    $("li").on("click", function() {
+        console.log("Printing alert");
+        this.children[0].click();
+    })
 
     $(".near").on("click", function () {
-        $(".button-close").click();
+        $("#near-mobile").css('top', '197px');
         $('.clear-nearest').css('display', 'flex');
+        $('.esri-ui-bottom-right').css('bottom', '30px')
     });
 
     $(".near-lg").on("click", function () {
@@ -46,12 +52,30 @@ $(document).ready(function () {
 
     $('#btn-clear').on('click', function () {
         $('.clear-nearest').css('display', 'none');
+        if (screen.width < 1024) {
+            $('.open-nearest').css('display', 'flex');
+        }
     });
 
     $('#btn-warning').click(function () {
         $('popup-warning').css('display', 'none');
     });
 
+    $('#campus-drop').click(() => {
+        $('#campus-dropdown').slideToggle(330);
+    });
+
+    $('#parking-drop').click(() => {
+        $('#parking-dropdown').slideToggle(330);
+    })
+
+    $('.open-nearest').click(() => {
+        $('.open-nearest').css('display', 'none');
+    });
+
+    $('#popup-warning').click(() => {
+        $('#popup-warning').css('display', 'none');
+    })
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {
@@ -63,34 +87,37 @@ require([
     'dojox/gesture/swipe',
     'dojo/dom',
     'dojo/dom-style',
-    'dojo/number',
     'dojo/fx'
-], function (on, swipe, dom, domStyle, number, fx) {
+], function (on, swipe, dom, domStyle, fx) {
     const slideTarget = dom.byId("near-mobile");
-    let positionY = number.parse(domStyle.getComputedStyle(slideTarget).top.match(/(\d+)/)[0]);
-
-    // I think it can be done if event listener is added to that small bar on the bottom
-    //
-    on(slideTarget, 'click', function (evt) {
-        console.log("Sliding");
-        fx.slideTo({ node: slideTarget, top: "-185", units: "px" }).play();
-        positionY = -185;
-    });
+    let positionY = 0;
 
     on(slideTarget, swipe, function (evt) {
-        if ((positionY + evt.dy) > -185) {
+        if ((positionY + evt.dy) > -250) {
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
+        }
+        if ((positionY + evt.dy) >= 140) {
+            domStyle.set(slideTarget, { top: "197px" });
+            $('.open-nearest').css('display', 'flex');
+            $('.esri-ui-bottom-right').css('bottom', '30px')
         }
     });
 
     on(slideTarget, swipe.end, function (evt) {
-        if ((positionY + evt.dy) > -185) {
+        if ((positionY + evt.dy) > -250) {
             positionY += (evt.dy - 1);
         }
         else {
-            positionY = -185;
+            positionY = -250;
         }
     });
 
-
+    on(dom.byId('open-nearest'), 'click', () => {
+        fx.slideTo({
+            node: slideTarget,
+            top: '0',
+            units: 'px'
+        }).play();
+        positionY = 0;
+    })
 })

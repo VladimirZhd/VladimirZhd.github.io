@@ -1,9 +1,11 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/PopupTemplate", "esri/layers/VectorTileLayer", "esri/layers/GraphicsLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "esri/tasks/support/Query", "esri/tasks/QueryTask", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest"], function (_Map, _Basemap, _MapView, _Locate, _Search, _PopupTemplate, _VectorTileLayer, _GraphicsLayer, _watchUtils, _Point, _Graphic, _MapImageLayer, _FeatureLayer, _dom, _on, _dojo, _Query, _QueryTask, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest) {
+define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "esri/tasks/support/Query", "esri/tasks/QueryTask", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology"], function (_Map, _Basemap, _request, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _Graphic, _FeatureLayer, _dom, _on, _dojo, _Query, _QueryTask, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
 
     var _Basemap2 = _interopRequireDefault(_Basemap);
+
+    var _request2 = _interopRequireDefault(_request);
 
     var _MapView2 = _interopRequireDefault(_MapView);
 
@@ -11,17 +13,13 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _Search2 = _interopRequireDefault(_Search);
 
-    var _PopupTemplate2 = _interopRequireDefault(_PopupTemplate);
-
     var _VectorTileLayer2 = _interopRequireDefault(_VectorTileLayer);
 
-    var _GraphicsLayer2 = _interopRequireDefault(_GraphicsLayer);
+    var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
 
     var _Point2 = _interopRequireDefault(_Point);
 
     var _Graphic2 = _interopRequireDefault(_Graphic);
-
-    var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
 
     var _FeatureLayer2 = _interopRequireDefault(_FeatureLayer);
 
@@ -45,6 +43,10 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _FindNearest2 = _interopRequireDefault(_FindNearest);
 
+    var _ParkingLayer2 = _interopRequireDefault(_ParkingLayer);
+
+    var _ParkingSymbology2 = _interopRequireDefault(_ParkingSymbology);
+
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
             default: obj
@@ -52,6 +54,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     }
 
     /* create a basemap using a community map with trees*/
+    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -63,7 +66,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     /* Creating a map with our tree basemap*/
-    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -252,15 +254,41 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         }
     });
 
+    search.on('search-complete', function (evt) {
+        var phraseFeature = new _FeatureLayer2.default({
+            url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
+        });
+
+        if (search.searchTerm != "") {
+            var newFeature = {
+                "attributes": {
+                    "SEARCHPHRASE": search.searchTerm
+                }
+            };
+            phraseFeature.applyEdits({
+                addFeatures: [newFeature]
+            });
+        }
+    });
+
+    var searchLog = '';
+    search.on('search-start', function () {
+        searchLog += [search.searchTerm] + ", ";
+    });
+
     /* Insert the search widget to the top right of the page*/
     view.ui.add(search, "top-right");
     /* For the bigger screens we want to move the search widget to  */
     if (screen.width > 600) {
         view.ui.move(search, "top-left");
     }
+    console.log(device);
     /* If large screen and not a mobile device we move buttons closer to zoom widget to get rid of the gap between them */
     if (screen.width >= 1024 && device == true) {
         document.getElementById("floorLayers").style.bottom = "110px";
+    }
+    if (screen.width <= 1024) {
+        document.getElementById("near-mobile").style.display = "block";
     }
 
     var lf = new _LayerFunctions2.default({});
@@ -355,6 +383,18 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     (0, _on2.default)(_dom2.default.byId('vending'), 'click', function () {
         fl.turnOnLayer('vending', map, _dom2.default.byId('vending').checked);
     });
+    (0, _on2.default)(_dom2.default.byId('outdoor'), 'click', function () {
+        fl.turnOnLayer('outdoor', map, _dom2.default.byId('outdoor').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('spaces'), 'click', function () {
+        fl.turnOnLayer('spaces', map, _dom2.default.byId('spaces').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('playfield'), 'click', function () {
+        fl.turnOnLayer('playfield', map, _dom2.default.byId('playfield').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('boundary'), 'click', function () {
+        fl.turnOnLayer('boundary', map, _dom2.default.byId('boundary').checked);
+    });
 
     (0, _on2.default)(_dom2.default.byId('btn-clear'), 'click', function () {
         findNear.graphicsLayer.removeAll();findNear.currentSelection = null;
@@ -401,30 +441,45 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         $('.esri-search__submit-button')[0].click();
     });
 
-    var phrase = "I'm a new phrase";
-    // let attributes = "[{'attributes':{'SEARCHPHRASE':" + phrase + "}}]";
+    var pl = new _ParkingLayer2.default();
 
-    // fetch("https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0/addFeatures",
-    //     { method: 'POST', mode: 'no-cors', body: JSON.stringify(attributes) }).then((response) => { console.log(response) });
-
-    // addFeatures({
-    //     url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0",
-    //     features: [{
-    //         attributes: { SEARCHPHRASE: "Completely new" }
-    //     }]
-    // }).then(function(response) {console.log(response)});
-    var phraseFeature = new _FeatureLayer2.default({
-        url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
+    (0, _on2.default)(_dom2.default.byId('event'), 'click', function (e) {
+        e.stopPropagation();pl.turnOnParkingLayer('event', map, _dom2.default.byId('event').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('child'), 'click', function (e) {
+        pl.turnOnParkingLayer('child', map, _dom2.default.byId('child').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('staff'), 'click', function () {
+        pl.turnOnParkingLayer('staff', map, _dom2.default.byId('staff').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('ward'), 'click', function () {
+        pl.turnOnParkingLayer('ward', map, _dom2.default.byId('ward').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('north'), 'click', function (e) {
+        pl.turnOnParkingLayer('north', map, _dom2.default.byId('north').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('south'), 'click', function () {
+        pl.turnOnParkingLayer('south', map, _dom2.default.byId('south').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('housing'), 'click', function () {
+        pl.turnOnParkingLayer('housing', map, _dom2.default.byId('housing').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('longTerm'), 'click', function () {
+        pl.turnOnParkingLayer('longTerm', map, _dom2.default.byId('longTerm').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('winterLT'), 'click', function () {
+        pl.turnOnParkingLayer('winterLT', map, _dom2.default.byId('winterLT').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('FaWiLT'), 'click', function () {
+        pl.turnOnParkingLayer('FaWiLT', map, _dom2.default.byId('FaWiLT').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('economy'), 'click', function () {
+        pl.turnOnParkingLayer('economy', map, _dom2.default.byId('economy').checked);
+    });
+    (0, _on2.default)(_dom2.default.byId('visitors'), 'click', function () {
+        pl.turnOnParkingLayer('visitors', map, _dom2.default.byId('visitors').checked);
     });
 
-    var newFeature = {
-
-        "attributes": {
-            "SEARCHPHRASE": phrase
-        }
-
-    };
-    phraseFeature.applyEdits({
-        addFeatures: [newFeature]
-    });
+    var ps = new _ParkingSymbology2.default();
+    ps.getParkingSymbols();
 });
