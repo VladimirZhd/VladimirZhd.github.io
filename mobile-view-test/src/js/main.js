@@ -13,9 +13,14 @@ import { whenFalse } from "esri/core/watchUtils";
 import { whenTrueOnce } from "esri/core/watchUtils";
 import { whenFalseOnce } from "esri/core/watchUtils";
 import Point from 'esri/geometry/Point';
+import Graphic from 'esri/Graphic';
+import FeatureLayer from 'esri/layers/FeatureLayer';
 
 import dom from "dojo/dom";
 import on from "dojo/on";
+import dojo from "dojo";
+import query from 'esri/tasks/support/Query';
+import task from 'esri/tasks/QueryTask';
 
 import LayerFunctions from "./extras/LayerFunctions";
 import Buttons from "./extras/FloorButtons";
@@ -25,9 +30,6 @@ import FindNearest from "./extras/FindNearest";
 import ParkingLayer from "./extras/ParkingLayer";
 import ParkingSymbology from "./extras/ParkingSymbology";
 import GetConnected from "./extras/GetConnected";
-
-
-
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -203,7 +205,6 @@ search.sources = sources;
 
 search.on('select-result', function (evt) {
     let floorNumber = evt.target.selectedResult.feature.attributes.FLOOR;
-    console.log(evt.target.selectedResult);
     if (floorNumber) {
         floorButton.setVisibleFloor(floorNumber, lf.floors, dom);
         view.scale = 400;
@@ -212,10 +213,26 @@ search.on('select-result', function (evt) {
     }
 });
 
+search.on('search-complete', function (evt) {
+    let phraseFeature = new FeatureLayer({
+        url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
+    });
+
+    if (search.searchTerm != "") {
+        let newFeature = {
+            "attributes": {
+                "SEARCHPHRASE": search.searchTerm
+            }
+        }
+        phraseFeature.applyEdits({
+            addFeatures: [newFeature]
+        });
+    }
+})
+
 let searchLog = '';
 search.on('search-start', () => {
     searchLog += [search.searchTerm] + ", ";
-    console.log(searchLog);
 })
 
 /* Insert the search widget to the top right of the page*/
@@ -299,13 +316,54 @@ on(dom.byId('boundary'), 'click', function () { fl.turnOnLayer('boundary', map, 
 
 on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAll(); findNear.currentSelection = null; });
 
+let string = window.location.href;
+let url = new URL(string);
+let build = url.searchParams.get("building");
+let room = url.searchParams.get("room");
+let booth = url.searchParams.get("booth");
+let place = url.searchParams.get("space");
+let space = url.searchParams.get("place");
+
+if (build != null && room != null) {
+    search.searchTerm = build + room;
+}
+
+if (booth != null) {
+    search.searchTerm = booth;
+}
+
+if (place != null && space == null) {
+    search.searchTerm = place;
+}
+
+if (place != null && space != null) {
+    search.searchTerm = place + space;
+}
+
+if (build != null && room == null) {
+    let t = new task("https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/16");
+    let q = new query();
+
+    q.where = "BUILDINGID = " + "'" + build + "'";
+    q.outFields = "[SHORTNAME]";
+
+    t.execute(q).then(function (evt) {
+        search.searchTerm = evt.features[0].attributes.SHORTNAME;
+        console.log("Here " + search.searchTerm);
+    });
+}
+
+dojo.addOnLoad(function () {
+    $('.esri-search__submit-button')[0].click();
+});
+
 let pl = new ParkingLayer();
 
 on(dom.byId('event'), 'click', function () { pl.turnOnParkingLayer('event', map, dom.byId('event').checked) });
 on(dom.byId('child'), 'click', function () { pl.turnOnParkingLayer('child', map, dom.byId('child').checked) });
 on(dom.byId('staff'), 'click', function () { pl.turnOnParkingLayer('staff', map, dom.byId('staff').checked) });
 on(dom.byId('ward'), 'click', function () { pl.turnOnParkingLayer('ward', map, dom.byId('ward').checked) });
-on(dom.byId('north'), 'click', function () { pl.turnOnParkingLayer('north', map, dom.byId('north').checked) });
+on(dom.byId('north'), 'click', function (e) { pl.turnOnParkingLayer('north', map, dom.byId('north').checked) });
 on(dom.byId('south'), 'click', function () { pl.turnOnParkingLayer('south', map, dom.byId('south').checked) });
 on(dom.byId('housing'), 'click', function () { pl.turnOnParkingLayer('housing', map, dom.byId('housing').checked) });
 on(dom.byId('longTerm'), 'click', function () { pl.turnOnParkingLayer('longTerm', map, dom.byId('longTerm').checked) });

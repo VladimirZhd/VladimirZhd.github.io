@@ -166,12 +166,14 @@ define([
             switch (layerId) {
                 case 'baby':
                     if (checked == true) {
+                        map.remove(this.featureLayerBaby);
                         let sql = "FLOOR = " + this.currentFloor;
                         this.featureLayerBaby.definitionExpression = sql;
                         map.add(this.featureLayerBaby);
                     }
-                    else
+                    else {
                         map.remove(this.featureLayerBaby);
+                    }
                     break;
 
                 case 'bike':
@@ -183,6 +185,7 @@ define([
 
                 case 'booth':
                     if (checked == true) {
+                        map.remove(this.featureLayerBooth);
                         let sql = "FLOOR = '" + this.currentFloor + "'";
                         if (this.currentFloor == '1') {
                             sql += " OR FLOOR = 'EX'";
@@ -197,6 +200,7 @@ define([
 
                 case 'food':
                     if (checked == true) {
+                        map.remove(this.featureLayerFood);
                         let sql = "FLOOR = " + this.currentFloor;
                         this.featureLayerFood.definitionExpression = sql;
                         map.add(this.featureLayerFood);
@@ -207,6 +211,7 @@ define([
 
                 case 'mothers-lounge':
                     if (checked == true) {
+                        map.remove(this.featureLayerMothersLounge);
                         let sql = "FLOOR = " + this.currentFloor;
                         this.featureLayerMothersLounge.definitionExpression = sql;
                         map.add(this.featureLayerMothersLounge);
@@ -217,6 +222,7 @@ define([
 
                 case 'bw-printer':
                     if (checked == true) {
+                        map.remove(this.featureLayerBwPrinter);
                         let sql = "Floor = '" + this.currentFloor + "'";
                         this.featureLayerBwPrinter.definitionExpression = sql;
                         map.add(this.featureLayerBwPrinter);
@@ -227,6 +233,7 @@ define([
 
                 case 'clr-printer':
                     if (checked == true) {
+                        map.remove(this.featureLayerClrPrinter);
                         let sql = "FLOOR = " + this.currentFloor;
                         this.featureLayerClrPrinter.definitionExpression = sql;
                         map.add(this.featureLayerClrPrinter);
@@ -237,6 +244,7 @@ define([
 
                 case 'copy-scan':
                     if (checked == true) {
+                        map.remove(this.featureLayerCopyScan);
                         let sql = "FLOOR = " + this.currentFloor;
                         this.featureLayerCopyScan.definitionExpression = sql;
                         map.add(this.featureLayerCopyScan);
@@ -247,6 +255,7 @@ define([
 
                 case 'vending':
                     if (checked == true) {
+                        map.remove(this.featureLayerVending);
                         let sql = "FLOOR = " + this.currentFloor;
                         this.featureLayerVending.definitionExpression = sql;
                         map.add(this.featureLayerVending);
