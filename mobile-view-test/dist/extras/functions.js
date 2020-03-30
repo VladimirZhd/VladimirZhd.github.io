@@ -4,7 +4,9 @@ $(document).ready(function () {
     $(".button-menu").click(function () {
         $(".hide").animate({ left: "0" });
         $("#near-mobile").css('top', '197px');
-        $('.open-nearest').css('display', 'flex');
+        if (screen.width < 1024) {
+            $('.open-nearest').css('display', 'flex');
+        }
     });
     $('.nearest-link').click(function () {
         $('.nearest-div').animate({ left: '0' });
