@@ -233,24 +233,14 @@ body,
     list-style: none;
 
     li {
-      padding: 0em 1em;
+      padding: 0.5rem 1rem;
       font-size: 18px;
       cursor: pointer;
+      display: flex;
 
-      a {
-        text-decoration: none;
-        color: black;
-
-        &:hover {
-          color: grey;
-        }
-      }
-
-      label {
-        position: relative;
-        left: 200px;
-        bottom: 20px;
-        margin: 0;
+      i {
+        margin-left: auto;
+        color: gray;
       }
     }
   }
@@ -550,7 +540,9 @@ hr {
 }
 
 #campus-dropdown,
-#parking-dropdown {
+#parking-dropdown,
+#graduation-dropdown,
+#connected-dropdown {
   display: none;
 }
 
@@ -743,8 +735,174 @@ h4 {
   }
 }
 
-.parking-symbology {
-  position: relative;
-  top: 25px;
-  right: 20px;
+#connected-item {
+  &--friday-events {
+    &:before {
+      background-image: url('../img/getConnected/fridaygetconnectedevent.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--friday-registration {
+    &:before {
+      background-image: url('../img/getConnected/fridayregistration.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--saturday-events {
+    &:before {
+      background-image: url('../img/getConnected/saturdaygetconnectedevent.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--saturday-registration {
+    &:before {
+      background-image: url('../img/getConnected/saturdayregistration.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--advising {
+    &:before {
+      background-image: url('../img/getConnected/advising.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--bookstore {
+    &:before {
+      background-image: url('../img/getConnected/bookstore.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--finance {
+    &:before {
+      background-image: url('../img/getConnected/finance.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--health {
+    &:before {
+      background-image: url('../img/getConnected/health.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--iCard {
+    &:before {
+      background-image: url('../img/getConnected/i-card.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--parking-permit {
+    &:before {
+      background-image: url('../img/getConnected/parkingpermit.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+}
+
+#graduation-item {
+  &--convocation {
+    &:before {
+      background-image: url('../img/graduation/convocation.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
+
+  &--parking {
+    &:before {
+      background-image: url('../img/graduation/Parking.png');
+      background-size: 30px 30px;
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-right: 8px;
+      margin-bottom: -10px;
+      content: '';
+    }
+  }
 }
