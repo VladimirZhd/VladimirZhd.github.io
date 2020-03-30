@@ -33,7 +33,7 @@ $(document).ready(function () {
 
     $('li').on('click', function () {
         this.children[0].click();
-
+        $(".hide").animate({ left: "-340px" });
         if (this.children[0].checked == true) {
             $(this.children[1]).css('color', '#bada55');
             $(this).css('color', '#0076b6');
