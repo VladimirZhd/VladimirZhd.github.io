@@ -1,3 +1,4 @@
+/* Module to add features from menu */
 define([
     'dojo/_base/declare',
     'esri/layers/FeatureLayer',
@@ -9,6 +10,7 @@ define([
     return declare(null, {
         currentFloor: "1",
 
+        /* Create layers, symbology, and popup templates */
         featureLayerBaby: new FeatureLayer({
             url: "https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/1",
             outFields: ['*'],
@@ -158,10 +160,18 @@ define([
             url: 'https://tomlinson.byui.edu/arcgis/rest/services/interactive/menuFeatures/MapServer/20'
         }),
 
+        /* Set currentFloor to selected floor on the map 
+         * @param {string} floorId - number of a floor selected on the map
+        */
         changeCurrentFloor: function (floorId) {
             this.currentFloor = floorId;
         },
 
+        /* Function to turn add a feature layer to the map 
+         * @param {string} layerId - DOM id of the layer
+         * @param map - esri map
+         * @param {boolean} checked - see if the checkbox input is checked or not
+         */
         turnOnLayer: function (layerId, map, checked) {
             switch (layerId) {
                 case 'baby':
@@ -292,16 +302,6 @@ define([
                     break;
                 default:
             }
-        },
-
-        activeFloor: function () {
-            let floor;
-            on(dom.byId('floorLayers'), 'click', function () {
-                let active = dom.byId(document.getElementsByClassName("button-floor-selected"));
-                floor = active[0].innerText;
-                console.log(floor);
-            });
-            return floor;
         }
     })
 })

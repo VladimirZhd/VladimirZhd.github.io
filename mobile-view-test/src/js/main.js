@@ -80,14 +80,16 @@ floorButton.cid = "1";
 
 let device = isMobileDevice();  //calling function to identify the device
 
+/* If large screen we get geolocation on mouse click instead of browser geolocation */
 if (screen.width >= 1024) {
     view.on('click', function (evt) {
         evt.stopPropagation;
         let locationOnClick = new Point({
             latitude: evt.mapPoint.latitude,
             longitude: evt.mapPoint.longitude
-        })
+        });
 
+        /* Content for our popup. We are using it in this way because esri sanitize classes and ids so we can't it */
         let content = '<a href="#" id="near-printer" class="near-lg">Printer</a>' +
             '<a href="#" id="near-restroom" class="near-lg">Restroom</a>' +
             '<a href="#" id="near-fountain" class="near-lg">Drinking Fountain</a>' +
@@ -96,6 +98,7 @@ if (screen.width >= 1024) {
             '<a href="#" id="near-aed" class="near-lg">AED</a>' +
             '<a href="#" id="near-fire" class="near-lg">Fire Extinguisher</a>';
 
+        /* Create popup template with links to find nearest */
         let template = {
             content: function () {
                 let div = document.createElement('div');
@@ -104,7 +107,7 @@ if (screen.width >= 1024) {
                 return div;
             }
         }
-
+        /* Set the popup */
         view.popup.visible = true;
         view.popup.location = locationOnClick;
         view.popup.title = "Find Nearest";
@@ -112,6 +115,7 @@ if (screen.width >= 1024) {
 
         view.popup.reposition();
 
+        /* Wahtching which floor is active to display nearest feature on the activve floor */
         floorButton.watch('cid', function () {
             if (findNear.currentSelection != null) {
                 findNear.changeCurrentFloor(floorButton.get('cid'));
@@ -119,7 +123,7 @@ if (screen.width >= 1024) {
             }
         });
 
-
+        /* Event listener to find nearest */
         on(dom.byId('near-restroom'), 'click', function () { findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 0); });
         on(dom.byId('near-printer'), 'click', function () { findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 1) });
         on(dom.byId('near-fountain'), 'click', function () { findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 2) });
@@ -138,6 +142,7 @@ if (screen.width >= 1024) {
             });
         });
     });
+    /* If mobile device we get geolocation through navigator.geolocation */
 } else {
     let options = {
         enableHighAccuracy: true,
@@ -334,12 +339,16 @@ if (place != null && space == null) {
     search.searchTerm = place;
 }
 
+if (place == null && space != null) {
+    search.searchTerm = space;
+}
+
 if (place != null && space != null) {
-    search.searchTerm = place + space;
+    search.searchTerm = space + place;
 }
 
 if (build != null && room == null) {
-    let t = new task("https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/16");
+    let t = new task("https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/4");
     let q = new query();
 
     q.where = "BUILDINGID = " + "'" + build + "'";

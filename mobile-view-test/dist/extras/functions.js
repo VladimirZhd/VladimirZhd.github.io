@@ -3,10 +3,10 @@ $(document).ready(function () {
     //function to show the sliding menu
     $(".button-menu").click(function () {
         $(".hide").animate({ left: "0" });
-        $("#near-mobile").css('top', '197px');
-        if (screen.width < 1024) {
+        let hm = screen.height + 20;
+        $("#near-mobile").css('top', `${hm}px`);
+        if (screen.width < 1024)
             $('.open-nearest').css('display', 'flex');
-        }
     });
     $('.nearest-link').click(function () {
         $('.nearest-div').animate({ left: '0' });
@@ -47,7 +47,8 @@ $(document).ready(function () {
 
 
     $(".near").on("click", function () {
-        $("#near-mobile").css('top', '197px');
+        let hm = screen.height + 20;
+        $("#near-mobile").css('top', `${hm}px`);
         $('.clear-nearest').css('display', 'flex');
         $('.esri-ui-bottom-right').css('bottom', '30px')
     });
@@ -104,34 +105,37 @@ require([
     'dojo/fx'
 ], function (on, swipe, dom, domStyle, fx) {
     const slideTarget = dom.byId("near-mobile");
-    let positionY = 0;
+    console.log(screen.height - 200);
+    let positionY = screen.height - 200;
+
 
     on(slideTarget, swipe, function (evt) {
-        if ((positionY + evt.dy) > -250) {
+        if ((positionY + evt.dy) > screen.height - 476) {
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
-        if ((positionY + evt.dy) >= 140) {
-            domStyle.set(slideTarget, { top: "197px" });
+        if ((positionY + evt.dy) >= screen.height - 35) {
+            domStyle.set(slideTarget, { top: screen.height + 20 + 'px' });
             $('.open-nearest').css('display', 'flex');
             $('.esri-ui-bottom-right').css('bottom', '30px')
         }
     });
 
     on(slideTarget, swipe.end, function (evt) {
-        if ((positionY + evt.dy) > -250) {
+        if ((positionY + evt.dy) > screen.height - 476) {
             positionY += (evt.dy - 1);
         }
         else {
-            positionY = -250;
+            positionY = screen.height - 476;
         }
     });
 
     on(dom.byId('open-nearest'), 'click', () => {
+        let height = screen.height - 200;
         fx.slideTo({
             node: slideTarget,
-            top: '0',
+            top: height,
             units: 'px'
         }).play();
-        positionY = 0;
+        positionY = height;
     })
 })
