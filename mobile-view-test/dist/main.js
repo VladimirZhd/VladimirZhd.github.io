@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "esri/tasks/support/Query", "esri/tasks/QueryTask", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology", "./extras/GetConnected"], function (_Map, _Basemap, _request, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _Graphic, _FeatureLayer, _dom, _on, _dojo, _Query, _QueryTask, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology, _GetConnected) {
+define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology", "./extras/GetConnected", "./extras/ZoomUrl"], function (_Map, _Basemap, _request, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _Graphic, _FeatureLayer, _dom, _on, _dojo, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology, _GetConnected, _ZoomUrl) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -29,10 +29,6 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
 
     var _dojo2 = _interopRequireDefault(_dojo);
 
-    var _Query2 = _interopRequireDefault(_Query);
-
-    var _QueryTask2 = _interopRequireDefault(_QueryTask);
-
     var _LayerFunctions2 = _interopRequireDefault(_LayerFunctions);
 
     var _FloorButtons2 = _interopRequireDefault(_FloorButtons);
@@ -49,6 +45,8 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
 
     var _GetConnected2 = _interopRequireDefault(_GetConnected);
 
+    var _ZoomUrl2 = _interopRequireDefault(_ZoomUrl);
+
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
             default: obj
@@ -56,6 +54,7 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
     }
 
     /* create a basemap using a community map with trees*/
+    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -67,7 +66,6 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
     });
 
     /* Creating a map with our tree basemap*/
-    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -405,40 +403,8 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
 
     var string = window.location.href;
     var url = new URL(string);
-    var build = url.searchParams.get("building");
-    var room = url.searchParams.get("room");
-    var booth = url.searchParams.get("booth");
-    var place = url.searchParams.get("space");
-    var space = url.searchParams.get("place");
-
-    if (build != null && room != null) {
-        search.searchTerm = build + room;
-    }
-
-    if (booth != null) {
-        search.searchTerm = booth;
-    }
-
-    if (place != null && space == null) {
-        search.searchTerm = place;
-    }
-
-    if (place != null && space != null) {
-        search.searchTerm = place + space;
-    }
-
-    if (build != null && room == null) {
-        var t = new _QueryTask2.default("https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/16");
-        var q = new _Query2.default();
-
-        q.where = "BUILDINGID = " + "'" + build + "'";
-        q.outFields = "[SHORTNAME]";
-
-        t.execute(q).then(function (evt) {
-            search.searchTerm = evt.features[0].attributes.SHORTNAME;
-            console.log("Here " + search.searchTerm);
-        });
-    }
+    var zoomUrl = new _ZoomUrl2.default();
+    zoomUrl.getSearchTerm(url, search);
 
     _dojo2.default.addOnLoad(function () {
         $('.esri-search__submit-button')[0].click();

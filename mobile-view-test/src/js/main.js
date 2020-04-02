@@ -19,8 +19,6 @@ import FeatureLayer from 'esri/layers/FeatureLayer';
 import dom from "dojo/dom";
 import on from "dojo/on";
 import dojo from "dojo";
-import query from 'esri/tasks/support/Query';
-import task from 'esri/tasks/QueryTask';
 
 import LayerFunctions from "./extras/LayerFunctions";
 import Buttons from "./extras/FloorButtons";
@@ -30,6 +28,7 @@ import FindNearest from "./extras/FindNearest";
 import ParkingLayer from "./extras/ParkingLayer";
 import ParkingSymbology from "./extras/ParkingSymbology";
 import GetConnected from "./extras/GetConnected";
+import ZoomUrl from "./extras/ZoomUrl";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -318,40 +317,8 @@ on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAl
 
 let string = window.location.href;
 let url = new URL(string);
-let build = url.searchParams.get("building");
-let room = url.searchParams.get("room");
-let booth = url.searchParams.get("booth");
-let place = url.searchParams.get("space");
-let space = url.searchParams.get("place");
-
-if (build != null && room != null) {
-    search.searchTerm = build + room;
-}
-
-if (booth != null) {
-    search.searchTerm = booth;
-}
-
-if (place != null && space == null) {
-    search.searchTerm = place;
-}
-
-if (place != null && space != null) {
-    search.searchTerm = place + space;
-}
-
-if (build != null && room == null) {
-    let t = new task("https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/16");
-    let q = new query();
-
-    q.where = "BUILDINGID = " + "'" + build + "'";
-    q.outFields = "[SHORTNAME]";
-
-    t.execute(q).then(function (evt) {
-        search.searchTerm = evt.features[0].attributes.SHORTNAME;
-        console.log("Here " + search.searchTerm);
-    });
-}
+let zoomUrl = new ZoomUrl();
+zoomUrl.getSearchTerm(url, search);
 
 dojo.addOnLoad(function () {
     $('.esri-search__submit-button')[0].click();
