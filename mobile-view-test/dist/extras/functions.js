@@ -120,7 +120,7 @@ require([
 
 
     on(slideTarget, swipe, function (evt) {
-        if ((positionY + evt.dy) > screen.height - 476) {
+        if ((positionY + evt.dy) > screen.height - 545) {
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
         if ((positionY + evt.dy) >= screen.height - 35) {
@@ -131,11 +131,11 @@ require([
     });
 
     on(slideTarget, swipe.end, function (evt) {
-        if ((positionY + evt.dy) > screen.height - 476) {
+        if ((positionY + evt.dy) > screen.height - 545) {
             positionY += (evt.dy - 1);
         }
         else {
-            positionY = screen.height - 476;
+            positionY = screen.height - 545;
         }
     });
 
