@@ -25,9 +25,9 @@ input[type='checkbox'] {
 
 html {
   overscroll-behavior-y: none;
-  overflow: hidden; }
+  overflow: hidden;
+  height: 100vh; }
 
-html,
 body,
 #viewDiv {
   padding: 0;
