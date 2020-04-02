@@ -1,3 +1,4 @@
+/* The module to find nearest features on the map */
 define([
     'dojo/_base/declare',
     'dojo/dom',
@@ -36,7 +37,10 @@ define([
         }),
         graphicsLayer: new GraphicsLayer({}),
 
-
+        /* Function to query the layer to search in the buffer around the user location 
+         * @param featureLayer - the layer to query nearest
+         * @param layerBufferWebMercator - the buffer 
+         */
         queryNearest: function (featureLayer, layerBufferWebMercator) {
             let queryBuffTask = new QueryTask(featureLayer);
             let queryBuff = new Query();
@@ -46,11 +50,11 @@ define([
             let result = queryBuffTask.execute(queryBuff);
             return result;
         },
-
+        /* Change the active floor according to selected floor on the map */
         changeCurrentFloor: function (floorId) {
             this.currentFloor = floorId;
         },
-
+        /* Customize the popup window to inform on wich floor is the nearest feature */
         displayPopUp(floors, popup) {
             document.getElementById('nearest-item').innerHTML = 'printers';
             document.getElementById('found-item').innerHTML = 'printer(s)';
@@ -60,10 +64,18 @@ define([
             setTimeout(function () { popup.style.display = 'none'; }, 3000);
         },
 
+        /* Function to display nearest feature
+         * @param layer - GraphicLayer on the map
+         * @param locationPoint - geolocation of user or a poit on the map
+         * @param map - esri map
+         * @param view - the map view
+         * @param index - index of a layer of a feature 
+         */
         displayNearest: async function (layer, locationPoint, map, view, index) {
             this.currentSelection = index;
             layer.removeAll();
             let result;
+            /* Create a point on users location */
             let point = {
                 type: 'point',
                 latitude: locationPoint.latitude,
@@ -88,6 +100,8 @@ define([
             let set = new Set();
             let popup = dom.byId('popup-warning');
             let floors = [];
+
+            /* Add symbology of a feature to the buffer */
             switch (index) {
                 case 0:
                     result = this.incrementBuffer(locationPoint, this.restroom.parsedUrl.path);
@@ -368,6 +382,10 @@ define([
             map.add(layer);
         },
 
+        /* Set the buffer size untill at lease one feature is found 
+         * @param locationPoint - geolocation 
+         * @param featureLayer - feature layer 
+        */
         incrementBuffer: async function (locationPoint, featureLayer) {
             let increment = 150;
             let length = 0;

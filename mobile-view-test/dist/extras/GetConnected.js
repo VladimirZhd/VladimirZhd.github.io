@@ -1,8 +1,10 @@
+/* Module for get connected/graduation events */
 define([
     'dojo/_base/declare',
     'esri/layers/FeatureLayer'
 ], function (declare, FeatureLayer) {
     return declare(null, {
+        /* Create feature layers, popups, and symbology */
         convocation: new FeatureLayer({
             url: 'https://tomlinson.byui.edu/arcgis/rest/services/getConnected/Graduation_Events/FeatureServer/0',
             outFields: ['*'],
@@ -215,7 +217,11 @@ define([
                 }
             }
         }),
-
+        /* Function to add/remove layers to the map
+         * @param {string} layerId - DOM id for feature layer 
+         * @param map - esri map
+         * @param {boolean} checked - checkbox input status
+         */
         turnOnLayer: function (layerId, map, checked) {
             switch (layerId) {
                 case 'convocation':
