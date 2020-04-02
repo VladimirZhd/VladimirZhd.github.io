@@ -8,10 +8,10 @@
 html {
   overscroll-behavior-y: none;
   overflow: hidden;
+  height: 100vh;
 }
 
 // Basic styles for displaying the map on the page
-html,
 body,
 #viewDiv {
   padding: 0;
