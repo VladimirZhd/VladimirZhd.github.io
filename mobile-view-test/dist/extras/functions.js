@@ -102,7 +102,7 @@ require([
     'dojo/fx'
 ], function (on, swipe, dom, domStyle, fx) {
     const slideTarget = dom.byId("near-mobile");
-    let positionY = 0;
+    let positionY = 100;
 
     on(slideTarget, swipe, function (evt) {
         if ((positionY + evt.dy) > -250) {
