@@ -5,11 +5,15 @@
   box-sizing: border-box;
 }
 
+@function vh($quantity) {
+  @return calc(var(--vh, 1vh) * 100);
+}
+
 html {
   -webkit-overscroll-behavior-y: none;
   -webkit-overflow-scrolling: hidden;
   overflow: hidden;
-  height: 100vh;
+  height: vh(100);
 }
 
 // Basic styles for displaying the map on the page
