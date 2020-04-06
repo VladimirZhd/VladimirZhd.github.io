@@ -103,6 +103,9 @@ function setDocHeight() {
 
 window.addEventListener('resize', setDocHeight);
 window.addEventListener('orientationChange', setDocHeight);
+console.log(window.innerHeight)
+alert(window.innerHeight)
+
 
 
 require([
