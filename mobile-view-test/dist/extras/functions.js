@@ -5,8 +5,10 @@ $(document).ready(function () {
         $(".hide").animate({ left: "0" });
         let hm = screen.height + 20;
         $("#near-mobile").css('top', `${hm}px`);
-        if (screen.width < 1024)
+        if (screen.width < 1024) {
             $('.open-nearest').css('display', 'flex');
+            $('.esri-ui-bottom-right').css('bottom', '30px')
+        }
     });
     $('.nearest-link').click(function () {
         $('.nearest-div').animate({ left: '0' });
