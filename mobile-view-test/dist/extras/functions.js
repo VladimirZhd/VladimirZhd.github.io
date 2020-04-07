@@ -108,6 +108,8 @@ window.addEventListener('orientationChange', setDocHeight);
 
 setDocHeight();
 
+window.scrollTo(0,0);
+
 require([
     'dojo/on',
     'dojox/gesture/swipe',
