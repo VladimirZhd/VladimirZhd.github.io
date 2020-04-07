@@ -108,7 +108,7 @@ window.addEventListener('orientationChange', setDocHeight);
 
 setDocHeight();
 
-window.ontouchend = (e) => {
+window.ontouchmove = (e) => {
     e.preventDefault();
 };
 // window.scrollTo(0, 0);
