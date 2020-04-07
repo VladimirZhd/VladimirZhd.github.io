@@ -101,16 +101,10 @@ function isMobileDevice() {
 
 function setDocHeight() {
     document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
-    // let page = document.getElementById('html');
-    // page.style.height = window.innerHeight;
-    // console.log(page.style.height);
 }
 
 window.addEventListener('resize', setDocHeight);
 window.addEventListener('orientationChange', setDocHeight);
-console.log(window.innerHeight)
-alert("inner heigth " + window.innerHeight);
-alert("screen height " + screen.height);
 
 setDocHeight();
 
@@ -129,7 +123,7 @@ require([
         if ((positionY + evt.dy) > window.innerHeight - 545) {
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
-        if ((positionY + evt.dy) >= window.innerHeight - 35) {
+        if ((positionY + evt.dy) >= window.innerHeight - 65) {
             domStyle.set(slideTarget, { top: window.innerHeight + 20 + 'px' });
             $('.open-nearest').css('display', 'flex');
             $('.esri-ui-bottom-right').css('bottom', '30px')
