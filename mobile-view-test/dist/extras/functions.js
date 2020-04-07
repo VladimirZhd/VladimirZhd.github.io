@@ -108,10 +108,10 @@ window.addEventListener('orientationChange', setDocHeight);
 
 setDocHeight();
 
-window.addEventListener('touchmove', function (event) {
-    event.preventDefault()
-}, false)
-window.scrollTo(0, 0);
+window.ontouchend = (e) => {
+    e.preventDefault();
+};
+// window.scrollTo(0, 0);
 
 require([
     'dojo/on',
