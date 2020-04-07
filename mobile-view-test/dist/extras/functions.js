@@ -111,6 +111,7 @@ setDocHeight();
 window.addEventListener('touchmove', function (event) {
     event.preventDefault()
 }, false)
+window.scrollTo(0, 0);
 
 require([
     'dojo/on',
