@@ -108,6 +108,10 @@ window.addEventListener('orientationChange', setDocHeight);
 
 setDocHeight();
 
+window.addEventListener('touchmove', function (event) {
+    event.preventDefault()
+}, false)
+
 require([
     'dojo/on',
     'dojox/gesture/swipe',
