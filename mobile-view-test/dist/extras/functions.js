@@ -107,8 +107,8 @@ function setDocHeight() {
 window.addEventListener('resize', setDocHeight);
 window.addEventListener('orientationChange', setDocHeight);
 console.log(window.innerHeight)
-alert(window.innerHeight);
-alert(screen.height);
+alert("inner heigth " + window.innerHeight);
+alert("screen height " + screen.height);
 
 setDocHeight();
 
