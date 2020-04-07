@@ -130,7 +130,7 @@ require([
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
         if ((positionY + evt.dy) >= window.innerHeight - 35) {
-            domStyle.set(slideTarget, { top: screen.innerHeight + 20 + 'px' });
+            domStyle.set(slideTarget, { top: window.innerHeight + 20 + 'px' });
             $('.open-nearest').css('display', 'flex');
             $('.esri-ui-bottom-right').css('bottom', '30px')
         }
