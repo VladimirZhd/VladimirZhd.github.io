@@ -99,6 +99,9 @@ function isMobileDevice() {
 
 function setDocHeight() {
     document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
+    // let page = document.getElementById('html');
+    // page.style.height = window.innerHeight;
+    // console.log(page.style.height);
 }
 
 window.addEventListener('resize', setDocHeight);
@@ -107,7 +110,7 @@ console.log(window.innerHeight)
 alert(window.innerHeight);
 alert(screen.height);
 
-
+setDocHeight();
 
 require([
     'dojo/on',
@@ -117,7 +120,6 @@ require([
     'dojo/fx'
 ], function (on, swipe, dom, domStyle, fx) {
     const slideTarget = dom.byId("near-mobile");
-    console.log(screen.height - 200);
     let positionY = screen.height - 200;
 
 
