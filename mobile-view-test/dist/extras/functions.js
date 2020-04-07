@@ -122,31 +122,31 @@ require([
     'dojo/fx'
 ], function (on, swipe, dom, domStyle, fx) {
     const slideTarget = dom.byId("near-mobile");
-    let positionY = screen.height - 200;
+    let positionY = window.innerHeight - 200;
 
 
     on(slideTarget, swipe, function (evt) {
-        if ((positionY + evt.dy) > screen.height - 545) {
+        if ((positionY + evt.dy) > window.innerHeight - 545) {
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
-        if ((positionY + evt.dy) >= screen.height - 35) {
-            domStyle.set(slideTarget, { top: screen.height + 20 + 'px' });
+        if ((positionY + evt.dy) >= window.innerHeight - 35) {
+            domStyle.set(slideTarget, { top: screen.innerHeight + 20 + 'px' });
             $('.open-nearest').css('display', 'flex');
             $('.esri-ui-bottom-right').css('bottom', '30px')
         }
     });
 
     on(slideTarget, swipe.end, function (evt) {
-        if ((positionY + evt.dy) > screen.height - 545) {
+        if ((positionY + evt.dy) > window.innerHeight - 545) {
             positionY += (evt.dy - 1);
         }
         else {
-            positionY = screen.height - 545;
+            positionY = window.innerHeight - 545;
         }
     });
 
     on(dom.byId('open-nearest'), 'click', () => {
-        let height = screen.height - 200;
+        let height = window.innerHeight - 200;
         fx.slideTo({
             node: slideTarget,
             top: height,
