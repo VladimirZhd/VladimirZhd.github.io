@@ -111,7 +111,21 @@ setDocHeight();
 window.ontouchmove = (e) => {
     e.preventDefault();
 };
-// window.scrollTo(0, 0);
+
+document.addEventListener('touchmove', (evt) => {
+    if (evt.scale !== 1) {
+        evt.preventDefault();
+    }
+}, false);
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (evt) => {
+    let now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        evt.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false)
 
 require([
     'dojo/on',
