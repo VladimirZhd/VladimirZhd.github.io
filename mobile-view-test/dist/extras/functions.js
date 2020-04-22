@@ -49,7 +49,7 @@ $(document).ready(function () {
 
 
     $(".near").on("click", function () {
-        let hm = screen.height + 20;
+        let hm = window.innerHeight + 20;
         $("#near-mobile").css('top', `${hm}px`);
         $('.clear-nearest').css('display', 'flex');
         $('.esri-ui-bottom-right').css('bottom', '30px')
