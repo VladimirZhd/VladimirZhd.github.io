@@ -8,10 +8,10 @@
 html {
   overscroll-behavior-y: none;
   overflow: hidden;
+  height: 100vh;
 }
 
 // Basic styles for displaying the map on the page
-html,
 body,
 #viewDiv {
   padding: 0;
@@ -467,12 +467,19 @@ hr {
   padding: 0;
   position: absolute;
   top: 0;
-  bottom: -400px;
   touch-action: none;
   width: 100%;
   height: 545px;
-  transition: transform 0.3s;
-  transform: translateY(0%) translateY(350px);
+  // transition: transform 0.3s;
+  // transform: translateY(0%) translateY(0px);
+}
+
+@media (min-height: 496px) {
+  .nearest-mobile {
+    height: 476px;
+    margin-top: 0;
+    top: calc(100% - 200px);
+  }
 }
 
 .menu-top {

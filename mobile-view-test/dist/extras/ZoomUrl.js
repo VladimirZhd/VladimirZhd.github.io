@@ -4,7 +4,7 @@ define([
     'esri/tasks/QueryTask',
 ], function (declare, query, task) {
     return declare(null, {
-        getSearchTerm: async function (url, search) {
+        getSearchTerm: async function (url, search, view) {
             let build = url.searchParams.get("building");
             let room = url.searchParams.get("room");
             let booth = url.searchParams.get("booth");
@@ -12,7 +12,6 @@ define([
             let space = url.searchParams.get("place");
 
             if (build != null && room != null) {
-                console.log(build + room);
                 search.searchTerm = build + room;
             }
 

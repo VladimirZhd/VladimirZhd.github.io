@@ -1,11 +1,9 @@
-define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/Graphic", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology", "./extras/GetConnected", "./extras/ZoomUrl"], function (_Map, _Basemap, _request, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _Graphic, _FeatureLayer, _dom, _on, _dojo, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology, _GetConnected, _ZoomUrl) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology", "./extras/GetConnected", "./extras/ZoomUrl", "./extras/SceneView", "./extras/Routing"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _FeatureLayer, _dom, _on, _dojo, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology, _GetConnected, _ZoomUrl, _SceneView, _Routing) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
 
     var _Basemap2 = _interopRequireDefault(_Basemap);
-
-    var _request2 = _interopRequireDefault(_request);
 
     var _MapView2 = _interopRequireDefault(_MapView);
 
@@ -18,8 +16,6 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
     var _MapImageLayer2 = _interopRequireDefault(_MapImageLayer);
 
     var _Point2 = _interopRequireDefault(_Point);
-
-    var _Graphic2 = _interopRequireDefault(_Graphic);
 
     var _FeatureLayer2 = _interopRequireDefault(_FeatureLayer);
 
@@ -46,6 +42,10 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
     var _GetConnected2 = _interopRequireDefault(_GetConnected);
 
     var _ZoomUrl2 = _interopRequireDefault(_ZoomUrl);
+
+    var _SceneView2 = _interopRequireDefault(_SceneView);
+
+    var _Routing2 = _interopRequireDefault(_Routing);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -101,6 +101,7 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
 
     var device = isMobileDevice(); //calling function to identify the device
 
+    /* If large screen we get geolocation on mouse click instead of browser geolocation */
     if (screen.width >= 1024) {
         view.on('click', function (evt) {
             evt.stopPropagation;
@@ -109,8 +110,10 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
                 longitude: evt.mapPoint.longitude
             });
 
+            /* Content for our popup. We are using it in this way because esri sanitize classes and ids so we can't it */
             var _content = '<a href="#" id="near-printer" class="near-lg">Printer</a>' + '<a href="#" id="near-restroom" class="near-lg">Restroom</a>' + '<a href="#" id="near-fountain" class="near-lg">Drinking Fountain</a>' + '<a href="#" id="near-elevator" class="near-lg">Elevator</a>' + '<a href="#" id="near-vending" class="near-lg">Vending Machine</a>' + '<a href="#" id="near-aed" class="near-lg">AED</a>' + '<a href="#" id="near-fire" class="near-lg">Fire Extinguisher</a>';
 
+            /* Create popup template with links to find nearest */
             var template = {
                 content: function content() {
                     var div = document.createElement('div');
@@ -118,15 +121,15 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
                     div.innerHTML = _content;
                     return div;
                 }
-            };
-
-            view.popup.visible = true;
+                /* Set the popup */
+            };view.popup.visible = true;
             view.popup.location = locationOnClick;
             view.popup.title = "Find Nearest";
             view.popup.content = template.content();
 
             view.popup.reposition();
 
+            /* Wahtching which floor is active to display nearest feature on the activve floor */
             floorButton.watch('cid', function () {
                 if (findNear.currentSelection != null) {
                     findNear.changeCurrentFloor(floorButton.get('cid'));
@@ -134,6 +137,7 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
                 }
             });
 
+            /* Event listener to find nearest */
             (0, _on2.default)(_dom2.default.byId('near-restroom'), 'click', function () {
                 findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 0);
             });
@@ -166,6 +170,7 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
                 });
             });
         });
+        /* If mobile device we get geolocation through navigator.geolocation */
     } else {
         var positionRecieved = function positionRecieved(pos) {
             var coords = pos.coords;
@@ -255,7 +260,33 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
         }
     });
 
+    var coords = null;
+    var routing = new _Routing2.default();
+    view.popup.watch("visible", function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(postPosition);
+        } else {
+            console.log("Failed to get location");
+        }
+
+        function postPosition(position) {
+            document.addEventListener('click', function (e) {
+                if (e.target.id == "mode1") {
+                    routing.getRoute(view, position, coords, 1);
+                }
+                if (e.target.id == "mode2") {
+                    routing.getRoute(view, position, coords, 2);
+                }
+            });
+        }
+    });
+
     search.on('search-complete', function (evt) {
+        coords = evt.results[0].results[0].feature.geometry;
+        if ("centroid" in coords) {
+            coords = evt.results[0].results[0].feature.geometry.centroid;
+        }
+
         var phraseFeature = new _FeatureLayer2.default({
             url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
         });
@@ -404,10 +435,19 @@ define(["esri/Map", "esri/Basemap", "esri/request", "esri/views/MapView", "esri/
     var string = window.location.href;
     var url = new URL(string);
     var zoomUrl = new _ZoomUrl2.default();
-    zoomUrl.getSearchTerm(url, search);
+    var sceneView = new _SceneView2.default();
+    if (url.searchParams != null) {
+        var section = url.searchParams.get("section");
+        if (section != null) {
+            var build = url.searchParams.get("building");
+            sceneView.getSceneView(section, build, view, floorButton, lf, _dom2.default);
+        } else {
+            zoomUrl.getSearchTerm(url, search);
+        }
+    }
 
     _dojo2.default.addOnLoad(function () {
-        $('.esri-search__submit-button')[0].click();
+        if (search.searchTerm != "") $('.esri-search__submit-button')[0].click();
     });
 
     var pl = new _ParkingLayer2.default();

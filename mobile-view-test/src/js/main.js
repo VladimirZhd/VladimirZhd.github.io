@@ -1,7 +1,6 @@
 /* import all of the libraries from esri that we need to use */
 import Map from "esri/Map";
 import Basemap from "esri/Basemap";
-import esriRequest from 'esri/request';
 import MapView from "esri/views/MapView";
 
 import Locate from "esri/widgets/Locate";
@@ -13,7 +12,6 @@ import { whenFalse } from "esri/core/watchUtils";
 import { whenTrueOnce } from "esri/core/watchUtils";
 import { whenFalseOnce } from "esri/core/watchUtils";
 import Point from 'esri/geometry/Point';
-import Graphic from 'esri/Graphic';
 import FeatureLayer from 'esri/layers/FeatureLayer';
 
 import dom from "dojo/dom";
@@ -29,6 +27,8 @@ import ParkingLayer from "./extras/ParkingLayer";
 import ParkingSymbology from "./extras/ParkingSymbology";
 import GetConnected from "./extras/GetConnected";
 import ZoomUrl from "./extras/ZoomUrl";
+import SceneView from "./extras/SceneView";
+import Routing from "./extras/Routing";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -81,14 +81,16 @@ floorButton.cid = "1";
 
 let device = isMobileDevice();  //calling function to identify the device
 
+/* If large screen we get geolocation on mouse click instead of browser geolocation */
 if (screen.width >= 1024) {
     view.on('click', function (evt) {
         evt.stopPropagation;
         let locationOnClick = new Point({
             latitude: evt.mapPoint.latitude,
             longitude: evt.mapPoint.longitude
-        })
+        });
 
+        /* Content for our popup. We are using it in this way because esri sanitize classes and ids so we can't it */
         let content = '<a href="#" id="near-printer" class="near-lg">Printer</a>' +
             '<a href="#" id="near-restroom" class="near-lg">Restroom</a>' +
             '<a href="#" id="near-fountain" class="near-lg">Drinking Fountain</a>' +
@@ -97,6 +99,7 @@ if (screen.width >= 1024) {
             '<a href="#" id="near-aed" class="near-lg">AED</a>' +
             '<a href="#" id="near-fire" class="near-lg">Fire Extinguisher</a>';
 
+        /* Create popup template with links to find nearest */
         let template = {
             content: function () {
                 let div = document.createElement('div');
@@ -105,7 +108,7 @@ if (screen.width >= 1024) {
                 return div;
             }
         }
-
+        /* Set the popup */
         view.popup.visible = true;
         view.popup.location = locationOnClick;
         view.popup.title = "Find Nearest";
@@ -113,6 +116,7 @@ if (screen.width >= 1024) {
 
         view.popup.reposition();
 
+        /* Wahtching which floor is active to display nearest feature on the activve floor */
         floorButton.watch('cid', function () {
             if (findNear.currentSelection != null) {
                 findNear.changeCurrentFloor(floorButton.get('cid'));
@@ -120,7 +124,7 @@ if (screen.width >= 1024) {
             }
         });
 
-
+        /* Event listener to find nearest */
         on(dom.byId('near-restroom'), 'click', function () { findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 0); });
         on(dom.byId('near-printer'), 'click', function () { findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 1) });
         on(dom.byId('near-fountain'), 'click', function () { findNear.displayNearest(findNear.graphicsLayer, locationOnClick, map, view, 2) });
@@ -139,6 +143,7 @@ if (screen.width >= 1024) {
             });
         });
     });
+    /* If mobile device we get geolocation through navigator.geolocation */
 } else {
     let options = {
         enableHighAccuracy: true,
@@ -212,7 +217,33 @@ search.on('select-result', function (evt) {
     }
 });
 
+let coords = null;
+let routing = new Routing();
+view.popup.watch("visible", function () {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(postPosition);
+    } else {
+        console.log("Failed to get location");
+    }
+
+    function postPosition(position) {
+        document.addEventListener('click', function (e) {
+            if (e.target.id == "mode1") {
+                routing.getRoute(view, position, coords, 1);
+            }
+            if (e.target.id == "mode2") {
+                routing.getRoute(view, position, coords, 2);
+            }
+        });
+    }
+});
+
 search.on('search-complete', function (evt) {
+    coords = evt.results[0].results[0].feature.geometry;
+    if ("centroid" in coords) {
+        coords = evt.results[0].results[0].feature.geometry.centroid;
+    }
+
     let phraseFeature = new FeatureLayer({
         url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
     });
@@ -318,10 +349,21 @@ on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAl
 let string = window.location.href;
 let url = new URL(string);
 let zoomUrl = new ZoomUrl();
-zoomUrl.getSearchTerm(url, search);
+let sceneView = new SceneView();
+if (url.searchParams != null) {
+    let section = url.searchParams.get("section");
+    if (section != null) {
+        let build = url.searchParams.get("building");
+        sceneView.getSceneView(section, build, view, floorButton, lf, dom);
+    }
+    else {
+        zoomUrl.getSearchTerm(url, search);
+    }
+}
 
 dojo.addOnLoad(function () {
-    $('.esri-search__submit-button')[0].click();
+    if (search.searchTerm != "")
+        $('.esri-search__submit-button')[0].click();
 });
 
 let pl = new ParkingLayer();
