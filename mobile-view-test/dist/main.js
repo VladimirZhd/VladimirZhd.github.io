@@ -434,14 +434,15 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var string = window.location.href;
     var url = new URL(string);
-    var zoomUrl = new _ZoomUrl2.default();
-    var sceneView = new _SceneView2.default();
     if (url.searchParams != null) {
         var section = url.searchParams.get("section");
         if (section != null) {
             var build = url.searchParams.get("building");
-            sceneView.getSceneView(section, build, view, floorButton, lf, _dom2.default);
+            var sceneView = new _SceneView2.default();
+            sceneView.getSceneLayer(map, view);
+            sceneView.getSceneView(section, build, view);
         } else {
+            var zoomUrl = new _ZoomUrl2.default();
             zoomUrl.getSearchTerm(url, search);
         }
     }

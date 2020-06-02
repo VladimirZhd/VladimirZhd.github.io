@@ -348,15 +348,16 @@ on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAl
 
 let string = window.location.href;
 let url = new URL(string);
-let zoomUrl = new ZoomUrl();
-let sceneView = new SceneView();
 if (url.searchParams != null) {
     let section = url.searchParams.get("section");
     if (section != null) {
         let build = url.searchParams.get("building");
-        sceneView.getSceneView(section, build, view, floorButton, lf, dom);
+        let sceneView = new SceneView();
+        sceneView.getSceneLayer(map, view);
+        sceneView.getSceneView(section, build, view);
     }
     else {
+        let zoomUrl = new ZoomUrl();
         zoomUrl.getSearchTerm(url, search);
     }
 }
