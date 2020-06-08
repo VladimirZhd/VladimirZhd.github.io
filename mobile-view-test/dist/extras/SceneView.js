@@ -12,10 +12,10 @@ define([
             popupTemplate: {
                 title: function(feature) {
                     if (feature.graphic.attributes.Location == "HRT-GYM") {
-                        return "HART GYM: " + feature.graphic.attributes.SECTION;
+                        return "HART GYM " + feature.graphic.attributes.SECTION;
                     }
                     else {
-                        return "BYU-I Center: " + feature.graphic.attributes.SECTION;
+                        return "BYU-I Center " + feature.graphic.attributes.SECTION;
                     }
                 },
                 content: function (feature) {

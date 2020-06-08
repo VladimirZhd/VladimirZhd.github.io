@@ -260,7 +260,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         }
     });
 
-    var coords = null;
+    var coordinates = null;
     var routing = new _Routing2.default();
     view.popup.watch("visible", function () {
         if (navigator.geolocation) {
@@ -272,19 +272,19 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         function postPosition(position) {
             document.addEventListener('click', function (e) {
                 if (e.target.id == "mode1") {
-                    routing.getRoute(view, position, coords, 1);
+                    routing.getRoute(view, position, coordinates, 1);
                 }
                 if (e.target.id == "mode2") {
-                    routing.getRoute(view, position, coords, 2);
+                    routing.getRoute(view, position, coordinates, 2);
                 }
             });
         }
     });
 
     search.on('search-complete', function (evt) {
-        coords = evt.results[0].results[0].feature.geometry;
-        if ("centroid" in coords) {
-            coords = evt.results[0].results[0].feature.geometry.centroid;
+        coordinates = evt.results[0].results[0].feature.geometry;
+        if ("centroid" in coordinates) {
+            coordinates = evt.results[0].results[0].feature.geometry.centroid;
         }
 
         var phraseFeature = new _FeatureLayer2.default({

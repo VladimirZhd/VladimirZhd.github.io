@@ -217,7 +217,7 @@ search.on('select-result', function (evt) {
     }
 });
 
-let coords = null;
+let coordinates = null;
 let routing = new Routing();
 view.popup.watch("visible", function () {
     if (navigator.geolocation) {
@@ -229,19 +229,19 @@ view.popup.watch("visible", function () {
     function postPosition(position) {
         document.addEventListener('click', function (e) {
             if (e.target.id == "mode1") {
-                routing.getRoute(view, position, coords, 1);
+                routing.getRoute(view, position, coordinates, 1);
             }
             if (e.target.id == "mode2") {
-                routing.getRoute(view, position, coords, 2);
+                routing.getRoute(view, position, coordinates, 2);
             }
         });
     }
 });
 
 search.on('search-complete', function (evt) {
-    coords = evt.results[0].results[0].feature.geometry;
-    if ("centroid" in coords) {
-        coords = evt.results[0].results[0].feature.geometry.centroid;
+    coordinates = evt.results[0].results[0].feature.geometry;
+    if ("centroid" in coordinates) {
+        coordinates = evt.results[0].results[0].feature.geometry.centroid;
     }
 
     let phraseFeature = new FeatureLayer({
