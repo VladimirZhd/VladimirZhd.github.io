@@ -5,8 +5,10 @@ $(document).ready(function () {
         $(".hide").animate({ left: "0" });
         let hm = screen.height + 20;
         $("#near-mobile").css('top', `${hm}px`);
-        if (screen.width < 1024)
+        if (screen.width < 1024) {
             $('.open-nearest').css('display', 'flex');
+            $('.esri-ui-bottom-right').css('bottom', '30px')
+        }
     });
     $('.nearest-link').click(function () {
         $('.nearest-div').animate({ left: '0' });
@@ -47,7 +49,7 @@ $(document).ready(function () {
 
 
     $(".near").on("click", function () {
-        let hm = screen.height + 20;
+        let hm = window.innerHeight + 20;
         $("#near-mobile").css('top', `${hm}px`);
         $('.clear-nearest').css('display', 'flex');
         $('.esri-ui-bottom-right').css('bottom', '30px')
@@ -97,14 +99,33 @@ function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
 
+function setDocHeight() {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
+}
 
-let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+window.addEventListener('resize', setDocHeight);
+window.addEventListener('orientationChange', setDocHeight);
 
-window.addEventListener('resize', () => {
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-})
+setDocHeight();
+
+window.ontouchmove = (e) => {
+    e.preventDefault();
+};
+
+document.addEventListener('touchmove', (evt) => {
+    if (evt.scale !== 1) {
+        evt.preventDefault();
+    }
+}, false);
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (evt) => {
+    let now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        evt.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false)
 
 require([
     'dojo/on',
@@ -114,31 +135,31 @@ require([
     'dojo/fx'
 ], function (on, swipe, dom, domStyle, fx) {
     const slideTarget = dom.byId("near-mobile");
-    let positionY = screen.height - 200;
+    let positionY = window.innerHeight - 200;
 
 
     on(slideTarget, swipe, function (evt) {
-        if ((positionY + evt.dy) > screen.height - 476) {
+        if ((positionY + evt.dy) > window.innerHeight - 545) {
             domStyle.set(slideTarget, { top: (positionY + evt.dy) + "px" });
         }
-        if ((positionY + evt.dy) >= screen.height - 35) {
-            domStyle.set(slideTarget, { top: screen.height + 20 + 'px' });
+        if ((positionY + evt.dy) >= window.innerHeight - 65) {
+            domStyle.set(slideTarget, { top: window.innerHeight + 20 + 'px' });
             $('.open-nearest').css('display', 'flex');
             $('.esri-ui-bottom-right').css('bottom', '30px')
         }
     });
 
     on(slideTarget, swipe.end, function (evt) {
-        if ((positionY + evt.dy) > screen.height - 476) {
+        if ((positionY + evt.dy) > window.innerHeight - 545) {
             positionY += (evt.dy - 1);
         }
         else {
-            positionY = screen.height - 476;
+            positionY = window.innerHeight - 545;
         }
     });
 
     on(dom.byId('open-nearest'), 'click', () => {
-        let height = screen.height - 200;
+        let height = window.innerHeight - 200;
         fx.slideTo({
             node: slideTarget,
             top: height,
