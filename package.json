@@ -1,0 +1,22 @@
+{
+  "name": "vladimirzhd.github.io",
+  "version": "1.0.0",
+  "description": "portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladimirZhd/VladimirZhd.github.io.git"
+  },
+  "author": "Vova Zhdanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VladimirZhd/VladimirZhd.github.io/issues"
+  },
+  "homepage": "https://github.com/VladimirZhd/VladimirZhd.github.io#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.0"
+  }
+}

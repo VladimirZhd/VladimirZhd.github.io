@@ -249,6 +249,12 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     search.sources = sources;
 
     search.on('select-result', function (evt) {
+        var hm = window.innerHeight + 20;
+        $("#near-mobile").css('top', hm + "px");
+        $('.esri-ui-bottom-right').css('bottom', '30px');
+        if (screen.width < 1024) {
+            $('.open-nearest').css('display', 'flex');
+        }
         var floorNumber = evt.target.selectedResult.feature.attributes.FLOOR;
         if (floorNumber) {
             floorButton.setVisibleFloor(floorNumber, lf.floors, _dom2.default);

@@ -207,6 +207,12 @@ const { sources } = Sources();
 search.sources = sources;
 
 search.on('select-result', function (evt) {
+    let hm = window.innerHeight + 20;
+    $("#near-mobile").css('top', `${hm}px`);
+    $('.esri-ui-bottom-right').css('bottom', '30px')
+    if (screen.width < 1024) {
+        $('.open-nearest').css('display', 'flex');
+    }
     let floorNumber = evt.target.selectedResult.feature.attributes.FLOOR;
     if (floorNumber) {
         floorButton.setVisibleFloor(floorNumber, lf.floors, dom);
