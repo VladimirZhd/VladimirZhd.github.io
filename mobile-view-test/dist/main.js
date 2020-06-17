@@ -275,12 +275,20 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         }
     });
 
+    search.on("search-focus", function () {
+        console.log('search in focus');
+        var hm = window.innerHeight + 20;
+        $("#near-mobile").css('top', hm + "px");
+        $('.esri-ui-bottom-right').css('bottom', '30px');
+        if (screen.width < 1024) {
+            $('.open-nearest').css('display', 'flex');
+        }
+    });
+
     var searchLog = '';
     search.on('search-start', function () {
         searchLog += [search.searchTerm] + ", ";
     });
-
-    /* Insert the search widget to the top right of the page*/
     view.ui.add(search, "top-right");
     /* For the bigger screens we want to move the search widget to  */
     if (screen.width > 600) {

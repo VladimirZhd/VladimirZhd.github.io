@@ -3,7 +3,7 @@ $(document).ready(function () {
     //function to show the sliding menu
     $(".button-menu").click(function () {
         $(".hide").animate({ left: "0" });
-        let hm = screen.height + 20;
+        let hm = window.innerHeight + 20;
         $("#near-mobile").css('top', `${hm}px`);
         if (screen.width < 1024) {
             $('.open-nearest').css('display', 'flex');
@@ -37,7 +37,6 @@ $(document).ready(function () {
 
     $('li').on('click', function () {
         this.children[0].click();
-        $(".hide").animate({ left: "-340px" });
         if (this.children[0].checked == true) {
             $(this.children[1]).css('color', '#bada55');
             $(this).css('color', '#0076b6');
@@ -93,6 +92,7 @@ $(document).ready(function () {
     $('#popup-warning').click(() => {
         $('#popup-warning').css('display', 'none');
     })
+
 });
 /* function to identify if user is using desktop or mobile device*/
 function isMobileDevice() {

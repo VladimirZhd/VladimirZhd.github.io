@@ -233,12 +233,20 @@ search.on('search-complete', function (evt) {
     }
 })
 
+search.on("search-focus", () => {
+    console.log('search in focus');
+    let hm = window.innerHeight + 20;
+    $("#near-mobile").css('top', `${hm}px`);
+    $('.esri-ui-bottom-right').css('bottom', '30px');
+    if (screen.width < 1024) {
+        $('.open-nearest').css('display', 'flex');
+    }
+})
+
 let searchLog = '';
 search.on('search-start', () => {
     searchLog += [search.searchTerm] + ", ";
 })
-
-/* Insert the search widget to the top right of the page*/
 view.ui.add(search, "top-right");
 /* For the bigger screens we want to move the search widget to  */
 if (screen.width > 600) {
