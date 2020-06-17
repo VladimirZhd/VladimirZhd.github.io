@@ -17,8 +17,6 @@ import FeatureLayer from 'esri/layers/FeatureLayer';
 import dom from "dojo/dom";
 import on from "dojo/on";
 import dojo from "dojo";
-import query from 'esri/tasks/support/Query';
-import task from 'esri/tasks/QueryTask';
 
 import LayerFunctions from "./extras/LayerFunctions";
 import Buttons from "./extras/FloorButtons";
@@ -28,6 +26,9 @@ import FindNearest from "./extras/FindNearest";
 import ParkingLayer from "./extras/ParkingLayer";
 import ParkingSymbology from "./extras/ParkingSymbology";
 import GetConnected from "./extras/GetConnected";
+import ZoomUrl from "./extras/ZoomUrl";
+import SceneView from "./extras/SceneView";
+import Routing from "./extras/Routing";
 
 /* create a basemap using a community map with trees*/
 let basemap = new Basemap({
@@ -216,7 +217,33 @@ search.on('select-result', function (evt) {
     }
 });
 
+let coordinates = null;
+let routing = new Routing();
+view.popup.watch("visible", function () {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(postPosition);
+    } else {
+        console.log("Failed to get location");
+    }
+
+    function postPosition(position) {
+        document.addEventListener('click', function (e) {
+            if (e.target.id == "mode1") {
+                routing.getRoute(view, position, coordinates, 1);
+            }
+            if (e.target.id == "mode2") {
+                routing.getRoute(view, position, coordinates, 2);
+            }
+        });
+    }
+});
+
 search.on('search-complete', function (evt) {
+    coordinates = evt.results[0].results[0].feature.geometry;
+    if ("centroid" in coordinates) {
+        coordinates = evt.results[0].results[0].feature.geometry.centroid;
+    }
+
     let phraseFeature = new FeatureLayer({
         url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
     });
@@ -329,47 +356,23 @@ on(dom.byId('btn-clear'), 'click', function () { findNear.graphicsLayer.removeAl
 
 let string = window.location.href;
 let url = new URL(string);
-let build = url.searchParams.get("building");
-let room = url.searchParams.get("room");
-let booth = url.searchParams.get("booth");
-let place = url.searchParams.get("space");
-let space = url.searchParams.get("place");
-
-if (build != null && room != null) {
-    search.searchTerm = build + room;
-}
-
-if (booth != null) {
-    search.searchTerm = booth;
-}
-
-if (place != null && space == null) {
-    search.searchTerm = place;
-}
-
-if (place == null && space != null) {
-    search.searchTerm = space;
-}
-
-if (place != null && space != null) {
-    search.searchTerm = space + place;
-}
-
-if (build != null && room == null) {
-    let t = new task("https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/4");
-    let q = new query();
-
-    q.where = "BUILDINGID = " + "'" + build + "'";
-    q.outFields = "[SHORTNAME]";
-
-    t.execute(q).then(function (evt) {
-        search.searchTerm = evt.features[0].attributes.SHORTNAME;
-        console.log("Here " + search.searchTerm);
-    });
+if (url.searchParams != null) {
+    let section = url.searchParams.get("section");
+    if (section != null) {
+        let build = url.searchParams.get("building");
+        let sceneView = new SceneView();
+        sceneView.getSceneLayer(map, view);
+        sceneView.getSceneView(section, build, view);
+    }
+    else {
+        let zoomUrl = new ZoomUrl();
+        zoomUrl.getSearchTerm(url, search);
+    }
 }
 
 dojo.addOnLoad(function () {
-    $('.esri-search__submit-button')[0].click();
+    if (search.searchTerm != "")
+        $('.esri-search__submit-button')[0].click();
 });
 
 let pl = new ParkingLayer();

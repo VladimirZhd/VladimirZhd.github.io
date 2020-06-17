@@ -1,4 +1,4 @@
-define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "esri/tasks/support/Query", "esri/tasks/QueryTask", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology", "./extras/GetConnected"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _FeatureLayer, _dom, _on, _dojo, _Query, _QueryTask, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology, _GetConnected) {
+define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/VectorTileLayer", "esri/layers/MapImageLayer", "esri/core/watchUtils", "esri/geometry/Point", "esri/layers/FeatureLayer", "dojo/dom", "dojo/on", "dojo", "./extras/LayerFunctions", "./extras/FloorButtons", "./extras/FeatureLayers", "./extras/Sources", "./extras/FindNearest", "./extras/ParkingLayer", "./extras/ParkingSymbology", "./extras/GetConnected", "./extras/ZoomUrl", "./extras/SceneView", "./extras/Routing"], function (_Map, _Basemap, _MapView, _Locate, _Search, _VectorTileLayer, _MapImageLayer, _watchUtils, _Point, _FeatureLayer, _dom, _on, _dojo, _LayerFunctions, _FloorButtons, _FeatureLayers, _Sources2, _FindNearest, _ParkingLayer, _ParkingSymbology, _GetConnected, _ZoomUrl, _SceneView, _Routing) {
     "use strict";
 
     var _Map2 = _interopRequireDefault(_Map);
@@ -25,10 +25,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _dojo2 = _interopRequireDefault(_dojo);
 
-    var _Query2 = _interopRequireDefault(_Query);
-
-    var _QueryTask2 = _interopRequireDefault(_QueryTask);
-
     var _LayerFunctions2 = _interopRequireDefault(_LayerFunctions);
 
     var _FloorButtons2 = _interopRequireDefault(_FloorButtons);
@@ -45,6 +41,12 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var _GetConnected2 = _interopRequireDefault(_GetConnected);
 
+    var _ZoomUrl2 = _interopRequireDefault(_ZoomUrl);
+
+    var _SceneView2 = _interopRequireDefault(_SceneView);
+
+    var _Routing2 = _interopRequireDefault(_Routing);
+
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
             default: obj
@@ -52,6 +54,7 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     }
 
     /* create a basemap using a community map with trees*/
+    /* import all of the libraries from esri that we need to use */
     var basemap = new _Basemap2.default({
         baseLayers: [new _VectorTileLayer2.default({
             portalItem: {
@@ -63,7 +66,6 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
     });
 
     /* Creating a map with our tree basemap*/
-    /* import all of the libraries from esri that we need to use */
     var map = new _Map2.default({
         basemap: basemap
     });
@@ -258,7 +260,33 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         }
     });
 
+    var coordinates = null;
+    var routing = new _Routing2.default();
+    view.popup.watch("visible", function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(postPosition);
+        } else {
+            console.log("Failed to get location");
+        }
+
+        function postPosition(position) {
+            document.addEventListener('click', function (e) {
+                if (e.target.id == "mode1") {
+                    routing.getRoute(view, position, coordinates, 1);
+                }
+                if (e.target.id == "mode2") {
+                    routing.getRoute(view, position, coordinates, 2);
+                }
+            });
+        }
+    });
+
     search.on('search-complete', function (evt) {
+        coordinates = evt.results[0].results[0].feature.geometry;
+        if ("centroid" in coordinates) {
+            coordinates = evt.results[0].results[0].feature.geometry.centroid;
+        }
+
         var phraseFeature = new _FeatureLayer2.default({
             url: "https://tomlinson.byui.edu/arcgis/rest/services/SearchPhrase/SearchPhrase/FeatureServer/0"
         });
@@ -414,47 +442,21 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
 
     var string = window.location.href;
     var url = new URL(string);
-    var build = url.searchParams.get("building");
-    var room = url.searchParams.get("room");
-    var booth = url.searchParams.get("booth");
-    var place = url.searchParams.get("space");
-    var space = url.searchParams.get("place");
-
-    if (build != null && room != null) {
-        search.searchTerm = build + room;
-    }
-
-    if (booth != null) {
-        search.searchTerm = booth;
-    }
-
-    if (place != null && space == null) {
-        search.searchTerm = place;
-    }
-
-    if (place == null && space != null) {
-        search.searchTerm = space;
-    }
-
-    if (place != null && space != null) {
-        search.searchTerm = space + place;
-    }
-
-    if (build != null && room == null) {
-        var t = new _QueryTask2.default("https://tomlinson.byui.edu/arcgis/rest/services/interactive/mapSearch/MapServer/4");
-        var q = new _Query2.default();
-
-        q.where = "BUILDINGID = " + "'" + build + "'";
-        q.outFields = "[SHORTNAME]";
-
-        t.execute(q).then(function (evt) {
-            search.searchTerm = evt.features[0].attributes.SHORTNAME;
-            console.log("Here " + search.searchTerm);
-        });
+    if (url.searchParams != null) {
+        var section = url.searchParams.get("section");
+        if (section != null) {
+            var build = url.searchParams.get("building");
+            var sceneView = new _SceneView2.default();
+            sceneView.getSceneLayer(map, view);
+            sceneView.getSceneView(section, build, view);
+        } else {
+            var zoomUrl = new _ZoomUrl2.default();
+            zoomUrl.getSearchTerm(url, search);
+        }
     }
 
     _dojo2.default.addOnLoad(function () {
-        $('.esri-search__submit-button')[0].click();
+        if (search.searchTerm != "") $('.esri-search__submit-button')[0].click();
     });
 
     var pl = new _ParkingLayer2.default();
