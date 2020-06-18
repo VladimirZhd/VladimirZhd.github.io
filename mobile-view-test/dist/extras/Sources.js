@@ -26,6 +26,7 @@ define([
                         div.innerHTML = "<p><img src=\"http://www.byui.edu/images/buildings/" + feature.graphic.attributes.BUILDINGID + ".jpg\" /></p>" +
                             "<p><strong>Hours:</strong> " + feature.graphic.attributes.OPERDAYS + " " + feature.graphic.attributes.OPERHOURS + "</p>" +
                             "<p><strong>Info:</strong> " + feature.graphic.attributes.INFORMATION + "</p>" +
+                            "<h2>Please select option to get directions</h2>" +
                             "<p><img id=\"mode1\" style=\"width:80px;height:80px;\" src=\"https://tomlinson.byui.edu/portal/sharing/rest/content/items/83acc5d0595342329aa5cca442b9e644/data\" />" +
                             "<img id=\"mode2\" style=\"width:80px;height:80px;\" src=\"https://tomlinson.byui.edu/portal/sharing/rest/content/items/50396ef5d3664392ba77b6632b60e9f3/data\" /></p>";
                         return div;
@@ -56,6 +57,7 @@ define([
                             "<p><strong>Building:</strong> " + feature.graphic.attributes.BUILDING + "</p>" +
                             "<p><strong>Floor:</strong> " + feature.graphic.attributes.FLOOR + "</p>" +
                             "<p><strong>Space Type:</strong> " + feature.graphic.attributes.SPACETYPE + "</p>" +
+                            "<h2>Please select option to get directions</h2>" +
                             "<p><img id=\"mode1\" style=\"width:80px;height:80px;\" src=\"https://tomlinson.byui.edu/portal/sharing/rest/content/items/83acc5d0595342329aa5cca442b9e644/data\" />" +
                             "<img id=\"mode2\" style=\"width:80px;height:80px;\" src=\"https://tomlinson.byui.edu/portal/sharing/rest/content/items/50396ef5d3664392ba77b6632b60e9f3/data\" /></p>";
                         return div;
@@ -91,6 +93,7 @@ define([
                     content: function (feature) {
                         let div = document.createElement("div");
                         div.innerHTML = "<p><strong>Info:</strong> " + feature.graphic.attributes.SPACETYPE + "</p>" +
+                            "<h2>Please select option to get directions</h2>" +
                             "<p><img id=\"mode1\" style=\"width:80px;height:80px;\" src=\"https://tomlinson.byui.edu/portal/sharing/rest/content/items/83acc5d0595342329aa5cca442b9e644/data\" />" +
                             "<img id=\"mode2\" style=\"width:80px;height:80px;\" src=\"https://tomlinson.byui.edu/portal/sharing/rest/content/items/50396ef5d3664392ba77b6632b60e9f3/data\" /></p>";
                         return div;
@@ -127,6 +130,7 @@ define([
                         div.innerHTML = "<p><strong>Hours:</strong> " + feature.graphic.attributes.HOURS + "</p>" +
                             "<p><strong>Info:</strong> " + feature.graphic.attributes.DESCRIP + "</p>" +
                             "<p><strong>Floor: </strong> " + feature.graphic.attributes.FLOOR + "</p>" +
+                            "<h2>Please select option to get directions</h2>" +
                             "<p><img id=\"mode1\" style=\"width:80px;height:80px;\" src=\"https://tomlinson.byui.edu/portal/sharing/rest/content/items/83acc5d0595342329aa5cca442b9e644/data\" />" +
                             "<img id=\"mode2\" style=\"width:80px;height:80px;\" src=\"https://tomlinson.byui.edu/portal/sharing/rest/content/items/50396ef5d3664392ba77b6632b60e9f3/data\" /></p>";
                         return div;
