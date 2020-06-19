@@ -353,8 +353,8 @@ if (url.searchParams != null) {
     if (section != null) {
         let build = url.searchParams.get("building");
         let sceneView = new SceneView();
-        sceneView.getSceneLayer(map, view, floorButton);
         sceneView.getSceneView(section, build, view);
+        sceneView.getSceneLayer(map, view, floorButton);
     }
     else {
         let zoomUrl = new ZoomUrl();

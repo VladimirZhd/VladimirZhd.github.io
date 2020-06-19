@@ -439,8 +439,8 @@ define(["esri/Map", "esri/Basemap", "esri/views/MapView", "esri/widgets/Locate",
         if (section != null) {
             var build = url.searchParams.get("building");
             var sceneView = new _SceneView2.default();
-            sceneView.getSceneLayer(map, view, floorButton);
             sceneView.getSceneView(section, build, view);
+            sceneView.getSceneLayer(map, view, floorButton);
         } else {
             var zoomUrl = new _ZoomUrl2.default();
             zoomUrl.getSearchTerm(url, search);
