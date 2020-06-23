@@ -116,7 +116,7 @@ document.addEventListener('touchmove', (evt) => {
     if (evt.scale !== 1) {
         evt.preventDefault();
     }
-}, false);
+}, {passive: false});
 
 let lastTouchEnd = 0;
 document.addEventListener('touchend', (evt) => {
