@@ -89,11 +89,6 @@ define([
                 }
             })]]
         ),
-        defaultFloorLayer: new FeatureLayer({
-            url: "https://tomlinson.byui.edu/arcgis/rest/services/SeatingSection/SeatingSection_default/FeatureServer/0",
-            outFields: ['*'],
-            popupEnabled: false
-        }),
         getSceneView: async function (section, build, view) {
             let hasPercent = section.includes("%");
             if (hasPercent == true) {
@@ -117,7 +112,6 @@ define([
         },
         getSceneLayer: function (map, view, fb) {
             let cFloor = fb.get("cid");
-            map.add(this.defaultFloorLayer);
             map.add(this.layersMap.get(cFloor));
             this.currentFloor = cFloor;
             fb.watch("cid", function () {
@@ -132,7 +126,6 @@ define([
             btnClear.classList = 'nav-btn';
             btnClear.innerHTML = "Clear";
             btnClear.addEventListener("click", function () {
-                map.remove(this.defaultFloorLayer);
                 map.remove(this.layersMap.get(this.currentFloor));
                 view.ui.remove(btnClear);
                 this.currentFloor = null;

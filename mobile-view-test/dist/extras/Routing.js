@@ -35,7 +35,7 @@ define([
                 width: 1
             }
         },
-        
+
         resultRoute: null,
         start: null,
         stop: null,
@@ -72,7 +72,7 @@ define([
 
             let routeGraphic = null;
             await this.routeTask.solve(routeParams).then(function (data) {
-                
+
                 data.routeResults.forEach(function (result) {
                     result.route.symbol = {
                         type: "simple-line",
@@ -83,18 +83,20 @@ define([
                     routeGraphic = result.route;
                 });
 
-                stopA.geometry = new Point({latitude: data.routeResults[0].route.geometry.paths[0][0][1], 
-                    longitude: data.routeResults[0].route.geometry.paths[0][0][0]});
+                stopA.geometry = new Point({
+                    latitude: data.routeResults[0].route.geometry.paths[0][0][1],
+                    longitude: data.routeResults[0].route.geometry.paths[0][0][0]
+                });
             });
             view.graphics.add(stopA);
             view.graphics.add(stopB);
             this.start = stopA;
             this.stop = stopB;
             this.resultRoute = routeGraphic;
-            this.getNavigationOptions(view);
+            this.getNavigationOptions(view, position);
         },
 
-        getNavigationOptions(view) {
+        getNavigationOptions(view, position) {
             if (this.navigationActive == true)
                 return 0;
             this.navigationActive = true;
@@ -116,8 +118,8 @@ define([
             view.ui.add(clearNavigationBtn, "top-trailing");
 
             let navPoint = new Point({
-                latitude: this.start.geometry.latitude,
-                longitude: this.start.geometry.longitude
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
             })
             let locator = new Graphic(navPoint, this.navSymbol);
 
@@ -129,10 +131,20 @@ define([
                 view.graphics.add(locator);
             };
 
+            function error(err) {
+                console.warn('ERROR(' + err.code + '): ' + err.message);
+            }
+
+            options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            }
+
             function startNavigation() {
-                this.navigatorID = navigator.geolocation.watchPosition(success);
+                this.navigatorID = navigator.geolocation.watchPosition(success, error, options);
                 view.graphics.add(locator);
-                view.goTo({target: locator, zoom: 22});
+                view.goTo({ target: locator, zoom: 22 });
             };
 
             function stopNavigation() {
