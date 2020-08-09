@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+body {
+    height: 100vh;
+    font-family: 'Source Code Pro', monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.home {
+    height: 500px;
+    background: linear-gradient( rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/src/images/coder.jpg') no-repeat center center;
+}
+
+nav {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    background-color: lightslategray;
+    margin: 0;
+    height: 50px;
+
+    .nav {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        list-style: none;
+
+        li {
+            margin: .6rem 1.2rem;
+            a {
+                text-decoration: none;
+                color: white;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+
+.skills {
+    &-container {
+        position: relative;
+        top: 40%;
+        display: flex;
+        justify-content: center;
+    }
+
+    font-size: 3rem;
+    color: white;
+}
+
+.bio {
+    margin-top: 5%;
+    width: 80%;
+    position: relative;
+    left: 10%;
+
+    p {
+        font-size: 1.3rem;
+        line-height: 2.5rem;
+        z-index: 1;
+        text-indent: 2rem;
+        text-align: justify;
+    }
+    
+}
