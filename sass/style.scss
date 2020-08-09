@@ -57,6 +57,12 @@ nav {
     color: white;
 }
 
+.txt-type {
+    .txt {
+        border-right: 0.2rem solid white;
+    }
+}
+
 @media(max-width: 500px) {
     .skills {
         font-size: 1.5rem;
