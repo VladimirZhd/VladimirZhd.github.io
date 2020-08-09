@@ -6,6 +6,7 @@
      <title>Vova Zhdanov</title>
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <meta name="author" content="Vova Zhdanov">
+     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
      <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap"
           rel="stylesheet">
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
@@ -48,19 +49,55 @@
                Development. I am very passionate about web development,
                since I took my first web class I fell in love with various web technics and tool that we
                can use in the field. I do enjoy to learn new programming
-               languages and frameworks. 
+               languages and frameworks.
           </p>
           <p>Here you can find my portfolio of web apps and websites that I
-               created when I had free time from school.</p>
+               created when I had free time from school, and projects that I was working on school campus in Web
+               developer role.</p>
      </div>
      <div style="height: 150px;"></div>
      <div id="portfolio">
-          <h1>My Portfolio: </h1>
+          <div class="projects">
+               <h1>Projects I worked on: </h1>
+          </div>
+          <div class="container">
+               <section class="card">
+                    <img src="/src/images/csgo.jpg" alt="counter strike">
+                    <div>
+                         <h3>Project 1</h3>
+                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, laudantium!</p>
+                         <a href="#" class="btn">See project</a>
+                    </div>
+               </section>
+               <section class="card" data-aos='fade-left'>
+                    <img src="/src/images/pro100maindoor-min.jpg" alt="pro100">
+                    <div>
+                         <h3>Project 2</h3>
+                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, laudantium!</p>
+                         <a href="#" class="btn">See project</a>
+                    </div>
+               </section>
+               <section class="card" data-aos='fade-right'>
+                    <img src="/src/images/campus-map-min.png" alt="byui campus map">
+                    <div>
+                         <h3>Project 3</h3>
+                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, laudantium!</p>
+                         <a href="#" class="btn">See project</a>
+                    </div>
+               </section>
+          </div>
      </div>
      <footer>
           <p>&copy; Vova Zhdanov</p>
      </footer>
      <script src="/src/js/main.js"></script>
+     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+     <script>
+          AOS.init({
+               offset: 200,
+               duration: 500
+          });
+     </script>
 </body>
 
 </html>
