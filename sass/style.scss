@@ -134,14 +134,14 @@ img {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
-        &:nth-child(odd) a {
-            align-self: flex-end;
-        }
     }
 
     &:nth-child(even) img {
         order: 2;
+    }
+
+    &:nth-child(odd) a {
+        align-self: flex-end;
     }
 }
 
@@ -163,5 +163,10 @@ img {
 @media(max-width: 700px) {
     .card{
         display: block;
+        height: auto;
+
+        div {
+            display: block;
+        }
     }
 }
