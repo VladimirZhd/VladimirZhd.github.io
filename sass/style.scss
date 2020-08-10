@@ -119,6 +119,7 @@ img {
     grid-gap: 2rem;
     background: #f1f1f1;
     margin-bottom: 2rem;
+    height: 280px;
 
     h3 {
         margin-bottom: 2rem;
@@ -129,7 +130,14 @@ img {
     }
 
     div {
-        padding: 2rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &:nth-child(odd) a {
+            align-self: flex-end;
+        }
     }
 
     &:nth-child(even) img {
@@ -145,6 +153,7 @@ img {
     margin-top: 2rem;
     cursor: pointer;
     text-decoration: none;
+    width: 180px;
 
     &:hover {
         opacity: 0.8;
