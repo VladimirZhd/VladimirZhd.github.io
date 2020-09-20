@@ -66,7 +66,7 @@ function init() {
 const links = [
   {
     label: 'Week 1 Notes',
-    url: '/portfoliowdd330/week1/index.html',
+    url: '/portfoliowdd330/week1/',
   },
 ];
 
