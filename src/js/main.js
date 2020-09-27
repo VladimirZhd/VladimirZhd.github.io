@@ -66,12 +66,16 @@ function init() {
 const links = [
   {
     label: 'Week 1 Notes',
-    url: '/portfoliowdd330/week1/index.html',
+    url: '/portfolioWdd330/week1/index.html',
+  },
+  {
+    label: 'Week 2 Notes',
+    url: '/portfolioWdd330/week2/index.html',
   },
 ];
 
 function addNotes() {
-  links.forEach((item) => {
+  links.forEach(item => {
     const liContent = `<a href='${item.url}'>${item.label}</a>`;
     const li = document.createElement('li');
     li.innerHTML = liContent;
@@ -81,3 +85,13 @@ function addNotes() {
 }
 
 addNotes();
+
+const colors = ['red', 'blue', 'green', 'yellow', 'orange'];
+const adjectives = ['bold', 'shy', 'strong', 'lazy', 'round', 'flat', 'old'];
+const nouns = ['bike', 'cat', 'plate', 'computer', 'student', 'car', 'house'];
+const numbers = [1, 4, 7, 34, 54, 234, 67, 89, 21, 12345];
+const ships = [];
+
+colors.forEach(item => {
+  console.log(item);
+});
