@@ -80,6 +80,10 @@ const links = [
     label: 'Week 4 Notes',
     url: '/portfolioWdd330/week4/',
   },
+  {
+    label: 'Week 5 Notes',
+    url: '/portfolioWdd330/week5/',
+  },
 ];
 
 function addNotes() {
