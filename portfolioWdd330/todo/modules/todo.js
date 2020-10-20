@@ -19,18 +19,19 @@ display the todo list
 
 */
 
-import { qs, saveToLS } from './utilities.js';
+import { qs, saveToLS, getFromLS } from './utilities.js';
 
 const todos = [];
 
-const saveTodos = (key, data) => {
-  saveToLS(key, data);
+const saveTodos = key => {
+  saveToLS(key, todos);
 };
 
 class Todo {
   constructor(parentId, key) {
     this.listElement = qs(parentId);
     this.key = key;
+    this.listTodos();
   }
 
   addNewTodo(text) {
@@ -40,11 +41,18 @@ class Todo {
       completed: false,
     };
     todos.push(newTodo);
-    saveTodos(this.key, newTodo);
+    saveTodos(this.key);
+    console.log(todos);
   }
 
   completeTodo(todo) {}
 
-  listTodos() {}
+  listTodos() {
+    let li = document.createElement('li');
+    todos.forEach(item => {
+      li.innerText = item;
+      this.listElement.appendChild = li;
+    });
+  }
 }
 export default Todo;

@@ -18,17 +18,19 @@ display the todo list
   add todo to list
 
 */
-import { qs, getFromLS, saveToLS } from './modules/utilities.js';
+import { qs, getFromLS, saveToLS, setClick, showList } from './modules/utilities.js';
 import Todo from './modules/todo.js';
 
-const btn = qs('.btn');
+const myTodo = new Todo('.todo-list', 'todos');
+const list = qs('.todo-list');
+const todoArray = JSON.parse(getFromLS('todos'));
 
-btn.addEventListener('click', event => {
+showList(todoArray, list);
+
+setClick('.btn', async () => {
   const text = qs('.add-todo');
-  console.log(text.value);
-  const myTodo = new Todo('.todo-list', 'todoItem');
-
-  console.log(text.value);
-
-  myTodo.addNewTodo(text.value);
+  await myTodo.addNewTodo(text.value);
+  const updatedArray = JSON.parse(getFromLS('todos'));
+  list.innerHtml = '';
+  showList(updatedArray, list);
 });
