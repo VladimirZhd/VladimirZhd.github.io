@@ -25,7 +25,9 @@ const myTodo = new Todo('.todo-list', 'todos');
 const list = qs('.todo-list');
 const todoArray = JSON.parse(getFromLS('todos'));
 
-showList(todoArray, list);
+if (todoArray) {
+  showList(todoArray, list);
+}
 
 setClick('.btn', async () => {
   const text = qs('.add-todo');
