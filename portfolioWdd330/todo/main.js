@@ -33,6 +33,6 @@ setClick('.btn', async () => {
   const text = qs('.add-todo');
   await myTodo.addNewTodo(text.value);
   const updatedArray = JSON.parse(getFromLS('todos'));
-  list.innerHtml = '';
+  list.innerHTML = '';
   showList(updatedArray, list);
 });

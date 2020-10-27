@@ -50,8 +50,9 @@ class Todo {
   listTodos() {
     let li = document.createElement('li');
     todos.forEach(item => {
-      li.innerText = item;
-      this.listElement.appendChild = li;
+      li.id = item.id;
+      li.innerText = item.text;
+      this.listElement.appendChild(li);
     });
   }
 }
