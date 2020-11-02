@@ -32,8 +32,6 @@ const hikeList = [
   },
 ];
 
-
-
 console.log(arr);
 
 const imgBasePath = '//byui-cit.github.io/cit261/examples/';
@@ -68,6 +66,5 @@ function renderOneHike(hike) {
                     <p>${hike.difficulty}</p>
                 </div>
         </div>`;
-
   return item;
 }
