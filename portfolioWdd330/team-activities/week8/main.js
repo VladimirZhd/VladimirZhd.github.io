@@ -34,24 +34,33 @@ const showDetails = details => {
 
   starships.forEach(async item => {
     const starshipData = await fetch(item).then(convertToJson);
-    starshipsData.push({ name: starshipData.name });
-  });
-  console.log(starshipsData);
-  console.log(typeof starshipsData);
-  const startshipString = starshipsData.map(item => {
-    console.log('Im here');
-    return item.name;
+    console.log(starshipData);
+    starshipsData.push(starshipData);
   });
 
-  const detailsDiv = document.getElementById('detailsDiv');
-  const detailsHTML = `<ul>
-      <li>${name}</li>
-      <li>${birth}</li>
-      <li>${height}</li>
-      <li>${startshipString.join('')}</li>
-      <li></li>
-    </ul>`;
-  detailsDiv.innerHTML = detailsHTML;
+  setTimeout(() => {
+    const startshipString = starshipsData.map(item => {
+      return `
+      <div class='starship-container'>
+      <p>Name: ${item.name}</p>
+      <p>Class: ${item.starship_class}</p>
+      <p>Price: ${item.cost_in_credits}</p>
+      <p>Manufacturer: ${item.manufacturer}</p>
+      </div>
+      `;
+    });
+
+    const detailsDiv = document.getElementById('detailsDiv');
+    const detailsHTML = `<ul id='details-container'>
+        <li>Name: ${name}</li>
+        <li>DOB: ${birth}</li>
+        <li>Height: ${height}</li>
+        <h3>Starships</h3>
+        <li class='starships'>${startshipString.join('')}</li>
+        <li></li>
+      </ul>`;
+    detailsDiv.innerHTML = detailsHTML;
+  }, 500)
 };
 
 const displayData = list => {
