@@ -34,7 +34,6 @@ const showDetails = details => {
 
   starships.forEach(async item => {
     const starshipData = await fetch(item).then(convertToJson);
-    console.log(starshipData);
     starshipsData.push(starshipData);
   });
 
@@ -73,7 +72,6 @@ const displayData = list => {
 
 const itemClicked = async event => {
   const data = await fetch(event.target.dataset.url).then(convertToJson);
-  console.log(data);
   showDetails(data);
 };
 
