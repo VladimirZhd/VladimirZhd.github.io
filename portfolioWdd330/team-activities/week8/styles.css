@@ -1,0 +1,27 @@
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-top: 7px;
+  margin-bottom: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.btnDiv {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+button {
+  padding: 10px 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+h1 {
+  text-align: center;
+}
