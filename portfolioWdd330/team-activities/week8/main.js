@@ -55,7 +55,7 @@ const showDetails = details => {
         <li></li>
       </ul>`;
     detailsDiv.innerHTML = detailsHTML;
-  }, 500)
+  }, 500);
 };
 
 const displayData = list => {
@@ -80,4 +80,4 @@ Array.from(buttons).forEach(item => {
   });
 });
 
-getData('https://swapi.dev/api/people');
+getData(url);
