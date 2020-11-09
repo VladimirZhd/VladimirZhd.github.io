@@ -1,8 +1,4 @@
 const url = 'https://swapi.dev/api/people';
-const people = 'people/';
-const vehicles = 'vehicles/';
-const starships = 'starships/';
-const planets = 'planets/';
 
 const convertToJson = res => {
   if (res.ok) {
@@ -59,7 +55,7 @@ const showDetails = details => {
         <li></li>
       </ul>`;
     detailsDiv.innerHTML = detailsHTML;
-  }, 500)
+  }, 500);
 };
 
 const displayData = list => {
